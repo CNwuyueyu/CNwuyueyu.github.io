@@ -118,7 +118,7 @@
     <link href="/2023/09/08/test1/"/>
     <url>/2023/09/08/test1/</url>
     
-    <content type="html"><![CDATA[<p>Hello World</p><p>Hello Everyone</p><p><code>print(&#39;hello world!&#39;)</code></p><p>你好！</p><p><img src="/home/gting/.config/Typora/typora-user-images/image-20230909103836805.png" alt="image-20230909103836805"></p>]]></content>
+    <content type="html"><![CDATA[<p>Hello World</p><p>Hello Everyone</p><p><code>print(&#39;hello world!&#39;)</code></p><p>你好！</p><p>Test image</p><p><img src="/../images/Irena.png"></p>]]></content>
     
     
     
