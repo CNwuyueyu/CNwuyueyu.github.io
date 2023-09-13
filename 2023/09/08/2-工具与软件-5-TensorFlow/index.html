@@ -33,8 +33,17 @@
 <meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913140637316.png">
 <meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913145516199.png">
 <meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913150028635.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913151017142.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913151343657.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913152152906.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913152543744.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913153356947.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913162344502.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913162811491.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913170454005.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913170523568.png">
 <meta property="article:published_time" content="2023-09-08T09:29:25.000Z">
-<meta property="article:modified_time" content="2023-09-13T07:03:54.983Z">
+<meta property="article:modified_time" content="2023-09-13T09:27:49.385Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230912155352950.png">
@@ -276,7 +285,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.7k 字
+          10k 字
         
       </span>
     
@@ -287,7 +296,7 @@
         
         
         
-          64 分钟
+          87 分钟
         
       </span>
     
@@ -438,8 +447,9 @@
 <p>assign_sub 赋值操作，更新参数的值并返回。<br>调用assign_sub前，先用 tf.Variable 定义变量 w 为可训练（可自更新）。<br>w.assign_sub (w要自减的内容)</p>
 <p>返回张量沿指定维度最大值的索引<br>tf.argmax (张量名,axis&#x3D;操作轴)     numpy中也有类似函数</p>
 <h2 id="1-5-鸢尾花数据集的读入"><a href="#1-5-鸢尾花数据集的读入" class="headerlink" title="1.5 鸢尾花数据集的读入"></a>1.5 鸢尾花数据集的读入</h2><p>Setosa Iris（狗尾草鸢尾），Versicolour Iris（杂色鸢尾），Virginica Iris（弗吉尼亚鸢尾）</p>
+<p>鸢尾花数据来源：sklearn框架</p>
 <p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913105626307.png" srcset="/img/loading.gif" lazyload alt="3种鸢尾花"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br><span class="hljs-keyword">from</span> pandas <span class="hljs-keyword">import</span> DataFrame<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br>x_data = datasets.load_iris().data  <span class="hljs-comment"># .data返回iris数据集所有输入特征</span><br>y_data = datasets.load_iris().target  <span class="hljs-comment"># .target返回iris数据集所有标签</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;x_data from datasets: \n&quot;</span>, x_data)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;y_data from datasets: \n&quot;</span>, y_data)<br><br>x_data = DataFrame(x_data, columns=[<span class="hljs-string">&#x27;花萼长度&#x27;</span>, <span class="hljs-string">&#x27;花萼宽度&#x27;</span>, <span class="hljs-string">&#x27;花瓣长度&#x27;</span>, <span class="hljs-string">&#x27;花瓣宽度&#x27;</span>])  <span class="hljs-comment"># 为表格增加行索引（左侧）和列标签（上方）</span><br>pd.set_option(<span class="hljs-string">&#x27;display.unicode.east_asian_width&#x27;</span>, <span class="hljs-literal">True</span>)  <span class="hljs-comment"># 设置列名对齐</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;x_data add index: \n&quot;</span>, x_data)<br><br>x_data[<span class="hljs-string">&#x27;类别&#x27;</span>] = y_data  <span class="hljs-comment"># 新加一列，列标签为‘类别’，数据为y_data</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;x_data add a column: \n&quot;</span>, x_data)<br><br><span class="hljs-comment"># 类型维度不确定时，建议用print函数打印出来确认效果</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets <br><span class="hljs-keyword">from</span> pandas <span class="hljs-keyword">import</span> DataFrame<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br>x_data = datasets.load_iris().data  <span class="hljs-comment"># .data返回iris数据集所有输入特征</span><br>y_data = datasets.load_iris().target  <span class="hljs-comment"># .target返回iris数据集所有标签</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;x_data from datasets: \n&quot;</span>, x_data)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;y_data from datasets: \n&quot;</span>, y_data)<br><br>x_data = DataFrame(x_data, columns=[<span class="hljs-string">&#x27;花萼长度&#x27;</span>, <span class="hljs-string">&#x27;花萼宽度&#x27;</span>, <span class="hljs-string">&#x27;花瓣长度&#x27;</span>, <span class="hljs-string">&#x27;花瓣宽度&#x27;</span>])  <span class="hljs-comment"># 为表格增加行索引（左侧）和列标签（上方）</span><br>pd.set_option(<span class="hljs-string">&#x27;display.unicode.east_asian_width&#x27;</span>, <span class="hljs-literal">True</span>)  <span class="hljs-comment"># 设置列名对齐</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;x_data add index: \n&quot;</span>, x_data)<br><br>x_data[<span class="hljs-string">&#x27;类别&#x27;</span>] = y_data  <span class="hljs-comment"># 新加一列，列标签为‘类别’，数据为y_data</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;x_data add a column: \n&quot;</span>, x_data)<br><br><span class="hljs-comment"># 类型维度不确定时，建议用print函数打印出来确认效果</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="1-8-神经网络实现鸢尾花的分类"><a href="#1-8-神经网络实现鸢尾花的分类" class="headerlink" title="1.8 神经网络实现鸢尾花的分类"></a>1.8 神经网络实现鸢尾花的分类</h2><p>1.准备数据</p>
 <p>​	数据集读入</p>
@@ -485,7 +495,69 @@
 <p>学习率：</p>
 <p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913150028635.png" srcset="/img/loading.gif" lazyload alt="学习率"></p>
 <p>指数衰减学习率：<br>可以先用较大的学习率，快速得到较优解，然后逐步减小学习率，使<br>模型在训练后期稳定。<br><code>指数衰减学习率 = 初始学习率 * 学习率衰减率（ 当前轮数 / 多少轮衰减一次 ）</code></p>
-<h2 id="2-3-激活函数"><a href="#2-3-激活函数" class="headerlink" title="2.3 激活函数"></a>2.3 激活函数</h2>
+<h2 id="2-3-激活函数"><a href="#2-3-激活函数" class="headerlink" title="2.3 激活函数"></a>2.3 激活函数</h2><p>优秀的激活函数：<br>• 非线性： 激活函数非线性时，多层神经网络可逼近所有函数<br>• 可微性： 优化器大多用梯度下降更新参数<br>• 单调性： 当激活函数是单调的，能保证单层网络的损失函数是凸函数<br>• 近似恒等性： f(x)≈x当参数初始化为随机小值时，神经网络更稳定</p>
+<p>激活函数输出值的范围：<br>• 激活函数输出为有限值时，基于梯度的优化方法更稳定<br>• 激活函数输出为无限值时，建议调小学习率</p>
+<p>Sigmoid函数：<br>$$<br>f(x) &#x3D; \frac{1}{1 + e ^ {-x}}<br>$$<br><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913151017142.png" srcset="/img/loading.gif" lazyload alt="Sigmoid函数"></p>
+<p>特点<br>（1）易造成梯度消失<br>（2）输出非0均值，收敛慢<br>（3）幂运算复杂，训练时间长<br>目前Sigmoid函数因计算复杂，已接近弃用。</p>
+<p>Tanh函数：<br>$$<br>f(x) &#x3D; \frac{1-e^{-2x}}{1+e^{-2x}}<br>$$<br><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913151343657.png" srcset="/img/loading.gif" lazyload alt="Tanh函数"></p>
+<p>特点<br>（1）输出是0均值<br>（2）易造成梯度消失<br>（3）幂运算复杂，训练时间长</p>
+<p>Relu函数：<br>$$<br>f(x) &#x3D; max(x , 0) &#x3D; \begin{cases}0 \quad x&lt;0 \x \quad x\geq0 \end{cases}<br>$$<br><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913152152906.png" srcset="/img/loading.gif" lazyload alt="Relu函数"></p>
+<p>优点：<br>（1） 解决了梯度消失问题 (在正区间)<br>（2） 只需判断输入是否大于0，计算速度快<br>（3） 收敛速度远快于sigmoid和tanh</p>
+<p>缺点：<br>（1） 输出非0均值，收敛慢<br>（2） Dead RelU问题：某些神经元可能永远不会被激活，导致相应的参数永远不能被更新。（神经元死亡）</p>
+<p>Leaky Relu函数：<br>$$<br>f(x) &#x3D; max (ax,x)<br>$$<br><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913152543744.png" srcset="/img/loading.gif" lazyload alt="Leaky Relu函数"></p>
+<p>理论上来讲，Leaky Relu有Relu的所有优点，外加不会有Dead Relu问题，但是在实际操作当中，并没有完全证明Leaky Relu总是好于Relu。</p>
+<p>对于初学者的建议：<br>首选relu激活函数；<br>学习率设置较小值；<br>输入特征标准化，即让输入特征满足以0为均值，1为标准差的正态分布；<br>初始参数中心化，即让随机生成的参数满足以0为均值，<br>$$<br>\sqrt{\frac{2}{当前层输入特征个数}}<br>$$<br>为标准差的正态分布。</p>
+<h2 id="2-4-损失函数"><a href="#2-4-损失函数" class="headerlink" title="2.4 损失函数"></a>2.4 损失函数</h2><p>预测值（y）与已知答案（_y）的差距</p>
+<p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913153356947.png" srcset="/img/loading.gif" lazyload alt="主流的三种计算方法"></p>
+<p>均方误差mse：<br>$$<br>MSE(y_,y)&#x3D;\frac{\sum_{i&#x3D;1}^n (y-y_)^2}{n}<br>$$<br><code>lost_mse = tf.reduce_mean(tf.square(y_-y))</code></p>
+<p>自定义函数：</p>
+<p>可在一定程度上优化实际问题中的预测误差。</p>
+<p>交叉熵CE：</p>
+<p>表明了两个概率分布之间的距离，交叉熵越大，表明两个概率分布越远<br>$$<br>H(y_,y) &#x3D; - \sum y_ \times ln\ y<br>$$<br>交叉熵越小，证明数据距离真实越准确。</p>
+<p>softmax与交叉熵的结合：</p>
+<p>在TensorFlow中提供了函数<code>tf.nn.softmax_cross_entropy_with_logits(y_，y)</code>输出先过softmax函数，再计算y与y_的交叉熵损失函数。</p>
+<h2 id="2-5-缓解过拟合"><a href="#2-5-缓解过拟合" class="headerlink" title="2.5 缓解过拟合"></a>2.5 缓解过拟合</h2><p>欠拟合与过拟合</p>
+<p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913162344502.png" srcset="/img/loading.gif" lazyload alt="欠拟合与过拟合"></p>
+<table>
+<thead>
+<tr>
+<th>欠拟合的解决方法：<br/>增加输入特征项<br/>增加网络参数<br/>减少正则化参数</th>
+<th>过拟合的解决方法：<br/>数据清洗<br/>增大训练集<br/>采用正则化<br/>增大正则化参数</th>
+</tr>
+</thead>
+</table>
+<p>正则化缓解过拟合：</p>
+<p>正则化在损失函数中引入模型复杂度指标，利用给W加权值，弱化了训练<br>数据的噪声（一般不正则化b）</p>
+<p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913162811491.png" srcset="/img/loading.gif" lazyload alt="正则化"></p>
+<p>正则化的选择<br>L1正则化大概率会使很多参数变为零，因此该方法可通过稀疏参数，即减少参数的数量，降低复杂度。<br>L2正则化会使参数很接近零但不为零，因此该方法可通过减小参数值的大小降低复杂度。</p>
+<p>使用L2正则化缓解过拟合</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> tf.GradientTape() <span class="hljs-keyword">as</span> tape:  <span class="hljs-comment"># 记录梯度信息</span><br><br>           h1 = tf.matmul(x_train, w1) + b1  <span class="hljs-comment"># 记录神经网络乘加运算</span><br>           h1 = tf.nn.relu(h1)<br>           y = tf.matmul(h1, w2) + b2<br><br>           <span class="hljs-comment"># 采用均方误差损失函数mse = mean(sum(y-out)^2)</span><br>           loss_mse = tf.reduce_mean(tf.square(y_train - y))<br>           <span class="hljs-comment"># 添加l2正则化</span><br>           loss_regularization = []<br>           <span class="hljs-comment"># tf.nn.l2_loss(w)=sum(w ** 2) / 2</span><br>           loss_regularization.append(tf.nn.l2_loss(w1))<br>           loss_regularization.append(tf.nn.l2_loss(w2))<br>           <span class="hljs-comment"># 求和</span><br>           <span class="hljs-comment"># 例：x=tf.constant(([1,1,1],[1,1,1]))</span><br>           <span class="hljs-comment">#   tf.reduce_sum(x)</span><br>           <span class="hljs-comment"># &gt;&gt;&gt;6</span><br>           loss_regularization = tf.reduce_sum(loss_regularization)<br>           loss = loss_mse + <span class="hljs-number">0.03</span> * loss_regularization  <span class="hljs-comment"># REGULARIZER = 0.03</span><br><br>       <span class="hljs-comment"># 计算loss对各个参数的梯度</span><br>       variables = [w1, b1, w2, b2]<br>       grads = tape.gradient(loss, variables)<br></code></pre></td></tr></table></figure>
+
+<p>下表可以看出，L2正则化函数可有效的缓解过饱和现象</p>
+<table>
+<thead>
+<tr>
+<th><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913170454005.png" srcset="/img/loading.gif" lazyload alt="未填加L2正则化"></th>
+<th><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913170523568.png" srcset="/img/loading.gif" lazyload alt="加入了L2正则化"></th>
+</tr>
+</thead>
+</table>
+<h2 id="2-6-优化器"><a href="#2-6-优化器" class="headerlink" title="2.6 优化器"></a>2.6 优化器</h2><p>是引导神经网络更新参数的工具。</p>
+<p>神经网络参数优化器：<br>待优化参数𝒘，损失函数loss，学习率lr，每次迭代一个batch，t表示当前batch迭代的总次数：</p>
+<ol>
+<li>计算t时刻损失函数关于当前参数的梯度 $g_t&#x3D;\triangledown loss &#x3D; \frac{\partial loss}{\partial (w_t)} $</li>
+<li>计算t时刻一阶动量 $m_t$ 和二阶动量$V_t$</li>
+<li>计算t时刻下降梯度：$\eta_t &#x3D;\frac{lr·m_t}{\sqrt{V_t}}$</li>
+<li>计算t+1时刻参数：$w_{t+1} &#x3D; w_t - \eta_t &#x3D; w_t - \frac{lr·m_t}{\sqrt{V_t}}$</li>
+</ol>
+<p>一阶动量：与梯度相关的函数<br>二阶动量：与梯度平方相关的函数</p>
+<p>SGD(无momentum)，常用的梯度下降算法：</p>
+<p>$m_t &#x3D; g_t $ $V_t &#x3D; 1$</p>
+<p>$\eta_t &#x3D; \frac{lr·m_t}{\sqrt{V_t}} $</p>
+<p>$w_{t+1} &#x3D; w_t -\eta_t &#x3D; w_t - \frac{lr·m_t}{\sqrt{V_t}} \ &#x3D;w_t - lr·g_t $</p>
+<p>$w_{t+1} &#x3D; w_t -lr \ast \frac{\partial loss}{\partial w_t}  \ 参数更新公式$</p>
+<p>SGDM(含momentum的SGD)，在SGD的基础上增加了一阶动量</p>
+
                 
               </div>
             
