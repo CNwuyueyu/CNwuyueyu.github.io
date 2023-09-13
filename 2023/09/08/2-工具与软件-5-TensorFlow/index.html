@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913170454005.png">
 <meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913170523568.png">
 <meta property="article:published_time" content="2023-09-08T09:29:25.000Z">
-<meta property="article:modified_time" content="2023-09-13T09:34:39.664Z">
+<meta property="article:modified_time" content="2023-09-13T10:11:50.504Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230912155352950.png">
@@ -285,7 +285,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          10k 字
+          12k 字
         
       </span>
     
@@ -296,7 +296,7 @@
         
         
         
-          87 分钟
+          99 分钟
         
       </span>
     
@@ -556,7 +556,29 @@
 <p>$\eta_t &#x3D; \frac{lr·m_t}{\sqrt{V_t}} $</p>
 <p>$w_{t+1} &#x3D; w_t -\eta_t &#x3D; w_t - \frac{lr·m_t}{\sqrt{V_t}} \ &#x3D;w_t - lr·g_t $</p>
 <p>$w_{t+1} &#x3D; w_t -lr \ast \frac{\partial loss}{\partial w_t}  \ 参数更新公式$</p>
-<p>SGDM(含momentum的SGD)，在SGD的基础上增加了一阶动量</p>
+<p>SGDM(含momentum的SGD)，在SGD的基础上增加了一阶动量:</p>
+<p>$m_{t-1}$表示上一时刻的一阶动量。</p>
+<p>$m_t &#x3D; \beta · m_{t-1} + (1-\beta )·g_t $      $V_t&#x3D;1$</p>
+<p>$\eta_t&#x3D;  \frac{lr·m_t}{\sqrt{V_t}} &#x3D; lr· m_t &#x3D;lr·(\beta · m_{t-1}+(1-\beta)·g_t)$</p>
+<p>$w_{t+1}&#x3D;w_t -\eta_t &#x3D; w_t - lr · (\beta · m_{t-1}+(1-\beta)·g_t)$</p>
+<p>Adagrad，在SGD基础上增加二阶动量:</p>
+<p>$m_t&#x3D;g_t$     $V_t&#x3D;\sum_{\tau&#x3D;1}^t g_\tau^2$</p>
+<p>$\eta_t&#x3D;\frac{lr·m_t}{\sqrt{V_t}} &#x3D;\frac{lr·g_t}{\sqrt{\sum_{\tau&#x3D;1}^t g_\tau^2}} $</p>
+<p>$w_{t+1}&#x3D;w_t-\eta_t&#x3D;w_t-\frac{lr·g_t}{\sqrt{\sum_{\tau&#x3D;1}^t g_\tau^2}}$</p>
+<p>RMSProp，SGD基础上增加二阶动量:</p>
+<p>$m_t&#x3D;g_t$      $V_t &#x3D; \beta · V_{t-1} + (1-\beta)·g_t^2 $</p>
+<p>$\eta_t&#x3D;\frac{lr·m_t}{\sqrt{V_t}} &#x3D;\frac{lr·g_t}{\sqrt{ \beta · V_{t-1} + (1-\beta)·g_t^2}} $</p>
+<p>$w_{t+1}&#x3D;w_t-\eta_t&#x3D;w_t-\frac{lr·g_t}{\sqrt{ \beta · V_{t-1} + (1-\beta)·g_t^2}}$</p>
+<p>Adam, 同时结合SGDM一阶动量和RMSProp二阶动量:</p>
+<p>$m_t&#x3D;\beta_1 ·m_{t-1}+(1-\beta_1)·g_t$</p>
+<p>修正一阶动量的偏差：$\widehat{m_t}&#x3D;\frac{m_t}{1-\beta_1^t}$</p>
+<p>$V_t&#x3D;\beta_2 · V_{step-1}+(1-\beta_2)·g_t^2$</p>
+<p>修正二阶动量的偏差：$ \widehat{V_t}&#x3D; \frac{V_t} {1-\beta_2^t} $</p>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs fsharp"><span class="hljs-operator">$</span>\eta_t<span class="hljs-operator">=</span>\<span class="hljs-keyword">frac</span>&#123;lr·\<span class="hljs-keyword">widehat</span>&#123;m_t&#125;&#125;&#123;\<span class="hljs-keyword">sqrt</span>&#123;\<span class="hljs-keyword">widehat</span>&#123;V_t&#125;&#125;&#125; <span class="hljs-operator">=</span>  \<span class="hljs-keyword">frac</span>&#123;lr·&#123;\<span class="hljs-keyword">frac</span>&#123;m_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_1<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#123;\<span class="hljs-keyword">sqrt</span>&#123;&#123;\<span class="hljs-keyword">frac</span>&#123;V_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_2<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#125; <span class="hljs-operator">$</span><br><br><br><br><span class="hljs-operator">$</span><span class="hljs-keyword">w_</span>&#123;t<span class="hljs-operator">+</span><span class="hljs-number">1</span>&#125;<span class="hljs-operator">=</span>w_t<span class="hljs-operator">-</span>\eta_t<span class="hljs-operator">=</span>w_t<span class="hljs-operator">-</span>\<span class="hljs-keyword">frac</span>&#123;lr·&#123;\<span class="hljs-keyword">frac</span>&#123;m_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_1<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#123;\<span class="hljs-keyword">sqrt</span>&#123;&#123;\<span class="hljs-keyword">frac</span>&#123;V_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_2<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#125; <span class="hljs-operator">$</span><br><br>Nunjucks <span class="hljs-literal">Error</span><span class="hljs-operator">:</span> _posts<span class="hljs-operator">/</span>2<span class="hljs-operator">-</span>工具与软件<span class="hljs-operator">-</span>5<span class="hljs-operator">-</span>TensorFlow.md [Line 237, Column 86] expected variable <span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>…to be continue</p>
 
                 
               </div>
