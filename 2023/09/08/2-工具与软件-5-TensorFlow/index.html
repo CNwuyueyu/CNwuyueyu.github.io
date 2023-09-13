@@ -28,8 +28,13 @@
 <meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230911172021989.png">
 <meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230911172351969.png">
 <meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230912105643070.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913093248414.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913105626307.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913140637316.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913145516199.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913150028635.png">
 <meta property="article:published_time" content="2023-09-08T09:29:25.000Z">
-<meta property="article:modified_time" content="2023-09-12T09:30:16.463Z">
+<meta property="article:modified_time" content="2023-09-13T07:03:54.983Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230912155352950.png">
@@ -271,7 +276,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.3k 字
+          7.7k 字
         
       </span>
     
@@ -282,7 +287,7 @@
         
         
         
-          28 分钟
+          64 分钟
         
       </span>
     
@@ -414,7 +419,73 @@
 <p>生成截断式正态分布的随机数</p>
 <p><code>tf.random.truncated_normal(纬度，mean=均值，stddev=标准差)</code></p>
 <p>在正态分布中如果随机生成的数据的取值在（$$\mu\pm2\sigma$$)</p>
+<p>生成均匀分布的随机数</p>
+<p><code>tf.random.uniform(纬度，minval=最小值，maxval=最大值)</code></p>
+<h2 id="1-4-TF2常用函数"><a href="#1-4-TF2常用函数" class="headerlink" title="1.4 TF2常用函数"></a>1.4 TF2常用函数</h2><p>强制tensor转换为该数据类型<br><code>tf.cast (张量名，dtype=数据类型)</code><br>计算张量维度上元素的最小值<br><code>tf.reduce_min (张量名)</code><br>计算张量维度上元素的最大值<br><code>tf.reduce_max (张量名)</code></p>
+<p>理解axis<br>在一个二维张量或数组中，可以通过调整 axis 等于0或1 控制执行维度。<br> axis&#x3D;0代表跨行（经度，down)，而axis&#x3D;1代表跨列（纬度，across)<br> 如果不指定axis，则所有元素参与计算。</p>
+<p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913093248414.png" srcset="/img/loading.gif" lazyload alt="理解axis"></p>
+<p>计算张量沿着指定维度的平均值<br><code>tf.reduce_mean (张量名，axis=操作轴)</code>  (不指定axis，则对所有元素进行操作)<br>计算张量沿着指定维度的和<br><code>tf.reduce_sum (张量名，axis=操作轴)</code></p>
+<p><code>tf.Variable () </code>将变量标记为“可训练”，被标记的变量会在反向传播<br>中记录梯度信息。神经网络训练中，常用该函数标记待训练参数。<br><code>tf.Variable(初始值)</code><br><code>w = tf.Variable(tf.random.normal([2, 2], mean=0, stddev=1))</code></p>
+<p>TensorFlow中的数学运算<br>对应元素的四则运算：<code>tf.add</code>，<code>tf.subtract</code>，<code>tf.multiply</code>，<code>tf.divide</code>    </p>
+<p> 只有纬度相同的张量才能做四则运算。<br>平方、次方与开方：<code> tf.square</code>，<code>tf.pow</code>，<code>tf.sqrt</code><br>矩阵乘：<code>tf.matmul</code></p>
+<p>切分传入张量的第一维度，生成输入特征&#x2F;标签对，构建数据集<br><code>data = tf.data.Dataset.from_tensor_slices((输入特征, 标签))</code><br>（Numpy和Tensor格式都可用该语句读入数据）</p>
+<p><code>tf.GradientTape</code><br>with结构记录计算过程，gradient求出张量的梯度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> tf.GradientTape( ) <span class="hljs-keyword">as</span> tape:<br>	若干个计算过程<br>grad=tape.gradient(函数，对谁求导)<br></code></pre></td></tr></table></figure>
 
+<p>enumerate是python的内建函数，它可遍历每个元素(如列表、元组<br>或字符串)，组合为：索引 元素，常在for循环中使用。<br><code>enumerate(列表名)</code></p>
+<p>独热编码：在分类问题中，常用独热码做标签，标记类别：1表示是，0表示非。 <code>tf.one_hot (待转换数据, depth=几分类)</code></p>
+<p>当n分类的n个输出 （y0 ，y1, …… yn-1）通过softmax( ) 函数，<br>便符合概率分布了。也就是说，将多个权重占比划分归为1。<br>$$<br>\forall x \ \ P(X &#x3D; x) \in [0,1] 且 \sum_{x}P(X &#x3D; x) &#x3D; 1<br>$$</p>
+<p>assign_sub 赋值操作，更新参数的值并返回。<br>调用assign_sub前，先用 tf.Variable 定义变量 w 为可训练（可自更新）。<br>w.assign_sub (w要自减的内容)</p>
+<p>返回张量沿指定维度最大值的索引<br>tf.argmax (张量名,axis&#x3D;操作轴)     numpy中也有类似函数</p>
+<h2 id="1-5-鸢尾花数据集的读入"><a href="#1-5-鸢尾花数据集的读入" class="headerlink" title="1.5 鸢尾花数据集的读入"></a>1.5 鸢尾花数据集的读入</h2><p>Setosa Iris（狗尾草鸢尾），Versicolour Iris（杂色鸢尾），Virginica Iris（弗吉尼亚鸢尾）</p>
+<p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913105626307.png" srcset="/img/loading.gif" lazyload alt="3种鸢尾花"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br><span class="hljs-keyword">from</span> pandas <span class="hljs-keyword">import</span> DataFrame<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br>x_data = datasets.load_iris().data  <span class="hljs-comment"># .data返回iris数据集所有输入特征</span><br>y_data = datasets.load_iris().target  <span class="hljs-comment"># .target返回iris数据集所有标签</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;x_data from datasets: \n&quot;</span>, x_data)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;y_data from datasets: \n&quot;</span>, y_data)<br><br>x_data = DataFrame(x_data, columns=[<span class="hljs-string">&#x27;花萼长度&#x27;</span>, <span class="hljs-string">&#x27;花萼宽度&#x27;</span>, <span class="hljs-string">&#x27;花瓣长度&#x27;</span>, <span class="hljs-string">&#x27;花瓣宽度&#x27;</span>])  <span class="hljs-comment"># 为表格增加行索引（左侧）和列标签（上方）</span><br>pd.set_option(<span class="hljs-string">&#x27;display.unicode.east_asian_width&#x27;</span>, <span class="hljs-literal">True</span>)  <span class="hljs-comment"># 设置列名对齐</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;x_data add index: \n&quot;</span>, x_data)<br><br>x_data[<span class="hljs-string">&#x27;类别&#x27;</span>] = y_data  <span class="hljs-comment"># 新加一列，列标签为‘类别’，数据为y_data</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;x_data add a column: \n&quot;</span>, x_data)<br><br><span class="hljs-comment"># 类型维度不确定时，建议用print函数打印出来确认效果</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="1-8-神经网络实现鸢尾花的分类"><a href="#1-8-神经网络实现鸢尾花的分类" class="headerlink" title="1.8 神经网络实现鸢尾花的分类"></a>1.8 神经网络实现鸢尾花的分类</h2><p>1.准备数据</p>
+<p>​	数据集读入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 从sklearn包datasets 读入数据集：</span><br><span class="hljs-keyword">from</span> sklearn.datasets <span class="hljs-keyword">import</span> datasets<br>x_data = datasets.load_iris().data <span class="hljs-comment"># 返回iris数据集所有输入特征</span><br>y_data = datasets.load_iris().target <span class="hljs-comment"># 返回iris数据集所有标签</span><br></code></pre></td></tr></table></figure>
+
+<p>​	数据集乱序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">np.random.seed(<span class="hljs-number">116</span>) <span class="hljs-comment"># 使用相同的seed，使输入特征/标签一一对应</span><br>np.random.shuffle(x_data)<br>np.random.seed(<span class="hljs-number">116</span>)<br>np.random.shuffle(y_data)<br>tf.random.set_seed(<span class="hljs-number">116</span>)<br></code></pre></td></tr></table></figure>
+
+<p>​	分成用不相见的训练集和测试集</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">x_train = x_data[:-<span class="hljs-number">30</span>]<br>y_train = y_data[:-<span class="hljs-number">30</span>]<br>x_test = x_data[-<span class="hljs-number">30</span>:]<br>y_test = y_data[-<span class="hljs-number">30</span>:]<br></code></pre></td></tr></table></figure>
+
+<p>​	配成【输入特征，标签】对，每次喂入一个batch</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">train_db = tf.data.Dataset.from_tensor_slices((x_train, y_train)).batch(<span class="hljs-number">32</span>)<br>test_db = tf.data.Dataset.from_tensor_slices((x_test, y_test)).batch(<span class="hljs-number">32</span>)<br></code></pre></td></tr></table></figure>
+
+<p>2.搭建网络</p>
+<p>​	定义神经网络中的所有可训练参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">w1 = tf.Variable(tf.random.truncated_normal([ <span class="hljs-number">4</span>, <span class="hljs-number">3</span> ], stddev=<span class="hljs-number">0.1</span>, seed=<span class="hljs-number">1</span>)) <span class="hljs-comment"># 四种特征，三个结果</span><br>b1 = tf.Variable(tf.random.truncated_normal([ <span class="hljs-number">3</span> ], stddev=<span class="hljs-number">0.1</span>, seed=<span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
+
+<p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913140637316.png" srcset="/img/loading.gif" lazyload alt="输入层与输出层"></p>
+<p>3.参数优化</p>
+<p>​	嵌套循环迭代，with结构更新参数，显示当前loss</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epoch): <span class="hljs-comment">#数据集级别迭代</span><br><span class="hljs-keyword">for</span> step, (x_train, y_train) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(train_db): <span class="hljs-comment">#batch级别迭代</span><br><span class="hljs-keyword">with</span> tf.GradientTape() <span class="hljs-keyword">as</span> tape: <span class="hljs-comment"># 记录梯度信息</span><br>前向传播过程计算y<br>计算总loss<br>grads = tape.gradient(loss, [ w1, b1 ])<br>w1.assign_sub(lr * grads[<span class="hljs-number">0</span>]) <span class="hljs-comment">#参数自更新</span><br>b1.assign_sub(lr * grads[<span class="hljs-number">1</span>])<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Epoch &#123;&#125;, loss: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(epoch, loss_all/<span class="hljs-number">4</span>))<br></code></pre></td></tr></table></figure>
+
+
+
+<p>4.测试效果</p>
+<p>​	计算当前参数前向传播后的准确率，显示当前acc</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> x_test, y_test <span class="hljs-keyword">in</span> test_db:<br>y = tf.matmul(h, w) + b <span class="hljs-comment"># y为预测结果</span><br>y = tf.nn.softmax(y)<br><span class="hljs-comment"># y符合概率分布</span><br>pred = tf.argmax(y, axis=<span class="hljs-number">1</span>) <span class="hljs-comment"># 返回y中最大值的索引，即预测的分类</span><br>pred = tf.cast(pred, dtype=y_test.dtype) <span class="hljs-comment">#调整数据类型与标签一致</span><br>correct = tf.cast(tf.equal(pred, y_test), dtype=tf.int32)<br>correct = tf.reduce_sum (correct) <span class="hljs-comment"># 将每个batch的correct数加起来</span><br>total_correct += <span class="hljs-built_in">int</span> (correct) <span class="hljs-comment"># 将所有batch中的correct数加起来</span><br>total_number += x_test.shape [<span class="hljs-number">0</span>]<br>acc = total_correct / total_number<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;test_acc:&quot;</span>, acc)<br></code></pre></td></tr></table></figure>
+
+<p>5.acc &#x2F; loss 可视化（查看效果）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">plt.title(<span class="hljs-string">&#x27;Acc Curve&#x27;</span>) <span class="hljs-comment"># 图片标题</span><br>plt.xlabel(<span class="hljs-string">&#x27;Epoch&#x27;</span>) <span class="hljs-comment"># x轴名称</span><br>plt.ylabel(<span class="hljs-string">&#x27;Acc&#x27;</span>) <span class="hljs-comment"># y轴名称</span><br>plt.plot(test_acc, label=<span class="hljs-string">&quot;$Accuracy$&quot;</span>) <span class="hljs-comment"># 逐点画出test_acc值并连线</span><br>plt.legend()<br>plt.show()<br></code></pre></td></tr></table></figure>
+
+<h2 id="2-1-预备知识"><a href="#2-1-预备知识" class="headerlink" title="2.1 预备知识"></a>2.1 预备知识</h2><p>函数：</p>
+<p><code>tf.where()</code>  条件语句真返回A，条件语句假返回B<br><code>tf.where(条件语句，真返回A，假返回B)</code></p>
+<p><code>np.random.RandomState.rand()</code>返回一个[0,1)之间的随机数<br><code>np.random.RandomState.rand(维度) #维度为空，返回标量</code></p>
+<p><code>np.vstack()</code>将两个数组按垂直方向叠加<br><code>np.vstack(数组1，数组2)</code></p>
+<p><code>np.mgrid[ ] </code>返回间隔数值点，可同时返回多组， [起始值 结束值)<br><code>np.mgrid[ 起始值 : 结束值 : 步长 ，起始值 : 结束值 : 步长 , … ]</code></p>
+<p><code> x.ravel( )</code> 将x变为一维数组，“把. 前变量拉直”<br><code>np.c\_[ ] </code>使返回的间隔数值点配对<br><code>np.c\_[ 数组1，数组2， … ]</code></p>
+<h2 id="2-2-复杂度学习率"><a href="#2-2-复杂度学习率" class="headerlink" title="2.2 复杂度学习率"></a>2.2 复杂度学习率</h2><p>NN复杂度：多用NN层数和NN参数的个数表示</p>
+<p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913145516199.png" srcset="/img/loading.gif" lazyload alt="复杂度"></p>
+<p>空间复杂度：<br>    层数 &#x3D; 隐藏层的层数 + 1个输出层<br>    图为2层NN<br>                总参数 &#x3D; 总w + 总b<br>                图中 3x4+4 + 4x2+2 &#x3D; 26</p>
+<p>时间复杂度：<br>    乘加运算次数<br>    左图 3x4 +  4x2 &#x3D; 20</p>
+<p>学习率：</p>
+<p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913150028635.png" srcset="/img/loading.gif" lazyload alt="学习率"></p>
+<p>指数衰减学习率：<br>可以先用较大的学习率，快速得到较优解，然后逐步减小学习率，使<br>模型在训练后期稳定。<br><code>指数衰减学习率 = 初始学习率 * 学习率衰减率（ 当前轮数 / 多少轮衰减一次 ）</code></p>
+<h2 id="2-3-激活函数"><a href="#2-3-激活函数" class="headerlink" title="2.3 激活函数"></a>2.3 激活函数</h2>
                 
               </div>
             
