@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913170454005.png">
 <meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230913170523568.png">
 <meta property="article:published_time" content="2023-09-08T09:29:25.000Z">
-<meta property="article:modified_time" content="2023-09-13T10:11:50.504Z">
+<meta property="article:modified_time" content="2023-09-16T04:42:22.317Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230912155352950.png">
@@ -296,7 +296,7 @@
         
         
         
-          99 分钟
+          101 分钟
         
       </span>
     
@@ -362,7 +362,7 @@
 <p>符号主义：用公式描述的人工智能，让PC具有了理性思维</p>
 <p>连接主义：仿造人的感性思维</p>
 <p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-5-TensorFlow/image-20230911172351969.png" srcset="/img/loading.gif" lazyload alt="神经网络是连接主义"></p>
-<h2 id="1-2神经网络的设计过程"><a href="#1-2神经网络的设计过程" class="headerlink" title="1.2神经网络的设计过程"></a>1.2神经网络的设计过程</h2><p>用神经网络实现鸢尾花的分类：<strong>梯度下降</strong></p>
+<h2 id="1-2-神经网络的设计过程"><a href="#1-2-神经网络的设计过程" class="headerlink" title="1.2 神经网络的设计过程"></a>1.2 神经网络的设计过程</h2><p>用神经网络实现鸢尾花的分类：<strong>梯度下降</strong></p>
 <p>目的：找到一组参数w和b，使得损失函数最小。</p>
 <p>梯度：函数对各参数<strong>求偏导</strong>后的向量。 <u>梯度下降的方向是函数减小的方向</u></p>
 <p>梯度下降法：沿损失函数梯度下降的方向，寻找损失函数的最小值，得到最优参数的方法</p>
@@ -574,7 +574,9 @@
 <p>修正一阶动量的偏差：$\widehat{m_t}&#x3D;\frac{m_t}{1-\beta_1^t}$</p>
 <p>$V_t&#x3D;\beta_2 · V_{step-1}+(1-\beta_2)·g_t^2$</p>
 <p>修正二阶动量的偏差：$ \widehat{V_t}&#x3D; \frac{V_t} {1-\beta_2^t} $</p>
-<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs fsharp"><span class="hljs-operator">$</span>\eta_t<span class="hljs-operator">=</span>\<span class="hljs-keyword">frac</span>&#123;lr·\<span class="hljs-keyword">widehat</span>&#123;m_t&#125;&#125;&#123;\<span class="hljs-keyword">sqrt</span>&#123;\<span class="hljs-keyword">widehat</span>&#123;V_t&#125;&#125;&#125; <span class="hljs-operator">=</span>  \<span class="hljs-keyword">frac</span>&#123;lr·&#123;\<span class="hljs-keyword">frac</span>&#123;m_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_1<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#123;\<span class="hljs-keyword">sqrt</span>&#123;&#123;\<span class="hljs-keyword">frac</span>&#123;V_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_2<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#125; <span class="hljs-operator">$</span><br><br><br><br><span class="hljs-operator">$</span><span class="hljs-keyword">w_</span>&#123;t<span class="hljs-operator">+</span><span class="hljs-number">1</span>&#125;<span class="hljs-operator">=</span>w_t<span class="hljs-operator">-</span>\eta_t<span class="hljs-operator">=</span>w_t<span class="hljs-operator">-</span>\<span class="hljs-keyword">frac</span>&#123;lr·&#123;\<span class="hljs-keyword">frac</span>&#123;m_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_1<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#123;\<span class="hljs-keyword">sqrt</span>&#123;&#123;\<span class="hljs-keyword">frac</span>&#123;V_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_2<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#125; <span class="hljs-operator">$</span><br><br>Nunjucks <span class="hljs-literal">Error</span><span class="hljs-operator">:</span> _posts<span class="hljs-operator">/</span>2<span class="hljs-operator">-</span>工具与软件<span class="hljs-operator">-</span>5<span class="hljs-operator">-</span>TensorFlow.md [Line 237, Column 86] expected variable <span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
+<p>$\eta_t&#x3D;\frac{lr·\widehat{m_t} }{\sqrt{\widehat{V_t} } } &#x3D; lr \cdot \frac{lr{\frac{m_t}{1-\beta_1^t} } }{\sqrt{ {\frac{V_t} {1-\beta_2^t} } } } $</p>
+<p>$w_{t+1}&#x3D;w_t-\eta_t&#x3D;w_t-\frac{lr\cdot{\frac{m_t}{1-\beta_1^t} } }{\sqrt{ {\frac{V_t}{1-\beta_2^t} } } } $</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql">$\eta_t<span class="hljs-operator">=</span>\frac&#123;lr·\widehat&#123;m_t&#125;&#125;&#123;\sqrt&#123;\widehat&#123;V_t&#125;&#125;&#125; <span class="hljs-operator">=</span>  \frac&#123;lr·&#123;\frac&#123;m_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_1<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#123;\sqrt&#123;&#123;\frac&#123;V_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_2<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#125; $<br><br><br><br>$w_&#123;t<span class="hljs-operator">+</span><span class="hljs-number">1</span>&#125;<span class="hljs-operator">=</span>w_t<span class="hljs-operator">-</span>\eta_t<span class="hljs-operator">=</span>w_t<span class="hljs-operator">-</span>\frac&#123;lr·&#123;\frac&#123;m_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_1<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#123;\sqrt&#123;&#123;\frac&#123;V_t&#125;&#123;<span class="hljs-number">1</span><span class="hljs-operator">-</span>\beta_2<span class="hljs-operator">^</span>t&#125;&#125;&#125;&#125; $<br><br>Nunjucks Error: _posts<span class="hljs-operator">/</span><span class="hljs-number">2</span><span class="hljs-operator">-</span>工具与软件<span class="hljs-number">-5</span><span class="hljs-operator">-</span>TensorFlow.md [Line <span class="hljs-number">237</span>, <span class="hljs-keyword">Column</span> <span class="hljs-number">86</span>] expected variable <span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 
 
 
