@@ -16,15 +16,21 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="安装在pycharm中对应的python解释器内安装pandas。  123import pandasprint(pandas.__version__)  Output: 1232.1.0进程已结束,退出代码0  Pandas 数据结构 - SeriesSeries 相当于表格中的一个列，函数如下： pandas.Series( data, index, dtype, name, copy)  d">
+<meta property="og:type" content="article">
 <meta property="og:title" content="2-工具与软件-2-Pandas">
 <meta property="og:url" content="http://example.com/2023/09/08/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-2-Pandas/index.html">
 <meta property="og:site_name" content="Blog">
+<meta property="og:description" content="安装在pycharm中对应的python解释器内安装pandas。  123import pandasprint(pandas.__version__)  Output: 1232.1.0进程已结束,退出代码0  Pandas 数据结构 - SeriesSeries 相当于表格中的一个列，函数如下： pandas.Series( data, index, dtype, name, copy)  d">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-2-Pandas/image-20230919175623027.png">
+<meta property="og:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-2-Pandas/image-20230919182139779.png">
 <meta property="article:published_time" content="2023-09-08T09:29:07.000Z">
-<meta property="article:modified_time" content="2023-09-08T09:29:07.470Z">
+<meta property="article:modified_time" content="2023-09-19T13:06:56.917Z">
 <meta property="article:author" content="Wuyueyu">
+<meta property="article:tag" content="Pandas">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-2-Pandas/image-20230919175623027.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -263,7 +269,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          5.9k 字
         
       </span>
     
@@ -274,7 +280,7 @@
         
         
         
-          1 分钟
+          49 分钟
         
       </span>
     
@@ -316,7 +322,335 @@
             
               <div class="markdown-body">
                 
-                
+                <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在pycharm中对应的python解释器内安装pandas。</p>
+<p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-2-Pandas/image-20230919175623027.png" srcset="/img/loading.gif" lazyload alt="pandas的安装"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas<br><br><span class="hljs-built_in">print</span>(pandas.__version__)<br></code></pre></td></tr></table></figure>
+
+<p>Output:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2.1</span><span class="hljs-number">.0</span><br><br>进程已结束,退出代码<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Pandas-数据结构-Series"><a href="#Pandas-数据结构-Series" class="headerlink" title="Pandas 数据结构 - Series"></a>Pandas 数据结构 - Series</h2><p>Series 相当于表格中的一个列，函数如下：</p>
+<p><code>pandas.Series( data, index, dtype, name, copy)</code></p>
+<ul>
+<li><strong>data</strong>：一组数据(ndarray 类型)。</li>
+<li><strong>index</strong>：数据索引标签，如果不指定，默认从 0 开始。</li>
+<li><strong>dtype</strong>：数据类型，默认会自己判断。</li>
+<li><strong>name</strong>：设置名称。</li>
+<li><strong>copy</strong>：拷贝数据，默认为 False。</li>
+</ul>
+<p>也可以使用Map来创建Series：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br>sites = &#123;<span class="hljs-number">1</span>: <span class="hljs-string">&quot;Google&quot;</span>, <span class="hljs-number">2</span>: <span class="hljs-string">&quot;Runoob&quot;</span>, <span class="hljs-number">3</span>: <span class="hljs-string">&quot;Wiki&quot;</span>&#125;<br><br>myvar = pd.Series(sites)<br><br><span class="hljs-built_in">print</span>(myvar)<br></code></pre></td></tr></table></figure>
+
+<p>这样Key就变为了索引值。</p>
+<h2 id="Pandas-数据结构-DataFrame"><a href="#Pandas-数据结构-DataFrame" class="headerlink" title="Pandas 数据结构 - DataFrame"></a>Pandas 数据结构 - DataFrame</h2><p>DataFrame 是一个表格型的数据结构，由一个index组成的第0列和DataFrame组成的n列构成，相当于Series组成的字典（共用一个index）。</p>
+<p><img src="/../images/2-%E5%B7%A5%E5%85%B7%E4%B8%8E%E8%BD%AF%E4%BB%B6-2-Pandas/image-20230919182139779.png" srcset="/img/loading.gif" lazyload alt="Series与DataFrame"></p>
+<p>函数如下：</p>
+<p><code>pandas.DataFrame( data, index, columns, dtype, copy)</code></p>
+<ul>
+<li><strong>data</strong>：一组数据(ndarray、series, map, lists, dict 等类型)。</li>
+<li><strong>index</strong>：索引值，或者可以称为行标签。</li>
+<li><strong>columns</strong>：列标签，默认为 RangeIndex (0, 1, 2, …, n) 。</li>
+<li><strong>dtype</strong>：数据类型。</li>
+<li><strong>copy</strong>：拷贝数据，默认为 False。</li>
+</ul>
+<p>使用ndarrays创建DataFrame对象:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br>data = &#123;<span class="hljs-string">&#x27;Site&#x27;</span>:[<span class="hljs-string">&#x27;Google&#x27;</span>, <span class="hljs-string">&#x27;Runoob&#x27;</span>, <span class="hljs-string">&#x27;Wiki&#x27;</span>], <span class="hljs-string">&#x27;Age&#x27;</span>:[<span class="hljs-number">10</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>]&#125;<br><br>df = pd.DataFrame(data)<br><br><span class="hljs-built_in">print</span> (df)<br></code></pre></td></tr></table></figure>
+
+<p>Site Age为列名，0、1、2为行标。</p>
+<p>使用Map创建与Series同理。</p>
+<h2 id="Pandas-CSV-文件"><a href="#Pandas-CSV-文件" class="headerlink" title="Pandas CSV 文件"></a>Pandas CSV 文件</h2><p>Pandas 可以很方便的处理 CSV 文件</p>
+<p><code>df = pd.read_csv(&#39;nba.csv&#39;)</code>读取CSV文件。</p>
+<p><code>df.to_csv(&#39;site.csv&#39;)</code>将DataFrame储存为csv文件。</p>
+<p>数据处理</p>
+<p><strong>head( n )</strong> 方法用于读取前面的 n 行，如果不填参数 n ，默认返回 5 行。</p>
+<p><strong>tail( n )</strong> 方法用于读取尾部的 n 行，如果不填参数 n ，默认返回 5 行，空行各个字段的值返回 <strong>NaN</strong>。</p>
+<p><strong>info()</strong> 方法返回表格的一些基本信息：</p>
+<h2 id="Pandas-JSON-文件"><a href="#Pandas-JSON-文件" class="headerlink" title="Pandas JSON 文件"></a>Pandas JSON 文件</h2><p>Pandas 可以很方便的处理 JSON 数据</p>
+<p><strong>to_string()</strong> 用于返回 <strong>DataFrame</strong>(表格) 类型的数据，我们也可以直接处理 JSON 字符串。</p>
+<p>如果是字符串格式的 JSON 可以直接将Python字典转为DataFrame数据（json对象与Map有相同的格式）</p>
+<p><strong>Json数据的解析</strong></p>
+<p>直接加载一个print一个json文件打印出的并不直观。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">          school_name   <span class="hljs-keyword">class</span>                                           <span class="hljs-title class_">students</span><br><span class="hljs-number">0</span>  ABC primary school  Year <span class="hljs-number">1</span>  &#123;<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-string">&#x27;A001&#x27;</span>, <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;Tom&#x27;</span>, <span class="hljs-string">&#x27;math&#x27;</span>: <span class="hljs-number">60</span>, <span class="hljs-string">&#x27;phy...</span><br><span class="hljs-string">1  ABC primary school  Year 1  &#123;&#x27;</span><span class="hljs-built_in">id</span><span class="hljs-string">&#x27;: &#x27;</span>A002<span class="hljs-string">&#x27;, &#x27;</span>name<span class="hljs-string">&#x27;: &#x27;</span>James<span class="hljs-string">&#x27;, &#x27;</span>math<span class="hljs-string">&#x27;: 89, &#x27;</span>p...<br><span class="hljs-number">2</span>  ABC primary school  Year <span class="hljs-number">1</span>  &#123;<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-string">&#x27;A003&#x27;</span>, <span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;Jenny&#x27;</span>, <span class="hljs-string">&#x27;math&#x27;</span>: <span class="hljs-number">79</span>, <span class="hljs-string">&#x27;p...</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
+
+<p>用到 <strong>json_normalize()</strong> 方法将内嵌的数据完整的解析出来</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> json<br><br><span class="hljs-comment"># 使用 Python JSON 模块载入数据</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;nested_list.json&#x27;</span>,<span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    data = json.loads(f.read()) <br>    <span class="hljs-comment">#data = json.loads(f.read()) 使用 Python JSON 模块载入数据。</span><br><br><span class="hljs-comment"># 展平数据</span><br>df_nested_list = pd.json_normalize(data, record_path =[<span class="hljs-string">&#x27;students&#x27;</span>])<br><span class="hljs-built_in">print</span>(df_nested_list)<br></code></pre></td></tr></table></figure>
+
+<p>Output:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">     <span class="hljs-built_in">id</span>   name  math  physics  chemistry<br><span class="hljs-number">0</span>  A001    Tom    <span class="hljs-number">60</span>       <span class="hljs-number">66</span>         <span class="hljs-number">61</span><br><span class="hljs-number">1</span>  A002  James    <span class="hljs-number">89</span>       <span class="hljs-number">76</span>         <span class="hljs-number">51</span><br><span class="hljs-number">2</span>  A003  Jenny    <span class="hljs-number">79</span>       <span class="hljs-number">90</span>         <span class="hljs-number">78</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>读取一组数据glom</strong></p>
+<p><strong>import</strong> pandas <strong>as</strong> pd<br><strong>from</strong> glom <strong>import</strong> glom   glom模块准许使用“.”来获取内嵌对象的属性</p>
+<p><code>data = df[&#39;students&#39;].apply(**lambda** row: glom(row, &#39;grade.math&#39;))</code></p>
+<p>效果类似于查找。</p>
+<h2 id="Pandas-数据清洗"><a href="#Pandas-数据清洗" class="headerlink" title="Pandas 数据清洗"></a>Pandas 数据清洗</h2><p>很多数据集存在数据缺失、数据格式错误、错误数据或重复数据的情况，如果要使数据分析更加准确，就需要对这些没有用的数据进行处理（清洗）。</p>
+<p>例如数据中的“n&#x2F;a  NA  –  na”，或者空值等。</p>
+<p>清洗空值：dropna（）方法</p>
+<p><code>DataFrame.dropna(axis=0, how=&#39;any&#39;, thresh=None, subset=None, inplace=False)</code></p>
+<ul>
+<li>axis：默认为 <strong>0</strong>，表示逢空值剔除整行，如果设置参数 <strong>axis＝1</strong> 表示逢空值去掉整列。</li>
+<li>how：默认为 <strong>‘any’</strong> 如果一行（或一列）里任何一个数据有出现 NA 就去掉整行，如果设置 <strong>how&#x3D;’all’</strong> 一行（或列）都是 NA 才去掉这整行。</li>
+<li>thresh：设置需要多少非空值的数据才可以保留下来的。</li>
+<li>subset：设置想要检查的列。如果是多个列，可以使用列名的 list 作为参数。</li>
+<li>inplace：如果设置 True，将计算得到的值直接覆盖之前的值并返回 None，修改的是源数据。</li>
+</ul>
+<p>可以先用isnull()判断是否为空。</p>
+<p>可以在read_csv（）方法中指定空数据的数据类型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br>missing_values = [<span class="hljs-string">&quot;n/a&quot;</span>, <span class="hljs-string">&quot;na&quot;</span>, <span class="hljs-string">&quot;--&quot;</span>]<br>df = pd.read_csv(<span class="hljs-string">&#x27;property-data.csv&#x27;</span>, na_values = missing_values)<br></code></pre></td></tr></table></figure>
+
+<p>dropna会返回一个新的Dataframe不会修改源数据。如果需要修改在inplace设置为True。</p>
+<p>移除指定列有空值的行（移除 ST_NUM 列值为空）<code>df.dropna(subset=[&#39;ST_NUM&#39;], inplace = True)</code></p>
+<p>我们也可以 <strong>fillna()</strong> 方法来替换一些空字段<code>df.fillna(12345, inplace = True)</code></p>
+<p>指定某一个列来替换数据<code>df[&#39;PID&#39;].fillna(12345, inplace = True)</code></p>
+<p>替换空单元格的常用方法是计算列的均值、中值或众数。</p>
+<p>Pandas使用 <strong>mean()<strong>、</strong>median()</strong> 和 <strong>mode()</strong> 方法计算列的均值（所有值加起来的平均值）、中位数值（排序后排在中间的数）和众数（出现频率最高的数）。	</p>
+<p>比如mode() 方法计算列的众数并替换空单元格：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br>df = pd.read_csv(<span class="hljs-string">&#x27;property-data.csv&#x27;</span>)<br><br>x = df[<span class="hljs-string">&quot;ST_NUM&quot;</span>].mode()<br><br>df[<span class="hljs-string">&quot;ST_NUM&quot;</span>].fillna(x, inplace = <span class="hljs-literal">True</span>)<br><br><span class="hljs-built_in">print</span>(df.to_string())<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>清洗格式错误数据:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br><span class="hljs-comment"># 第三个日期格式错误</span><br>data = &#123;<br>  <span class="hljs-string">&quot;Date&quot;</span>: [<span class="hljs-string">&#x27;2020/12/01&#x27;</span>, <span class="hljs-string">&#x27;2020/12/02&#x27;</span> , <span class="hljs-string">&#x27;20201226&#x27;</span>],<br>  <span class="hljs-string">&quot;duration&quot;</span>: [<span class="hljs-number">50</span>, <span class="hljs-number">40</span>, <span class="hljs-number">45</span>]<br>&#125;<br><br>df = pd.DataFrame(data, index = [<span class="hljs-string">&quot;day1&quot;</span>, <span class="hljs-string">&quot;day2&quot;</span>, <span class="hljs-string">&quot;day3&quot;</span>])<br><br>df[<span class="hljs-string">&#x27;Date&#x27;</span>] = pd.to_datetime(df[<span class="hljs-string">&#x27;Date&#x27;</span>])<br><br><span class="hljs-built_in">print</span>(df.to_string())<br><br><br><span class="hljs-comment">#output：</span><br>           Date  duration<br>day1 <span class="hljs-number">2020</span>-<span class="hljs-number">12</span>-01        <span class="hljs-number">50</span><br>day2 <span class="hljs-number">2020</span>-<span class="hljs-number">12</span>-02        <span class="hljs-number">40</span><br>day3 <span class="hljs-number">2020</span>-<span class="hljs-number">12</span>-<span class="hljs-number">26</span>        <span class="hljs-number">45</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>清洗错误数据：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br>person = &#123;<br>  <span class="hljs-string">&quot;name&quot;</span>: [<span class="hljs-string">&#x27;Google&#x27;</span>, <span class="hljs-string">&#x27;Runoob&#x27;</span> , <span class="hljs-string">&#x27;Taobao&#x27;</span>],<br>  <span class="hljs-string">&quot;age&quot;</span>: [<span class="hljs-number">50</span>, <span class="hljs-number">40</span>, <span class="hljs-number">12345</span>]    <span class="hljs-comment"># 12345 年龄数据是错误的</span><br>&#125;<br><br>df = pd.DataFrame(person)<br><br>df.loc[<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;age&#x27;</span>] = <span class="hljs-number">30</span> <span class="hljs-comment"># 修改数据  对错误的数据进行替换或移除。也可以使用if来判断if df.loc[x, &quot;age&quot;] &gt; ?: df.drop(x, inplaced = True)</span><br><br><span class="hljs-built_in">print</span>(df.to_string())<br><br><span class="hljs-comment">#output:</span><br>     name  age<br><span class="hljs-number">0</span>  Google   <span class="hljs-number">50</span><br><span class="hljs-number">1</span>  Runoob   <span class="hljs-number">40</span><br><span class="hljs-number">2</span>  Taobao   <span class="hljs-number">30</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>清洗重复数据:</strong></p>
+<p>如果我们要清洗重复数据，可以使用 <strong>duplicated()</strong> 和 <strong>drop_duplicates()</strong> 方法。</p>
+<p>如果对应的数据是重复的，<strong>duplicated()</strong> 会返回 True，否则返回 False。</p>
+<h2 id="Pandas-常用函数"><a href="#Pandas-常用函数" class="headerlink" title="Pandas 常用函数"></a>Pandas 常用函数</h2><h3 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h3><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">pd.read_csv(filename)</td>
+<td align="left">读取 CSV 文件；</td>
+</tr>
+<tr>
+<td align="left">pd.read_excel(filename)</td>
+<td align="left">读取 Excel 文件；</td>
+</tr>
+<tr>
+<td align="left">pd.read_sql(query, connection_object)</td>
+<td align="left">从 SQL 数据库读取数据；</td>
+</tr>
+<tr>
+<td align="left">pd.read_json(json_string)</td>
+<td align="left">从 JSON 字符串中读取数据；</td>
+</tr>
+<tr>
+<td align="left">pd.read_html(url)</td>
+<td align="left">从 HTML 页面中读取数据。</td>
+</tr>
+</tbody></table>
+<h3 id="查看数据"><a href="#查看数据" class="headerlink" title="查看数据"></a>查看数据</h3><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">df.head(n)</td>
+<td align="left">显示前 n 行数据；</td>
+</tr>
+<tr>
+<td align="left">df.tail(n)</td>
+<td align="left">显示后 n 行数据；</td>
+</tr>
+<tr>
+<td align="left">df.info()</td>
+<td align="left">显示数据的信息，包括列名、数据类型、缺失值等；</td>
+</tr>
+<tr>
+<td align="left">df.describe()</td>
+<td align="left">显示数据的基本统计信息，包括均值、方差、最大值、最小值等；</td>
+</tr>
+<tr>
+<td align="left">df.shape</td>
+<td align="left">显示数据的行数和列数。</td>
+</tr>
+</tbody></table>
+<h3 id="数据清洗"><a href="#数据清洗" class="headerlink" title="数据清洗"></a>数据清洗</h3><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">df.dropna()</td>
+<td align="left">删除包含缺失值的行或列；</td>
+</tr>
+<tr>
+<td align="left">df.fillna(value)</td>
+<td align="left">将缺失值替换为指定的值；</td>
+</tr>
+<tr>
+<td align="left">df.replace(old_value, new_value)</td>
+<td align="left">将指定值替换为新值；</td>
+</tr>
+<tr>
+<td align="left">df.duplicated()</td>
+<td align="left">检查是否有重复的数据；</td>
+</tr>
+<tr>
+<td align="left">df.drop_duplicates()</td>
+<td align="left">删除重复的数据。</td>
+</tr>
+</tbody></table>
+<h3 id="数据选择和切片"><a href="#数据选择和切片" class="headerlink" title="数据选择和切片"></a>数据选择和切片</h3><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">df[column_name]</td>
+<td align="left">选择指定的列；</td>
+</tr>
+<tr>
+<td align="left">df.loc[row_index, column_name]</td>
+<td align="left">通过标签选择数据；</td>
+</tr>
+<tr>
+<td align="left">df.iloc[row_index, column_index]</td>
+<td align="left">通过位置选择数据；</td>
+</tr>
+<tr>
+<td align="left">df.ix[row_index, column_name]</td>
+<td align="left">通过标签或位置选择数据；</td>
+</tr>
+<tr>
+<td align="left">df.filter(items&#x3D;[column_name1, column_name2])</td>
+<td align="left">选择指定的列；</td>
+</tr>
+<tr>
+<td align="left">df.filter(regex&#x3D;’regex’)</td>
+<td align="left">选择列名匹配正则表达式的列；</td>
+</tr>
+<tr>
+<td align="left">df.sample(n)</td>
+<td align="left">随机选择 n 行数据。</td>
+</tr>
+</tbody></table>
+<h3 id="数据排序"><a href="#数据排序" class="headerlink" title="数据排序"></a>数据排序</h3><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">df.sort_values(column_name)</td>
+<td align="left">按照指定列的值排序；</td>
+</tr>
+<tr>
+<td align="left">df.sort_values([column_name1, column_name2], ascending&#x3D;[True, False])</td>
+<td align="left">按照多个列的值排序；</td>
+</tr>
+<tr>
+<td align="left">df.sort_index()</td>
+<td align="left">按照索引排序。</td>
+</tr>
+</tbody></table>
+<h3 id="数据分组和聚合"><a href="#数据分组和聚合" class="headerlink" title="数据分组和聚合"></a>数据分组和聚合</h3><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">df.groupby(column_name)</td>
+<td align="left">按照指定列进行分组；</td>
+</tr>
+<tr>
+<td align="left">df.aggregate(function_name)</td>
+<td align="left">对分组后的数据进行聚合操作；</td>
+</tr>
+<tr>
+<td align="left">df.pivot_table(values, index, columns, aggfunc)</td>
+<td align="left">生成透视表。</td>
+</tr>
+</tbody></table>
+<h3 id="数据合并"><a href="#数据合并" class="headerlink" title="数据合并"></a>数据合并</h3><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">pd.concat([df1, df2])</td>
+<td align="left">将多个数据框按照行或列进行合并；</td>
+</tr>
+<tr>
+<td align="left">pd.merge(df1, df2, on&#x3D;column_name)</td>
+<td align="left">按照指定列将两个数据框进行合并。</td>
+</tr>
+</tbody></table>
+<h3 id="数据选择和过滤"><a href="#数据选择和过滤" class="headerlink" title="数据选择和过滤"></a>数据选择和过滤</h3><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">df.loc[row_indexer, column_indexer]</td>
+<td align="left">按标签选择行和列。</td>
+</tr>
+<tr>
+<td align="left">df.iloc[row_indexer, column_indexer]</td>
+<td align="left">按位置选择行和列。</td>
+</tr>
+<tr>
+<td align="left">df[df[‘column_name’] &gt; value]</td>
+<td align="left">选择列中满足条件的行。</td>
+</tr>
+<tr>
+<td align="left">df.query(‘column_name &gt; value’)</td>
+<td align="left">使用字符串表达式选择列中满足条件的行。</td>
+</tr>
+</tbody></table>
+<h3 id="数据统计和描述"><a href="#数据统计和描述" class="headerlink" title="数据统计和描述"></a>数据统计和描述</h3><table>
+<thead>
+<tr>
+<th align="left">函数</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">df.describe()</td>
+<td align="left">计算基本统计信息，如均值、标准差、最小值、最大值等。</td>
+</tr>
+<tr>
+<td align="left">df.mean()</td>
+<td align="left">计算每列的平均值。</td>
+</tr>
+<tr>
+<td align="left">df.median()</td>
+<td align="left">计算每列的中位数。</td>
+</tr>
+<tr>
+<td align="left">df.mode()</td>
+<td align="left">计算每列的众数。</td>
+</tr>
+<tr>
+<td align="left">df.count()</td>
+<td align="left">计算每列非缺失值的数量。</td>
+</tr>
+</tbody></table>
+<p>UPDATE TIME: 星期二 2023年9月19日</p>
+
                 
               </div>
             
@@ -324,6 +658,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Pandas/" class="print-no-link">#Pandas</a>
+      
+    </div>
   
 </div>
 
