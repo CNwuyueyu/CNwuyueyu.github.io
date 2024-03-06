@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
+<html lang="zh-CN" data-default-color-scheme=dark>
 
 
 
@@ -16,12 +16,12 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="​	残差神经网络（也称为残差网络或ResNet）是一种深度学习模型，其中权重层参考层输入学习残差函数。 ​	残差学习框架通过引入残差学习的概念，使得训练比以往更深的网络变得更加容易。这种框架允许网络学习残差映射，即学习残差函数而不是直接学习底层特征映射。通过这种方式，网络可以更轻松地学习残差，从而减轻了训练深度网络时出现的梯度消失或梯度爆炸等问题。 ​	在ImageNet 2015比赛之前，20">
+    <meta name="description" content="​	残差神经网络（也称为残差网络或ResNet）是一种深度学习模型，其中权重层参考层输入学习残差函数。 ​	残差学习框架通过引入残差学习的概念，使得训练比以往更深的网络变得更加容易。这种框架允许网络学习残差映射，即学习残差函数而不是直接学习底层特征映射。通过这种方式，网络可以更轻松地学习残差，从而减轻了训练深度网络时出现的梯度消失或梯度爆炸等问题。 步骤：​	在ImageNet 2015比赛之前">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-Deep Residual Learning for Image Recognition">
 <meta property="og:url" content="http://example.com/2024/03/05/0-Deep-Residual-Learning-for-Image-Recognition/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="​	残差神经网络（也称为残差网络或ResNet）是一种深度学习模型，其中权重层参考层输入学习残差函数。 ​	残差学习框架通过引入残差学习的概念，使得训练比以往更深的网络变得更加容易。这种框架允许网络学习残差映射，即学习残差函数而不是直接学习底层特征映射。通过这种方式，网络可以更轻松地学习残差，从而减轻了训练深度网络时出现的梯度消失或梯度爆炸等问题。 ​	在ImageNet 2015比赛之前，20">
+<meta property="og:description" content="​	残差神经网络（也称为残差网络或ResNet）是一种深度学习模型，其中权重层参考层输入学习残差函数。 ​	残差学习框架通过引入残差学习的概念，使得训练比以往更深的网络变得更加容易。这种框架允许网络学习残差映射，即学习残差函数而不是直接学习底层特征映射。通过这种方式，网络可以更轻松地学习残差，从而减轻了训练深度网络时出现的梯度消失或梯度爆炸等问题。 步骤：​	在ImageNet 2015比赛之前">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305100734044.png">
 <meta property="og:image" content="http://example.com/images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305110540544.png">
@@ -31,13 +31,12 @@
 <meta property="og:image" content="http://example.com/images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305164121060.png">
 <meta property="og:image" content="http://example.com/images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305164201058-17096281334771.png">
 <meta property="article:published_time" content="2024-03-05T01:46:11.000Z">
-<meta property="article:modified_time" content="2024-03-05T08:50:59.857Z">
+<meta property="article:modified_time" content="2024-03-06T08:10:35.663Z">
 <meta property="article:author" content="Wuyueyu">
+<meta property="article:tag" content="目标检测">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305100734044.png">
   
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>0-Deep Residual Learning for Image Recognition - Blog</title>
@@ -78,7 +77,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -88,46 +87,6 @@
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
   
-
-  
-    <!-- Baidu Analytics -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?3028c6400adaaa4521a5b772ad242a5e";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-      }
-    </script>
-  
-
-  
-    <!-- Google tag (gtag.js) -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
-          gtag('config', '');
-        });
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
 
 
   
@@ -262,7 +221,7 @@
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2024-03-05 09:46" pubdate>
-          2024年3月5日 上午
+          上传日期：2024年3月5日
         </time>
       </span>
     
@@ -329,7 +288,7 @@
                 <p><img src="/../images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305100734044.png" srcset="/img/loading.gif" lazyload alt="文章发表于2015年"></p>
 <p>​	残差神经网络（也称为残差网络或<strong>ResNet</strong>）是一种深度学习模型，其中权重层参考层输入学习残差函数。</p>
 <p>​	残差学习框架通过引入残差学习的概念，使得训练比以往更深的网络变得更加容易。这种框架允许网络学习残差映射，即学习残差函数而不是直接学习底层特征映射。通过这种方式，网络可以更轻松地学习残差，从而减轻了训练深度网络时出现的梯度消失或梯度爆炸等问题。</p>
-<p>​	在ImageNet 2015比赛之前，2012 年 ImageNet 开发的AlexNet模型是一个八层卷积神经网络。牛津大学视觉几何小组 (VGGNet) 于 2014 年开发的神经网络通过堆叠 3×3 卷积层达到了 19 层的深度，然而，堆叠更多层会导致训练精度急剧下降，这被称为“退化”问题。</p>
+<h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><p>​	在ImageNet 2015比赛之前，2012 年 ImageNet 开发的AlexNet模型是一个八层卷积神经网络。牛津大学视觉几何小组 (VGGNet) 于 2014 年开发的神经网络通过堆叠 3×3 卷积层达到了 19 层的深度，然而，堆叠更多层会导致训练精度急剧下降，这被称为“退化”问题。</p>
 <p><img src="/../images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305110540544.png" srcset="/img/loading.gif" lazyload alt="梯度下降"></p>
 <p>如上图所示，将20层神经网络加深到56层之后，模型的training error和test error反而更高了。</p>
 <p>论文提出了一个解决方案，就是使用深度残差网络：</p>
@@ -344,8 +303,7 @@
 </ul>
 <p>实验表明方式C的精度最高，但作者建议使用方式B，因为C的计算量和参数量都有所增加。</p>
 <p><img src="/../images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305163658461.png" srcset="/img/loading.gif" lazyload alt="Table 3. Error rates"></p>
-<p>实验方法：</p>
-<ul>
+<h3 id="实验方法："><a href="#实验方法：" class="headerlink" title="实验方法："></a>实验方法：</h3><ul>
 <li>将图像扩充到[256,480]之间，再resize为224 × 224</li>
 <li>使用颜色增强</li>
 <li>使用BN</li>
@@ -365,6 +323,41 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" class="category-chain-item">目标检测</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" class="print-no-link">#目标检测</a>
+      
+    </div>
   
 </div>
 
@@ -540,33 +533,9 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>由Hexo提供框架支持</span></a> &nbsp; <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>由Hexo框架支持</span></a> 
     </div>
   
-  
-    <div class="statistics">
-  
-  
-
-  
-    
-      <span id="busuanzi_container_site_pv" style="display: none">
-        总访问量 
-        <span id="busuanzi_value_site_pv"></span>
-         次
-      </span>
-    
-    
-      <span id="busuanzi_container_site_uv" style="display: none">
-        总访客数 
-        <span id="busuanzi_value_site_uv"></span>
-         人
-      </span>
-    
-    
-  
-</div>
-
   
   
   
@@ -756,8 +725,6 @@
   <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
