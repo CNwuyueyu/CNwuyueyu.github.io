@@ -16,16 +16,25 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="​	上回说到R-CNN，而Fast R-CNN是原作者在2015年发表的续作，性能比之前的R-CNN块9倍。目标检测要面临的两大问题是（1）需要处理的候选框过多（2）候选框的位置不精确要进行微调。 ​	这就不得不提到R-CNN的缺点：训练以及测试的过程复杂，需要大量的RAM，R-CNN网络需要对候选框进行形变操作后再输入CNN网络提取特征，形变会产生一些列问题。 相比于RCNN主要在以下方面进行">
+<meta property="og:type" content="article">
 <meta property="og:title" content="0-Fast R-CNN">
 <meta property="og:url" content="http://example.com/2024/03/06/0-Fast-R-CNN/index.html">
 <meta property="og:site_name" content="Blog">
+<meta property="og:description" content="​	上回说到R-CNN，而Fast R-CNN是原作者在2015年发表的续作，性能比之前的R-CNN块9倍。目标检测要面临的两大问题是（1）需要处理的候选框过多（2）候选框的位置不精确要进行微调。 ​	这就不得不提到R-CNN的缺点：训练以及测试的过程复杂，需要大量的RAM，R-CNN网络需要对候选框进行形变操作后再输入CNN网络提取特征，形变会产生一些列问题。 相比于RCNN主要在以下方面进行">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-Fast-R-CNN/image-20240321162127988.png">
+<meta property="og:image" content="http://example.com/images/0-Fast-R-CNN/image-20240321164621432.png">
+<meta property="og:image" content="http://example.com/images/0-Fast-R-CNN/image-20240321170935327.png">
+<meta property="og:image" content="http://example.com/images/0-Fast-R-CNN/image-20240321171524578.png">
+<meta property="og:image" content="http://example.com/images/0-Fast-R-CNN/image-20240321171625086.png">
+<meta property="og:image" content="http://example.com/images/0-Fast-R-CNN/image-20240321171646898.png">
 <meta property="article:published_time" content="2024-03-06T07:38:06.000Z">
-<meta property="article:modified_time" content="2024-03-06T08:37:06.935Z">
+<meta property="article:modified_time" content="2024-03-21T09:17:29.719Z">
 <meta property="article:author" content="Wuyueyu">
 <meta property="article:tag" content="目标检测">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-Fast-R-CNN/image-20240321162127988.png">
   
   
   
@@ -222,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.6k 字
         
       </span>
     
@@ -233,7 +242,7 @@
         
         
         
-          1 分钟
+          14 分钟
         
       </span>
     
@@ -275,7 +284,35 @@
             
               <div class="markdown-body">
                 
-                
+                <p><img src="/../images/0-Fast-R-CNN/image-20240321162127988.png" srcset="/img/loading.gif" lazyload alt="Fast R-CNN"></p>
+<p>​	上回说到R-CNN，而Fast R-CNN是原作者在2015年发表的续作，性能比之前的R-CNN块9倍。目标检测要面临的两大问题是（1）需要处理的候选框过多（2）候选框的位置不精确要进行微调。</p>
+<p>​	这就不得不提到R-CNN的缺点：训练以及测试的过程复杂，需要大量的RAM，R-CNN网络需要对候选框进行形变操作后再输入CNN网络提取特征，形变会产生一些列问题。</p>
+<p>相比于RCNN主要在以下方面进行了改进：</p>
+<p>（1）Fast RCNN仍然使用selective search选取2000个建议框，但是这里不是将这么多建议框都输入卷积网络中，而是将原始图片输入卷积网络中得到特征图，再使用建议框对特征图提取特征框。这样做的好处是，原来建议框重合部分非常多，卷积重复计算严重，而这里每个位置都只计算了一次卷积，大大减少了计算量</p>
+<p>（2）由于建议框大小不一，得到的特征框需要转化为相同大小，这一步是通过ROI Pooling层来实现的（ROI表示region of interest即目标）</p>
+<p>（3）Fast RCNN里没有SVM分类器和回归器了，分类和预测框的位置大小都是通过卷积神经网络输出的</p>
+<p>（4）为了提高计算速度，网络最后使用SVD代替全连接层</p>
+<h3 id="inference过程"><a href="#inference过程" class="headerlink" title="inference过程"></a>inference过程</h3><p><img src="/../images/0-Fast-R-CNN/image-20240321164621432.png" srcset="/img/loading.gif" lazyload alt="inference过程"></p>
+<ul>
+<li><strong>CNN</strong>：将任意size的图像输入网络，计算整张图的feature maps</li>
+<li><strong>Selective search</strong>：在任意size图片上采用selective search算法提取约2k个候选框</li>
+<li><strong>RoI projection</strong>：在特征图中找到每个候选框对应的特征框（深度和特征图一致）</li>
+<li><strong>RoI pooling</strong>：相当于只有一层的空间金字塔池化SPP，将每个特征框划分为H<em>W个网格（eg: 7</em>7 for VGG16），每个网格中执行最大池化，输出为H<em>W</em>C，特征图深度不变。RoI pooling的输出需要满足下一层全连接层输入要求</li>
+<li><strong>FC+softmax&#x2F;bbox regerssion</strong></li>
+<li><strong>NMS：</strong>利用窗口得分分别对每一类物体进行非极大值抑制剔除重叠候选框，最终得到每个类别中回归修正后的得分最高的窗口</li>
+</ul>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p><img src="/../images/0-Fast-R-CNN/image-20240321170935327.png" srcset="/img/loading.gif" lazyload alt="损失函数"></p>
+<p>[u≥1]是艾弗森括号，当u≥1，这一项为1，否则，这一项为0</p>
+<h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p>​	对训练集中的图片，用selective search提取出每一个图片对应的一些proposal，保存图片路径和bounding box信息</p>
+<p>​	对每张图片，根据图片中bounding box的ground truth信息，给该图片的每一个proposal标记类标签，并保存。具体操作：对于每一个proposal，如果和ground truth中的proposal的IOU值超过了阈值（IOU&gt;&#x3D;0.5），则把ground truth中的proposal对应的类标签给原始产生的这个proposal，其余的proposal都标为背景；</p>
+<p>​	使用mini-batch&#x3D;128，25%来自非背景标签的proposal，其余来自标记为背景的proposal；</p>
+<p>​	训练CNN，最后一层的结果包含分类信息和位置修正信息，用多任务的loss，一个是分类的损失函数，一个是位置的损失函数。</p>
+<p><img src="/../images/0-Fast-R-CNN/image-20240321171524578.png" srcset="/img/loading.gif" lazyload alt="训练过程"></p>
+<h3 id="测试过程"><a href="#测试过程" class="headerlink" title="测试过程"></a>测试过程</h3><p>​	用selective search方法提取图片的2000个proposal，并保存到文件；将图片输入到已经训好的多层全卷积网络，对每一个proposal，获得对应的RoI Conv featrue map；对每一个RoI Conv featrue map，按照3.1中的方法进行池化，得到固定大小的feture map，并将其输入到后续的FC层，最后一层输出类别相关信息和4个boundinf box的修正偏移量；</p>
+<p>​	对bounding box 按照上述得到的位置偏移量进行修正，再根据nms对所有的proposal进行筛选，即可得到对该张图片的bounding box预测值以及每个bounding box对应的类和score。</p>
+<p><img src="/../images/0-Fast-R-CNN/image-20240321171625086.png" srcset="/img/loading.gif" lazyload alt="测试过程"></p>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="/../images/0-Fast-R-CNN/image-20240321171646898.png" srcset="/img/loading.gif" lazyload alt="结果"></p>
+
                 
               </div>
             
