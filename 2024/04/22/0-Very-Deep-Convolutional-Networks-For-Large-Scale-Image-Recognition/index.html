@@ -1,0 +1,678 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="用于大规模图像识别的超深卷积网络 2015 (VGG)   ImageNet Large-ScaleVisual Recognition Challenge (ILSVRC)：ImageNet大规模视觉识别挑战  背景卷积核到底该设置为多少？AlexNet采用了极大的size(11x11)、ZFNet将size调小了但仍然使用到了7x7，GoogLeNet同时使用了不同的filter size">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-Very Deep Convolutional Networks For Large-Scale Image Recognition">
+<meta property="og:url" content="http://example.com/2024/04/22/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="用于大规模图像识别的超深卷积网络 2015 (VGG)   ImageNet Large-ScaleVisual Recognition Challenge (ILSVRC)：ImageNet大规模视觉识别挑战  背景卷积核到底该设置为多少？AlexNet采用了极大的size(11x11)、ZFNet将size调小了但仍然使用到了7x7，GoogLeNet同时使用了不同的filter size">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713777253973.png">
+<meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713778810157.png">
+<meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713778871429.png">
+<meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713779093966.png">
+<meta property="og:image" content="https://file+.vscode-resource.vscode-cdn.net/1713795644679.png">
+<meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713795949526.png">
+<meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796032170.png">
+<meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796158321.png">
+<meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796323671.png">
+<meta property="article:published_time" content="2024-04-22T15:21:52.000Z">
+<meta property="article:modified_time" content="2024-04-26T06:59:43.943Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713777253973.png">
+  
+  
+  
+  <title>0-Very Deep Convolutional Networks For Large-Scale Image Recognition - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-Very Deep Convolutional Networks For Large-Scale Image Recognition"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-22 23:21" pubdate>
+          上传日期：2024年4月22日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-Very Deep Convolutional Networks For Large-Scale Image Recognition</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713777253973.png" srcset="/img/loading.gif" lazyload alt="1713777253973"></p>
+<blockquote>
+<p>用于大规模图像识别的超深卷积网络 2015 (VGG)</p>
+</blockquote>
+<blockquote>
+<p>ImageNet Large-ScaleVisual Recognition Challenge (ILSVRC)：ImageNet大规模视觉识别挑战</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>卷积核到底该设置为多少？AlexNet采用了极大的size(11x11)、ZFNet将size调小了但仍然使用到了7x7，GoogLeNet同时使用了不同的filter size…</p>
+<p>本篇文章VGG使用3x3不断叠加，使得CNN模型可以达到更深的层数且得到更好的精准度。本方法其实是对于AlexNet的基础上做了更好的改进。VGG的模型架构如下图所示：</p>
+<p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713778810157.png" srcset="/img/loading.gif" lazyload alt="1713778810157"></p>
+<p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713778871429.png" srcset="/img/loading.gif" lazyload alt="1713778871429" title="参数数目"></p>
+<p>作者根据配置进行了分析：7x7的卷积和3个3x3的卷积感受野实际上是一样的，那为什么要用小卷积来代替大卷积呢？</p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><h4 id="VGGNet-1x1卷积"><a href="#VGGNet-1x1卷积" class="headerlink" title="VGGNet 1x1卷积"></a>VGGNet 1x1卷积</h4><p>选用1x1卷积核的最直接原因是在维度上继承全连接，conv1x1更加专注于跨通道的特征组合，conv3x3既考虑跨通道，也考虑局部信息整合。使用1x1卷积也可以在3x3或5x5卷积计算前先降低feature map的维度。</p>
+<h4 id="VGGNet-卷积核变小"><a href="#VGGNet-卷积核变小" class="headerlink" title="VGGNet 卷积核变小"></a>VGGNet 卷积核变小</h4><p>卷积核全部替换为3×3（极少用了1×1）步长为1，而使用小的卷积核可以提升性能，加深网络结构。</p>
+<p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713779093966.png" srcset="/img/loading.gif" lazyload alt="1713779093966"></p>
+<h4 id="VGGNet-层数更深更宽"><a href="#VGGNet-层数更深更宽" class="headerlink" title="VGGNet 层数更深更宽"></a>VGGNet <strong>层数更深更宽</strong></h4><p>3个激活函数（ReLU）去代替1个，可使决策函数更加具有辨别能力；</p>
+<p>3x3比5x5,7x7,11x11的Conv filter的参数减少，减少卷积数量带来性能提升。</p>
+<h4 id="VGGNet-池化核变小且为偶数"><a href="#VGGNet-池化核变小且为偶数" class="headerlink" title="VGGNet 池化核变小且为偶数"></a>VGGNet <strong>池化核变小且为偶数</strong></h4><p>AlexNet中的max-pool全是3×3的，但VGGNet中是2×2的，可能的原因是2×2的max-pool带来的信息损失相对于3×3的来说要小一些，相比于3×3更容易捕获细小的特征变化起伏。在网络的层数增长的过程中，池化忽略的信息加上缓冲，并降低softmax的学习压力。</p>
+<p>卷积只增加feature map的通道数，而池化只减少feature map的宽高。如今也有不少做法用大stride卷积去替代池化，未来可能没有池化。</p>
+<h4 id="训练阶段"><a href="#训练阶段" class="headerlink" title="训练阶段"></a>训练阶段</h4><ul>
+<li>优化方法：带动量（momentum）的小批量梯度下降</li>
+<li>batch size：256</li>
+<li>learning rate：0.01<br>和AlexNet一样，当val-acc 不下降则学习率缩小十倍，训练过程缩小了三次</li>
+<li>momentum：0.9</li>
+<li>weight decay（L2惩罚乘子）：0.0005</li>
+<li>dropout rate（前两个全连接层）：0.5</li>
+<li>目标函数：多项式逻辑斯特回归（SoftMax）</li>
+<li>迭代次数：37万次iteration（74 epochs）后，停止训练</li>
+</ul>
+<h4 id="测试阶段"><a href="#测试阶段" class="headerlink" title="测试阶段"></a>测试阶段</h4><ul>
+<li>测试图像的尺寸Q和训练图像的尺寸 S 没必要完全一样。</li>
+<li>全连接层先转化为卷积层第一个全连接层转为7x7的卷积层，后两个转化为1x1的卷积层。</li>
+<li>再将这样得到的全卷积网络运用在整幅图像上。</li>
+<li>使用水平翻转对测试图像进行增强。</li>
+</ul>
+<h4 id="实验结论"><a href="#实验结论" class="headerlink" title="实验结论"></a>实验结论</h4><h5 id="单一尺寸上的卷积网络"><a href="#单一尺寸上的卷积网络" class="headerlink" title="单一尺寸上的卷积网络"></a>单一尺寸上的卷积网络</h5><p><img src="https://file+.vscode-resource.vscode-cdn.net/1713795644679.png" srcset="/img/loading.gif" lazyload alt="1713795644679"></p>
+<p>注意使用局部相应标准化网络（A-LRN）的性能并没有比未用标准化层的A高。</p>
+<p>更大的数据集使用更深的模型会更好。小滤波器的卷积网络比大滤波器的千层网络性能更好。</p>
+<h5 id="多尺寸上的卷积网络"><a href="#多尺寸上的卷积网络" class="headerlink" title="多尺寸上的卷积网络"></a>多尺寸上的卷积网络</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713795949526.png" srcset="/img/loading.gif" lazyload alt="1713795949526"></p>
+<p>测试时图片尺寸波动会使性能更好。</p>
+<h5 id="多裁剪的评估"><a href="#多裁剪的评估" class="headerlink" title="多裁剪的评估"></a>多裁剪的评估</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796032170.png" srcset="/img/loading.gif" lazyload alt="1713796032170"></p>
+<p>多重裁切比密集评估的效果好，并且两者互补。</p>
+<h5 id="融合卷积网络"><a href="#融合卷积网络" class="headerlink" title="融合卷积网络"></a>融合卷积网络</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796158321.png" srcset="/img/loading.gif" lazyload alt="1713796158321"></p>
+<p>将两个表现最好的多尺寸模型组合禁用，将会进一步减少错误率。</p>
+<h5 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796323671.png" srcset="/img/loading.gif" lazyload alt="1713796323671"></p>
+<p>使用了7个模型组合的测试错误率，为7.3%，使用2个模型的组合，将错误率降低到了6.8%。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>VGG网络继承了AlexNet中的不少网络结构，同时继承了OverFeat在Localization任务中的做法，学习这种经典的网络应该可以对日后在Computer Vision领域的学习起到一定的作用，小卷积核的应用以及VGGNet的输入图像rescale应该是本论文中重点关注的点。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/04/22/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/" title="0-ImageNet Classification with Deep Convolutional Neural Networks">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-ImageNet Classification with Deep Convolutional Neural Networks</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/06/Leetcode/" title="Leetcode">
+                        <span class="hidden-mobile">Leetcode</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>由Hexo框架支持</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

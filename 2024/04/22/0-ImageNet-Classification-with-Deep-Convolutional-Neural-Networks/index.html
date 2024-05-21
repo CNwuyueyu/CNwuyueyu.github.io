@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="AlexNet 2012 NIPS背景为了从数以百万计的图像中学习出数千种的目标，需要一个具有很强学习能力的模型。尽管CNNs有效率的局部结构，但大规模地应用于高分辨率图像消耗资源仍然过多。本文介绍了一种可以进行图像识别的卷积神经网络，包含了大量的不常见和新的特征来提升网络性能，减少训练时间。 包含6千万个参数和65万个神经元，包含了5个卷积层，其中有几层后面跟着最大池化层，以及3个全连接层，最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-ImageNet Classification with Deep Convolutional Neural Networks">
+<meta property="og:url" content="http://example.com/2024/04/22/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="AlexNet 2012 NIPS背景为了从数以百万计的图像中学习出数千种的目标，需要一个具有很强学习能力的模型。尽管CNNs有效率的局部结构，但大规模地应用于高分辨率图像消耗资源仍然过多。本文介绍了一种可以进行图像识别的卷积神经网络，包含了大量的不常见和新的特征来提升网络性能，减少训练时间。 包含6千万个参数和65万个神经元，包含了5个卷积层，其中有几层后面跟着最大池化层，以及3个全连接层，最">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422232943298.png">
+<meta property="og:image" content="http://example.com/images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422233750222.png">
+<meta property="og:image" content="http://example.com/images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422234147225.png">
+<meta property="og:image" content="http://example.com/images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422234515097.png">
+<meta property="og:image" content="http://example.com/images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422234549188.png">
+<meta property="og:image" content="http://example.com/images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422234630193.png">
+<meta property="article:published_time" content="2024-04-22T15:29:18.000Z">
+<meta property="article:modified_time" content="2024-04-26T07:11:08.201Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422232943298.png">
+  
+  
+  
+  <title>0-ImageNet Classification with Deep Convolutional Neural Networks - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-ImageNet Classification with Deep Convolutional Neural Networks"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-22 23:29" pubdate>
+          上传日期：2024年4月22日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-ImageNet Classification with Deep Convolutional Neural Networks</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><img src="/../images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422232943298.png" srcset="/img/loading.gif" lazyload alt="image-20240422232943298"></p>
+<h4 id="AlexNet-2012-NIPS"><a href="#AlexNet-2012-NIPS" class="headerlink" title="AlexNet 2012 NIPS"></a>AlexNet 2012 NIPS</h4><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>为了从数以百万计的图像中学习出数千种的目标，需要一个具有很强学习能力的模型。尽管CNNs有效率的局部结构，但大规模地应用于高分辨率图像消耗资源仍然过多。本文介绍了一种可以进行图像识别的卷积神经网络，包含了大量的不常见和新的特征来提升网络性能，减少训练时间。</p>
+<p>包含6千万个参数和65万个神经元，包含了5个卷积层，其中有几层后面跟着最大池化层，以及3个全连接层，最后还有一个1000路的softmax层。为了加快训练速度，本文使用了不饱和神经元以及一种高效的基于GPU的卷积运算方法。为了减少全连接层的过拟合，采用了正则化方法“dropout”，该方法被证明非常有效。</p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><h4 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h4><p>8层学习层——5层卷积层和三层全连接层</p>
+<p><img src="/../images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422233750222.png" srcset="/img/loading.gif" lazyload alt="image-20240422233750222"></p>
+<p>用ReLUs主要是对训练集的拟合进行加速。快速学习对由大规模数据集上训练出大模型的性能有相当大的影响。</p>
+<p>ReLUs具有符合本文要求的一个性质：它不需要对输入进行归一化来防止饱和。</p>
+<p><img src="/../images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422234147225.png" srcset="/img/loading.gif" lazyload alt="实线代表ReLUs，虚线代表tanh"></p>
+<p>（1）输入图像大小：224 * 224 * 3</p>
+<p>（2）第一层卷积设置：卷积–&gt;ReLU–&gt;局部响应归一化（LRN）–&gt;池化</p>
+<p>（3）第二层卷积：卷积–&gt;ReLU–&gt;局部响应归一化（LRN）–&gt;池化</p>
+<p>（4）第三层卷积：卷积–&gt;ReLU</p>
+<p>（5）第四层卷积：卷积–&gt;ReLU</p>
+<p>（6）第五层卷积：卷积–&gt;ReLU–&gt;池化</p>
+<p>（7）全连接层</p>
+<p>（8）全连接层2</p>
+<p>（9）输出层（全连接层3）</p>
+<h3 id="降低过拟合所采用的方法"><a href="#降低过拟合所采用的方法" class="headerlink" title="降低过拟合所采用的方法"></a>降低过拟合所采用的方法</h3><h5 id="数据扩增"><a href="#数据扩增" class="headerlink" title="数据扩增"></a>数据扩增</h5><p>为了降低过拟合，提高模型的鲁棒性，这里采用了两种Data Augmentation数据扩增方式：<br>a.生成图像平移和水平反射。通过从256×256幅图像中提取随机224×224块图像(及其水平反射)，并在这些提取的图像上训练AlexNet。这将训练集的大小增加了2048倍。<br>b.改变训练图像中RGB通道的强度。在整个ImageNet训练集中对RGB像素值集执行PCA（Principal Component Analysis)[<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/366337471#ref_5">5]</a>操作。</p>
+<h5 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h5><p>训练采用了0.5丢弃率的传统Dropout，对于使用了Dropout的layer中的每个神经元，训练时都有50%的概率被丢弃。所以每次输入时，神经网络都会对不同的结构进行采样，但是所有这些结构都共享权重。这种技术减少了神经元之间复杂的相互适应，因为神经元不能依赖于其他神经元的存在，因此，它被迫获得更健壮的特征。测试时使用所有的神经元，但将它们的输出乘以0.5。 论文中还提到了：Dropout使收敛所需的迭代次数增加了一倍。</p>
+<h4 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h4><p>batch size&#x3D;128，动量项v&#x3D;0.9，权值衰减(weight decay) wd&#x3D;0.0005，W服从均值为0、标准差为0.01的高斯分布。</p>
+<p>偏置项：第2、4、5卷积层和全连接层的b&#x3D;1（促进最初阶段ReLU的学习）；其它层b&#x3D;0。</p>
+<p>学习率：初始为0.01，当验证集的错误率停止降低时，手动缩减学习率（除以10）。</p>
+<h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><p><img src="/../images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422234515097.png" srcset="/img/loading.gif" lazyload alt="本文的算法错误率明显比前两个算法低"></p>
+<p>最后结果top-1是67.4%，top-5是40.9%，比发布的最好的结果还要好。</p>
+<p><img src="/../images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422234549188.png" srcset="/img/loading.gif" lazyload alt="验证误差"></p>
+<p><img src="/../images/0-ImageNet-Classification-with-Deep-Convolutional-Neural-Networks/image-20240422234630193.png" srcset="/img/loading.gif" lazyload alt="定性分析"></p>
+<p>左边部分，作者展示了8张图片的预测结果来说明网络在预测top-5时都从测试图片中学到了什么。右边部分则对比了测试集中的五张图片和在训练集中与之最相似的6张图片，如果两张图片产生的特征激活向量（即CNN的输出结果）的欧几里得距离小，就认为这两张图片相似。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>对于一个较大的数据集，给出了一种解决分类任务的方法，在当时取得了很重大的突破，<strong>AlexNet</strong>在深度学习</p>
+<p>发展史上的<strong>历史意义远大于其模型的影响</strong>。卷积神经网络也成为计算机视觉的核心算法模型。</p>
+<blockquote>
+<p>如果我们今天回过头看看，将人工智能领域的蓬勃发展归功于某个事件的话，这份殊荣应属于2012年 ImageNet大赛的比赛成果。<br>2012年 ImageNet 的那场赛事的的确确引发了今天人工智能井喷式的发展。之前在语音识别领域是有一些成果，但大众并不知道，也不关心，而 ImageNet 让人工智能开始进入公众视野。</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/05/16/0-CDDSA-Contrastive-Domain-Disentanglement-and-Style-Augmentation-for-Generalizable-Medical-Image-Segmentation/" title="0-CDDSA: Contrastive Domain Disentanglement and Style Augmentation for Generalizable Medical Image Segmentation">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-CDDSA: Contrastive Domain Disentanglement and Style Augmentation for Generalizable Medical Image Segmentation</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/22/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/" title="0-Very Deep Convolutional Networks For Large-Scale Image Recognition">
+                        <span class="hidden-mobile">0-Very Deep Convolutional Networks For Large-Scale Image Recognition</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>由Hexo框架支持</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
