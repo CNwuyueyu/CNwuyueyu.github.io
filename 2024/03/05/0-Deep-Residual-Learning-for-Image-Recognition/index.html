@@ -16,12 +16,12 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="​	残差神经网络（也称为残差网络或ResNet）是一种深度学习模型，其中权重层参考层输入学习残差函数。 ​	残差学习框架通过引入残差学习的概念，使得训练比以往更深的网络变得更加容易。这种框架允许网络学习残差映射，即学习残差函数而不是直接学习底层特征映射。通过这种方式，网络可以更轻松地学习残差，从而减轻了训练深度网络时出现的梯度消失或梯度爆炸等问题。 步骤：​	在ImageNet 2015比赛之前">
+    <meta name="description" content="用于图像识别的深度残差学习ResNet背景越深的神经网络训练起来越发困难，利用残差学习框架，能够简化深层的的网络训练。根据输入来学习残差函数而非原神函数，在ImageNet数据集使用了152曾的网络来评价残差网络，具有很低的复杂度，并且多个ensemble在测试集上的错误率很低。 在深度学习神经网络的训练中，层次越深，训练越困难，优化越困难，并且会出现梯度消失&#x2F;爆炸等问题阻碍网络收敛，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-Deep Residual Learning for Image Recognition">
 <meta property="og:url" content="http://example.com/2024/03/05/0-Deep-Residual-Learning-for-Image-Recognition/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="​	残差神经网络（也称为残差网络或ResNet）是一种深度学习模型，其中权重层参考层输入学习残差函数。 ​	残差学习框架通过引入残差学习的概念，使得训练比以往更深的网络变得更加容易。这种框架允许网络学习残差映射，即学习残差函数而不是直接学习底层特征映射。通过这种方式，网络可以更轻松地学习残差，从而减轻了训练深度网络时出现的梯度消失或梯度爆炸等问题。 步骤：​	在ImageNet 2015比赛之前">
+<meta property="og:description" content="用于图像识别的深度残差学习ResNet背景越深的神经网络训练起来越发困难，利用残差学习框架，能够简化深层的的网络训练。根据输入来学习残差函数而非原神函数，在ImageNet数据集使用了152曾的网络来评价残差网络，具有很低的复杂度，并且多个ensemble在测试集上的错误率很低。 在深度学习神经网络的训练中，层次越深，训练越困难，优化越困难，并且会出现梯度消失&#x2F;爆炸等问题阻碍网络收敛，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305100734044.png">
 <meta property="og:image" content="http://example.com/images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305110540544.png">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305164121060.png">
 <meta property="og:image" content="http://example.com/images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305164201058-17096281334771.png">
 <meta property="article:published_time" content="2024-03-05T01:46:11.000Z">
-<meta property="article:modified_time" content="2024-03-06T08:36:55.831Z">
+<meta property="article:modified_time" content="2024-05-24T06:41:31.906Z">
 <meta property="article:author" content="Wuyueyu">
 <meta property="article:tag" content="目标检测">
 <meta name="twitter:card" content="summary_large_image">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.6k 字
         
       </span>
     
@@ -243,7 +243,7 @@
         
         
         
-          11 分钟
+          14 分钟
         
       </span>
     
@@ -286,6 +286,9 @@
               <div class="markdown-body">
                 
                 <p><img src="/../images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305100734044.png" srcset="/img/loading.gif" lazyload alt="文章发表于2015年"></p>
+<h2 id="用于图像识别的深度残差学习ResNet"><a href="#用于图像识别的深度残差学习ResNet" class="headerlink" title="用于图像识别的深度残差学习ResNet"></a>用于图像识别的深度残差学习ResNet</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>越深的神经网络训练起来越发困难，利用残差学习框架，能够简化深层的的网络训练。根据输入来学习残差函数而非原神函数，在ImageNet数据集使用了152曾的网络来评价残差网络，具有很低的复杂度，并且多个ensemble在测试集上的错误率很低。</p>
+<p>在深度学习神经网络的训练中，层次越深，训练越困难，优化越困难，并且会出现梯度消失&#x2F;爆炸等问题阻碍网络收敛，使用归一初始化（normalized initialization）和中间归一化（intermediate normalization）在很大程度上解决了这一问题，使得在前数十层的网络在反向传播的随机梯度下降（SGD）上能够收敛。</p>
+<p>层数更深后，精度饱和，训练模型迅速变差</p>
 <p>​	残差神经网络（也称为残差网络或<strong>ResNet</strong>）是一种深度学习模型，其中权重层参考层输入学习残差函数。</p>
 <p>​	残差学习框架通过引入残差学习的概念，使得训练比以往更深的网络变得更加容易。这种框架允许网络学习残差映射，即学习残差函数而不是直接学习底层特征映射。通过这种方式，网络可以更轻松地学习残差，从而减轻了训练深度网络时出现的梯度消失或梯度爆炸等问题。</p>
 <h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><p>​	在ImageNet 2015比赛之前，2012 年 ImageNet 开发的AlexNet模型是一个八层卷积神经网络。牛津大学视觉几何小组 (VGGNet) 于 2014 年开发的神经网络通过堆叠 3×3 卷积层达到了 19 层的深度，然而，堆叠更多层会导致训练精度急剧下降，这被称为“退化”问题。</p>
