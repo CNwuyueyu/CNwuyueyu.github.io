@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://example.com/images/1-%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86-3-%E8%AF%BB%E8%AE%BA%E6%96%87/1709190804696.png">
 <meta property="og:image" content="http://example.com/images/1-%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86-3-%E8%AF%BB%E8%AE%BA%E6%96%87/1709193287719.png">
 <meta property="article:published_time" content="2024-03-05T01:47:40.000Z">
-<meta property="article:modified_time" content="2024-05-21T10:56:04.232Z">
+<meta property="article:modified_time" content="2024-05-25T07:09:33.920Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/1-%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86-3-%E8%AF%BB%E8%AE%BA%E6%96%87/1709190804696.png">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          5.3k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          13 分钟
+          45 分钟
         
       </span>
     
@@ -322,6 +322,152 @@
 <li>此时对领域应该已经有了一个较全面的把握，可以开始构思自己的 idea 了，注意依然要包含上面的要素</li>
 <li>拿自己的 idea 去跟导师讨论确认</li>
 </ol>
+<h1 id="time"><a href="#time" class="headerlink" title="{time}"></a>{time}</h1><p>这篇文章主要是想给大家分享一些论文阅读的技巧。网上相关的经验贴其实很多，我主要是看了沈向洋老师和吴恩达老师的两个视频，结合自己日常的一些体会，写下的这篇文章，两位老师的关于论文的视频我就放在文末了。</p>
+<p>本篇文章的目录为</p>
+<blockquote>
+<p><em>论文的常见框架</em><br><em>读论文的四个层次</em><br><em>读论文的三个阶段</em><br><em>读论文的不同部分应该得出的结论</em><br><em>读论文带着的12个问题</em><br><em>读论文的笔记模板</em></p>
+</blockquote>
+<h2 id="论文的常见框架"><a href="#论文的常见框架" class="headerlink" title="论文的常见框架"></a>论文的常见框架</h2><p>一般的论文都会按顺序包含一下几个部分：</p>
+<ul>
+<li>title</li>
+<li>keywords</li>
+<li>introduction</li>
+<li>related work</li>
+<li>method</li>
+<li>experimental results and discussion</li>
+<li>summary&#x2F;conclusion</li>
+<li>reference</li>
+<li>appendix</li>
+</ul>
+<h2 id="读论文的四个层次（沈向洋）"><a href="#读论文的四个层次（沈向洋）" class="headerlink" title="读论文的四个层次（沈向洋）"></a><strong>读论文的四个层次（沈向洋）</strong></h2><ul>
+<li>消极阅读（passive reading），即大概知道文章讲了什么；</li>
+<li>积极阅读（ active reading），主动思考这些知识有什么用；</li>
+<li>批判性阅读（critical reading），思考这篇文章是否言之成理；</li>
+<li>创造性阅读（creative reading），搞清楚文章对接下来的工作有什么帮助。</li>
+</ul>
+<h2 id="读论文的三个阶段"><a href="#读论文的三个阶段" class="headerlink" title="读论文的三个阶段"></a>读论文的三个阶段</h2><p>不是所有的论文一拿到就直接从头读到尾的，特别是现在论文这么多，这样做也不现实，所以读论文其实应该分步骤去读，先粗略地看一下，看看这是不是你感兴趣的文章；再简略地过一下全文，尤其是那些很多数学的部分，可以先跳过，大部分的论文看到这就行了，这个时候就基本上已经了解了论文的创新点；精读论文，还可以看一下开源的代码来帮助理解，知道论文的具体的实现的细节，如果是一些特别经典或者是你的工作主要就是基于这篇论文做的，那是肯定得精读的，即使可能得花掉一个星期甚至一个月的时间。具体的每个阶段看的内容如下：</p>
+<ul>
+<li>第一阶段（速读）：Title、Author、Abstract、Figure and Table(Introduction)(沈向洋觉得是论文的前两页，吴恩达觉得看完摘要要先看图表，这对于计算机来说确实如此）—–（快速知道论文讲了什么）。我个人觉得拿到一篇论文之后，先看题目、摘要、结论、图表会好一点，然后如果你不太了解这个领域，想要了解一下作者的motivation，那就可以把引言也读了。</li>
+<li>第二解决（精读）：Read but skim math，这个解决算是对论文的精读，在这个部分可以对论文进行批判性和创造性地阅读，也就是要对论文进行否定、质疑，仔细挑毛病。在读论文的时候可以带着这些问题：</li>
+</ul>
+<p>1、论文是否正确、真正地解决了问题？</p>
+<p>2、作者论文中所用方法是否有局限性？对论文有了足够的了解之后，如果发现论文中提 到的想法非常优秀，那么要创造性地思考你能用这篇论文做什么</p>
+<p>3、如果所读的论文没有解决问题，那么我能解决么？</p>
+<p>4、我能采用比论文中更简单的方法解决么？</p>
+<ul>
+<li>第三阶段（研读）：论文的每个部分的具体细节包括代码实现，一般论文特别经典的时候才需要。不过需要主要的是，即使论文很经典，也不见得是每个部分都需要研读，论文的一些部分可能发展到现在已经不 make sense了，比如AlexNet论文里面的各种trick，像这种就没有必要读了。</li>
+</ul>
+<h2 id="读论文的不同部分要得到的结论"><a href="#读论文的不同部分要得到的结论" class="headerlink" title="读论文的不同部分要得到的结论"></a>读论文的不同部分要得到的结论</h2><p>1、Abstract</p>
+<ul>
+<li>作者想解决什么问题？ question</li>
+<li>作者通过什么理论&#x2F;模型来解决这个问题？method</li>
+<li>作者给出的答案是什么？ answer</li>
+</ul>
+<p>2、Introduction</p>
+<ul>
+<li>作者为什么研究这个课题？</li>
+<li>目前这个课题的研究进行到了哪一阶段？</li>
+<li>作者使用的理论是基于哪些假设？</li>
+</ul>
+<p>3、Conclusion</p>
+<ul>
+<li>这篇文章存在哪些缺陷？</li>
+<li>作者关于这个课题的构思有哪几点？</li>
+</ul>
+<p>4、Table and Figure</p>
+<ul>
+<li>文章阶段性的成果</li>
+</ul>
+<p>5、Method and experiment</p>
+<ul>
+<li>研究的数据从哪里来？</li>
+<li>研究中用到的重要指标有哪些？</li>
+<li>模型分哪几步？ 每一步分别得出了什么结论？</li>
+</ul>
+<h2 id="读论文带着的12个问题"><a href="#读论文带着的12个问题" class="headerlink" title="读论文带着的12个问题"></a>读论文带着的12个问题</h2><p>我觉得带着论文去读问题效率会高很多。当然不是看所有的论文都是带着这些问题，可能有一些论文你自己看它已经有自己的目的了，那你就根据自己的情况来就好了，下面的是普遍性的。</p>
+<ol>
+<li>What is the problem addressed in the paper? What‘s the input and output? （当然不是每篇论文都有严格的输入输出）</li>
+<li>Is this a new problem? If it is a new problem, why does it matter? If it is not an entirely new problem, why does it still matter?</li>
+<li>What is the scientific hypothesis that the paper is trying to verify? Address what new knowledge is advanced in the pape</li>
+<li>What are the key related works and who are the key people working on this topic? （比如说对于Adam来说，其他的一些优化算法比如说SGD、Adagrad、Rmsprop等就可以稍微回想一下）</li>
+<li>What is the key Of the proposed solution in the paper?</li>
+<li>How are the experiments designed?（虽然一般论文的实验结果都是说自己的结果要好，但是也要注重实验，一来是可以参考别人是怎么设置实验的，还有就是看看作者的实验设置是否合理）</li>
+<li>What datasets are built&#x2F;used for the quantitative evaluation? Is the code open source?</li>
+<li>Is the scientific hypothesis well supported by evidence in the experiments? Are the claims in the paper well supported by the experimental results?</li>
+<li>What are the contributions of the paper?</li>
+<li>What should&#x2F;could be done next? （limitation of this paper）</li>
+<li>Are there important related papers I missed?</li>
+<li>What question should I ask the author( Any query？？？ 比如说你哪里没看懂或者觉得不合理的）</li>
+</ol>
+<h2 id="读论文的笔记模板"><a href="#读论文的笔记模板" class="headerlink" title="读论文的笔记模板"></a>读论文的笔记模板</h2><p>我觉得在阅读论文的过程中，记录一些笔记是非常重要的，包括在论文中进行一些标注，以及自己写成笔记的形式。论文中的标注大家可能自己有自己的方法，这里就不介绍了，这里主要介绍一下我平时写论文笔记的过程中整理的笔记模板，虽然用这些模板记录真的很花时间，但是等到以后你突然回过头再看这篇论文的时候，有了这些笔记就方便很多了，正所谓：“磨刀不误砍柴工”。</p>
+<p><strong>0 论文标题</strong></p>
+<p>一句话概括论文的主要内容（用什么样的方法解决了什么样的问题？）</p>
+<p><strong>1 论文的结构(简要概括)</strong></p>
+<p><strong>按标题的顺序</strong>写一下论文的每个部分大概写了那些内容，每个部分大概用一两句话或者几句话来概括。下面给的每个部分的问题不一定作者都提到了，比如说文章的缺陷，如果没提到大家可以不用在这个部分写，也就是<strong>论文的结构这一部分只写论文里面提到的</strong>，<strong>而且只是一个相对简要的概括，所以可能有些问题会和下面的其他部分重复</strong>。或者大家觉得还有其他重要的问题但是我下面没有提到的大家也可以自己补充。<strong>写这个的主要目的是自己了解一些各种论文结构。</strong></p>
+<p>不一定每篇论文当中都是下面的几个部分，大家根据实际的论文去总结，有些论文包含其他部分的大家就根据自己的理解去总结。</p>
+<p><strong>1.1 Abstract</strong></p>
+<ul>
+<li>作者想解决什么问题？</li>
+<li>作者通过什么理论&#x2F;模型来解决这个问题？</li>
+<li>作者给出的答案是什么？</li>
+</ul>
+<p><strong>1.2 Introduction</strong></p>
+<ul>
+<li>作者为什么研究这个课题？</li>
+<li>目前这个课题的研究进行到了哪一阶段？存在哪些缺陷？作者是想通过本文解决哪个问题？</li>
+<li>作者使用的理论是基于哪些假设？</li>
+</ul>
+<p><strong>1.3 Related work</strong></p>
+<ul>
+<li>和作者这篇论文相关的工作有哪些？</li>
+<li>之前工作的优缺点是什么？</li>
+<li>作者主要是对之前的哪个工作进行改进？</li>
+</ul>
+<p><strong>1.4 Theoretical Analysis</strong></p>
+<ul>
+<li>作者是用什么理论证明了自己的方法在理论上也是有保障的？</li>
+</ul>
+<p><strong>1.5 Experiment</strong></p>
+<ul>
+<li>作者是在哪些数据集或者说场景下进行了测试？</li>
+<li>实验中的重要指标有哪些？</li>
+<li>文章提出的方法在哪些指标上表现好？在哪些指标上表现不好？</li>
+<li>在实验的设置过程中作者有没有提到自己用到了什么trick？</li>
+</ul>
+<p><strong>1.6 Conclusion</strong></p>
+<ul>
+<li>这篇论文最大的贡献是什么？</li>
+<li>论文中的方法还存在什么问题？</li>
+<li>作者觉得还可以怎么改进？</li>
+</ul>
+<p><strong>2 论文想要解决的问题？</strong></p>
+<p><strong>2.1 背景是什么？</strong></p>
+<p><strong>2.2 之前的方法存在哪些问题</strong></p>
+<p><strong>2.3 输入和输出是什么？</strong></p>
+<p><strong>3 论文研究的是否是一个新问题</strong></p>
+<p><strong>4 论文试图验证的科学假设</strong></p>
+<p><strong>5 相关的关键人物与工作</strong></p>
+<p><strong>5.1 之前存在哪些相关的工作</strong></p>
+<p><strong>5.2 本文是对哪个工作进行的改进</strong></p>
+<p><strong>5.3 这个领域的关键研究者</strong></p>
+<p><strong>6 论文提出的解决方案的关键</strong></p>
+<p><strong>7 论文的解决方案有完备的理论证明吗</strong></p>
+<p><strong>8 实验设计</strong></p>
+<p><strong>8.1用到了哪些数据集</strong></p>
+<p><strong>8.2与什么算法进行了比较</strong></p>
+<p><strong>8.3评价指标是什么</strong></p>
+<p><strong>8.4有没有什么独特的实验实验设计？</strong></p>
+<p><strong>9 实验支撑</strong></p>
+<p><strong>9.1 论文的数据集哪里获取</strong></p>
+<p><strong>9.2 源代码哪里可以获取</strong></p>
+<p><strong>9.3 关键代码的讲解</strong></p>
+<p><strong>10 实验结果是否验证了科学假设？</strong></p>
+<p><strong>11 论文最大的贡献</strong></p>
+<p><strong>12 论文的不足之处</strong></p>
+<p><strong>12.1 这篇论文之后的工作有哪些其他的改进</strong></p>
+<p><strong>12.2你觉得可以对这篇论文有什么改进</strong></p>
+<p><strong>13 重要的相关论文</strong></p>
+<p><strong>14 不懂之处</strong></p>
 
                 
               </div>
@@ -527,7 +673,7 @@
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>由Hexo框架支持</span></a> 
+       Copyright © 2024 WuYueYu Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
     </div>
   
   
