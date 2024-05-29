@@ -16,16 +16,18 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Network Morphism 网络态射 ICML 2016  背景">
+    <meta name="description" content="Network Morphism 网络态射 ICML 2016  背景在深度学习中，模型架构的设计和优化是一个复杂且耗时的过程。现有的方法通常需要从头开始训练新的模型，或者进行复杂的超参数优化。论文提出了网络态射的概念，旨在通过调整现有网络结构，保持或提高网络性能，同时减少训练时间和资源。 实验方法网络态射包括以下几种主要操作：  增加层数（Layer Morphism）：  在现有网络中增加新">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-Network Morphism">
 <meta property="og:url" content="http://example.com/2024/05/26/0-Network-Morphism/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="Network Morphism 网络态射 ICML 2016  背景">
+<meta property="og:description" content="Network Morphism 网络态射 ICML 2016  背景在深度学习中，模型架构的设计和优化是一个复杂且耗时的过程。现有的方法通常需要从头开始训练新的模型，或者进行复杂的超参数优化。论文提出了网络态射的概念，旨在通过调整现有网络结构，保持或提高网络性能，同时减少训练时间和资源。 实验方法网络态射包括以下几种主要操作：  增加层数（Layer Morphism）：  在现有网络中增加新">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-Network-Morphism/image-20240526152658190.png">
+<meta property="og:image" content="http://example.com/images/0-Network-Morphism/image-20240526154225741.png">
+<meta property="og:image" content="http://example.com/images/0-Network-Morphism/image-20240526154300999.png">
 <meta property="article:published_time" content="2024-05-26T07:26:05.000Z">
-<meta property="article:modified_time" content="2024-05-26T07:29:53.905Z">
+<meta property="article:modified_time" content="2024-05-29T09:48:21.857Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-Network-Morphism/image-20240526152658190.png">
@@ -225,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          29 字
+          2.7k 字
         
       </span>
     
@@ -236,7 +238,7 @@
         
         
         
-          1 分钟
+          23 分钟
         
       </span>
     
@@ -282,7 +284,51 @@
 <h2 id="Network-Morphism"><a href="#Network-Morphism" class="headerlink" title="Network Morphism"></a>Network Morphism</h2><blockquote>
 <p>网络态射 ICML 2016</p>
 </blockquote>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在深度学习中，模型架构的设计和优化是一个复杂且耗时的过程。现有的方法通常需要从头开始训练新的模型，或者进行复杂的超参数优化。论文提出了网络态射的概念，旨在通过调整现有网络结构，保持或提高网络性能，同时减少训练时间和资源。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p>网络态射包括以下几种主要操作：</p>
+<ol>
+<li><p><strong>增加层数（Layer Morphism）</strong>：</p>
+<ul>
+<li>在现有网络中增加新的层，并确保新的网络在初始化时的输出与原始网络保持一致。</li>
+<li>通过将新层初始化为恒等映射，使得新层不会影响初始的输出。</li>
+</ul>
+<p>数学表示：</p>
+<p>$h’&#x3D;f(W_x+b)$</p>
+<p>其中，$f$ 是激活函数，$W$ 和 $b$ 是新层的权重和偏置，初始化为单位矩阵和零向量。</p>
+</li>
+<li><p><strong>增加节点数（Node Morphism）</strong>：</p>
+<ul>
+<li>增加网络中某一层的节点数，并保持输出不变。</li>
+<li>通过复制和调整权重，使得新的节点不会影响初始的输出。</li>
+</ul>
+<p>数学表示：</p>
+<p>$W^′&#x3D;[W,W_{new}]$</p>
+<p>其中，$W_{\text{new}}$ 是新增加的节点权重，初始化为原始权重的拷贝。</p>
+</li>
+<li><p><strong>改变激活函数（Activation Morphism）</strong>：</p>
+<ul>
+<li>改变网络中的激活函数，同时确保网络的输出保持不变。</li>
+<li>通过适当的初始化和调整，使新的激活函数与原始激活函数等效。</li>
+</ul>
+</li>
+</ol>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../images/0-Network-Morphism/image-20240526154225741.png" srcset="/img/loading.gif" lazyload alt="MNIST"></p>
+<p><img src="/../images/0-Network-Morphism/image-20240526154300999.png" srcset="/img/loading.gif" lazyload alt="CIFAR10"></p>
+<p>通过在 CIFAR-10、CIFAR-100 和 ImageNet 等数据集上的实验，验证了网络变形方法的有效性。</p>
+<p>实验结果表明，通过网络变形方法，可以在不影响性能的情况下，快速调整和优化现有网络结构。</p>
+<p>与从头开始训练的新网络相比，网络变形方法显著减少了训练时间和计算资源。</p>
+<p>主要贡献为：</p>
+<ul>
+<li>提出了一种系统的方法，可以在不影响现有模型性能的情况下，变换神经网络的结构。</li>
+<li>通过一系列的变换操作，如增加层数、增加节点数、改变激活函数等，来调整和优化网络。</li>
+</ul>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>网络态射提供了一种高效的模型调整和优化方法，可以在保持现有网络性能的前提下，快速进行结构调整。这一方法具有重要的应用价值，特别是在需要频繁调整和优化模型结构的深度学习研究和应用中。未来的研究可以进一步探索更多类型的变形操作，以及在更复杂任务中的应用。</p>
+<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="*代码分析"></a>*代码分析</h3><p>网络态射的一个比较火的开源应用是autokeras，其网络结构用 keras 的图模型 graph 表示。</p>
+<p>graph 类中的每个节点都是层之间的中间张量，每一层都是图中的一条边。</p>
+<p>graph 类中包含所有节点 (包括它们的 shape 和 id)、所有的层（包含 层 本身和它们的 id）、关系（层和输入节点、输出节点的关系以及邻接矩阵）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># in autokeras/graph.py</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">_build_network</span>(<span class="hljs-params">self</span>):<br>    self._node_to_id = &#123;&#125;<br>	<span class="hljs-comment"># Recursively find all the interested nodes.</span><br>    <span class="hljs-keyword">for</span> input_node <span class="hljs-keyword">in</span> self.inputs:<br>        self._search_network(input_node, self.outputs, <span class="hljs-built_in">set</span>(), <span class="hljs-built_in">set</span>())<br>    self._nodes = <span class="hljs-built_in">sorted</span>(<br>        <span class="hljs-built_in">list</span>(self._node_to_id.keys()), key=<span class="hljs-keyword">lambda</span> x: self._node_to_id[x]<br>    )<br><br>    <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> self.inputs + self.outputs:<br>        <span class="hljs-keyword">if</span> node <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> self._node_to_id:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;Inputs and outputs not connected.&quot;</span>)<br><br>    <span class="hljs-comment"># Find the blocks.</span><br>    blocks = []<br>    <span class="hljs-keyword">for</span> input_node <span class="hljs-keyword">in</span> self._nodes:<br>        <span class="hljs-keyword">for</span> block <span class="hljs-keyword">in</span> input_node.out_blocks:<br>            <span class="hljs-keyword">if</span> (<br>                <span class="hljs-built_in">any</span>(<br>                    [<br>                        output_node <span class="hljs-keyword">in</span> self._node_to_id<br>                        <span class="hljs-keyword">for</span> output_node <span class="hljs-keyword">in</span> block.outputs<br>                    ]<br>                )<br>                <span class="hljs-keyword">and</span> block <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> blocks<br>            ):<br>                blocks.append(block)<br><br>    <span class="hljs-comment"># Check if all the inputs of the blocks are set as inputs.</span><br>    <span class="hljs-keyword">for</span> block <span class="hljs-keyword">in</span> blocks:<br>        <span class="hljs-keyword">for</span> input_node <span class="hljs-keyword">in</span> block.inputs:<br>            <span class="hljs-keyword">if</span> input_node <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> self._node_to_id:<br>                <span class="hljs-keyword">raise</span> ValueError(<br>                    <span class="hljs-string">&quot;A required input is missing for HyperModel &quot;</span><br>                    <span class="hljs-string">&quot;&#123;name&#125;.&quot;</span>.<span class="hljs-built_in">format</span>(name=block.name)<br>                )<br><br>    <span class="hljs-comment"># Calculate the in degree of all the nodes</span><br>    in_degree = [<span class="hljs-number">0</span>] * <span class="hljs-built_in">len</span>(self._nodes)<br>    <span class="hljs-keyword">for</span> node_id, node <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(self._nodes):<br>        in_degree[node_id] = <span class="hljs-built_in">len</span>(<br>            [block <span class="hljs-keyword">for</span> block <span class="hljs-keyword">in</span> node.in_blocks <span class="hljs-keyword">if</span> block <span class="hljs-keyword">in</span> blocks]<br>        )<br><br>    <span class="hljs-comment"># Add the blocks in topological order.</span><br>    self.blocks = []<br>    self._block_to_id = &#123;&#125;<br>    <span class="hljs-keyword">while</span> <span class="hljs-built_in">len</span>(blocks) != <span class="hljs-number">0</span>:<br>        new_added = []<br><br>        <span class="hljs-comment"># Collect blocks with in degree 0.</span><br>        <span class="hljs-keyword">for</span> block <span class="hljs-keyword">in</span> blocks:<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">any</span>([in_degree[self._node_to_id[node]] <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> block.inputs]):<br>                <span class="hljs-keyword">continue</span><br>            new_added.append(block)<br><br>        <span class="hljs-comment"># Remove the collected blocks from blocks.</span><br>        <span class="hljs-keyword">for</span> block <span class="hljs-keyword">in</span> new_added:<br>            blocks.remove(block)<br><br>        <span class="hljs-keyword">for</span> block <span class="hljs-keyword">in</span> new_added:<br>            <span class="hljs-comment"># Add the collected blocks to the Graph.</span><br>            self._add_block(block)<br><br>            <span class="hljs-comment"># Decrease the in degree of the output nodes.</span><br>            <span class="hljs-keyword">for</span> output_node <span class="hljs-keyword">in</span> block.outputs:<br>                output_node_id = self._node_to_id[output_node]<br>                in_degree[output_node_id] -= <span class="hljs-number">1</span>`<br></code></pre></td></tr></table></figure>
+
+
                 
               </div>
             
@@ -407,6 +453,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -600,6 +652,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
