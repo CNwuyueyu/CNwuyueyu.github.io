@@ -24,7 +24,7 @@
 <meta property="og:description" content="12ping baidu.com -n 100|foreach -&quot; -f (Get-Date),$_&amp;#125;#显示时间的PING指令  背景第一次使用校园网，才知道校园网原来需要登录认证①，并且限制设备②，在没有办理校内校园流量卡的情况下，原来的流量卡只有100kb&#x2F;s速度（办了校园卡之后，速度也仅有2M&#x2F;s），已经严重影响使用，另外校园全覆盖WiFi，同样需要">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-09-08T08:39:39.000Z">
-<meta property="article:modified_time" content="2024-05-21T10:54:38.512Z">
+<meta property="article:modified_time" content="2024-06-24T07:40:02.255Z">
 <meta property="article:author" content="Wuyueyu">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.5k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          9 分钟
+          13 分钟
         
       </span>
     
@@ -298,8 +298,18 @@
 <p>可能由于多运营商的问题，无法获取运营商的id，这个版本的minieap也没能通过认证，所以让linux连接有线网络以失败告终。</p>
 <h2>更变思路</h2>
 
-<p>一次偶然的机会，联系上了一位学长，他给出了重要的点拨提示。为什么要仿造锐捷进行认证呢？直接使用路由器仿造电脑不就行了。</p>
-<p>不过我一直怀疑寝室里的网存在环路，导致广播风暴时常发生，只能期待校方有朝一日能够解决这个严重的问题。</p>
+<p>一次偶然的机会，联系上了一位学长，他给出了重要的点拨提示。为什么要仿造锐捷进行认证呢？直接使用路由器仿造电脑不就行了。所以在路由器后台管理端仿造通过验证的电脑MAC即可，具体步骤：</p>
+<ol>
+<li>准备工作：网线至少1,路由器（千兆&#x2F;百兆），win系统电脑</li>
+<li>电脑连接网线连接面板，正常进行锐捷认证。</li>
+<li>认证通过后可以在锐捷软件或者本地网络属性查看链接速度（1000MBPS，100MBPS）</li>
+<li>直接拔出面板端网线，插入路由器的LAN口。</li>
+<li>根据路由器的本地网络进入路由器管理界面，设置仿造当前设备MAC地址，WAN口设置自动获取IP地址。</li>
+<li>拔出电脑端网线和路由器端网线，分别插入路由器WAN口和面板，即可实现路由器上网。此时可使用第二根网线连接LAN口和电脑实现最优网络，也可以连接wifi使用。</li>
+</ol>
+<p>注意事项：面板一段时间没有流量会掉认证，重新认证需要重复上述步骤比较麻烦，可以一直连接用网设备来保活（比如wifi台灯）。过多设备会封号，请谨慎连接2个以上的设备。网口可能有千兆的，这也是为什么会提到千兆百兆的原因，如果你速度达不到，可能是出现木桶效应。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>不过我一直怀疑寝室里的网存在环路，导致广播风暴时常发生，只能期待校方有朝一日能够解决这个严重的问题。</p>
+<p>另一种可能是网络大面积中毒，可以通过交换机的是否存在端口数量进行查看，不过真的有人在局域网内放蠕虫来偷取pcdn流量吗？</p>
 
                 
               </div>
@@ -357,8 +367,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/05/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2023/09/05/hello-world/" title="HEXO GUIDE">
+                        <span class="hidden-mobile">HEXO GUIDE</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,12 +16,12 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="发布于NIPS 2015  背景 R-CNN：使用选择性搜索算法生成候选区域，然后对每个区域进行卷积神经网络（CNN）特征提取和分类。这种方法的计算效率低，因为每个候选区域都要单独进行特征提取。 Fast R-CNN：改进了R-CNN，通过在整个图像上进行一次特征提取，然后使用区域兴趣（RoI）池化层对候选区域进行分类和回归。这减少了冗余计算，但候选区域的生成仍是一个瓶颈。  目标检测不仅需要">
+    <meta name="description" content="Faster R-CNN  发布于NIPS 2015  背景 R-CNN：使用选择性搜索算法生成候选区域，然后对每个区域进行卷积神经网络（CNN）特征提取和分类。这种方法的计算效率低，因为每个候选区域都要单独进行特征提取。 Fast R-CNN：改进了R-CNN，通过在整个图像上进行一次特征提取，然后使用区域兴趣（RoI）池化层对候选区域进行分类和回归。这减少了冗余计算，但候选区域的生成仍是一个瓶">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-Faster R-CNN">
 <meta property="og:url" content="http://example.com/2024/05/21/0-Faster-R-CNN/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="发布于NIPS 2015  背景 R-CNN：使用选择性搜索算法生成候选区域，然后对每个区域进行卷积神经网络（CNN）特征提取和分类。这种方法的计算效率低，因为每个候选区域都要单独进行特征提取。 Fast R-CNN：改进了R-CNN，通过在整个图像上进行一次特征提取，然后使用区域兴趣（RoI）池化层对候选区域进行分类和回归。这减少了冗余计算，但候选区域的生成仍是一个瓶颈。  目标检测不仅需要">
+<meta property="og:description" content="Faster R-CNN  发布于NIPS 2015  背景 R-CNN：使用选择性搜索算法生成候选区域，然后对每个区域进行卷积神经网络（CNN）特征提取和分类。这种方法的计算效率低，因为每个候选区域都要单独进行特征提取。 Fast R-CNN：改进了R-CNN，通过在整个图像上进行一次特征提取，然后使用区域兴趣（RoI）池化层对候选区域进行分类和回归。这减少了冗余计算，但候选区域的生成仍是一个瓶">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-Faster-R-CNN/image-20240521164920800.png">
 <meta property="og:image" content="http://example.com/images/0-Faster-R-CNN/image-20240521191841145.png">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://example.com/images/0-Faster-R-CNN/image-20240521201436051.png">
 <meta property="og:image" content="http://example.com/images/0-Faster-R-CNN/image-20240521201705947.png">
 <meta property="article:published_time" content="2024-05-21T08:48:31.000Z">
-<meta property="article:modified_time" content="2024-05-24T05:21:49.940Z">
+<meta property="article:modified_time" content="2024-06-24T07:22:18.676Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-Faster-R-CNN/image-20240521164920800.png">
@@ -284,7 +284,7 @@
             
               <div class="markdown-body">
                 
-                <p><img src="/../images/0-Faster-R-CNN/image-20240521164920800.png" srcset="/img/loading.gif" lazyload alt="Faster R-CNN"></p>
+                <h2 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h2><p><img src="/../images/0-Faster-R-CNN/image-20240521164920800.png" srcset="/img/loading.gif" lazyload alt="Faster R-CNN"></p>
 <blockquote>
 <p>发布于NIPS 2015</p>
 </blockquote>

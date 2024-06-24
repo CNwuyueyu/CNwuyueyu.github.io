@@ -16,12 +16,12 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="用于大规模图像识别的超深卷积网络 2015 (VGG) ImageNet Large-ScaleVisual Recognition Challenge (ILSVRC)：ImageNet大规模视觉识别挑战  背景卷积核到底该设置为多少？AlexNet采用了极大的size(11x11)、ZFNet将size调小了但仍然使用到了7x7，GoogLeNet同时使用了不同的filter size… 本">
+    <meta name="description" content="用于大规模图像识别的超深卷积网络 2015 (VGG)  ImageNet Large-ScaleVisual Recognition Challenge (ILSVRC)：ImageNet大规模视觉识别挑战  背景卷积核到底该设置为多少？AlexNet采用了极大的size(11x11)、ZFNet将size调小了但仍然使用到了7x7，GoogLeNet同时使用了不同的filter size… 本">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-Very Deep Convolutional Networks For Large-Scale Image Recognition">
 <meta property="og:url" content="http://example.com/2024/04/22/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="用于大规模图像识别的超深卷积网络 2015 (VGG) ImageNet Large-ScaleVisual Recognition Challenge (ILSVRC)：ImageNet大规模视觉识别挑战  背景卷积核到底该设置为多少？AlexNet采用了极大的size(11x11)、ZFNet将size调小了但仍然使用到了7x7，GoogLeNet同时使用了不同的filter size… 本">
+<meta property="og:description" content="用于大规模图像识别的超深卷积网络 2015 (VGG)  ImageNet Large-ScaleVisual Recognition Challenge (ILSVRC)：ImageNet大规模视觉识别挑战  背景卷积核到底该设置为多少？AlexNet采用了极大的size(11x11)、ZFNet将size调小了但仍然使用到了7x7，GoogLeNet同时使用了不同的filter size… 本">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713777253973.png">
 <meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713778810157.png">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796158321.png">
 <meta property="og:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796323671.png">
 <meta property="article:published_time" content="2024-04-22T15:21:52.000Z">
-<meta property="article:modified_time" content="2024-05-24T05:22:07.127Z">
+<meta property="article:modified_time" content="2024-06-24T07:15:18.887Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713777253973.png">
@@ -286,18 +286,18 @@
             
               <div class="markdown-body">
                 
-                <p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713777253973.png" srcset="/img/loading.gif" lazyload alt="VGG"></p>
-<h2 id="用于大规模图像识别的超深卷积网络-2015-VGG"><a href="#用于大规模图像识别的超深卷积网络-2015-VGG" class="headerlink" title="用于大规模图像识别的超深卷积网络 2015 (VGG)"></a>用于大规模图像识别的超深卷积网络 2015 (VGG)</h2><blockquote>
+                <h2 id="用于大规模图像识别的超深卷积网络-2015-VGG"><a href="#用于大规模图像识别的超深卷积网络-2015-VGG" class="headerlink" title="用于大规模图像识别的超深卷积网络 2015 (VGG)"></a>用于大规模图像识别的超深卷积网络 2015 (VGG)</h2><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713777253973.png" srcset="/img/loading.gif" lazyload alt="VGG"></p>
+<blockquote>
 <p>ImageNet Large-ScaleVisual Recognition Challenge (ILSVRC)：ImageNet大规模视觉识别挑战</p>
 </blockquote>
 <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>卷积核到底该设置为多少？AlexNet采用了极大的size(11x11)、ZFNet将size调小了但仍然使用到了7x7，GoogLeNet同时使用了不同的filter size…</p>
 <p>本篇文章VGG使用3x3不断叠加，使得CNN模型可以达到更深的层数且得到更好的精准度。本方法其实是对于AlexNet的基础上做了更好的改进。VGG的模型架构如下图所示：</p>
-<p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713778810157.png" srcset="/img/loading.gif" lazyload alt="1713778810157"></p>
-<p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713778871429.png" srcset="/img/loading.gif" lazyload alt="1713778871429" title="参数数目"></p>
+<p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713778810157.png" srcset="/img/loading.gif" lazyload alt="VGG的模型架构"></p>
+<p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713778871429.png" srcset="/img/loading.gif" lazyload alt="参数数量" title="参数数目"></p>
 <p>作者根据配置进行了分析：7x7的卷积和3个3x3的卷积感受野实际上是一样的，那为什么要用小卷积来代替大卷积呢？</p>
 <h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><h4 id="VGGNet-1x1卷积"><a href="#VGGNet-1x1卷积" class="headerlink" title="VGGNet 1x1卷积"></a>VGGNet 1x1卷积</h4><p>选用1x1卷积核的最直接原因是在维度上继承全连接，conv1x1更加专注于跨通道的特征组合，conv3x3既考虑跨通道，也考虑局部信息整合。使用1x1卷积也可以在3x3或5x5卷积计算前先降低feature map的维度。</p>
 <h4 id="VGGNet-卷积核变小"><a href="#VGGNet-卷积核变小" class="headerlink" title="VGGNet 卷积核变小"></a>VGGNet 卷积核变小</h4><p>卷积核全部替换为3×3（极少用了1×1）步长为1，而使用小的卷积核可以提升性能，加深网络结构。</p>
-<p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713779093966.png" srcset="/img/loading.gif" lazyload alt="1713779093966"></p>
+<p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713779093966.png" srcset="/img/loading.gif" lazyload alt="VGGNet"></p>
 <h4 id="VGGNet-层数更深更宽"><a href="#VGGNet-层数更深更宽" class="headerlink" title="VGGNet 层数更深更宽"></a>VGGNet <strong>层数更深更宽</strong></h4><p>3个激活函数（ReLU）去代替1个，可使决策函数更加具有辨别能力；</p>
 <p>3x3比5x5,7x7,11x11的Conv filter的参数减少，减少卷积数量带来性能提升。</p>
 <h4 id="VGGNet-池化核变小且为偶数"><a href="#VGGNet-池化核变小且为偶数" class="headerlink" title="VGGNet 池化核变小且为偶数"></a>VGGNet <strong>池化核变小且为偶数</strong></h4><p>AlexNet中的max-pool全是3×3的，但VGGNet中是2×2的，可能的原因是2×2的max-pool带来的信息损失相对于3×3的来说要小一些，相比于3×3更容易捕获细小的特征变化起伏。在网络的层数增长的过程中，池化忽略的信息加上缓冲，并降低softmax的学习压力。</p>
@@ -321,13 +321,13 @@
 <h3 id="实验结论"><a href="#实验结论" class="headerlink" title="实验结论"></a>实验结论</h3><h5 id="单一尺寸上的卷积网络"><a href="#单一尺寸上的卷积网络" class="headerlink" title="单一尺寸上的卷积网络"></a>单一尺寸上的卷积网络</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713795644679.png" srcset="/img/loading.gif" lazyload alt="1713795644679"></p>
 <p>注意使用局部相应标准化网络（A-LRN）的性能并没有比未用标准化层的A高。</p>
 <p>更大的数据集使用更深的模型会更好。小滤波器的卷积网络比大滤波器的千层网络性能更好。</p>
-<h5 id="多尺寸上的卷积网络"><a href="#多尺寸上的卷积网络" class="headerlink" title="多尺寸上的卷积网络"></a>多尺寸上的卷积网络</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713795949526.png" srcset="/img/loading.gif" lazyload alt="1713795949526"></p>
+<h5 id="多尺寸上的卷积网络"><a href="#多尺寸上的卷积网络" class="headerlink" title="多尺寸上的卷积网络"></a>多尺寸上的卷积网络</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713795949526.png" srcset="/img/loading.gif" lazyload alt="多尺寸上的卷积网络"></p>
 <p>测试时图片尺寸波动会使性能更好。</p>
-<h5 id="多裁剪的评估"><a href="#多裁剪的评估" class="headerlink" title="多裁剪的评估"></a>多裁剪的评估</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796032170.png" srcset="/img/loading.gif" lazyload alt="1713796032170"></p>
+<h5 id="多裁剪的评估"><a href="#多裁剪的评估" class="headerlink" title="多裁剪的评估"></a>多裁剪的评估</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796032170.png" srcset="/img/loading.gif" lazyload alt="多裁剪"></p>
 <p>多重裁切比密集评估的效果好，并且两者互补。</p>
-<h5 id="融合卷积网络"><a href="#融合卷积网络" class="headerlink" title="融合卷积网络"></a>融合卷积网络</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796158321.png" srcset="/img/loading.gif" lazyload alt="1713796158321"></p>
+<h5 id="融合卷积网络"><a href="#融合卷积网络" class="headerlink" title="融合卷积网络"></a>融合卷积网络</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796158321.png" srcset="/img/loading.gif" lazyload alt="融合卷积网络"></p>
 <p>将两个表现最好的多尺寸模型组合禁用，将会进一步减少错误率。</p>
-<h5 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796323671.png" srcset="/img/loading.gif" lazyload alt="1713796323671"></p>
+<h5 id="结果比较"><a href="#结果比较" class="headerlink" title="结果比较"></a>结果比较</h5><p><img src="/../images/0-Very-Deep-Convolutional-Networks-For-Large-Scale-Image-Recognition/1713796323671.png" srcset="/img/loading.gif" lazyload alt="结果比较"></p>
 <p>使用了7个模型组合的测试错误率，为7.3%，使用2个模型的组合，将错误率降低到了6.8%。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>VGG网络继承了AlexNet中的不少网络结构，同时继承了OverFeat在Localization任务中的做法，学习这种经典的网络应该可以对日后在Computer Vision领域的学习起到一定的作用，小卷积核的应用以及VGGNet的输入图像rescale应该是本论文中重点关注的点。</p>
 

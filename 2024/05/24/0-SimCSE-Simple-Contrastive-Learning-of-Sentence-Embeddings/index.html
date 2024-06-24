@@ -16,12 +16,12 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SimCSE: Simple Contrastive Learning of Sentence EmbeddingsSimCSE：对比学习句向量表示  发布于EMNLP 2021  背景Embedding是指将高维度的数据（例如文字、图片、音频）映射到低维度空间的过程。Embedding向量是包含语义信息的。也就是含义相近的单词，Embedding向量在空间中有相似的位置。Embedding是数">
+    <meta name="description" content="SimCSE: Simple Contrastive Learning of Sentence Embeddings SimCSE：对比学习句向量表示 发布于EMNLP 2021  背景Embedding是指将高维度的数据（例如文字、图片、音频）映射到低维度空间的过程。Embedding向量是包含语义信息的。也就是含义相近的单词，Embedding向量在空间中有相似的位置。Embedding是数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-SimCSE: Simple Contrastive Learning of Sentence Embeddings">
 <meta property="og:url" content="http://example.com/2024/05/24/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="SimCSE: Simple Contrastive Learning of Sentence EmbeddingsSimCSE：对比学习句向量表示  发布于EMNLP 2021  背景Embedding是指将高维度的数据（例如文字、图片、音频）映射到低维度空间的过程。Embedding向量是包含语义信息的。也就是含义相近的单词，Embedding向量在空间中有相似的位置。Embedding是数">
+<meta property="og:description" content="SimCSE: Simple Contrastive Learning of Sentence Embeddings SimCSE：对比学习句向量表示 发布于EMNLP 2021  背景Embedding是指将高维度的数据（例如文字、图片、音频）映射到低维度空间的过程。Embedding向量是包含语义信息的。也就是含义相近的单词，Embedding向量在空间中有相似的位置。Embedding是数据">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182339276.png">
 <meta property="og:image" content="http://example.com/images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182601761.png">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://example.com/images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506183047519.png">
 <meta property="og:image" content="http://example.com/images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506183056349.png">
 <meta property="article:published_time" content="2024-05-24T05:17:27.000Z">
-<meta property="article:modified_time" content="2024-05-24T05:22:03.467Z">
+<meta property="article:modified_time" content="2024-06-24T07:17:04.782Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182339276.png">
@@ -285,10 +285,8 @@
             
               <div class="markdown-body">
                 
-                <p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182339276.png" srcset="/img/loading.gif" lazyload alt="image-20240506182339276"></p>
-<h2 id="SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings"><a href="#SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings" class="headerlink" title="SimCSE: Simple Contrastive Learning of Sentence Embeddings"></a><strong>SimCSE: Simple Contrastive Learning of Sentence Embeddings</strong></h2><p>SimCSE：对比学习句向量表示</p>
-<blockquote>
-<p>发布于EMNLP 2021</p>
+                <h2 id="SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings"><a href="#SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings" class="headerlink" title="SimCSE: Simple Contrastive Learning of Sentence Embeddings"></a>SimCSE: Simple Contrastive Learning of Sentence Embeddings</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182339276.png" srcset="/img/loading.gif" lazyload alt="SimCSE"></h2><blockquote>
+<p>SimCSE：对比学习句向量表示 发布于EMNLP 2021</p>
 </blockquote>
 <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><strong>Embedding</strong>是指将高维度的数据（例如文字、图片、音频）映射到低维度空间的过程。Embedding向量是包含语义信息的。也就是含义相近的单词，Embedding向量在空间中有相似的位置。Embedding是数据科学工具包中至关重要的部分，已经广泛应用于各种不同领域的生产级机器学习系统，包括自然语言处理、推荐系统和计算机视觉等</p>
 <p><strong>Dropout</strong>：Dropout是一种用于减少神经网络过拟合的正则化技术。在训练过程中，dropout会随机地将神经元的输出置为零，这样可以防止网络对特定的输入特征过度依赖，从而提高了模型的泛化能力。在SimCSE中，dropout被用作一种噪声注入的手段，用于生成不同的句子表示，从而帮助模型学习更加鲁棒和具有表征能力的句子嵌入。</p>
@@ -298,28 +296,28 @@
 <p>1.正例之间表示保持较近的距离;</p>
 <p>2.随机样例的表示应分散在超平面上。并且这两个目标分别可以用指标alignment和uniformity来衡量。</p>
 <p>样本对数据 D ，X_i和X_i^+是一对相似样本对。训练目标函数为</p>
-<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182601761.png" srcset="/img/loading.gif" lazyload alt="image-20240506182601761"></p>
+<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182601761.png" srcset="/img/loading.gif" lazyload alt="目标函数"></p>
 <p><strong>正样本</strong>:构造(X_i,X_i^+)样本对。在CV领域可通过裁剪、翻转等方法很容易构建，在NLP领域则很难构造语义一致的样本。比较常见的是通过数据增强来构造，如同义词的替换，删除某个或某些不重要的词等，但这些方法很容易引入噪声，致使模型的效果提升有限。</p>
 <p><strong>alignment</strong>和<strong>uniformity</strong>:alignment是正样本 （x_i,x_i^+）的平均距离. （对齐性）越小越好</p>
 <p>uniformity计算向量整体分布的均匀程度，越均匀，保留的信息越多。 （均匀性） 越小越好</p>
 <h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><strong>无监督</strong>SimCSE：</p>
 <p>无监督SimCSE的工作原理，它使用对比学习的方法，通过预测输入句子本身来学习句子表示。使用不同的隐藏层dropout掩码来生成不同的句子表示，并将它们与同一批次中的其他句子表示进行比较，以学习更好的句子表示。 </p>
-<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182827852.png" srcset="/img/loading.gif" lazyload alt="image-20240506182827852"></p>
+<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182827852.png" srcset="/img/loading.gif" lazyload alt="无监督"></p>
 <p>一般来说，我们会使用一些数据扩增手段，让正例的两个样本有所差异，但是在 NLP 中如何做数据扩增本身也是一个问题，SimCSE 提出了一个极为简单优雅的方案：直接把 Dropout 当做数据扩增！</p>
-<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182856730.png" srcset="/img/loading.gif" lazyload alt="image-20240506182856730"></p>
+<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182856730.png" srcset="/img/loading.gif" lazyload alt="Dropout 当做数据扩增"></p>
 <p><strong>有监督</strong>SimCSE：</p>
 <p>监督SimCSE的工作原理，它利用自然语言推理数据集（NLI数据集）中的标注句对来训练模型，以进一步提高句子表示的性能。使用自然语言推理数据，以学习更好的句子表示。</p>
-<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182928868.png" srcset="/img/loading.gif" lazyload alt="image-20240506182928868"></p>
+<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506182928868.png" srcset="/img/loading.gif" lazyload alt="有监督SimCSE"></p>
 <p><strong>SimCSE</strong>的各向异性（Anisotropy）：</p>
 <p>各向异性，又叫做表征退化问题，表示词嵌入在向量空间中占据了一个狭窄的圆锥体。与各向异性对应的是各向同性，指的是数据的分布在各个方向都一样，如图5。SimCSE论文中讨论的各向异性是和我们前面的均匀性类似的概念。目前缓解模型坍塌的策略消除主成分，加入正则项以及将各向异性映射为各向同性等等。SimCSE则证明了对比学习的训练目标可以降低模型的各向异性。</p>
 <p>在SimCSE中，作者表明，对比目标还可以通过提高嵌入空间的均匀性来缓解各向异性问题。他们从奇异谱的角度证明了对比学习目标“平坦”了句子嵌入空间的奇异值分布，从而提高了一致性。这是通过将对比学习目标中的负面事例分开来实现的。因此，SimCSE为语言表征中的各向异性问题提供了一种新的解决方案。</p>
 <p>对比学习能平缓奇异值的分布。</p>
-<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506183000010.png" srcset="/img/loading.gif" lazyload alt="image-20240506183000010"></p>
+<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506183000010.png" srcset="/img/loading.gif" lazyload alt="各向异性"></p>
 <h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>Sentence embedding performance on STS tasks</p>
 <p>语义文本相似性</p>
-<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506183047519.png" srcset="/img/loading.gif" lazyload alt="image-20240506183047519"></p>
+<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506183047519.png" srcset="/img/loading.gif" lazyload alt="语义文本相似性"></p>
 <p><strong>alignment</strong>和<strong>uniformity</strong>对比其他方法，可以看出SimCSE在alignment和uniformity两个方面均要好于BERT算法。</p>
-<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506183056349.png" srcset="/img/loading.gif" lazyload alt="image-20240506183056349"></p>
+<p><img src="/../images/0-SimCSE-Simple-Contrastive-Learning-of-Sentence-Embeddings/image-20240506183056349.png" srcset="/img/loading.gif" lazyload alt="实验结果"></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​	SimCSE是一个原理并不复杂的算法，它提出了使用Dropout构建正样本对这个简单易行的方案，解决了模型预训练过程中容易出现的模型坍塌的问题。Sim-CSE非常简单但效果非常好，其背后的数学原理是引入深思的。SimCSE一文对对比学习之后的数学原理进行了深入的探讨。证明了对比学习的损失函数是具有同时优化对齐性和均匀性这两个方向的。</p>
 
                 

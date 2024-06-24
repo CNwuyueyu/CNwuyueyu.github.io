@@ -16,12 +16,12 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Fast R-CNN背景​	上回说到R-CNN，而Fast R-CNN是原作者在2015年发表的续作，性能比之前的R-CNN块9倍。目标检测要面临的两大问题是（1）需要处理的候选框过多（2）候选框的位置不精确要进行微调。 ​	这就不得不提到R-CNN的缺点：训练以及测试的过程复杂，需要大量的RAM，R-CNN网络需要对候选框进行形变操作后再输入CNN网络提取特征，形变会产生一些列问题。 相比于R">
+    <meta name="description" content="Fast R-CNN 背景​	上回说到R-CNN，而Fast R-CNN是原作者在2015年发表的续作，性能比之前的R-CNN块9倍。目标检测要面临的两大问题是（1）需要处理的候选框过多（2）候选框的位置不精确要进行微调。 ​	这就不得不提到R-CNN的缺点：训练以及测试的过程复杂，需要大量的RAM，R-CNN网络需要对候选框进行形变操作后再输入CNN网络提取特征，形变会产生一些列问题。 相比于R">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-Fast R-CNN">
 <meta property="og:url" content="http://example.com/2024/03/06/0-Fast-R-CNN/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="Fast R-CNN背景​	上回说到R-CNN，而Fast R-CNN是原作者在2015年发表的续作，性能比之前的R-CNN块9倍。目标检测要面临的两大问题是（1）需要处理的候选框过多（2）候选框的位置不精确要进行微调。 ​	这就不得不提到R-CNN的缺点：训练以及测试的过程复杂，需要大量的RAM，R-CNN网络需要对候选框进行形变操作后再输入CNN网络提取特征，形变会产生一些列问题。 相比于R">
+<meta property="og:description" content="Fast R-CNN 背景​	上回说到R-CNN，而Fast R-CNN是原作者在2015年发表的续作，性能比之前的R-CNN块9倍。目标检测要面临的两大问题是（1）需要处理的候选框过多（2）候选框的位置不精确要进行微调。 ​	这就不得不提到R-CNN的缺点：训练以及测试的过程复杂，需要大量的RAM，R-CNN网络需要对候选框进行形变操作后再输入CNN网络提取特征，形变会产生一些列问题。 相比于R">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-Fast-R-CNN/image-20240321162127988.png">
 <meta property="og:image" content="http://example.com/images/0-Fast-R-CNN/image-20240321164621432.png">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/images/0-Fast-R-CNN/image-20240321171625086.png">
 <meta property="og:image" content="http://example.com/images/0-Fast-R-CNN/image-20240321171646898.png">
 <meta property="article:published_time" content="2024-03-06T07:38:06.000Z">
-<meta property="article:modified_time" content="2024-05-29T09:47:41.931Z">
+<meta property="article:modified_time" content="2024-06-24T07:23:04.104Z">
 <meta property="article:author" content="Wuyueyu">
 <meta property="article:tag" content="目标检测">
 <meta name="twitter:card" content="summary_large_image">
@@ -284,8 +284,8 @@
             
               <div class="markdown-body">
                 
-                <p><img src="/../images/0-Fast-R-CNN/image-20240321162127988.png" srcset="/img/loading.gif" lazyload alt="Fast R-CNN"></p>
-<h2 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>​	上回说到R-CNN，而Fast R-CNN是原作者在2015年发表的续作，性能比之前的R-CNN块9倍。目标检测要面临的两大问题是（1）需要处理的候选框过多（2）候选框的位置不精确要进行微调。</p>
+                <h2 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h2><p><img src="/../images/0-Fast-R-CNN/image-20240321162127988.png" srcset="/img/loading.gif" lazyload alt="Fast R-CNN"></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>​	上回说到R-CNN，而Fast R-CNN是原作者在2015年发表的续作，性能比之前的R-CNN块9倍。目标检测要面临的两大问题是（1）需要处理的候选框过多（2）候选框的位置不精确要进行微调。</p>
 <p>​	这就不得不提到R-CNN的缺点：训练以及测试的过程复杂，需要大量的RAM，R-CNN网络需要对候选框进行形变操作后再输入CNN网络提取特征，形变会产生一些列问题。</p>
 <p>相比于RCNN主要在以下方面进行了改进：</p>
 <p>（1）Fast RCNN仍然使用selective search选取2000个建议框，但是这里不是将这么多建议框都输入卷积网络中，而是将原始图片输入卷积网络中得到特征图，再使用建议框对特征图提取特征框。这样做的好处是，原来建议框重合部分非常多，卷积重复计算严重，而这里每个位置都只计算了一次卷积，大大减少了计算量</p>

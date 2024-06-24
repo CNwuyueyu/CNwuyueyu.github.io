@@ -16,12 +16,12 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基于区域的卷积神经网络 (R-CNN)Rich feature hierarchies for accurate object detection and semantic segmentation  背景​	2013 年 11 月：R-CNN。给定输入图像，R-CNN 首先应用一种称为选择性搜索的机制来提取感兴趣区域(ROI)，其中每个 ROI 是一个可以表示图像中对象边界的矩形。根据场景的不">
+    <meta name="description" content="基于区域的卷积神经网络 (R-CNN) Rich feature hierarchies for accurate object detection and semantic segmentation  背景​	2013 年 11 月：R-CNN。给定输入图像，R-CNN 首先应用一种称为选择性搜索的机制来提取感兴趣区域(ROI)，其中每个 ROI 是一个可以表示图像中对象边界的矩形。根据场景的不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-Rich feature hierarchies for accurate object detection and semantic segmentation">
 <meta property="og:url" content="http://example.com/2024/03/05/0-Rich-feature-hierarchies-for-accurate-object-detection-and-semantic-segmentation/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="基于区域的卷积神经网络 (R-CNN)Rich feature hierarchies for accurate object detection and semantic segmentation  背景​	2013 年 11 月：R-CNN。给定输入图像，R-CNN 首先应用一种称为选择性搜索的机制来提取感兴趣区域(ROI)，其中每个 ROI 是一个可以表示图像中对象边界的矩形。根据场景的不">
+<meta property="og:description" content="基于区域的卷积神经网络 (R-CNN) Rich feature hierarchies for accurate object detection and semantic segmentation  背景​	2013 年 11 月：R-CNN。给定输入图像，R-CNN 首先应用一种称为选择性搜索的机制来提取感兴趣区域(ROI)，其中每个 ROI 是一个可以表示图像中对象边界的矩形。根据场景的不">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-Rich-feature-hierarchies-for-accurate-object-detection-and-semantic-segmentation/image-20240305204216064.png">
 <meta property="og:image" content="http://example.com/images/0-Rich-feature-hierarchies-for-accurate-object-detection-and-semantic-segmentation/image-20240306113347937.png">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/images/0-Rich-feature-hierarchies-for-accurate-object-detection-and-semantic-segmentation/image-20240306114037739.png">
 <meta property="og:image" content="http://example.com/images/0-Rich-feature-hierarchies-for-accurate-object-detection-and-semantic-segmentation/image-20240306114137183.png">
 <meta property="article:published_time" content="2024-03-05T12:41:26.000Z">
-<meta property="article:modified_time" content="2024-05-21T10:47:19.099Z">
+<meta property="article:modified_time" content="2024-06-24T07:17:38.482Z">
 <meta property="article:author" content="Wuyueyu">
 <meta property="article:tag" content="目标检测">
 <meta name="twitter:card" content="summary_large_image">
@@ -284,8 +284,8 @@
             
               <div class="markdown-body">
                 
-                <p><img src="/../images/0-Rich-feature-hierarchies-for-accurate-object-detection-and-semantic-segmentation/image-20240305204216064.png" srcset="/img/loading.gif" lazyload alt="R-CNN"></p>
-<h2 id="基于区域的卷积神经网络-R-CNN"><a href="#基于区域的卷积神经网络-R-CNN" class="headerlink" title="基于区域的卷积神经网络 (R-CNN)"></a>基于区域的卷积神经网络 (R-CNN)</h2><p>Rich feature hierarchies for accurate object detection and semantic segmentation </p>
+                <h2 id="基于区域的卷积神经网络-R-CNN"><a href="#基于区域的卷积神经网络-R-CNN" class="headerlink" title="基于区域的卷积神经网络 (R-CNN)"></a>基于区域的卷积神经网络 (R-CNN)</h2><p><img src="/../images/0-Rich-feature-hierarchies-for-accurate-object-detection-and-semantic-segmentation/image-20240305204216064.png" srcset="/img/loading.gif" lazyload alt="R-CNN"></p>
+<p>Rich feature hierarchies for accurate object detection and semantic segmentation </p>
 <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>​	2013 年 11 月：R-CNN。给定输入图像，R-CNN 首先应用一种称为选择性搜索的机制来提取感兴趣区域(ROI)，其中每个 ROI 是一个可以表示图像中对象边界的矩形。根据场景的不同，ROI 可能多达两千个。之后，每个 ROI 都会通过神经网络产生输出特征。对于每个 ROI 的输出特征，使用支持向量机分类器的集合来确定 ROI 中包含什么类型的对象（如果有）。</p>
 <blockquote>
 <p>2013 年 11 月：R-CNN。给定输入图像，R-CNN 首先应用一种称为选择性搜索的机制来提取感兴趣区域(ROI)，其中每个 ROI 是一个可以表示图像中对象边界的矩形。根据场景的不同，ROI 可能多达两千个。之后，每个 ROI 都会通过神经网络产生输出特征。对于每个 ROI 的输出特征，使用支持向量机分类器的集合来确定 ROI 中包含什么类型的对象（如果有）。<br>2015 年 4 月：Fast R-CNN。原始 R-CNN 在多达 2000 个感兴趣区域中独立计算神经网络特征，而 Fast R-CNN 在整个图像上运行一次神经网络。网络的末端是一种称为 ROIPooling 的新颖方法，它从网络的输出张量中切出每个 ROI，对其进行整形并进行分类。与原始 R-CNN 一样，Fast R-CNN 使用选择性搜索来生成其区域建议。<br>2015 年 6 月：Faster R-CNN。Fast R-CNN 使用选择性搜索来生成 ROI，而 Faster R-CNN 将 ROI 生成集成到神经网络本身中。<br>2017 年 3 月：Mask R-CNN。之前版本的 R-CNN 专注于对象检测，而 Mask R-CNN 添加了实例分割。Mask R-CNN 还用一种名为 ROIAlign 的新方法取代了 ROIPooling，该方法可以表示像素的分数。<br>2019 年 6 月：Mesh R-CNN增加了从 2D 图像生成 3D 网格的功能。</p>

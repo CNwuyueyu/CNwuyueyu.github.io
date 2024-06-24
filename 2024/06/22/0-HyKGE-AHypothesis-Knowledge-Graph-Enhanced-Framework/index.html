@@ -1,0 +1,684 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="HyKGE：利用知识图谱增强大语言模型在医学领域提升准确度  arXiv:2312.15883v2 2024年4月19日(v2)  背景LLM增强的知识图谱问答：是指结合大型语言模型（LLM）和知识图谱（KG）来改进和增强问答系统的能力。通过利用LLM的自然语言处理和生成能力，结合知识图谱的结构化数据。通过结合LLM和KG，问答系统可以处理更复杂和多样化的问题，同时提供更高质量和更可信的回答。这种">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-HyKGE AHypothesis Knowledge Graph Enhanced Framework">
+<meta property="og:url" content="http://example.com/2024/06/22/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="HyKGE：利用知识图谱增强大语言模型在医学领域提升准确度  arXiv:2312.15883v2 2024年4月19日(v2)  背景LLM增强的知识图谱问答：是指结合大型语言模型（LLM）和知识图谱（KG）来改进和增强问答系统的能力。通过利用LLM的自然语言处理和生成能力，结合知识图谱的结构化数据。通过结合LLM和KG，问答系统可以处理更复杂和多样化的问题，同时提供更高质量和更可信的回答。这种">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143024238.png">
+<meta property="og:image" content="http://example.com/images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143438955.png">
+<meta property="og:image" content="http://example.com/images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143544030.png">
+<meta property="og:image" content="http://example.com/images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143731734.png">
+<meta property="og:image" content="http://example.com/images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143741162.png">
+<meta property="og:image" content="http://example.com/images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143759561.png">
+<meta property="article:published_time" content="2024-06-22T07:02:32.000Z">
+<meta property="article:modified_time" content="2024-06-24T07:21:43.748Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143024238.png">
+  
+  
+  
+  <title>0-HyKGE AHypothesis Knowledge Graph Enhanced Framework - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-HyKGE AHypothesis Knowledge Graph Enhanced Framework"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-06-22 15:02" pubdate>
+          上传日期：2024年6月22日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-HyKGE AHypothesis Knowledge Graph Enhanced Framework</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="HyKGE：利用知识图谱增强大语言模型在医学领域提升准确度"><a href="#HyKGE：利用知识图谱增强大语言模型在医学领域提升准确度" class="headerlink" title="HyKGE：利用知识图谱增强大语言模型在医学领域提升准确度"></a>HyKGE：利用知识图谱增强大语言模型在医学领域提升准确度</h2><p><img src="/../images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143024238.png" srcset="/img/loading.gif" lazyload alt="HyKGE"></p>
+<blockquote>
+<p>arXiv:2312.15883v2 2024年4月19日(v2)</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>LLM增强的知识图谱问答：是指结合大型语言模型（LLM）和知识图谱（KG）来改进和增强问答系统的能力。通过利用LLM的自然语言处理和生成能力，结合知识图谱的结构化数据。通过结合LLM和KG，问答系统可以处理更复杂和多样化的问题，同时提供更高质量和更可信的回答。这种增强方法有助于突破传统问答系统的限制，提升用户体验和满意度。</p>
+<p>大型语言模型（LLM）：基于深度学习技术训练的模型，能够理解和生成自然语言文本。擅长处理各种自然语言任务，如文本生成、翻译、总结和问答等。例如，GPT-4、文心一言等。</p>
+<p>知识图谱（KG）：一种以图形结构表示知识的数据库，节点表示实体（如人物、地点、事件等），边表示实体之间的关系。提供结构化和关联的数据，可以用于回答具体问题和提供事实信息。</p>
+<p>知识问答系统（QA System）：一个能够接受自然语言问题并生成答案的系统。通常包括问题理解、信息检索和答案生成三个主要步骤。</p>
+<p>检索增强生成（RAG）：通过检索外部信息来增强内容生成，减少知识密集型任务中的事实错误。RAG 被认为是一种有前途的解决方案，可以解决错误答案、幻觉和解释不足的问题。</p>
+<p>Retrieval-Augmented Generation（检索增强生成）：通过提示工程将外部知识检索组件纳入其中，以实现更符合事实的一致性，提高可靠性和 LLM 响应的可解释性，但在获取高精度方面仍然遇到困难用于训练查询文档对检索器的优质数据集，或用户查询中的信息有限，削弱了普遍性。</p>
+<p> Knowledge Graph Query-Answer (知识图谱问答)： 知识知识图谱具有结构化和可推断的优势，相比知识存储在文档库中。但是如何从 KG 中获取知识，以及如何设计LLM 与 KG 之间的交互策略仍处于探索阶段。 目前的解决办法是语义解析方法：允许LLM 将问题转换为结构化查询（例如 SPARQL），可以由查询引擎执行来得出答案。</p>
+<p>所面临的挑战：</p>
+<ul>
+<li>避免事实错误（如幻觉和有限解释性）</li>
+<li>数据约束（如资源限制、高训练成本和隐私问题）</li>
+<li>灾难性遗忘</li>
+<li>知识过时</li>
+<li>处理特定领域或高度专业化查询的专业知识不足</li>
+</ul>
+<p>解决方案：</p>
+<ul>
+<li>将用户不一致的非结构化查询与高质量的结构化知识图谱对接，存在显著挑战。</li>
+<li>提出了一种假设知识图谱增强（HyKGE）框架，利用 LLMs 强大的推理能力来补偿用户查询的不完整性，优化与 LLMs 的交互过程，并提供多样化的检索知识。</li>
+</ul>
+<p> HyKGE在预检索过程中使用图推理链纠正模型错误，并在后检索中应用细粒度对齐来保持有效、多样的知识，在没有微调或过度交互的情况下高效地增强检索。</p>
+<p><img src="/../images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143438955.png" srcset="/img/loading.gif" lazyload alt="HyKGE介绍"></p>
+<p>KGRAG（左）。基本 KGRAG 从用户查询中提取关键实体，并在其中搜索相应实体 KG，然后与查询一起输入到 LLM 中。询问饭后，我感觉有点胃反流。用什么药？ 仅根据查询条件搜索KG 提示 &#x3D;查询+实体 答案：胃食管反流 可能是由于落后 食物或胃酸的流动。您 可以考虑使用抑酸 缓解症状的药物 胃反流和减轻 反流性食管炎的发展⋯⋯</p>
+<p>HyKGE（右）。HyKGE 首先查询 LLM 以获得假设 输出并从假设输出和查询中提取实体。然后 HyKGE 检索 任意两个锚实体，并将推理链与查询一起输入到 LLM问题吃完饭后，感觉有点胃痛 胃食管反流。我应该服用什么药物治疗？ 假设输出⋯⋯胃食管反流可能是由于胃酸反流到食管引起的⋯⋯根据 证据，考虑使用H2 受体拮抗剂或质子泵抑制剂⋯⋯ 推理链： ①胆汁反流→腹部←胃痛 ②碳酸铝镁→胃灼热→胃酸过多→胃痛 锚实体 提示&#x3D;查询+推理链 回答：胃酸倒流可能是导致 胃食管反流⋯⋯你可以考虑奥美拉唑或 埃索美拉唑减少胃酸分泌，⋯⋯或者， 您可以使用酸中和药物（抗酸药），例如 碳酸镁铝。另一种选择是使用 ⋯ H2 受体拮抗剂，如雷尼替丁或法莫替丁⋯ 中。</p>
+<h3 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h3><p><img src="/../images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143544030.png" srcset="/img/loading.gif" lazyload alt="整体框架"></p>
+<p>HyKGE 的整体框架。HyKGE 首先将用户查询（Q）输入到 LLM 中，得到假设输出（H ·O）。然后通过 NER 模块，应用 W2NER 模型识别实体并分离关系。然后通过 GTE 编码器将这 些识别出的实体与知识图谱中的实体链接起来。之后，HyKGE 从知识图谱中提取出相关推理链。然后，由于Q 的稀疏性，在 HO 片段粒度感知重排序模块中， HyKGE 将Q和HO进行分 块，并通过 TopK 链重排序器与推理链对齐，以消除不相关的知识。最后，我们根据用户查询来组织检索到的知识，并通过 LLM Reader 获取答案。</p>
+<p><strong>预检索阶段：</strong>包括假设输出模块和NER模块。HOM利用LLM通过探索可能的答案来获得假设输出。然后NER模块提取来自假设输出模块的医疗实体和用户查询。</p>
+<p>NER（医学命名实体识别）模块：为了解决模型可能出现的幻觉或医学实体之间的误解，作者提取实体而不是关系，并使用KG中完全无误的三元组进行真实性验证，而不是在HO中分析的关系，使用 CMEEE（中文医学命名实体识别数据集）数据训练了一个医学命名实体识别(NER) 模型。</p>
+<p><strong>知识图谱上的检索</strong>：利用提取的实体作为锚点搜索不同类型的推理链，这些推理链将这些锚点相互连接起来，提供相关且合乎逻辑的知识。</p>
+<p>此过程涉及使用编码模型对潜在实体和KG中的实体进行编码，使用GTE嵌入模型，这是目前在检索领域中文本向量嵌入表现最好的模型。GTE 编码器遵循两阶段训练过程最初使用来自文本对的弱监督大规模数据集，然后使用对比 学习对高质量手动标记数据进行微调。计算和的嵌入之间的内积相似度，相似度最高的实体视为匹配。</p>
+<p>选择匹配的实体，使用实体之间的推理链，原因如下：</p>
+<ul>
+<li>推理链为 LLM 提供了更丰富的逻辑知识以帮助其消化。</li>
+<li>推理链帮助 LLM 阅读器理解 不同实体之间的关系，从而减轻幻觉和错误问题。</li>
+<li>推理链充当有效的修剪机制，比 子图更有效地过滤噪音并节省资源。</li>
+</ul>
+<p><strong>后检索阶段：</strong></p>
+<p>采用 HO 片段粒度感知重排序方法。首先，假设输出和用户查询被分割成离散片段，随后，我们根据片段对检索到的推理链进行重排序。</p>
+<p>传统的重新排序仅基于Q上的学习可能会过滤掉通过HOM获得的有价值的知识，从而导致重复和单调的情况。作者创新性地将HO和Q 结合起来，而不是仅仅依赖用户查询，利用其中包含的更丰富的医学知识。</p>
+<p><strong>LLM阅读器：</strong></p>
+<p>接收用户查询和修剪后的检索到的推理链，并通过精心设计的提示进行组织。</p>
+<p><img src="/../images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143731734.png" srcset="/img/loading.gif" lazyload alt="假设输出模块和LLM阅读器的提示格式"></p>
+<p><img src="/../images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143741162.png" srcset="/img/loading.gif" lazyload alt="算法框架"></p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143759561.png" srcset="/img/loading.gif" lazyload alt=" CMB‑Exam 和 MMCU‑Medical 在医学问答答案上的表现比较"></p>
+<p>红色阴影表示表现最佳的模型，蓝色表示消融研究中第二好的模型，绿色表示基线排名第二。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文介绍了HyKGE框架，旨在提高医学领域大型语言模型（LLMs）在回答问题时的准确性和可靠性。该框架利用知识图谱增强了LLMs的推理能力，通过识别实体、关系和知识图谱的嵌入对用户查询进行处理，并从知识图谱中提取相关的推理链。在处理查询和假设输出时，HyKGE采用了分段处理和重新排序的方法，以消除无关知识并提供更精确的答案。该框架的设计使得LLMs能够更好地理解和回答医学领域的复杂问题，提高了在实际应用中的性能表现。</p>
+<p><strong>未来发展</strong>:</p>
+<ul>
+<li>动态优化片段粒度：在后检索阶段，可以探索如何动态优化片段粒度，以进一步提高知识的密度和效率。</li>
+<li>探索更多语言或领域特定的知识图谱：尽管存在数据源的限制和LLMs的高计算成本，但未来可以在更多其他语言或领域特定的知识图谱上进行实验，以增强HyKGE框架的可扩展性和泛化性能。</li>
+<li>持续的实验和优化：未来可以继续尝试不同的策略，并对HyKGE框架进行进一步优化，以不断提升其性能和效果。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/06/22/0-Layer-Normalization/" title="0-Layer Normalization">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-Layer Normalization</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/05/26/0-Network-Morphism/" title="0-Network Morphism">
+                        <span class="hidden-mobile">0-Network Morphism</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
