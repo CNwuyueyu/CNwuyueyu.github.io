@@ -16,25 +16,25 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Binarized Neural Networks: Training Neural Networks with Weights and Activations Constrained to +1 or −1  arXiv:1602.02830v2 [cs.LG] 29 Feb 2016  背景本文提出了一种称为二值化神经网络（Binarized Neural Networks, BNNs）的方法">
+    <meta name="description" content="“Why Should I Trust You?”Explaining the Predictions of Any Classifier  LIME 这篇论文发表在2016年的KDD会议上  背景机器模型虽然被广泛采用，但是其对人们来说，还是一个黑匣子。然而，了解机器学习背后的原理对于其评估非常重要，因此一种称为“LIME（Local Interpretable Model-agnostic E">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0-Binarized Neural Networks: Training Neural Networks with Weights and Activations Constrained to +1 or −1">
-<meta property="og:url" content="http://example.com/2024/06/22/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/index.html">
+<meta property="og:title" content="0-&quot;Why Should I Trust You?&quot;Explaining the Predictions of Any Classifier">
+<meta property="og:url" content="http://example.com/2024/07/03/0-%22Why-Should-I-Trust-You">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="Binarized Neural Networks: Training Neural Networks with Weights and Activations Constrained to +1 or −1  arXiv:1602.02830v2 [cs.LG] 29 Feb 2016  背景本文提出了一种称为二值化神经网络（Binarized Neural Networks, BNNs）的方法">
+<meta property="og:description" content="“Why Should I Trust You?”Explaining the Predictions of Any Classifier  LIME 这篇论文发表在2016年的KDD会议上  背景机器模型虽然被广泛采用，但是其对人们来说，还是一个黑匣子。然而，了解机器学习背后的原理对于其评估非常重要，因此一种称为“LIME（Local Interpretable Model-agnostic E">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240630190852246.png">
-<meta property="og:image" content="http://example.com/images/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240701210215374.png">
-<meta property="og:image" content="http://example.com/images/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240701210433148.png">
-<meta property="article:published_time" content="2024-06-22T11:41:33.000Z">
-<meta property="article:modified_time" content="2024-07-01T13:05:34.214Z">
+<meta property="og:image" content="http://example.com/images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703151226459.png">
+<meta property="og:image" content="http://example.com/images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703154637601.png">
+<meta property="og:image" content="http://example.com/images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703155111570.png">
+<meta property="article:published_time" content="2024-07-03T06:45:00.000Z">
+<meta property="article:modified_time" content="2024-07-03T12:21:32.573Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240630190852246.png">
+<meta name="twitter:image" content="http://example.com/images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703151226459.png">
   
   
   
-  <title>0-Binarized Neural Networks: Training Neural Networks with Weights and Activations Constrained to +1 or −1 - Blog</title>
+  <title>0-&#34;Why Should I Trust You?&#34;Explaining the Predictions of Any Classifier - Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="0-Binarized Neural Networks: Training Neural Networks with Weights and Activations Constrained to +1 or −1"></span>
+            <span id="subtitle" data-typed-text="0-&#34;Why Should I Trust You?&#34;Explaining the Predictions of Any Classifier"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-22 19:41" pubdate>
-          上传日期：2024年6月22日
+        <time datetime="2024-07-03 14:45" pubdate>
+          上传日期：2024年7月3日
         </time>
       </span>
     
@@ -275,27 +275,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">0-Binarized Neural Networks: Training Neural Networks with Weights and Activations Constrained to +1 or −1</h1>
+            <h1 id="seo-header">0-&#34;Why Should I Trust You?&#34;Explaining the Predictions of Any Classifier</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-−1"><a href="#Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-−1" class="headerlink" title="Binarized Neural Networks: Training Neural Networks with Weights and Activations Constrained to +1 or −1"></a>Binarized Neural Networks: Training Neural Networks with Weights and Activations Constrained to +1 or −1</h2><p><img src="/../images/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240630190852246.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
+                <h2 id="“Why-Should-I-Trust-You-”Explaining-the-Predictions-of-Any-Classifier"><a href="#“Why-Should-I-Trust-You-”Explaining-the-Predictions-of-Any-Classifier" class="headerlink" title="“Why Should I Trust You?”Explaining the Predictions of Any Classifier"></a>“Why Should I Trust You?”Explaining the Predictions of Any Classifier</h2><p><img src="/../images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703151226459.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
 <blockquote>
-<p>arXiv:1602.02830v2 [cs.LG] 29 Feb 2016</p>
+<p>LIME 这篇论文发表在2016年的KDD会议上</p>
 </blockquote>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>本文提出了一种称为二值化神经网络（Binarized Neural Networks, BNNs）的方法。这种方法对神经网络中的权重和激活值进行二值化处理，将它们限制为+1或-1。这种处理方式的主要优势在于：计算效率：二值化操作可以大幅减少计算所需的复杂度，使得计算变得更为简单和快速。内存节省：由于权重和激活值仅需存储为1位（bit），内存需求显著降低。硬件友好：这种方法特别适用于在硬件上实现，如FPGA和ASIC等专用集成电路。</p>
-<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p>二值化方法：</p>
-<p>（1）Derterministic<br>$$<br>x^b&#x3D;Sign(x)&#x3D;\begin{cases}+1&amp; if\ x\geq0\-1&amp; \text{otherwise}\end{cases}<br>$$<br>（2）Stochastic(硬件生成随机数)<br>$$<br>x^b&#x3D;\begin{cases}+1&amp; 随机计算p&#x3D;\sigma(x) \-1&amp;1-p \end{cases}<br>$$<br>本文选用第一种方法，避免了使用硬件生成随机数。</p>
-<p>二值化网络：</p>
-<p>（1）二值化网络只是将网络的参数和激活值二值化，没有改变网络结构，且输出层的概率输出仍是浮点型，其前馈模型的公式表示为：<br>$$<br>x^k&#x3D;\sigma(W^k·x^{k-1})\<br>x^k是第k层输入，W^k是第k层权值矩阵，\\sigma()为非线性激活函数。<br>$$<br>（2）二值化激活函数：<br>$$<br>\sigma(x)&#x3D;sign(x)<br>$$<br>训练过程：</p>
-<p>（1）前馈过程：先将实数型权值参数二值化得到二值型权值参数，即$W^b_k&#x3D;sign(W_k)$。然后利用二值化后的参数计算得到实数型的中间向量，该向量再通过Batch Normalization操作，得到实数型的隐藏层激活向量。如果不是输出层的话，就将该向量二值化。<br>$$<br>x^k&#x3D;\sigma(BN(W_b^k·x^{k-1}))&#x3D;sign(BN(W_b^k·x^{k-1}))<br>$$<br>（2）反向更新：</p>
-<p><img src="/../images/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240701210215374.png" srcset="/img/loading.gif" lazyload alt="反向更新"></p>
-<p>作者为了解决sign的导数几乎处处为零的问题，对sign(x)进行了改写，让其在-1和1之间加一个线性变化的过程。</p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../images/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240701210433148.png" srcset="/img/loading.gif" lazyload alt="DATA"></p>
-<p>展示了在CIFAR-10和SVHN等多个数据集上的实验结果，表明二值化神经网络在保持较低计算和内存开销的情况下，依然能够取得接近甚至超过传统神经网络的性能。</p>
-<p>与实值网络相比准确率并没有太多降低，时间复杂度却可以降低60%。相对于32bit的DNN，BNN内存需求量减少为原来的1&#x2F;3</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>二值化神经网络通过简化计算和降低内存需求，为神经网络的实际应用提供了一种有效的方法。特别是在计算资源有限的场景下（如移动设备和嵌入式系统），这种方法具有显著的优势。</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>机器模型虽然被广泛采用，但是其对人们来说，还是一个黑匣子。然而，了解机器学习背后的原理对于其评估非常重要，因此一种称为“LIME（Local Interpretable Model-agnostic Explanations）”的技术被提出，通过可解释和忠实的方式解释任何分类器的预测，以非冗余的方式呈现代表性的个体预测及其解释。人类对模型行为的理解程度，而不是将其视为黑匣子。</p>
+<p>当模型用于决策时，确定对个人预测的信任是很重要的，例如，当使用机器学习进行医疗诊断、恐怖主义检测时，如果盲目的相信预测，可能会带来灾难性的后果。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p>LIME 是一种模型无关的方法，可以解释任何机器学习模型的预测结果。它的基本思路是通过扰动输入数据并观察模型输出的变化，来构建一个局部线性模型，从而解释模型在某个特定数据点附近的行为。LIME 的具体步骤如下：</p>
+<ol>
+<li><strong>扰动输入数据</strong>：生成与原始数据点相似的一组扰动数据。</li>
+<li><strong>模型预测</strong>：使用原始模型对这些扰动数据进行预测。</li>
+<li><strong>加权线性回归</strong>：根据扰动数据与原始数据点的相似度，对扰动数据的预测结果进行加权线性回归，从而得到一个局部的线性模型。</li>
+<li><strong>解释结果</strong>：利用线性模型的系数解释原始模型的预测。</li>
+</ol>
+<p><img src="/../images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703154637601.png" srcset="/img/loading.gif" lazyload alt="解释个体症状"></p>
+<p>LIME的主要流程，通过对数据对可能的症状进行高亮标记，通过这个模型就会对于结果有可信的预测。</p>
+<p><img src="/../images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703155111570.png" srcset="/img/loading.gif" lazyload alt="LIME工作流程"></p>
+<p>在模型中选取需要预测的点，对其周围的点按照weight进行标记，然后将weight大的点放入模型中重新标记，选择一个解释模型来表示原来的模型，也就是在用一个可解释的新模型代替不可解释的原模型。</p>
+<p>假设我们有一个训练好的图像分类模型，可以将医学图像分类为正常或异常。我们使用LIME来解释模型对某个具体图像的预测：</p>
+<ol>
+<li><strong>输入扰动</strong>：对该医学图像进行小幅度扰动，如改变某些像素值或添加噪声，生成一组相似的图像。</li>
+<li><strong>模型预测</strong>：使用原始模型对这些扰动图像进行预测，记录每个扰动图像的预测结果。</li>
+<li><strong>加权回归</strong>：根据扰动图像与原始图像的相似度，对这些扰动图像的预测结果进行加权线性回归，构建局部线性模型。</li>
+<li><strong>解释结果</strong>：分析线性模型的系数，解释哪些像素或图像区域对原始模型的预测影响最大，从而理解模型是如何做出预测的。</li>
+</ol>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>论文在多个数据集上进行了实验，包括文本分类和图像分类。实验结果表明，LIME能够有效地解释复杂模型的预测结果，并且在保持高解释性的同时，对原始模型的预测结果有较高的近似度。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过这种方法，我们可以更好地理解深度学习模型在医学图像处理中的决策过程，提升模型的透明度和可信度。</p>
+<p>事实上还有一种方法SHAP（SHapley Additive exPlanations）是一种基于合作博弈论的解释方法，用于解释机器学习模型的预测结果。SHAP 结合了Shapley值的理论基础和加性特征重要性的思想，是目前广泛应用的一种解释工具。相比于 LIME，SHAP 更加严格和全面，但计算复杂度也较高。在实际应用中，SHAP 被广泛用于解释各种机器学习和深度学习模型的预测结果，提升模型的可解释性和透明度。在本文中不再介绍。</p>
 
                 
               </div>
@@ -315,18 +326,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/22/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/" title="0-Dropout: A Simple Way to Prevent Neural Networks from Overfitting">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">0-Dropout: A Simple Way to Prevent Neural Networks from Overfitting</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/22/0-Decoupled-Neural-Interfaces-using-Synthetic-Gradients/" title="0-Decoupled Neural Interfaces using Synthetic Gradients">
-                        <span class="hidden-mobile">0-Decoupled Neural Interfaces using Synthetic Gradients</span>
+                      <a href="/2024/06/22/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/" title="0-Dropout: A Simple Way to Prevent Neural Networks from Overfitting">
+                        <span class="hidden-mobile">0-Dropout: A Simple Way to Prevent Neural Networks from Overfitting</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

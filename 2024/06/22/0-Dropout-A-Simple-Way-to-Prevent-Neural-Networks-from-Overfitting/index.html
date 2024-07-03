@@ -16,17 +16,28 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="11">
+    <meta name="description" content="Dropout: A Simple Way to Prevent Neural Networks from Overfitting  Journal of Machine Learning Research 15 (2014)  背景“Improving neural networks by preventing co-adaptation of feature detectors”这篇文章与本文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-Dropout: A Simple Way to Prevent Neural Networks from Overfitting">
 <meta property="og:url" content="http://example.com/2024/06/22/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="11">
+<meta property="og:description" content="Dropout: A Simple Way to Prevent Neural Networks from Overfitting  Journal of Machine Learning Research 15 (2014)  背景“Improving neural networks by preventing co-adaptation of feature detectors”这篇文章与本文">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624205657449.png">
+<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624211159119.png">
+<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624211321053.png">
+<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212030741.png">
+<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212409263.png">
+<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212438607.png">
+<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212525202.png">
+<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212619091.png">
+<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212802707.png">
+<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212824659.png">
 <meta property="article:published_time" content="2024-06-22T11:42:01.000Z">
-<meta property="article:modified_time" content="2024-06-24T07:46:06.147Z">
+<meta property="article:modified_time" content="2024-06-24T13:30:22.215Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624205657449.png">
   
   
   
@@ -223,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2 字
+          1.8k 字
         
       </span>
     
@@ -234,7 +245,7 @@
         
         
         
-          1 分钟
+          15 分钟
         
       </span>
     
@@ -276,7 +287,40 @@
             
               <div class="markdown-body">
                 
-                <p>11</p>
+                <h2 id="Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting"><a href="#Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting" class="headerlink" title="Dropout: A Simple Way to Prevent Neural Networks from Overfitting"></a>Dropout: A Simple Way to Prevent Neural Networks from Overfitting</h2><p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624205657449.png" srcset="/img/loading.gif" lazyload alt="Dropout"></p>
+<blockquote>
+<p>Journal of Machine Learning Research 15 (2014)</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><a target="_blank" rel="noopener" href="https://cnwuyueyu.github.io/2024/05/25/0-Improving-neural-networks-by-preventing-coadaptation-of-feature-detectors/">“Improving neural networks by preventing co-adaptation of feature detectors”</a>这篇文章与本文有很大的关联，实际上，前者可以被认为是后者的早期工作或相关研究，前者讨论了防止特征检测器协同适应(co-adaptation)的方法，这就是Dropout技术的核心思想，本文是作者在同一年稍晚时候发表的进一步研究成果，更详细地描述了Dropout技术并提供了更多实验结果。</p>
+<h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3><p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624211159119.png" srcset="/img/loading.gif" lazyload alt="网络模型"></p>
+<p>左边是训练集神经元，右边是测试集神经元。左边训练集的神经元以P概率被保留。右边测试集不做丢弃，但参数乘以p。 这⾥的意义就是保证训练集和测试集 的输出期望⼀致。</p>
+<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624211321053.png" srcset="/img/loading.gif" lazyload alt="期望"></p>
+<p>也就是Dropout说数目要在相应的分母中减去，以保证结果不会偏差。</p>
+<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212030741.png" srcset="/img/loading.gif" lazyload alt="模型描述"></p>
+<p>Dropout神经网络模型描述。Dropout通过减少神经元之间的相互依赖，迫使网络学习到更加鲁棒的特征。这不仅有效防止了过拟合，还可以看作是对多个不同结构网络的集成，提升了模型的泛化能力。</p>
+<p>深入研究：</p>
+<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212409263.png" srcset="/img/loading.gif" lazyload alt="对特征的影响"></p>
+<p>其中，图(a)是没有Dropout的神经网络提取的特征，图(b)是丢失率 p&#x3D;0.5 时的带Dropout的神经网络提取的特征。由上图可知，Dropout破坏了隐藏层单元之间的协同适应性，使得带Dropout的神经网络提取的特征更明确，增加了模型的泛化能力。</p>
+<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212438607.png" srcset="/img/loading.gif" lazyload alt="稀疏性的影响"></p>
+<p>其中，图(a)是没有Dropout的神经网络提取的特征，图(b)是丢失率 p&#x3D;0.5 时的带Dropout的神经网络提取的特征。由上图可知，Dropout使得网络中只有极少数单位具有较高的激活能力。</p>
+<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212525202.png" srcset="/img/loading.gif" lazyload alt="对丢失率的影响"></p>
+<p>其中，图(a)是第一种情况，在第一种情况下，使用不同数量的辍学来训练相同的网络架构。网络结构为784-2048-2048-2048-10。没有在输入时使用Dropout。由图可知，随着p的增加，测试误差先降后升，在 p∈[0.4,0.8] 时效果最好。 图(b)是第二种情况，此时 pn 保持不变，因此p越大，n越小，反之亦然。由该图可知，随着p的增加，测试误差先降后升，在 p&#x3D;0.6 时效果最好。</p>
+<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212619091.png" srcset="/img/loading.gif" lazyload alt="对数据集大小的影响"></p>
+<p>其中，实验从MNIST训练集中随机选取100、500、1K、5K、10K和50K的数据集。所有数据集的网络结构皆为784-1024-1024-2048-10。Dropout的丢失率为0.5。由上图可知，在小数据集(100,500)上，Dropout并没有改善性能，数据量变大时，Dropout就有了明显的改善网络的效果，但数据量过大是Dropout对网络的改进并不明显。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>所用的数据集有：</p>
+<ul>
+<li>MNIST：一组手写体数字的标准数据集。</li>
+<li>Timit：用于语音清洗识别的标准语音基准。</li>
+<li>CIAR-10和CIFAR-100：微小的自然图像。</li>
+<li>街景房屋编号数据集(Street View House Numbers data set，SVHN)：谷歌街景收集的房屋号码图片。</li>
+<li>ImageNet：大量自然图像的集合。</li>
+<li>Reuters-RCV1：路透社新闻报道集。</li>
+<li>替代剪接数据集(Alternative Splicing data set)：预测替代基因剪接的RNA特征。</li>
+</ul>
+<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212802707.png" srcset="/img/loading.gif" lazyload alt="MNIST"></p>
+<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212824659.png" srcset="/img/loading.gif" lazyload alt="CIAR-10和CIFAR-100"></p>
+<p>可以看出都有不错的结果，其他数据集的结果不在次赘述。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>“Improving neural networks by preventing co-adaptation of feature detectors”提出了防止神经网络中过拟合的基本思想，而“Dropout: A Simple Way to Prevent Neural Networks from Overfitting”详细描述并验证了这一思想，形成了Dropout技术。两篇论文共同推进了深度学习领域的发展，为后续研究和应用奠定了基础。Dropout的基本思想是，在每次训练迭代中，随机忽略（“丢弃”）网络中的一些神经元，包括它们的连接。具体做法是在前向传播时，以一定的概率p将某些神经元的输出设为零，而在反向传播时只对剩下的神经元进行权重更新。这篇论文的主要贡献在于提供了一种简单而有效的防止过拟合的方法，极大地推动了神经网络的发展和应用。</p>
 
                 
               </div>
@@ -295,6 +339,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/07/03/0-%22Why-Should-I-Trust-You?%22Explaining-the-Predictions-of-Any-Classifier/" title="0-&#34;Why Should I Trust You?&#34;Explaining the Predictions of Any Classifier">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-&#34;Why Should I Trust You?&#34;Explaining the Predictions of Any Classifier</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
