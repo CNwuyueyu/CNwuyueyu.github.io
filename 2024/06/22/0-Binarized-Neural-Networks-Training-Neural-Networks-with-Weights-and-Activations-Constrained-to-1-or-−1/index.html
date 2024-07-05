@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://example.com/images/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240701210215374.png">
 <meta property="og:image" content="http://example.com/images/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240701210433148.png">
 <meta property="article:published_time" content="2024-06-22T11:41:33.000Z">
-<meta property="article:modified_time" content="2024-07-01T13:05:34.214Z">
+<meta property="article:modified_time" content="2024-07-05T04:54:11.707Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240630190852246.png">
@@ -429,6 +429,12 @@
   
 
 
+  
+  
+
+
+
+
 
 
 
@@ -620,6 +626,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
