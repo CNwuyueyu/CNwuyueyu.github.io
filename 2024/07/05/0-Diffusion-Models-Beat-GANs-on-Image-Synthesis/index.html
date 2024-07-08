@@ -16,16 +16,18 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Diffusion Models Beat GANs on Image Synthesis  发表在2021年的NeurIPS会议上https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;Uav0zrV6A9U&amp;t&#x3D;10  背景实验方法实验结果结论">
+    <meta name="description" content="Diffusion Models Beat GANs on Image Synthesis  发表在2021年的NeurIPS会议上  背景GANs(生成对抗网络)一直是广泛使用的方法之一，在图片生成领域效果很好，但也有着训练过程不稳定，模式崩溃等问题。Diffusion Models(扩散模型)是一类基于概率生成过程的模型，一开始用于密度建模和生成任务，此研究旨在评估扩散模型在图像生成任务中的表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="0-Diffusion Models Beat GANs on Image Synthesis">
 <meta property="og:url" content="http://example.com/2024/07/05/0-Diffusion-Models-Beat-GANs-on-Image-Synthesis/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="Diffusion Models Beat GANs on Image Synthesis  发表在2021年的NeurIPS会议上https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;Uav0zrV6A9U&amp;t&#x3D;10  背景实验方法实验结果结论">
+<meta property="og:description" content="Diffusion Models Beat GANs on Image Synthesis  发表在2021年的NeurIPS会议上  背景GANs(生成对抗网络)一直是广泛使用的方法之一，在图片生成领域效果很好，但也有着训练过程不稳定，模式崩溃等问题。Diffusion Models(扩散模型)是一类基于概率生成过程的模型，一开始用于密度建模和生成任务，此研究旨在评估扩散模型在图像生成任务中的表">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-Diffusion-Models-Beat-GANs-on-Image-Synthesis/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240705130419512.png">
+<meta property="og:image" content="http://example.com/images/0-Diffusion-Models-Beat-GANs-on-Image-Synthesis/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240708172941523.png">
+<meta property="og:image" content="http://example.com/images/0-Diffusion-Models-Beat-GANs-on-Image-Synthesis/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240708173615704.png">
 <meta property="article:published_time" content="2024-07-05T05:03:19.000Z">
-<meta property="article:modified_time" content="2024-07-05T08:11:48.661Z">
+<meta property="article:modified_time" content="2024-07-08T09:37:40.890Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-Diffusion-Models-Beat-GANs-on-Image-Synthesis/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240705130419512.png">
@@ -225,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          122 字
+          819 字
         
       </span>
     
@@ -236,7 +238,7 @@
         
         
         
-          2 分钟
+          7 分钟
         
       </span>
     
@@ -280,9 +282,24 @@
                 
                 <h2 id="Diffusion-Models-Beat-GANs-on-Image-Synthesis"><a href="#Diffusion-Models-Beat-GANs-on-Image-Synthesis" class="headerlink" title="Diffusion Models Beat GANs on Image Synthesis"></a>Diffusion Models Beat GANs on Image Synthesis</h2><p><img src="/../images/0-Diffusion-Models-Beat-GANs-on-Image-Synthesis/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240705130419512.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
 <blockquote>
-<p>发表在2021年的NeurIPS会议上<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Uav0zrV6A9U&t=10">https://www.youtube.com/watch?v=Uav0zrV6A9U&amp;t=10</a></p>
+<p>发表在2021年的NeurIPS会议上</p>
 </blockquote>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>GANs(生成对抗网络)一直是广泛使用的方法之一，在图片生成领域效果很好，但也有着训练过程不稳定，模式崩溃等问题。Diffusion Models(扩散模型)是一类基于概率生成过程的模型，一开始用于密度建模和生成任务，此研究旨在评估扩散模型在图像生成任务中的表现，与GANs进行对比。扩散模型有着分布覆盖广，使用静态训练目标和易于扩展的有点，但是其生成效果与GANs仍然有差距，所以作者改进了现有的Diffusion模型架构，同时提出了可以平衡图像生成多样性和逼真度的方案。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p>论文提出了一种改进的扩散模型，该模型通过多步去噪过程生成高质量的图像。扩散过程包括两个阶段：</p>
+<ul>
+<li><strong>前向过程</strong>：逐渐向图像中添加噪声，直到图像变成纯噪声。</li>
+<li><strong>反向过程</strong>：从纯噪声开始，逐步去噪重建图像。</li>
+</ul>
+<p>研究中使用了特定的网络结构和训练策略来优化扩散模型的性能，包括了U-Net架构、阶梯式噪声调度策略等，经过改进后，模型取得了明显的效果。</p>
+<p><img src="/../images/0-Diffusion-Models-Beat-GANs-on-Image-Synthesis/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240708172941523.png" srcset="/img/loading.gif" lazyload alt="模型改进"></p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>论文在多个数据集上对扩散模型和GANs进行了实验对比，包括CIFAR-10、LSUN、ImageNet等。实验结果表明，扩散模型在图像生成的质量和多样性上优于GANs。具体表现为：</p>
+<ul>
+<li>在CIFAR-10上，扩散模型生成的图像质量（FID值）优于当前最好的GAN模型。</li>
+<li>在更大规模的ImageNet数据集上，扩散模型也展示了优异的生成能力。</li>
+</ul>
+<p><img src="/../images/0-Diffusion-Models-Beat-GANs-on-Image-Synthesis/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240708173615704.png" srcset="/img/loading.gif" lazyload alt="实验结果"></p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>论文的主要贡献在于提出并验证了扩散模型在图像生成任务中的优越性，表明这种模型在图像质量和生成稳定性上都超过了传统的GANs。未来的发展方向可能包括进一步优化扩散模型的效率，探索其在更大规模数据集和更复杂图像生成任务中的应用。</p>
+<h4 id="Reference-Link-https-sunlin-ai-github-io-2022-05-30-guided-diffusion-html"><a href="#Reference-Link-https-sunlin-ai-github-io-2022-05-30-guided-diffusion-html" class="headerlink" title="Reference Link:https://sunlin-ai.github.io/2022/05/30/guided-diffusion.html"></a>Reference Link:<a target="_blank" rel="noopener" href="https://sunlin-ai.github.io/2022/05/30/guided-diffusion.html">https://sunlin-ai.github.io/2022/05/30/guided-diffusion.html</a></h4>
                 
               </div>
             
