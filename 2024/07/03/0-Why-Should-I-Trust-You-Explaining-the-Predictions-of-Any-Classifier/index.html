@@ -16,32 +16,25 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Dropout: A Simple Way to Prevent Neural Networks from Overfitting  Journal of Machine Learning Research 15 (2014)  背景“Improving neural networks by preventing co-adaptation of feature detectors”这篇文章与本文">
+    <meta name="description" content="“Why Should I Trust You”Explaining the Predictions of Any Classifier  LIME 这篇论文发表在2016年的KDD会议上  背景机器模型虽然被广泛采用，但是其对人们来说，还是一个黑匣子。然而，了解机器学习背后的原理对于其评估非常重要，因此一种称为“LIME（Local Interpretable Model-agnostic Ex">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0-Dropout: A Simple Way to Prevent Neural Networks from Overfitting">
-<meta property="og:url" content="http://example.com/2024/06/22/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/index.html">
+<meta property="og:title" content="0-Why Should I Trust You Explaining the Predictions of Any Classifier">
+<meta property="og:url" content="http://example.com/2024/07/03/0-Why-Should-I-Trust-You-Explaining-the-Predictions-of-Any-Classifier/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="Dropout: A Simple Way to Prevent Neural Networks from Overfitting  Journal of Machine Learning Research 15 (2014)  背景“Improving neural networks by preventing co-adaptation of feature detectors”这篇文章与本文">
+<meta property="og:description" content="“Why Should I Trust You”Explaining the Predictions of Any Classifier  LIME 这篇论文发表在2016年的KDD会议上  背景机器模型虽然被广泛采用，但是其对人们来说，还是一个黑匣子。然而，了解机器学习背后的原理对于其评估非常重要，因此一种称为“LIME（Local Interpretable Model-agnostic Ex">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624205657449.png">
-<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624211159119.png">
-<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624211321053.png">
-<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212030741.png">
-<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212409263.png">
-<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212438607.png">
-<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212525202.png">
-<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212619091.png">
-<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212802707.png">
-<meta property="og:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212824659.png">
-<meta property="article:published_time" content="2024-06-22T11:42:01.000Z">
-<meta property="article:modified_time" content="2024-06-24T13:30:22.215Z">
+<meta property="og:image" content="http://example.com/images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703151226459.png">
+<meta property="og:image" content="http://example.com/images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703154637601.png">
+<meta property="og:image" content="http://example.com/images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703155111570.png">
+<meta property="article:published_time" content="2024-07-03T06:45:00.000Z">
+<meta property="article:modified_time" content="2024-07-08T05:45:42.155Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624205657449.png">
+<meta name="twitter:image" content="http://example.com/images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703151226459.png">
   
   
   
-  <title>0-Dropout: A Simple Way to Prevent Neural Networks from Overfitting - Blog</title>
+  <title>0-Why Should I Trust You Explaining the Predictions of Any Classifier - Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -211,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="0-Dropout: A Simple Way to Prevent Neural Networks from Overfitting"></span>
+            <span id="subtitle" data-typed-text="0-Why Should I Trust You Explaining the Predictions of Any Classifier"></span>
           
         </div>
 
@@ -222,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-22 19:42" pubdate>
-          上传日期：2024年6月22日
+        <time datetime="2024-07-03 14:45" pubdate>
+          上传日期：2024年7月3日
         </time>
       </span>
     
@@ -234,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.3k 字
         
       </span>
     
@@ -245,7 +238,7 @@
         
         
         
-          15 分钟
+          11 分钟
         
       </span>
     
@@ -282,45 +275,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">0-Dropout: A Simple Way to Prevent Neural Networks from Overfitting</h1>
+            <h1 id="seo-header">0-Why Should I Trust You Explaining the Predictions of Any Classifier</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting"><a href="#Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting" class="headerlink" title="Dropout: A Simple Way to Prevent Neural Networks from Overfitting"></a>Dropout: A Simple Way to Prevent Neural Networks from Overfitting</h2><p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624205657449.png" srcset="/img/loading.gif" lazyload alt="Dropout"></p>
+                <h2 id="“Why-Should-I-Trust-You”Explaining-the-Predictions-of-Any-Classifier"><a href="#“Why-Should-I-Trust-You”Explaining-the-Predictions-of-Any-Classifier" class="headerlink" title="“Why Should I Trust You”Explaining the Predictions of Any Classifier"></a>“Why Should I Trust You”Explaining the Predictions of Any Classifier</h2><p><img src="/../images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703151226459.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
 <blockquote>
-<p>Journal of Machine Learning Research 15 (2014)</p>
+<p>LIME 这篇论文发表在2016年的KDD会议上</p>
 </blockquote>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><a target="_blank" rel="noopener" href="https://cnwuyueyu.github.io/2024/05/25/0-Improving-neural-networks-by-preventing-coadaptation-of-feature-detectors/">“Improving neural networks by preventing co-adaptation of feature detectors”</a>这篇文章与本文有很大的关联，实际上，前者可以被认为是后者的早期工作或相关研究，前者讨论了防止特征检测器协同适应(co-adaptation)的方法，这就是Dropout技术的核心思想，本文是作者在同一年稍晚时候发表的进一步研究成果，更详细地描述了Dropout技术并提供了更多实验结果。</p>
-<h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3><p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624211159119.png" srcset="/img/loading.gif" lazyload alt="网络模型"></p>
-<p>左边是训练集神经元，右边是测试集神经元。左边训练集的神经元以P概率被保留。右边测试集不做丢弃，但参数乘以p。 这⾥的意义就是保证训练集和测试集 的输出期望⼀致。</p>
-<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624211321053.png" srcset="/img/loading.gif" lazyload alt="期望"></p>
-<p>也就是Dropout说数目要在相应的分母中减去，以保证结果不会偏差。</p>
-<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212030741.png" srcset="/img/loading.gif" lazyload alt="模型描述"></p>
-<p>Dropout神经网络模型描述。Dropout通过减少神经元之间的相互依赖，迫使网络学习到更加鲁棒的特征。这不仅有效防止了过拟合，还可以看作是对多个不同结构网络的集成，提升了模型的泛化能力。</p>
-<p>深入研究：</p>
-<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212409263.png" srcset="/img/loading.gif" lazyload alt="对特征的影响"></p>
-<p>其中，图(a)是没有Dropout的神经网络提取的特征，图(b)是丢失率 p&#x3D;0.5 时的带Dropout的神经网络提取的特征。由上图可知，Dropout破坏了隐藏层单元之间的协同适应性，使得带Dropout的神经网络提取的特征更明确，增加了模型的泛化能力。</p>
-<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212438607.png" srcset="/img/loading.gif" lazyload alt="稀疏性的影响"></p>
-<p>其中，图(a)是没有Dropout的神经网络提取的特征，图(b)是丢失率 p&#x3D;0.5 时的带Dropout的神经网络提取的特征。由上图可知，Dropout使得网络中只有极少数单位具有较高的激活能力。</p>
-<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212525202.png" srcset="/img/loading.gif" lazyload alt="对丢失率的影响"></p>
-<p>其中，图(a)是第一种情况，在第一种情况下，使用不同数量的辍学来训练相同的网络架构。网络结构为784-2048-2048-2048-10。没有在输入时使用Dropout。由图可知，随着p的增加，测试误差先降后升，在 p∈[0.4,0.8] 时效果最好。 图(b)是第二种情况，此时 pn 保持不变，因此p越大，n越小，反之亦然。由该图可知，随着p的增加，测试误差先降后升，在 p&#x3D;0.6 时效果最好。</p>
-<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212619091.png" srcset="/img/loading.gif" lazyload alt="对数据集大小的影响"></p>
-<p>其中，实验从MNIST训练集中随机选取100、500、1K、5K、10K和50K的数据集。所有数据集的网络结构皆为784-1024-1024-2048-10。Dropout的丢失率为0.5。由上图可知，在小数据集(100,500)上，Dropout并没有改善性能，数据量变大时，Dropout就有了明显的改善网络的效果，但数据量过大是Dropout对网络的改进并不明显。</p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>所用的数据集有：</p>
-<ul>
-<li>MNIST：一组手写体数字的标准数据集。</li>
-<li>Timit：用于语音清洗识别的标准语音基准。</li>
-<li>CIAR-10和CIFAR-100：微小的自然图像。</li>
-<li>街景房屋编号数据集(Street View House Numbers data set，SVHN)：谷歌街景收集的房屋号码图片。</li>
-<li>ImageNet：大量自然图像的集合。</li>
-<li>Reuters-RCV1：路透社新闻报道集。</li>
-<li>替代剪接数据集(Alternative Splicing data set)：预测替代基因剪接的RNA特征。</li>
-</ul>
-<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212802707.png" srcset="/img/loading.gif" lazyload alt="MNIST"></p>
-<p><img src="/../images/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240624212824659.png" srcset="/img/loading.gif" lazyload alt="CIAR-10和CIFAR-100"></p>
-<p>可以看出都有不错的结果，其他数据集的结果不在次赘述。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>“Improving neural networks by preventing co-adaptation of feature detectors”提出了防止神经网络中过拟合的基本思想，而“Dropout: A Simple Way to Prevent Neural Networks from Overfitting”详细描述并验证了这一思想，形成了Dropout技术。两篇论文共同推进了深度学习领域的发展，为后续研究和应用奠定了基础。Dropout的基本思想是，在每次训练迭代中，随机忽略（“丢弃”）网络中的一些神经元，包括它们的连接。具体做法是在前向传播时，以一定的概率p将某些神经元的输出设为零，而在反向传播时只对剩下的神经元进行权重更新。这篇论文的主要贡献在于提供了一种简单而有效的防止过拟合的方法，极大地推动了神经网络的发展和应用。</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>机器模型虽然被广泛采用，但是其对人们来说，还是一个黑匣子。然而，了解机器学习背后的原理对于其评估非常重要，因此一种称为“LIME（Local Interpretable Model-agnostic Explanations）”的技术被提出，通过可解释和忠实的方式解释任何分类器的预测，以非冗余的方式呈现代表性的个体预测及其解释。人类对模型行为的理解程度，而不是将其视为黑匣子。</p>
+<p>当模型用于决策时，确定对个人预测的信任是很重要的，例如，当使用机器学习进行医疗诊断、恐怖主义检测时，如果盲目的相信预测，可能会带来灾难性的后果。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p>LIME 是一种模型无关的方法，可以解释任何机器学习模型的预测结果。它的基本思路是通过扰动输入数据并观察模型输出的变化，来构建一个局部线性模型，从而解释模型在某个特定数据点附近的行为。LIME 的具体步骤如下：</p>
+<ol>
+<li><strong>扰动输入数据</strong>：生成与原始数据点相似的一组扰动数据。</li>
+<li><strong>模型预测</strong>：使用原始模型对这些扰动数据进行预测。</li>
+<li><strong>加权线性回归</strong>：根据扰动数据与原始数据点的相似度，对扰动数据的预测结果进行加权线性回归，从而得到一个局部的线性模型。</li>
+<li><strong>解释结果</strong>：利用线性模型的系数解释原始模型的预测。</li>
+</ol>
+<p><img src="/../images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703154637601.png" srcset="/img/loading.gif" lazyload alt="解释个体症状"></p>
+<p>LIME的主要流程，通过对数据对可能的症状进行高亮标记，通过这个模型就会对于结果有可信的预测。</p>
+<p><img src="/../images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703155111570.png" srcset="/img/loading.gif" lazyload alt="LIME工作流程"></p>
+<p>在模型中选取需要预测的点，对其周围的点按照weight进行标记，然后将weight大的点放入模型中重新标记，选择一个解释模型来表示原来的模型，也就是在用一个可解释的新模型代替不可解释的原模型。</p>
+<p>假设我们有一个训练好的图像分类模型，可以将医学图像分类为正常或异常。我们使用LIME来解释模型对某个具体图像的预测：</p>
+<ol>
+<li><strong>输入扰动</strong>：对该医学图像进行小幅度扰动，如改变某些像素值或添加噪声，生成一组相似的图像。</li>
+<li><strong>模型预测</strong>：使用原始模型对这些扰动图像进行预测，记录每个扰动图像的预测结果。</li>
+<li><strong>加权回归</strong>：根据扰动图像与原始图像的相似度，对这些扰动图像的预测结果进行加权线性回归，构建局部线性模型。</li>
+<li><strong>解释结果</strong>：分析线性模型的系数，解释哪些像素或图像区域对原始模型的预测影响最大，从而理解模型是如何做出预测的。</li>
+</ol>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>论文在多个数据集上进行了实验，包括文本分类和图像分类。实验结果表明，LIME能够有效地解释复杂模型的预测结果，并且在保持高解释性的同时，对原始模型的预测结果有较高的近似度。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过这种方法，我们可以更好地理解深度学习模型在医学图像处理中的决策过程，提升模型的透明度和可信度。</p>
+<p>事实上还有一种方法SHAP（SHapley Additive exPlanations）是一种基于合作博弈论的解释方法，用于解释机器学习模型的预测结果。SHAP 结合了Shapley值的理论基础和加性特征重要性的思想，是目前广泛应用的一种解释工具。相比于 LIME，SHAP 更加严格和全面，但计算复杂度也较高。在实际应用中，SHAP 被广泛用于解释各种机器学习和深度学习模型的预测结果，提升模型的可解释性和透明度。在本文中不再介绍。</p>
 
                 
               </div>
@@ -340,9 +326,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/03/0-Why-Should-I-Trust-You-Explaining-the-Predictions-of-Any-Classifier/" title="0-Why Should I Trust You Explaining the Predictions of Any Classifier">
+                      <a href="/2024/07/05/0-Diffusion-Models-Beat-GANs-on-Image-Synthesis/" title="0-Diffusion Models Beat GANs on Image Synthesis">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">0-Why Should I Trust You Explaining the Predictions of Any Classifier</span>
+                        <span class="hidden-mobile">0-Diffusion Models Beat GANs on Image Synthesis</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -350,8 +336,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/22/0-Binarized-Neural-Networks-Training-Neural-Networks-with-Weights-and-Activations-Constrained-to-1-or-%E2%88%921/" title="0-Binarized Neural Networks: Training Neural Networks with Weights and Activations Constrained to +1 or −1">
-                        <span class="hidden-mobile">0-Binarized Neural Networks: Training Neural Networks with Weights and Activations Constrained to +1 or −1</span>
+                      <a href="/2024/06/22/0-Dropout-A-Simple-Way-to-Prevent-Neural-Networks-from-Overfitting/" title="0-Dropout: A Simple Way to Prevent Neural Networks from Overfitting">
+                        <span class="hidden-mobile">0-Dropout: A Simple Way to Prevent Neural Networks from Overfitting</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -452,6 +438,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -645,6 +637,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
