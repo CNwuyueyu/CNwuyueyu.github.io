@@ -1,0 +1,703 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Segment Anything in Medical Images  arXiv:2304.12306v3 [eess.IV] 1 Apr 2024  背景本文介绍MedSAM这个基础模型，旨在让SAM弥补在医学图像分割领的不足，在大量的图像掩码上开发，涵盖多种病灶类型，证明了比模态专业模型更好的准确性和稳健性。在广泛的任务中提供准确高效的细分。 分割是医学成像分析中的一项基本任务，它涉及识别和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-Segment Anything in Medical Images">
+<meta property="og:url" content="http://example.com/2024/09/29/0-Segment-Anything-in-Medical-Images/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="Segment Anything in Medical Images  arXiv:2304.12306v3 [eess.IV] 1 Apr 2024  背景本文介绍MedSAM这个基础模型，旨在让SAM弥补在医学图像分割领的不足，在大量的图像掩码上开发，涵盖多种病灶类型，证明了比模态专业模型更好的准确性和稳健性。在广泛的任务中提供准确高效的细分。 分割是医学成像分析中的一项基本任务，它涉及识别和">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-in-Medical-Images/image-20240921104718830.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-in-Medical-Images/image-20240921111617581.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-in-Medical-Images/image-20240921131805670.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-in-Medical-Images/image-20240921132241403.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-in-Medical-Images/image-20240921132414523.png">
+<meta property="article:published_time" content="2024-09-29T07:57:25.000Z">
+<meta property="article:modified_time" content="2024-09-29T11:59:30.027Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-Segment-Anything-in-Medical-Images/image-20240921104718830.png">
+  
+  
+  
+  <title>0-Segment Anything in Medical Images - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-Segment Anything in Medical Images"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-29 15:57" pubdate>
+          上传日期：2024年9月29日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-Segment Anything in Medical Images</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Segment-Anything-in-Medical-Images"><a href="#Segment-Anything-in-Medical-Images" class="headerlink" title="Segment Anything in Medical Images"></a>Segment Anything in Medical Images</h2><p><img src="/../images/0-Segment-Anything-in-Medical-Images/image-20240921104718830.png" srcset="/img/loading.gif" lazyload alt="MEDSAM"></p>
+<blockquote>
+<p>arXiv:2304.12306v3 [eess.IV] 1 Apr 2024</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>本文介绍MedSAM这个基础模型，旨在让SAM弥补在医学图像分割领的不足，在大量的图像掩码上开发，涵盖多种病灶类型，证明了比模态专业模型更好的准确性和稳健性。在广泛的任务中提供准确高效的细分。</p>
+<p>分割是医学成像分析中的一项基本任务，它涉及识别和描绘各种医学图像中的感兴趣区域 （ROI），例如器官、病变和组织。准确分割对于许多临床应用至关重要，包括疾病诊断、治疗计划和疾病进展监测 。长期以来，手动分割一直是描绘解剖结构和病理区域的黄金标准，但这个过程耗时、劳动密集，并且通常需要高度的专业知识。所以基于深度学习的方法具有很大的研究价值，本文使用分割基础模型SAM，SAM 具有很好的泛化能力， MedSAM是一个改进的基础模型，可显著提高 SAM 在医学图像上的分割性能。MedSAM 通过在具有超过 100 万对医学图像-掩模对的前所未有的数据集上微调 SAM 来实现这一目标。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><img src="/../images/0-Segment-Anything-in-Medical-Images/image-20240921111617581.png" srcset="/img/loading.gif" lazyload alt="MedSAM"></p>
+<p>MedSAM 在可以处理各种分割任务的大规模数据集上进行训练。该数据集涵盖了各种解剖结构、病理状况和医学成像模式。洋红色轮廓和掩码叠加层分别表示专家注释和 MedSAM 分割结果。</p>
+<p>Computed Tomography (CT), Magnetic Resonance Imaging (MRI), 和 endoscopy是最主要的医学数据，CT 和 MRI 图像提供 3D 身体结构的详细横截面视图，其他的还有ultrasound（超声）, pathology（病理学）, fundus（眼底）, dermoscopy（皮肤镜检查）, mammography（乳腺X线摄影）, 和Optical Coherence Tomography (OCT 光学相干断层扫描)，这些模态及其相应的细分目标的多样性强调了通用且有效的细分模型的必要性，该模型能够处理与每种模态相关的独特特征。</p>
+<p><img src="/../images/0-Segment-Anything-in-Medical-Images/image-20240921131805670.png" srcset="/img/loading.gif" lazyload alt="a,b"></p>
+<p>a : 每种模态中的医学图像掩码对数。</p>
+<p>b : MedSAM 是一种可提示的分割方法，用户可以使用边界框来指定分割目标。源数据作为 源数据 文件提供。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>定量和定性评估结果。</p>
+<p><img src="/../images/0-Segment-Anything-in-Medical-Images/image-20240921132241403.png" srcset="/img/loading.gif" lazyload alt="内部数据实验结果"></p>
+<p>a : 86 个内部验证任务的绩效分布，根据骰子相似系数 （DSC） 分数的中位数。框内的中心线表示中值，框的下边界和上边界分别描绘第 25 个和第 75 个百分位数。选择须线以显示四分位距的 1.5。向上三角形表示最小值，向下三角形表示最大值。</p>
+<p>b : 用于可视化 86 个内部验证任务的性能对应关系的 Podium 图。上半部分：每个彩色点表示使用相应方法在一项任务上实现的 DSC 中位数。对应于相同任务的点由一条线连接。下半部分：条形图表示每种方法获得排名的频率。MedSAM 在大多数任务中排名第一。</p>
+<p>c : 内部验证集上的可视化分割示例。这四个例子分别是计算机断层扫描 （CT）、（磁共振成像）MRI、超声和内窥镜检查图像中的肝癌、脑癌、乳腺癌和息肉。蓝色：边界框提示;黄色：分割结果。Magenta：专家注释。源数据作为源数据文件提供。</p>
+<p><img src="/../images/0-Segment-Anything-in-Medical-Images/image-20240921132414523.png" srcset="/img/loading.gif" lazyload alt="外部数据实验结果"></p>
+<p>a ：60 个外部验证任务的中位数骰子相似系数 （DSC） 分数的性能分布。框内的中心线表示中值，框的下边界和上边界分别描绘第 25 个和第 75 个百分位数。选择须线以显示四分位距的 1.5。向上三角形表示最小值，向下三角形表示最大值。</p>
+<p>b ：用于可视化 60 个外部验证任务的性能对应关系的 Podium 图。上半部分：每个彩色点表示使用相应方法在一项任务上实现的 DSC 中位数。对应于相同任务的点由一条线连接。下半部分：条形图表示每种方法获得排名的频率。MedSAM 在大多数任务中排名第一。</p>
+<p>c ：在外部验证集上可视化的分割示例。这四个例子分别是 CT、MR、超声和内窥镜图像中的淋巴结、宫颈癌、胎头和息肉。源数据作为 源数据 文件提供。</p>
+<p>框架：</p>
+<p>在分割性能和计算效率之间取得平衡，采用基本 ViT 模型作为图像编码器，因为广泛的评估表明，较大的 ViT 模型，如 ViT Large 和 ViT Huge，在准确性方面仅提供边际改进 ，同时显着增加了计算需求。</p>
+<p>具体来说，基本ViT模型由12个transformer层组成，每个模块包括一个多头自注意力模块和一个包含层归一化的多层感知器（MLP）模块。使用掩蔽的自动编码器建模进行预训练，然后在 SAM 数据集上进行完全监督训练。输入图像（1024 × 1024 × 3）被重塑为一系列大小为 16 × 16 × 3 的扁平化 2D 块，在通过图像编码器后，图像嵌入中的特征尺寸为 64 × 64，缩小了 16×。提示编码器将边界框提示的角点映射到 256 维矢量嵌入。特别是，每个边界框都由左上角点和右下角点的嵌入对表示。为了在计算图像嵌入后促进实时用户交互，采用了轻量级掩码解码器架构。它由两个用于融合图像嵌入和提示编码的转换器层和两个转置卷积层组成，用于将嵌入分辨率提高到256×256。随后，嵌入经历 sigmoid 激活，然后进行双线性插值以匹配输入大小。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>应用：在肿瘤学领域，MedSAM 可以在加速 3D 肿瘤注释过程方面发挥关键作用，从而能够随后计算肿瘤体积，这是评估疾病进展和治疗反应的关键生物标志物 。MedSAM 为使自然图像基础模型适应新领域提供了一种成功的范式，可以进一步扩展到生物图像分割，例如光学显微镜图像中的细胞分割和电子显微镜图像中的细胞器分割。</p>
+<p>局限：训练集中的模态不平衡，CT、MRI 和内窥镜图像在数据集中占主导地位。这可能会影响模型在代表性较少的模式（例如乳房 X 光检查）上的性能。另一个限制是它难以分割血管状分支结构，因为在此设置中边界框提示可能不明确。例如，动脉和静脉在眼底图像中共享相同的边界框。</p>
+<p>本文的研究构建能够管理大量分割任务的单一基础模型的可行性，从而消除了对特定任务模型的需求。MedSAM 作为医学图像分割的首个基础模型，在加速新诊断和治疗工具的发展方面具有巨大潜力，并最终有助于改善患者护理</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/29/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/" title="0-SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/29/0-Segment-Anything-Model-for-Medical-Images/" title="0-Segment Anything Model for Medical Images">
+                        <span class="hidden-mobile">0-Segment Anything Model for Medical Images</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,766 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation  arXiv:2309.06824v1 [cs.CV] 13 Sep 2023  背景SAM是一种杰出的通用图像分割模型，在医学图像分割领域近来引起了相当大的关注。尽管SAM在自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation">
+<meta property="og:url" content="http://example.com/2024/09/29/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation  arXiv:2309.06824v1 [cs.CV] 13 Sep 2023  背景SAM是一种杰出的通用图像分割模型，在医学图像分割领域近来引起了相当大的关注。尽管SAM在自">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/image-20240924192212703.png">
+<meta property="og:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIc">
+<meta property="og:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXId">
+<meta property="og:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIg">
+<meta property="og:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIh">
+<meta property="og:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIi">
+<meta property="og:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIp">
+<meta property="og:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIq">
+<meta property="og:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIr">
+<meta property="og:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIs">
+<meta property="og:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIu">
+<meta property="og:image" content="c:/Users/Wuyueyu/Desktop/1/SAM/image/SAMUS%2520Adapting%2520Segment%2520Anything%2520Model%2520for%2520Clinically-Friendly%2520and%2520Generalizable%2520Ultrasound%2520Image%2520Segmentation/bVbXIv">
+<meta property="article:published_time" content="2024-09-29T07:57:33.000Z">
+<meta property="article:modified_time" content="2024-09-29T11:59:44.117Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/image-20240924192212703.png">
+  
+  
+  
+  <title>0-SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-29 15:57" pubdate>
+          上传日期：2024年9月29日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          64 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation"><a href="#SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation" class="headerlink" title="SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation"></a>SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation</h2><p><img src="/../images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/image-20240924192212703.png" srcset="/img/loading.gif" lazyload alt="SAMUS"></p>
+<blockquote>
+<p>arXiv:2309.06824v1 [cs.CV] 13 Sep 2023</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>SAM是一种杰出的通用图像分割模型，在医学图像分割领域近来引起了相当大的关注。尽管SAM在自然图像上表现出色，但在处理医学图像，特别是涉及低对比度、模糊边界、复杂形状和小尺寸目标的医学图像时，其性能明显下降且泛化能力有限。</p>
+<p>在本文中，作者提出了SAMUS，这是一种专为超声图像分割定制的通用模型。与以前基于SAM的通用模型不同，SAMUS不仅追求更好的泛化性能，还降低了部署成本，使其更适用于临床应用。</p>
+<p>具体而言，基于SAM，引入了一个并行的CNN分支，通过跨分支的注意力将局部特征注入ViT编码器，以实现更好的医学图像分割。然后，开发了Position Adapter和Feature Adapter，将SAM从自然领域适应到医学领域，并从需要大尺寸输入（1024×1024）适应到小尺寸输入（256×256），以更适合临床应用。</p>
+<p>作者收集了一个包括约30,000张图像和69,000个Mask，涵盖6个目标类别的全面超声数据集进行验证。广泛的比较实验在任务特定评估和泛化评估下展示了SAMUS相对于最先进的任务特定模型和通用基础模型的优越性。此外，SAMUS可以部署在入门级GPU上，因为它已经摆脱了长序列编码的限制。</p>
+<p>医学图像分割是一项关键技术，用于识别和突出显示医学图像中的特定器官、组织和病变，是计算机辅助诊断系统的重要组成部分。已经提出了许多深度学习模型，用于自动医学图像分割，展示出巨大的潜力。然而，这些模型都是为特定目标量身定制的，应用于其他目标时需要重新训练，给临床使用带来了很大的不便。</p>
+<p>SAM作为视觉分割的通用基础模型，因其在各种目标上出色的分割能力和强大的零样本泛化能力而广受好评。根据用户提示，包括点、边界框和粗略Mask，SAM能够分割相应的目标。因此，通过简单的提示，SAM可以轻松地适应各种分割应用。这一范 paradigm 使多个个体医学图像分割任务集成到一个统一的框架中（即通用模型），极大地促进了临床部署。</p>
+<p>尽管构建了迄今为止最大的数据集（即SA-1B），但由于可靠临床注释的稀缺性，SAM在医学领域遭遇了快速的性能下降。一些基础模型已经提出，通过在医学数据集上调整SAM，将其适应医学图像分割。然而，与SAM一样，它们在进行特征建模之前在输入图像上执行无重叠的16×Tokenization，这破坏了用于识别小目标和边界的局部信息，使其难以分割具有复杂&#x2F;丝状形状、弱边界、小尺寸或低对比度的临床目标。此外，它们中的大多数需要尺寸为1024×1024的输入，导致GPU消耗巨大，因为生成了长输入序列。</p>
+<p>在本文中，作者提出了SAMUS，旨在将SAM的出色分割性能和强大的泛化能力转移到医学图像分割领域，同时降低计算复杂性。SAMUS继承了SAM的ViT图像编码器、提示编码器和Mask解码器，具有针对图像编码器的定制设计。首先，作者通过减小输入尺寸来缩短ViT分支的序列长度，以降低计算复杂性。然后，作者开发了一个Feature Adapter和一个Position Adapter，用于将ViT图像编码器从自然领域微调到医学领域。</p>
+<p>为了补充ViT图像编码器中的局部（低级）信息，作者引入了一个并行的CNN分支图像编码器，与ViT分支并行运行，并提出了一个跨分支注意力模块，使ViT分支中的每个块可以从CNN分支 assimilate 局部信息。此外，作者构建了一个名为US30K的大型超声数据集，包括30,106张图像和68,570个Mask，以全面评估SAMUS的有效性。实验结果表明，SAMUS在任务特定和通用医学图像分割方面均优于最先进的方法。更重要的是，与SAM相比，SAMUS具有显着的泛化能力，同时大大降低了培训成本。</p>
+<p>贡献总结如下：</p>
+<ul>
+<li>一种基础模型SAMUS，专为通用超声图像分割而设计，与SAM相比，需要更少的GPU资源。</li>
+<li>一种CNN分支图像编码器和跨分支注意力模块，可以有效补充ViT图像编码器中的局部信息。</li>
+<li>一种Feature Adapter和Position Adapter，用于微调ViT分支图像编码器，进一步优化SAM以适应医学领域。</li>
+<li>一个包含30,106张图像和68,570个Mask的大型超声数据集，用于全面评估SAMUS的有效性。</li>
+</ul>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><h4 id="1-视觉调优"><a href="#1-视觉调优" class="headerlink" title="1 视觉调优"></a>1 视觉调优</h4><p>随着计算机视觉中基础模型的惊人发展，提出了一系列视觉调优方法，以将这些基础模型适应下游任务。通常，最近的视觉调优方法可以分为五大类，包括微调、参数调优、重新映射调优、提示调优和自适应调优。</p>
+<p>具体来说，微调方法涉及调整预训练模型的整个参数集或有选择地微调预训练模型的特定部分。参数调优方法直接修改模型参数的权重或偏差。重新映射方法通过知识蒸馏、基于权重的重新映射或基于架构的重新映射将从预训练模型中学到的信息传递给下游模型。提示调优通过将一组可学习参数与输入进行结合或设计一个子网络来生成视觉提示的方式，引入了下游任务的知识。Adapter调优是最广泛采用的策略，通过将额外的可学习参数与冻结的预训练模型相结合，促进了下游任务的学习。</p>
+<h4 id="2-将SAM适应到医学图像分割"><a href="#2-将SAM适应到医学图像分割" class="headerlink" title="2 将SAM适应到医学图像分割"></a>2 将SAM适应到医学图像分割</h4><p>SAM在自然图像中表现出色，但在某些医学图像分割任务中遇到困难，尤其是在具有复杂形状、模糊边界、小尺寸或低对比度的目标上。</p>
+<p>为了弥补这一差距，使SAM能够有效地适应医学图像领域，已经提出了几种方法，使用有限的下游医学数据集来调整SAM。MedSAM通过冻结图像编码器和提示编码器，重点调整SAM的Mask解码器，以可接受的成本在医学图像上进行训练。SAMed采用低秩（LoRA）策略对图像编码器进行调优，以更低的计算成本调整SAM，使其更适用于医学图像分割。MSA在ViT图像编码器的每个变换层上采用两个downReLU-upAdapter来引入任务特定信息。</p>
+<p><img src="/../images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIc" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>如图1所示，与当前基于SAM的基础模型相比，提出的SAMUS更注重补充局部特征并减少GPU消耗，这对于在临床场景中进行准确且易于部署的医学图像分割至关重要。</p>
+<h4 id="3-方法概述"><a href="#3-方法概述" class="headerlink" title="3 方法概述"></a>3 方法概述</h4><p><img src="/../images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXId" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>如图2所示，SAMUS的总体架构继承自SAM，保留了提示编码器和Mask解码器的结构和参数，没有进行任何调整。相比之下，图像编码器经过精心修改，以解决局部特征不足和计算内存消耗过多的挑战，使其更适合于临床友好的分割。主要修改包括减小输入尺寸，重叠的Patch嵌入，向ViT分支引入Adapter，添加CNN分支以及引入跨分支注意力（CBA）。</p>
+<p>具体来说，输入的空间分辨率从1024×1024像素缩小到256×256像素，由于Transformer中较短的输入序列，GPU内存成本大幅降低。重叠的Patch嵌入使用与SAM中的Patch嵌入相同的参数，但其Patch跨度减半，与原始跨度保持良好的信息一致性。</p>
+<p>ViT分支中的Adapter包括Position Adapter和5个Feature Adapter。Position Adapter用于适应较短序列中的全局位置嵌入，因为输入尺寸较小。第一个Feature Adapter遵循了重叠的Patch嵌入，以使输入特征与预训练的ViT图像编码器所需的特征分布相一致。其余的Feature Adapter附加到全局Transformer中的前馈网络的残差连接上，以微调预训练图像编码器。</p>
+<p>在CNN分支方面，它与ViT分支并行，通过CBA模块向后者提供互补的局部信息，该模块以ViT分支特征作为Query，并与CNN分支的特征建立全局依赖性。值得注意的是，CBA仅集成到每个全局Transformer中。最后，两个分支的输出被合并为SAMUS的最终图像特征嵌入。</p>
+<h4 id="4-ViT分支中的Adapter"><a href="#4-ViT分支中的Adapter" class="headerlink" title="4 ViT分支中的Adapter"></a>4 ViT分支中的Adapter</h4><p>为了促进SAM的训练图像编码器（即ViT分支）在更小的输入尺寸和医学图像领域的泛化，作者引入了一个Position Adapter和5个Feature Adapter。这些Adapter可以有效地调整ViT分支，同时只需要更少的参数。</p>
+<p>具体来说，Position Adapter负责调整位置嵌入以匹配嵌入序列的分辨率。它首先通过Stride和Kernel-Size为2的最大池化对位置嵌入进行降采样，实现与嵌入序列相同的分辨率。随后，应用Kernel-Size为3×3的卷积操作来调整位置嵌入，进一步帮助ViT分支更好地处理较小的输入。</p>
+<p>所有Feature Adapter具有相同的结构，包括下投影、激活函数和上投影3个组成部分。每个Feature Adapter的过程可以表示为：<br>$$<br>A(x)&#x3D;g(xE_d)Eu<br>$$<br>其中g代表GELU激活函数，$E_D\in R^{d<em>d&#x2F;4}$ 和 $E_u \in R^{d&#x2F;4</em>d}$ 是投影矩阵，d是特征嵌入的维度，通过这些简单的操作，Feature Adapter使ViT分支更好的适应医学图像领域的特征分布</p>
+<h4 id="5-CNN分支"><a href="#5-CNN分支" class="headerlink" title="5 CNN分支"></a>5 CNN分支</h4><p>CNN分支由顺序连接的卷积-池化块组成。具体来说，输入首先通过一个单一的卷积块，然后通过3个卷积-池化块进行处理。</p>
+<p>然后，CNN分支中的特征映射与ViT分支的特征映射具有相同的空间分辨率。在CNN分支的其余部分，这种单一的卷积块被连续重复4次。CNN分支的这种简约和轻量级设计是为了防止训练过程中的过拟合。</p>
+<h4 id="6-跨分支注意力"><a href="#6-跨分支注意力" class="headerlink" title="6 跨分支注意力"></a>6 跨分支注意力</h4><p>跨分支注意力（CBA）模块在CNN分支和ViT分支之间建立了一个桥梁，以进一步通过ViT分支补充缺失的局部特征。</p>
+<p>对于来自ViT分支Fv和CNN分支的特征映射对，单一Head的跨分支注意力可以表示为：<br>$$<br>F(F_v,F_c)&#x3D;(S(\frac{F_vE_q(F_cE_k)^T}{\sqrt{d_m}})+R)(F_cE_v)<br>$$<br>其中S代表Softmax函数，$E_q \in R^{d<em>d_m} , E_k \in R^{d</em>d_m} 和 E_v \in R^{d<em>d_m}$是用于将$F_c$和$F_v$投影到不同特征子空间的可学习权重矩阵。$R \in R^{hw</em>hw}$是相对位置嵌入，$d_m$是CBA的维度，CBA的最终输出是这种单头注意力的线性组合。 </p>
+<h4 id="7-训练策略"><a href="#7-训练策略" class="headerlink" title="7 训练策略"></a>7 训练策略</h4><p>在训练之前，SAMUS使用在SA-1B上训练的权重来初始化从SAM继承的参数。其余参数被随机初始化。在训练过程中，只有Adapter、CNN分支和CBA模块的参数会被更新，而其他参数将保持冻结。训练过程通过组合损失函数进行监督，包括Dice损失和二元交叉熵损失。</p>
+<p>为了方便使用，SAMUS只使用最简单的正点提示。作者通过在标签的前景区域中随机采样一个点来模拟专家提供提示的过程。SAMUS使用Adam优化器进行训练，初始学习率为0.0001，批大小为8，共进行200个epochs的训练。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><h4 id="1-与SOTA任务特定方法的比较"><a href="#1-与SOTA任务特定方法的比较" class="headerlink" title="1 与SOTA任务特定方法的比较"></a>1 与SOTA任务特定方法的比较</h4><p>比较方法：选择了12种SOTA任务特定方法进行比较，涵盖了基于CNN、基于Transformer和CNN-Transformer混合方法。</p>
+<ul>
+<li>基于CNN的方法包括U-Net、CPFNet、CA-Net、CE-Net和AAU-Net</li>
+<li>基于Transformer的方法包括SwinUnet、SETR和MISSFormer</li>
+<li>CNN-Transformer混合方法包括TransUNet、TransFuse、FAT-Net和H2Former</li>
+</ul>
+<h5 id="定量结果："><a href="#定量结果：" class="headerlink" title="定量结果："></a>定量结果：</h5><p><img src="/../images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIg" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>在TN3K、BUSI、CAMUS-LV、CAMUS-MYO和CAMUS-LA上，不同任务特定方法的定量结果总结在表7中。</p>
+<p><img src="/../images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIh" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>在这些最先进的方法中，H2Former在TN3K和CAMUS-MYO上取得了最佳性能，分别获得了82.48%和87.31%的平均Dice分数。TransUnet、CA-Net和FATNet在BUSI、CAMUS-LV和CAMUS-LA上取得了最佳性能，平均Dice分数分别为82.22%、93.59%和91.55%。</p>
+<p>相比之下，SAMUS在包括TN3K、BUSI、CAMUS-LV、CAMUS-MYO和CAMUS-LA在内的所有5个任务上都取得了更好的性能，平均Dice分数分别为84.45%、85.77%、93.73%、87.46%和91.58%。这验证了SAMUS将SAM适应医学图像领域的有效性。</p>
+<h5 id="定性结果："><a href="#定性结果：" class="headerlink" title="定性结果："></a>定性结果：</h5><p>不同方法的定性分割结果，包括U-Net、AAU-Net、MISSFormer、H2Former和SAMUS，如图4所示。</p>
+<p><img src="/../images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIi" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>从视觉上看，超声图像的分割因其低对比度、不均匀特征和模糊的物体边界而具有挑战性。现有方法难以准确区分目标和背景，导致了大量的假阴性和&#x2F;或假阳性。</p>
+<p>相比之下，SAMUS在保持目标区域的完整性和减少假阳性方面表现出优越性。这归功于SAM框架的固有优势，以及SAMUS引入的具体调整和设计。</p>
+<h5 id="泛化能力："><a href="#泛化能力：" class="headerlink" title="泛化能力："></a>泛化能力：</h5><p><img src="/../images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIp" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>不同任务特定方法的泛化性能定量比较如图3所示。在比较方法中，H2Former、TransUnet和TransFuse分别在DDTI、UDIAT和HMC-QU上取得了最佳性能。</p>
+<p>相比之下，SAMUS在每个数据集上都超过了最佳比较方法，并分别提高了Dice分数，平均增加了7.06%、12.22%和7.42%。在可见和不可见数据集之间的性能比较中，与其他比较方法相比，SAMUS在3个不同的分割任务中都遇到了最小的性能下降。</p>
+<p>一个有趣的观察是，在乳腺癌分割任务上，SAMUS在不可见数据集（即UDIAT）上的性能甚至优于可见数据集（即BUSI）上最佳比较方法。这显示了SAMUS在处理未知领域方面的出色泛化能力，展示了它在各种医学图像分割场景中的稳健性和适应性。</p>
+<h4 id="2-与SOTA基础模型的比较"><a href="#2-与SOTA基础模型的比较" class="headerlink" title="2 与SOTA基础模型的比较"></a>2 与SOTA基础模型的比较</h4><h5 id="比较方法："><a href="#比较方法：" class="headerlink" title="比较方法："></a>比较方法：</h5><p>选择了4种SOTA基础模型进行比较，包括原始的SAM、MedSAM、SAMed和MSA。</p>
+<h5 id="定量结果：-1"><a href="#定量结果：-1" class="headerlink" title="定量结果："></a>定量结果：</h5><p>为了验证SAMUS作为一个基础模型在各种下游任务上的通用性能，作者在US30K数据集上进行了基础模型的比较。</p>
+<p><img src="/../images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIq" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>如表8所示，SAM，即在SA-1B上训练的模型，在未经调整的情况下在医学图像分割上表现出显著的性能下降。通过在US30K数据集上简单调整SAM的Mask解码器，MedSAM显著改善了SAM的性能。</p>
+<p>在比较的基础模型中，MAS是表现最佳的模型，有效提高了SAM在TN3K、BUSI、CAMUS-LV、CAMUS-MYO和CAMUS-LA上的分割性能，平均Dice分数分别增加了53.08%、27.65%、62.77%、53.05%和74.52%。</p>
+<p>与MSA相比，SAMUS在上述5个数据集中始终取得了显著的改进，Dice分数分别为83.05%、84.54%、91.13%、83.11%和92%。这验证了SAMUS中的CNN分支和CBA模块的有效性，特别是在补充对于医学图像分割至关重要的局部信息方面。</p>
+<h5 id="定性结果：-1"><a href="#定性结果：-1" class="headerlink" title="定性结果："></a>定性结果：</h5><p><img src="/../images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIr" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>图5展示了不同基础模型的定性分割结果，包括SAM、MedSAM、SAMed、MSA和SAMUS。在医学图像中没有经过调整的情况下，SAM完全失去了分割一切的能力。通过将调整方法应用于SAM，MedSAM、SAMed和MSA可以在一定程度上恢复SAM的分割能力。</p>
+<p>然而，它们仍然难以在超声图像中准确勾画分割边界，导致大量的假阴性和假阳性。相比之下，SAMUS表现出卓越的性能，能够准确地定位分割边界，即使是低对比度的分割。这与使用图像编码器补充局部信息对于医学图像分割中的边界&#x2F;形状保持特别有帮助的分析是一致的。</p>
+<h5 id="泛化能力：-1"><a href="#泛化能力：-1" class="headerlink" title="泛化能力："></a>泛化能力：</h5><p><img src="/../images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIs" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>不同基础模型在未知领域上的比较总结在图6中。总的来说，在US30K上训练的基础模型在医学图像分割任务中的泛化性能要远远优于原始的SAM。在三对分割任务中，即甲状腺结节分割、乳腺癌分割和心肌分割，所有基础模型在心肌分割上都遇到了严重的性能下降，并且在乳腺癌分割上有很好的泛化性能。</p>
+<p>SAMUS在所有三个未知数据集上始终表现出最佳性能，分别为甲状腺结节、乳腺癌和心肌分割的Dice分数为66.78%、78.06%和56.77%。这强调了SAMUS在未知领域的卓越泛化能力，始终明显优于其他基础模型。</p>
+<h5 id="部署成本："><a href="#部署成本：" class="headerlink" title="部署成本："></a>部署成本：</h5><p>作者对SAMUS和其他基础模型在部署效率方面进行了全面评估，包括GPU内存成本、模型参数、计算复杂性、推理速度、分割性能和泛化性能。</p>
+<p>为了便于比较，GPU内存在训练期间将批处理大小设置为1时进行测试，并以千兆字节（即G）为单位进行测量。计算复杂性和推理速度以每秒浮点运算（即GFLOPs）和每秒帧数（即FPS）来衡量。分割性能以在所有可见数据集上的平均Dice分数来衡量，泛化性能则基于在所有未知数据集上的平均Dice分数进行评估。所有上述指标都经过归一化，并在雷达图中呈现，如图7所示。</p>
+<p><img src="/../images/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/bVbXIu" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>在比较模型中，SAMed的GPU内存成本、模型参数、计算复杂性和推理速度都最低。然而，它的分割和泛化性能都不如MSA和SAMUS。尽管SAMUS拥有比其他模型更多的参数，但其GPU内存成本和计算复杂性仍然是第二低的，而推理速度是第二快的，表明SAMUS是一个更适合临床的模型。</p>
+<p>此外，SAMUS的部署性能与最易于部署的方法（即SAMed）非常接近，并且在分割和泛化性能方面要好得多。</p>
+<h4 id="3-消融实验"><a href="#3-消融实验" class="headerlink" title="3 消融实验"></a>3 消融实验</h4><h5 id="SAMUS中每个组件的有效性："><a href="#SAMUS中每个组件的有效性：" class="headerlink" title="SAMUS中每个组件的有效性："></a>SAMUS中每个组件的有效性：</h5><p>SAMUS中的4个组件，包括CNN分支、CBA、Feature Adapter和Position Adapter，依次引入原始SAM并在TN3K和BUSI数据集上进行评估。</p>
+<p><img src="C:/Users/Wuyueyu/Desktop/1/SAM/image/SAMUS%2520Adapting%2520Segment%2520Anything%2520Model%2520for%2520Clinically-Friendly%2520and%2520Generalizable%2520Ultrasound%2520Image%2520Segmentation/bVbXIv" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>如表9所总结的，SAMUS的任何一个组件都能有效提高SAM在医学任务上的分割性能和泛化能力。即使是一个简单的Position Adapter也可以在TN3K、DDTI、BUSI和UDIAT上分别提高SAM的Dice分数分别为50.6%、38.1%、26.77%和30.54%。通过引入局部特征，CNN分支的性能提升明显高于Position Adapter。</p>
+<p>此外，仅仅将CNN分支和ViT分支的输出进行融合并不是最佳选择。引入CBA可以进一步促进对局部特征的探索，从而在Dice上相对于CNN分支实现平均增长1.48%和2.11%。</p>
+<p>通过结合所有四个组件，SAMUS实现了最佳的分割性能和泛化性能。</p>
+<h5 id="不同提示对SAMUS的影响："><a href="#不同提示对SAMUS的影响：" class="headerlink" title="不同提示对SAMUS的影响："></a>不同提示对SAMUS的影响：</h5><p>为了分析提示的效果，作者评估了在不同点提示下在US30K上训练的SAMUS的性能。总的来说，SAMUS对点的位置和数量具有很强的鲁棒性。对于具有大的类内表征变化的目标（例如甲状腺结节、左心室和心肌），在不同位置的单点提示下，Dice分数的性能变化在1%范围内。</p>
+<p>此外，通过引入多点提示，性能可以得到很大的提升。相比之下，对于具有均匀特征的目标（例如乳腺癌和左心房），在不同单点提示下的性能变化在±0.3%的范围内，引入多点提示未必会带来性能提升。一个可能的原因是使用更多的点可能会产生信息冗余或排除。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/29/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/" title="0-SAM-UNet: Enhancing Zero-Shot Segmentation of SAM for Universal Medical Images">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-SAM-UNet: Enhancing Zero-Shot Segmentation of SAM for Universal Medical Images</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/29/0-Segment-Anything-in-Medical-Images/" title="0-Segment Anything in Medical Images">
+                        <span class="hidden-mobile">0-Segment Anything in Medical Images</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,837 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="医学影像数据集肺肺MSD肺癌分割 MSD肺脏分割数据集 LoLa11肺叶分割 LoLa11肺叶分割数据集 肺部多病智能诊断 天池数据 vessel12 肺部血管分割 VESSEL12 肺部血管分割 NIHChest Xray   14种肺部疾病 论文 数据集下载 NIH chest Xray  QIN Lung CT QIN 肺部CT数据 4D-Lung 4D-Lung NSCLC-Radiomi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="医学影像数据集">
+<meta property="og:url" content="http://example.com/2024/09/29/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E6%95%B0%E6%8D%AE%E9%9B%86/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="医学影像数据集肺肺MSD肺癌分割 MSD肺脏分割数据集 LoLa11肺叶分割 LoLa11肺叶分割数据集 肺部多病智能诊断 天池数据 vessel12 肺部血管分割 VESSEL12 肺部血管分割 NIHChest Xray   14种肺部疾病 论文 数据集下载 NIH chest Xray  QIN Lung CT QIN 肺部CT数据 4D-Lung 4D-Lung NSCLC-Radiomi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-29T08:05:11.000Z">
+<meta property="article:modified_time" content="2024-09-29T12:00:01.157Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>医学影像数据集 - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="医学影像数据集"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-29 16:05" pubdate>
+          上传日期：2024年9月29日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">医学影像数据集</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="医学影像数据集"><a href="#医学影像数据集" class="headerlink" title="医学影像数据集"></a>医学影像数据集</h2><h3 id="肺"><a href="#肺" class="headerlink" title="肺"></a>肺</h3><h4 id="肺-1"><a href="#肺-1" class="headerlink" title="肺"></a>肺</h4><p>MSD肺癌分割 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/10334">MSD肺脏分割数据集</a></p>
+<p>LoLa11肺叶分割 <a target="_blank" rel="noopener" href="https://zenodo.org/record/4708800#.Y_4GJV5ByUk">LoLa11肺叶分割数据集</a></p>
+<p>肺部多病智能诊断 <a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/dataset?spm=5176.12282013.J_3941670930.15.7107417b5sQFpV">天池数据</a></p>
+<p>vessel12 肺部血管分割 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/94923">VESSEL12 肺部血管分割</a></p>
+<p>NIHChest Xray </p>
+<ul>
+<li>14种肺部疾病 <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_cvpr_2017/papers/Wang_ChestX-ray8_Hospital-Scale_Chest_CVPR_2017_paper.pdf">论文</a></li>
+<li>数据集下载 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/35660">NIH chest Xray</a></li>
+</ul>
+<p>QIN Lung CT QIN <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/35205">肺部CT数据</a></p>
+<p>4D-Lung <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/37482">4D-Lung</a></p>
+<p>NSCLC-Radiomics <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/63958">NSCLC-Radiomics</a></p>
+<p>Shenzhen Hospital X-ray Set <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/25237">深圳肺结核胸透数据集</a></p>
+<h4 id="肺结核"><a href="#肺结核" class="headerlink" title="肺结核"></a>肺结核</h4><p>Montgomery County X-ray Set <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/34229">蒙哥马利肺结核数据集</a></p>
+<h4 id="肺炎"><a href="#肺炎" class="headerlink" title="肺炎"></a>肺炎</h4><p>Ieee8023</p>
+<ul>
+<li>covid19-ct-scans <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/34221">新冠肺炎CT扫描+分割标注</a></li>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/34221">新冠肺炎CT扫描+分割标注</a></li>
+</ul>
+<p>COVID-CT <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/27732">新冠肺炎CT图片数据集</a></p>
+<p>Figure1-COVID-chestxray-dataset <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/34208">新冠病例CT照片</a></p>
+<p>RSNA肺炎检测 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/34214">RSNA肺炎检测数据集</a></p>
+<p>CovidX CovidX数据集是DarwinAI训练CovidNet做的一个数据集，本身没有新的数据，是Ieee8023，Figure1和RSNA组合成的一个数据集。</p>
+<p>covid19-radiography-database <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/34241">跟CovidX一样是一个组合数据集，数据来自论文图片和RSNA</a>。</p>
+<p>Flyai Covid Flyai <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/34230">新冠分类数据集</a></p>
+<p>COVID-19-AR <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/63553">来自农村地区的新冠确诊病例CT</a></p>
+<p>CT Images in COVID-19 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/63794">共包含771组新冠患者的胸腹部CT平扫</a></p>
+<h4 id="肺结节"><a href="#肺结节" class="headerlink" title="肺结节"></a>肺结节</h4><p>LIDC-IDRI <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/63957">肺部肿瘤</a></p>
+<p>LUNA16 据来自LIDC&#x2F;IDIR数据集，包括888组CT扫描。<a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/1860">标注了结节类型和中心位置</a></p>
+<p>LNDB <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/23909">LNDB肺结节数据集</a></p>
+<p>Lung Nodule Malignancy <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/28474">肺结节良恶性分类</a></p>
+<p>Data Science Bowl 17 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/25423">DSB 肺癌预测数据集 stage-1</a></p>
+<h4 id="气胸"><a href="#气胸" class="headerlink" title="气胸"></a>气胸</h4><p>SIIM-ACR Pneumothorax Segmentation <a target="_blank" rel="noopener" href="https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation">SIIM-ACR 气胸细分</a></p>
+<h3 id="胸"><a href="#胸" class="headerlink" title="胸"></a>胸</h3><p>CBIS-DDSM <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/37567">CBIS-DDSM</a></p>
+<p>breast cancer </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/68630">breast cancer</a></li>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/22532">breast_40X</a></li>
+</ul>
+<p>Rider Breast MRI <a target="_blank" rel="noopener" href="https://wiki.cancerimagingarchive.net/display/Public/RIDER+Breast+MRI">骑士乳房核磁共振成像</a></p>
+<p>ACRIN 6688 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/37565">腺素-FLT-乳房</a> （ACRIN 6688）</p>
+<p>BraTS2015 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/26367">BraTS2015</a></p>
+<h3 id="脑"><a href="#脑" class="headerlink" title="脑"></a>脑</h3><p>MSD脑瘤分割 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/10277">MSD脑瘤数据集</a></p>
+<p>MSD海马体分割 MSD-4，<a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/23862">海马体分割数据集</a></p>
+<p>Iseg2019 <a target="_blank" rel="noopener" href="https://iseg2019.web.unc.edu/data/">MICCAI</a>对多位点6个月婴儿脑MRI分割的大挑战</p>
+<p>ABIDE <a target="_blank" rel="noopener" href="http://preprocessed-connectomes-project.org/abide/download.html">自闭症患者的头部MRI扫描</a>，包含539例自闭症患者和573个正常扫描对照组</p>
+<p>ADNI </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://n.neurology.org/content/74/3/201.short">阿尔茨海默病神经影像</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1803.05854">开发和验证用于检测头部CT扫描中关键发现的深度学习算法</a></li>
+</ul>
+<p>CQ500 </p>
+<p>脑出血 RSNA </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.kaggle.com/c/rsna-intracranial-hemorrhage-detection">颅内出血检测 RSNA</a> </li>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/35741">颅内出血检测 kaggle</a></li>
+</ul>
+<p>脑肿瘤 MRI <a target="_blank" rel="noopener" href="https://www.cvmart.net/dataSets/detail/452?utm_campaign=zywang&utm_source=social&utm_medium=gongzhonghao&utm_content=datasets">数据集</a></p>
+<h3 id="肠"><a href="#肠" class="headerlink" title="肠"></a>肠</h3><p>CT COLONOGRAPHY <a target="_blank" rel="noopener" href="https://wiki.cancerimagingarchive.net/display/Public/CT+COLONOGRAPHY#dc149b9170f54aa29e88f1119e25ba3e">CT 结肠造影</a></p>
+<p>MSD肠道分割数据集 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/10332">MSD肠道分割数据集</a></p>
+<p>UW-Madison <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/145482">胃肠道图像分割 RI 扫描来自实际的癌症患者，放射治疗期间的不同日子 1-5 次 MRI 扫描</a>。</p>
+<p>直肠息肉<a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/37521">数据集</a></p>
+<h3 id="心脏"><a href="#心脏" class="headerlink" title="心脏"></a>心脏</h3><p>EchoNet</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://echonet.github.io/dynamic/NeuroIPS_2019_ML4H%20Workshop_Paper.pdf">介绍论文</a></li>
+<li><a target="_blank" rel="noopener" href="https://echonet.github.io/dynamic/index.html">EchoNet-D</a>数据库包括 10030 个标记的超声心动图视频和人类专家注释</li>
+</ul>
+<p>MMWHS <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/38799">mmwhs是心脏分割数据集</a></p>
+<p>MSD心脏分割 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/23911">MSD心脏分割数据集</a></p>
+<p>主动脉 <a target="_blank" rel="noopener" href="https://asoca.grand-challenge.org/">冠状动脉分割</a></p>
+<p>心脏病发作分析和<a target="_blank" rel="noopener" href="http://m6z.cn/6ikH8v">预测数据集</a></p>
+<h3 id="眼睛"><a href="#眼睛" class="headerlink" title="眼睛"></a>眼睛</h3><p>DRIVE <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/27737">DRIVE糖尿病人眼底血管分割</a></p>
+<p>ODIR-5k <a target="_blank" rel="noopener" href="https://odir2019.grand-challenge.org/">ODIR-5K包括5000名患者的年龄</a>，双眼的彩色眼底照片和医生的诊断关键词</p>
+<p>FIRE 视网膜图像数据 <a target="_blank" rel="noopener" href="https://projects.ics.forth.gr/cvrl/fire/">FIRE</a> 是一个视网膜眼底图像数据集，包含 129张 眼底视网膜图像，由不同特征组合成 134对 图像组合</p>
+<p>STARE <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/81241">STARE 眼底多种诊断</a></p>
+<p>CHASE_DB1 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/81247">Kinston大学公开的一个小规模眼底分割数据集，包含28张眼底照片及对应的分割标签</a>。</p>
+<p>IDRiD</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://idrid.grand-challenge.org/">印度糖尿病视网膜病变图像数据集（IDRiD）网站</a></li>
+<li><a target="_blank" rel="noopener" href="http://m6z.cn/5yth3m">眼病深度学习数据集</a></li>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/91860/0">IDRiD</a></li>
+</ul>
+<h3 id="肾脏"><a href="#肾脏" class="headerlink" title="肾脏"></a>肾脏</h3><p>Kits19 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/24582">Kits19肾脏肿瘤分割</a></p>
+<p><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/178466">入侵肾脏</a></p>
+<p><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/157138">肾脏CT</a></p>
+<h3 id="肝脏"><a href="#肝脏" class="headerlink" title="肝脏"></a>肝脏</h3><p>LiTS</p>
+<ul>
+<li>数据集论文：The Liver Tumor Segmentation Benchmark (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1901.04056">LiTS</a>)</li>
+<li>数据集下载 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/10273">LiTS肝脏&#x2F;肝肿瘤分割</a></li>
+</ul>
+<p>Sliver07 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/19906">Sliver-07肝脏分割数据集</a></p>
+<p>3D-IRCADB</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/10293">3D-IRCADB脏器分割数据集</a></li>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/129670">肝脏CT薄层分割数据集，肝脏1，肿瘤2</a></li>
+<li>CHAOS <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/23864">CHAOS多脏器分割数据集</a></li>
+</ul>
+<p>TCGA-LIHC 肝脏CT  <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/37439">TCGA-LIHC</a></p>
+<p>MSD肝脏血管分割 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/10333">MSD肝脏血管数据集</a></p>
+<h3 id="细胞"><a href="#细胞" class="headerlink" title="细胞"></a>细胞</h3><p>Data Science Bowl 18</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.kaggle.com/competitions">kaggle</a></li>
+<li><a target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/31636459/">论文</a></li>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/10292">DSB18 细胞核分割</a></li>
+</ul>
+<p>血细胞涂片分类 ISBI细胞跟踪</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/10278">血细胞分类数据集</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/paultimothymooney/blood-cells">血细胞图像kaggle</a></li>
+<li><a target="_blank" rel="noopener" href="http://celltrackingchallenge.net/">细胞追踪挑战</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.cvmart.net/dataSets/detail/413">PanNuke癌组织细胞数据集</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cvmart.net/dataSets/detail/449">血细胞图像数据集</a></p>
+<h3 id="骨骼"><a href="#骨骼" class="headerlink" title="骨骼"></a>骨骼</h3><p>MURA-1.1</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stanfordmlgroup.github.io/competitions/mura/">骨X射线深度学习竞赛</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1712.06957">介绍论文</a></li>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/20010">MURA-1.1</a></li>
+</ul>
+<p>RSNA Bone Age</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/kmader/rsna-bone-age">RSNA骨龄</a></li>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/36300">RSNA Bone Age</a></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/81211">磁共振图像脊柱结构多类别三维自动分割</a></p>
+<p>膝盖</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/24584">MRNet</a> 斯坦福MRNet膝关节MRI数据集</li>
+<li><a target="_blank" rel="noopener" href="https://www.cvmart.net/dataSets/detail/457?utm_campaign=zywang&utm_source=social&utm_medium=gongzhonghao&utm_content=datasets">膝关节 X 射线图像数据集</a></li>
+</ul>
+<p>脊椎 <a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/86496">Verse大规模脊椎分割数据集</a></p>
+<p>身体部位<a target="_blank" rel="noopener" href="https://www.cvmart.net/dataSets/detail/454?utm_campaign=zywang&utm_source=social&utm_medium=gongzhonghao&utm_content=datasets">X射线图像数据集</a></p>
+<h3 id="前列腺"><a href="#前列腺" class="headerlink" title="前列腺"></a>前列腺</h3><p>PANDA 前列腺<a target="_blank" rel="noopener" href="https://www.kaggle.com/competitions/prostate-cancer-grade-assessment/data">cANcer graDe评估（PANDA）挑战</a></p>
+<p>MSD<a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/23912">前列腺分割</a></p>
+<p>QIN-PROSTATE-<a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/63950">Repeatability</a></p>
+<h3 id="胰腺"><a href="#胰腺" class="headerlink" title="胰腺"></a>胰腺</h3><p><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/23914">MSD胰腺分割</a></p>
+<p><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/64052">PDMR-833975-119-R</a>胰腺腺癌患者来源异种移植模型的成像组织表征</p>
+<h3 id="皮肤"><a href="#皮肤" class="headerlink" title="皮肤"></a>皮肤</h3><p><a target="_blank" rel="noopener" href="https://www.kaggle.com/c/siim-isic-melanoma-classification/data">SIIM-ISIC 黑色素瘤分类</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cvmart.net/dataSets/detail/450?utm_campaign=zywang&utm_source=social&utm_medium=gongzhonghao&utm_content=datasets">皮肤病数据集</a></p>
+<h3 id="VQA"><a href="#VQA" class="headerlink" title="VQA"></a>VQA</h3><p>PathVQA </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/datasetdetail/25239">病理视觉回答</a></li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2003.10286">论文</a></li>
+</ul>
+<h3 id="内窥镜"><a href="#内窥镜" class="headerlink" title="内窥镜"></a>内窥镜</h3><p>SARAS-MESAD <a target="_blank" rel="noopener" href="https://saras-mesad.grand-challenge.org/">SARAS对多域内窥镜外科医生动作检测24</a></p>
+<p>SARAS-MESAD <a target="_blank" rel="noopener" href="https://saras-esad.grand-challenge.org/">SARAS内窥镜视力挑战外科医生动作检测21</a></p>
+<h3 id="医学影像数据库"><a href="#医学影像数据库" class="headerlink" title="医学影像数据库"></a>医学影像数据库</h3><p><a target="_blank" rel="noopener" href="https://www.cancerimagingarchive.net/">TCIA:The Cancer Imaging Archive</a></p>
+<p><a target="_blank" rel="noopener" href="https://ida.loni.usc.edu/login.jsp">LONI 神经相关医学影像</a></p>
+<p><a target="_blank" rel="noopener" href="https://medpix.nlm.nih.gov/home">MedPix 包含超过12000名患者和59000张影像</a></p>
+<p><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/projectdetail/431782">胸部\肺部ct数据集</a></p>
+<p><a target="_blank" rel="noopener" href="https://grand-challenge.org/">Grand Challenges</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>医学影像分割挑战<a target="_blank" rel="noopener" href="http://medicaldecathlon.com/">http://medicaldecathlon.com/</a></p>
+<p>adalca<a target="_blank" rel="noopener" href="https://github.com/adalca/medical-datasets">https://github.com/adalca/medical-datasets</a></p>
+<p>beamandrew<a target="_blank" rel="noopener" href="https://gitcode.net/mirrors/beamandrew/medical-data?utm_source=csdn_github_accelerator">https://gitcode.net/mirrors/beamandrew/medical-data?utm_source=csdn_github_accelerator</a></p>
+<p>Stanford ML Group<a target="_blank" rel="noopener" href="https://stanfordmlgroup.github.io/">https://stanfordmlgroup.github.io/</a></p>
+<p>omic tools<a target="_blank" rel="noopener" href="https://omictools.com/">https://omictools.com/</a></p>
+<p>各领域公开数据集<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/25138563">https://zhuanlan.zhihu.com/p/25138563</a></p>
+<p>medical-imaging-datasets<a target="_blank" rel="noopener" href="https://gitcode.net/mirrors/sfikas/medical-imaging-datasets?utm_source=csdn_github_accelerator">https://gitcode.net/mirrors/sfikas/medical-imaging-datasets?utm_source=csdn_github_accelerator</a></p>
+<p>Open-Access Medical Image Repositories<a target="_blank" rel="noopener" href="https://www.aylward.org/notes/open-access-medical-image-repositories">https://www.aylward.org/notes/open-access-medical-image-repositories</a></p>
+<p>Medical Image Datasets Download Links<a target="_blank" rel="noopener" href="https://www.aylward.org/notes/open-access-medical-image-repositories">https://www.aylward.org/notes/open-access-medical-image-repositories</a></p>
+<p>HAM10000 dataset<a target="_blank" rel="noopener" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T">https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DBW86T</a></p>
+<p>Dermatology Image Classification<a target="_blank" rel="noopener" href="https://www.kaggle.com/code/yuningalexliu/dermatology-image-classification/notebook">https://www.kaggle.com/code/yuningalexliu/dermatology-image-classification/notebook</a></p>
+<p>havard<a target="_blank" rel="noopener" href="https://library.med.utah.edu/kw/derm/">https://library.med.utah.edu/kw/derm/</a></p>
+<p>usc<a target="_blank" rel="noopener" href="https://library.med.utah.edu/kw/derm/">https://library.med.utah.edu/kw/derm/</a></p>
+<p>burkely<a target="_blank" rel="noopener" href="https://library.med.utah.edu/kw/derm/">https://library.med.utah.edu/kw/derm/</a></p>
+<p>radiopedia<a target="_blank" rel="noopener" href="https://radiopaedia.org/articles/imaging-data-sets-artificial-intelligence">https://radiopaedia.org/articles/imaging-data-sets-artificial-intelligence</a></p>
+<p>aimi<a target="_blank" rel="noopener" href="https://radiopaedia.org/articles/imaging-data-sets-artificial-intelligence">https://radiopaedia.org/articles/imaging-data-sets-artificial-intelligence</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/29/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/" title="0-A novel attention-guided convolutional network for the detection of">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-A novel attention-guided convolutional network for the detection of</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/29/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/" title="0-ESP-MedSAM: Efficient Self-Prompting SAM for Universal Domain-Generalized Medical Image Segmentation">
+                        <span class="hidden-mobile">0-ESP-MedSAM: Efficient Self-Prompting SAM for Universal Domain-Generalized Medical Image Segmentation</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

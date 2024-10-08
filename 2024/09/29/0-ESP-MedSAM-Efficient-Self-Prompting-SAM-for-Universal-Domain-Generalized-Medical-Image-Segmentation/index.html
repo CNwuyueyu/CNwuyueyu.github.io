@@ -1,0 +1,713 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ESP-MedSAM: Efficient Self-Prompting SAM for Universal Domain-Generalized Medical Image Segmentation  arXiv:2407.14153v4 [eess.IV] 18 Aug 2024 IEEE TRANSACTIONS ON MEDICAL IMAGING ESP-MedSAM： 用于通用域广义医">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-ESP-MedSAM: Efficient Self-Prompting SAM for Universal Domain-Generalized Medical Image Segmentation">
+<meta property="og:url" content="http://example.com/2024/09/29/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="ESP-MedSAM: Efficient Self-Prompting SAM for Universal Domain-Generalized Medical Image Segmentation  arXiv:2407.14153v4 [eess.IV] 18 Aug 2024 IEEE TRANSACTIONS ON MEDICAL IMAGING ESP-MedSAM： 用于通用域广义医">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20240925233026212.png">
+<meta property="og:image" content="http://example.com/images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20240926213054530.png">
+<meta property="og:image" content="http://example.com/images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20241004144116917.png">
+<meta property="og:image" content="http://example.com/images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20241004150740526.png">
+<meta property="og:image" content="http://example.com/images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20241004150838023.png">
+<meta property="article:published_time" content="2024-09-29T08:01:09.000Z">
+<meta property="article:modified_time" content="2024-10-08T03:13:00.771Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20240925233026212.png">
+  
+  
+  
+  <title>0-ESP-MedSAM: Efficient Self-Prompting SAM for Universal Domain-Generalized Medical Image Segmentation - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-ESP-MedSAM: Efficient Self-Prompting SAM for Universal Domain-Generalized Medical Image Segmentation"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-29 16:01" pubdate>
+          上传日期：2024年9月29日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-ESP-MedSAM: Efficient Self-Prompting SAM for Universal Domain-Generalized Medical Image Segmentation</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation"><a href="#ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation" class="headerlink" title="ESP-MedSAM: Efficient Self-Prompting SAM for Universal Domain-Generalized Medical Image Segmentation"></a>ESP-MedSAM: Efficient Self-Prompting SAM for Universal Domain-Generalized Medical Image Segmentation</h2><p><img src="/../images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20240925233026212.png" srcset="/img/loading.gif" lazyload alt="ESP-MedSAM"></p>
+<blockquote>
+<p>arXiv:2407.14153v4 [eess.IV] 18 Aug 2024 IEEE TRANSACTIONS ON MEDICAL IMAGING ESP-MedSAM： 用于通用域广义医学图像分割的高效自提示 SAM</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>SAM给医学图像分割提供了新的可能，但是SAM巨大的计算成本、对人工注释作为提示的需求以及容易发生冲突的解码过程降低了其在临床场景中的泛化性和适用性。为了解决这些问题，本文提出了一种高效的自提示 SAM，用于通用域广义医学图像分割，名为 ESP-MedSAM。首先设计了多模态解耦知识蒸馏 （MMDKD） 策略来构建一个轻量级的半参数共享图像编码器，为不同模态产生判别性视觉特征。此外引入了 Self-Patch Prompt Generator （SPPG） 来自动生成高质量的密集提示嵌入，用于指导分段解码。最后设计了查询解耦模态解码器 （QDMD），它利用一对一的策略为每种模态提供独立的解码通道。</p>
+<ul>
+<li>MMDKD 策略，将模态特定和模态常识从基础模型分别提炼到模态控制器和模态聚合器中。两者都构成了一个轻量级的半参数共享图像编码器，从而为不同的医疗模式生成了独特的特征</li>
+<li>设计了 SPPG 来自动生成高质量的补丁提示，而无需手动注释。这些提示用于指导分割掩码的预测。</li>
+<li>用于分段解码的 QDMD。它利用一对一策略为每种模式提供私有分段工作流，防止不同模式相互干扰。</li>
+<li>提炼的轻量级半参数共享图像编码器 SPPG 和 QDMD 来构建ESP-MedSAM 具有显著的泛化-效率权衡。对各种医学成像模式进行了广泛的实验，证明的 ESP-MedSAM 在通用域广义医学图像分割方面优于最先进的技术</li>
+</ul>
+<p>MedSAM 和 SAMMI  收集了超过 1M 的公共医学图像，以通过框和点提示对 SAM 进行全面微调，以实现域广义通用医学图像分割。然而，这种方法会迅速增加数据和计算成本，这在临床场景中既昂贵又不切实际。为了减轻迁移学习过程中对数据大小和计算资源的依赖，SAM 中引入了参数高效的微调技术。具体来说，Adapter 已被广泛用于集成到 SAM 的图像编码器中，以改进医学成像中的特征表示。但是无论那种方法都基于巨大的ViT编码器，有着复杂的计算，本文的方法克服了挑战，并说明了各种医学成像模式中卓越的泛化-效率权衡。</p>
+<p>本文的方法还使用了知识蒸馏，</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><img src="/../images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20240926213054530.png" srcset="/img/loading.gif" lazyload alt="ESP-MedSam"></p>
+<p> ESP-MedSAM 的端到端架构，用于通用医疗图像分割。</p>
+<p>（a） 多模态解耦知识蒸馏。</p>
+<ul>
+<li>教师模型</li>
+</ul>
+<p>多模态教师模型，该模型涉及 SAM 的自然图像编码器 FViT-SAM 和医学图像编码器 FViT-Med。在 SAM 中冻结图像编码器的权重，并额外创建一组可学习的标记。它们与多头注意力层的键和值通道连接，以学习医学图像中的新模式，从而更新注意力图。此外，将可学习的多层感知器并行到 ViT 中的前馈网络 （FFN） 中，以存储不同的模态信息。利用这个 FViT-Med 、 SPPG 和 QDMD 在医学源域 S 上实施微调。教师模型由焦点损失和骰子损失的组合进行监督，FViT-SAM 和 FViT-Med 能够分别提供模态常识和模态特异性知识。</p>
+<ul>
+<li>解耦知识蒸馏</li>
+</ul>
+<p>分割掩码的质量取决于从图像编码器中提取的特征。从分而治之算法中汲取灵感，作者提出 MMDKD 方法将 KD 过程解耦为两个子任务：模态公共特征蒸馏和模态特定特征蒸馏。在模态共同特征蒸馏过程中，目标是将知识从 FViT-SAM 转移到模态聚合器 FMA，MMDKD 策略为每种医学成像模式提供了一个私有蒸馏通道，防止不同模式相互干扰。</p>
+<ul>
+<li>轻量级半参数共享图像编码器</li>
+</ul>
+<p>为了无缝协调不同模态的特征表示，采用提炼的模态控制器和模态聚合器来构建一个轻量级的半参数共享图像编码器，总体而言，与 SAM 相比， MMDKD 方法有效地降低了图像编码器的计算成本，同时保留了生成可泛化特征图的能力。</p>
+<p>（b） Self-Patch Prompt 生成器。</p>
+<p>目前的医疗SAM和轻量级SAM主要利用手动提示（例如，点和框）来指导模型提供满意的分割掩码。然而，这些方法依赖于病理学家在医疗场景中的经验，这既昂贵又耗时。为了消除对手动注释的需求，作者使用包含补丁生成器和密集提示（DP）编码器的 SPPG，以自动生成一组高质量的补丁提示，以协助分割解码：</p>
+<p><img src="/../images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20241004144116917.png" srcset="/img/loading.gif" lazyload alt="Self-Patch Prompt Generator "></p>
+<p>通过这种方式，SPPG 模块自动生成一组高质量的密集提示 p 来指导分割掩码的预测，提高了 ESP-MedSAM 在临床场景中的适用性。</p>
+<p>（c） 查询解耦模态解码器。</p>
+<p>SAM的掩码解码器利用与模态无关的查询标记来处理自然图像中的所有分割任务。但是，这并不是医学图像分割的最佳选择。由于各种医学成像模态存在固有的异质性，这种常见的预测通道存在解码冲突，降低了模型的泛化能力，ESP-MedSAM 框架提出了 QDMD。 QDMD 为每种模态提供了一个独立的解码过程，避免了不同模态之间相互冲突的固有异质性，提高了 ESP-MedSAM 框架的泛化能力。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20241004150740526.png" srcset="/img/loading.gif" lazyload alt="与通用医学图像分割（源域）中最先进的框架进行比较。"></p>
+<p><img src="/../images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20241004150838023.png" srcset="/img/loading.gif" lazyload alt="与域广义医学图像分割（看不见的域）中最先进的框架进行比较。"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通用医学图像分割的 ESP-MedSAM 框架引入了 MMDKD 策略，将基础模型中的知识提炼到模态控制器和模态控制器中，以创建一个用于判别特征生成的半参数共享图像编码器。然后，SPPG 被设计出来自动生成一组高质量的补丁提示，以协助分割解码。最后，QDMD 为每种模态定制了特定的分割工作流程。大量实验表明，ESP-MedSAM 的计算复杂度低于标准 SAM，在各种医学成像分割任务中优于 SOTA 任务特定架构和轻量级 SAM，表现出卓越的零样本泛化和通用能力。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/29/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E6%95%B0%E6%8D%AE%E9%9B%86/" title="医学影像数据集">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">医学影像数据集</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/29/0-Learnable-Ophthalmology-SAM/" title="0-Learnable Ophthalmology SAM">
+                        <span class="hidden-mobile">0-Learnable Ophthalmology SAM</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

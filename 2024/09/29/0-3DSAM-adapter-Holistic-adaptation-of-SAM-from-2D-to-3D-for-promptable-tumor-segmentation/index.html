@@ -1,0 +1,700 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="3DSAM-adapter: Holistic adaptation of SAM from 2D to 3D for promptable tumor segmentation  3DSAM 适配器：SAM 从 2D 到 3D 的整体适应，用于及时的肿瘤分割 2024年8月  背景SAM框架对于日常的图像已经有良好的分割性能，但是在医学图像分割上表现出的性能不太精确且不稳定，尤其是在处理涉及小尺">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-3DSAM-adapter: Holistic adaptation of SAM from 2D to 3D for promptable tumor segmentation">
+<meta property="og:url" content="http://example.com/2024/09/29/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="3DSAM-adapter: Holistic adaptation of SAM from 2D to 3D for promptable tumor segmentation  3DSAM 适配器：SAM 从 2D 到 3D 的整体适应，用于及时的肿瘤分割 2024年8月  背景SAM框架对于日常的图像已经有良好的分割性能，但是在医学图像分割上表现出的性能不太精确且不稳定，尤其是在处理涉及小尺">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240911160429772.png">
+<meta property="og:image" content="http://example.com/images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240913205057950.png">
+<meta property="og:image" content="http://example.com/images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240913213048917.png">
+<meta property="og:image" content="http://example.com/images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240913214011374.png">
+<meta property="og:image" content="http://example.com/images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240913214109207.png">
+<meta property="article:published_time" content="2024-09-29T07:56:53.000Z">
+<meta property="article:modified_time" content="2024-09-29T11:59:12.557Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240911160429772.png">
+  
+  
+  
+  <title>0-3DSAM-adapter: Holistic adaptation of SAM from 2D to 3D for promptable tumor segmentation - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-3DSAM-adapter: Holistic adaptation of SAM from 2D to 3D for promptable tumor segmentation"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-29 15:56" pubdate>
+          上传日期：2024年9月29日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-3DSAM-adapter: Holistic adaptation of SAM from 2D to 3D for promptable tumor segmentation</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation"><a href="#3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation" class="headerlink" title="3DSAM-adapter: Holistic adaptation of SAM from 2D to 3D for promptable tumor segmentation"></a>3DSAM-adapter: Holistic adaptation of SAM from 2D to 3D for promptable tumor segmentation</h2><p><img src="/../images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240911160429772.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
+<blockquote>
+<p>3DSAM 适配器：SAM 从 2D 到 3D 的整体适应，用于及时的肿瘤分割 2024年8月</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>SAM框架对于日常的图像已经有良好的分割性能，但是在医学图像分割上表现出的性能不太精确且不稳定，尤其是在处理涉及小尺寸、不规则形状和低对比度物体的肿瘤分割任务时。最初的SAM是为了自然界2D图像而设计的，无法有效的获取医学图像中3D空间信息，所以在本文中作者提出了一种新的适应方法，用于将 SAM 从 2D 转移到 3D 以进行可提示的医学图像分割。</p>
+<p>本文提出了一种新的参数高效自适应方法，以全面将 SAM 从 2D 适应 3D 以进行医学图像分割。修改了图像编码器以支持体积输入，同时重用预先训练的权重。在提示编码器级别，引入了用于点提示的视觉采样器，并使用全局查询来过滤掉噪声，解决了过度平滑问题，并提高了模型的稳健性。对于掩码解码器，优先考虑具有多层聚合的轻量级设计。结果表明，本文的方法可以大大优于现有方法。该方法还显示了提示符的数量和位置的稳健性。例如，肿瘤边缘的单个点也可以作为准确分割的提示。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><img src="/../images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240913205057950.png" srcset="/img/loading.gif" lazyload alt="3DSAM"></p>
+<p>1.SAM框架：<a herf="#">LINK</a></p>
+<p>2.体积输入编码器：使用2DViT编码器适应3D图像信息，通过补丁嵌入、位置编码、注意块、瓶颈机制将2DViT修改到支持3DViT，同时保持大部分参数可重用。</p>
+<p>![(C:&#x2F;Users&#x2F;Wuyueyu&#x2F;Desktop&#x2F;1&#x2F;SAM&#x2F;image&#x2F;3DSAM-adapter%2520Holistic%2520adaptation%2520of%2520SAM%2520from%25202D%2520to%25203D%2520for%2520promptable&#x2F;image-20240913205743398.png)空间适配器 (b)视觉采样器](image&#x2F;3DSAM-adapter Holistic adaptation of SAM from 2D to 3D for promptable&#x2F;image-20240913205743398.png)</p>
+<p>a）在下投影层之后附加了一个深度 3D 卷积，以便适配器可以更好地利用 3D 空间信息。将空间适配器放置在两个相邻的注意力块之间。在每个注意力块之后，得到了大小为 [B， DHW， c] 的潜在特征图。然后，此特征图被重塑为 [B， c， D， H， W] 并通过空间适配器，从而产生相同大小的自适应特征图。然后，调整后的特征图被重塑回大小 [B， DHW， c] 并插入到随后的注意力块中。通过冻结方案让训练时有良好的内存效率，和对之前信息的记忆力。</p>
+<p>3.提示编码器</p>
+<p>b)视觉采样器<br>$$<br>P_s&#x3D;VisualSampler(s,Z)<br>$$<br>其中 s 是从提示点的坐标，Z 是从图像中提取的特征图，Ps 是提示的嵌入。给定特征图 Z，每个网格对应于一个长度为 c 的潜在向量。通过三线性插值，也可以从特征图中采样非整数位置的视觉特征。这种设计可以更好地利用空间信息，根据点提示的坐标直接从图像特征图中采样，从而在保证图像嵌入和提示嵌入之间的对齐的同时，避免了每个标记的权重计算。通过双向注意力机制将提示嵌入与图像嵌入融合（a）-&gt;</p>
+<p><img src="/../images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240913213048917.png" srcset="/img/loading.gif" lazyload alt="（a） 通过交叉注意力进行提示嵌入和图像嵌入融合的图示。（b） 具有多层聚合的轻量级掩码解码器的结构图"></p>
+<p>由于点和提示词的全局查询的数量都非常小，缓解了过度平滑的问题，提高对干扰点的容忍度。从背景中随机采样10个点提高模型对嘈杂提示的鲁棒性，在One-Prompt表现也很好。</p>
+<p>4.解码器-轻量级</p>
+<p>将2D卷积替换为3D卷积，生成3D掩码，医学图像需要更加精细的像素划分，作者在保持轻量级的同时使用了多层聚合机制（b)，</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>实验集中在肿瘤分割上。</p>
+<p><img src="/../images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240913214011374.png" srcset="/img/loading.gif" lazyload alt="肿瘤分割"></p>
+<p>与公认的和最新的最先进的域分割方法比较。</p>
+<p><img src="/../images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240913214109207.png" srcset="/img/loading.gif" lazyload alt="3D 透视图可视化预测的分割掩码"></p>
+<p>从 3D 透视图可视化预测的分割掩码。与基线相比，我们的方法可以生成具有更多切片间平滑度和连贯性的蒙版</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文提出了一种新的参数高效适应方法，将 SAM 从 2D 整体适应 3D 以进行可及时的肿瘤分割。对图像编码器的修改是专门为支持体积输入而设计的，同时重用预先训练的权重。该文提出视觉采样器与全局查询一起，在提示编码器层面取代原来的交叉注意力机制，可以过滤掉提示中的噪声，缓解随着维度上升而过度平滑的问题。掩码解码器中使用了多层聚合，以更好地利用编码器的中间功能。在几个公共肿瘤分割数据集上的实验表明，本文的方法优于最先进的医学图像分割模型和现有的参数高效微调方法。</p>
+<p>目前存在的问题：一个观察结果是，尽管许多基于 transformer 的方法在多类分割方面可以优于 nnU-Net，但对于纯肿瘤分割，总体趋势是基于 CNN 的方法具有更好的性能并且更容易训练。这可能是因为肿瘤的大小非常小，肿瘤检测更多地依赖于局部纹理信息。因此，全局信息，即transformer 的强度不再有用。因为 SAM 基于 ViT，在第一次降采样操作期间可能会丢失大量详细的纹理信息。未来的方向可能需要如何调整架构以恢复这些纹理细节，以便性能能够以全自动的方式实现 SOTA。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/29/0-Segment-Anything-Model-for-Medical-Images/" title="0-Segment Anything Model for Medical Images">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-Segment Anything Model for Medical Images</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/29/%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" title="医学图像处理">
+                        <span class="hidden-mobile">医学图像处理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Segment Anything Model for Medical Images？  分割所有医学图像模型？ arXiv:2304.14660v5 [eess.IV] 12 Dec 2023  MED SAM  背景Segment Anything Model （SAM） 是第一个用于常规图像分割的基础模型。它在各种自然图像分割任务上取得了令人印象深刻的成果。然而，由于模态复杂、解剖结构精细、对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-Segment Anything Model for Medical Images">
+<meta property="og:url" content="http://example.com/2024/09/29/0-Segment-Anything-Model-for-Medical-Images/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="Segment Anything Model for Medical Images？  分割所有医学图像模型？ arXiv:2304.14660v5 [eess.IV] 12 Dec 2023  MED SAM  背景Segment Anything Model （SAM） 是第一个用于常规图像分割的基础模型。它在各种自然图像分割任务上取得了令人印象深刻的成果。然而，由于模态复杂、解剖结构精细、对">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20240921133338408.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006163847704.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006163925591.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006164317466.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006181834883.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006184728915.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006184919651.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006192028760.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006192114067.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006192551961.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006192712036.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006192142244.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006193506239.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006193534261.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006193552209.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006193707566.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006193847488.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006194100272.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006194356144.png">
+<meta property="og:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20241006194425816.png">
+<meta property="article:published_time" content="2024-09-29T07:57:15.000Z">
+<meta property="article:modified_time" content="2024-10-08T03:12:41.871Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-Segment-Anything-Model-for-Medical-Images/image-20240921133338408.png">
+  
+  
+  
+  <title>0-Segment Anything Model for Medical Images - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-Segment Anything Model for Medical Images"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-29 15:57" pubdate>
+          上传日期：2024年9月29日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          16k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          130 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-Segment Anything Model for Medical Images</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Segment-Anything-Model-for-Medical-Images？"><a href="#Segment-Anything-Model-for-Medical-Images？" class="headerlink" title="Segment Anything Model for Medical Images？"></a>Segment Anything Model for Medical Images？</h2><p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20240921133338408.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
+<blockquote>
+<p>分割所有医学图像模型？ arXiv:2304.14660v5 [eess.IV] 12 Dec 2023 </p>
+<p>MED SAM</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>Segment Anything Model （SAM） 是第一个用于常规图像分割的基础模型。它在各种自然图像分割任务上取得了令人印象深刻的成果。然而，由于模态复杂、解剖结构精细、对象边界不确定且复杂以及对象尺度宽，医学图像分割 （MIS） 更具挑战性。为了充分验证 SAM 在医疗数据上的性能，本文收集并分类了 53 个开源数据集，并构建了一个大型医疗分割数据集，其中包含 18 种模态、84 个对象、125 个对象-模态配对目标、1050K 2D 图像和 6033K 掩码。在所谓的 COSMOS 1050K 数据集上全面分析了不同的模型和策略。发现主要包括以下几点：</p>
+<ol>
+<li>SAM 在某些特定目标上表现出优异的性能，但在其他情况下不稳定、不完美甚至完全失效。</li>
+<li>使用大型 ViT-H 的 SAM 比使用小型 ViTB 的 SAM 表现出更好的整体性能。</li>
+<li>SAM 在手动提示（尤其是框）下的表现优于 Everything 模式。</li>
+<li>SAM 可以帮助人工注释，提高标记质量和减少时间。</li>
+<li>SAM 对中心点的随机性和紧凑的框提示很敏感，可能会出现严重的性能下降。</li>
+<li>SAM 的表现优于具有 1 个或几个点的交互式方法，但随着点数的增加，SAM 的性能会超过。</li>
+<li>SAM 的性能与不同因素相关，包括边界复杂性、强度差异等。</li>
+<li>在特定医疗任务上微调 SAM 可以使其 ViT-B 和 ViT-H 的平均 DICE 性能分别提高 4.39% 和 6.68%。</li>
+</ol>
+<p>ChatGPT和GPT-4等大型语言模型的出现引发了自然语言处理 （NLP） 的新时代，其特点是其卓越的零样本和少样本泛化能力。这一进展激发了研究人员为计算机视觉 （CV） 开发类似的大规模基础模型。第一个提出的基础 CV 模型主要基于 CLIP  和 ALIGN  等预训练方法。CLIP 可以通过将视觉概念和细节（如对象形状、纹理和颜色）与相应的文本描述相关联来识别和理解它们。这使得 CLIP 能够执行广泛的任务，包括图像分类、对象检测，甚至视觉问答。ALIGN 可以生成图像区域的自然语言描述，提供比传统图像字幕方法更详细、更易解释的结果。DALL·E  的开发是为了从文本描述中生成图像。该模型是在文本-图像对的大型数据集上训练的，该数据集可以创建各种图像，从逼真的对象到结合多个概念的超现实场景。但是，这些模型尚未针对图像分割进行明确优化，尤其是医学图像分割 （MIS）。</p>
+<p>最近，SAM 被提议作为图像分割的创新基础模型。SAM 基于视觉转换器 （ViT） 模型，并在一个包含 10 亿个蒙版的 1100 万张图像的大型数据集上进行训练。SAM 最大的亮点是它对看不见的数据集和任务具有良好的零镜头分割性能。这个过程由不同的提示（例如点和框）驱动，用于指示目标对象的像素级语义和区域级位置。它已被证明具有高度的通用性，能够处理广泛的分割任务。基于SAM的预训练模型，几篇论文进一步研究了它在不同的零镜头分割场景中的性能。大致将它们分为两类：1） 非医疗和 2） 医疗应用</p>
+<ul>
+<li>非医学图像应用中的 SAM</li>
+</ul>
+<p>研究侧重于测试 SAM 在 Everything 模式下分割伪装对象的性能。结果表明，它在这些场景中的表现很差，例如，视觉上隐藏在自然环境中的伪装动物。作者发现，SAM 未能检测到工业场景中的隐藏缺陷。探索了三种测试用于各种应用程序的 SAM 方法（点、框和所有内容）。具体来说，他们的任务涵盖自然图像（突出&#x2F;伪装&#x2F;透明对象分割和阴影检测）、农业（作物分割和病虫害和树叶病害监测）、制造（异常和表面缺陷检测）和遥感（建筑和道路开采）。他们得出的结论是，尽管 SAM 可以在某些情况下实现良好的性能，例如突出对象分割和农业分析，但在其他应用中产生的结果很差。他们还验证，与自动 Everything 方法相比，人工提示可以有效地优化细分结果。</p>
+<ul>
+<li>医学影像分析中的 SAM</li>
+</ul>
+<p>J评估了 Everything 模式下在各种解剖结构（例如，大脑、肺和肝脏）和模式（计算机断层扫描 （CT） 和磁共振成像 （MRI））中分割病变区域时的 SAM。实验结果表明，SAM 相对擅长分割边界清晰的器官区域，但可能难以准确识别无定形病变区域。然后，另一项研究使用自动 Everything 和两种手动提示（点和框）策略（Ji et al.， ）评估了 SAM 在一些医疗保健子领域（视神经检查和眼底、息肉和皮肤病变分割）的性能。作者发现，SAM 需要大量的人类先验知识（即提示点）才能在这些任务上获得相对准确的结果。否则，SAM 会导致错误的分段，尤其是在未给出提示的情况下。在使用 MRI 的大脑提取任务中，M等人将 SAM 与 FMRIB 软件库的大脑提取工具 （BET） 进行了比较。定量结果表明，SAM 的分割结果优于 BET，证明了 SAM 在脑提取任务中的应用潜力。邓评估了 SAM 在数字病理分割任务中的性能，包括全玻片成像上的肿瘤、非肿瘤组织和细胞核分割。结果表明，SAM 为大型连接对象提供了出色的分割结果。</p>
+<p>但是，对于密集实例对象分割，它可能无法始终如一地实现令人满意的性能，即使提示所有目标框或每个图像 20 个点也是如此。周在 Everything 设置下使用五个基准数据集将 SAM 应用于息肉分割任务。结果表明，尽管 SAM 在某些情况下可以准确分割息肉，但 SAM 与最先进的方法之间存在很大差距。此外，Liu为 3D Slicer 软件 配备了 SAM，以协助在医学图像上开发、评估和利用 SAM。最近，几项研究在 ≥10 个公共 MIS 数据集或任务上测试了 SAM，一组研究员得出的结论是，SAM 的零镜头分割性能远不如传统的基于深度学习的方法。另一种的作者使用不同数量的点提示评估了 SAM 的性能，他们观察到，随着点的增加则 SAM 的性能会收敛。他们还注意到，SAM 的性能 1） 总体中等，2） 在不同数据集和案例中极不稳定。马和Wang验证了原始 SAM 在许多医学数据集上可能会失败，平均 DICE 评分为 58.52%。然后，他们使用医学图像对 SAM 进行了微调，发现与 SAM 相比，拟议的 MedSAM 在 DICE 上实现了 22.51% 的改进。Wu 等人采用 Adapter 技术对 SAM 进行微调并增强其医疗能力。实验验证了他们提出的医用 SAM适配器可以胜过最先进的 （SOTA） MIS 方法（例如，nnUnet ）。虽然上述工作调查了 SAM 在 MIS 中的表现，但它们至少存在以下限制之一：</p>
+<ol>
+<li>小数据集。以前的研究仅评估了 SAM 在 MRI、CT 和数字病理学等模式中的表现。它们包含有限数量的分段对象。然而，医学图像包含多种模态和许多解剖结构或其他需要分割的物体。这限制了上述研究在 MIS 领域的综合分析等人，</li>
+<li>单一 SAM 测试策略。大多数以前的研究用有限甚至只有一种类型的测试模式&#x2F;策略评估了 SAM。然而，不同的医疗对象通常表现出不同的特性，因此可能有自己合适的测试模式。有限的测试策略可能导致对 SAM 的分析不准确和不完整。</li>
+<li>缺乏全面和深入的评估。一些现有工作仅通过在线演示提供的可视化结果评估了 SAM。此外，一些研究仅关注有限的指标（例如 DICE 或 IOU）来评估 SAM 的性能。大多数研究没有调查 SAM 对医疗对象的感知。因此，SAM 的分割性能与医疗对象属性之间的相关性没有得到仔细进行。</li>
+</ol>
+<p>对医疗物体感知的分析至关重要。它可以帮助社区更好地了解影响 SAM 分割性能的因素（即感知医疗对象的能力），从而更好地开发新一代通用医疗分割模型。在本报告中，构建了一个名为 COSMOS 1050K 的大型医学图像数据集，包括 1050K 图像，具有 18 种不同的模态（见图 1）和 84 个对象（例如，解剖结构、病变、细胞、工具等），以覆盖整个身体（见图 2）。这可以帮助我们全面分析和评估 SAM 在医学图像上的性能。然后，我们充分探索了 SAM 的不同测试策略，并提供了丰富的定量和定性实验结果，以展示 SAM 对医疗对象的感知。最后，我们深入评估了 SAM 的性能与对象的特性（例如，复杂性、对比度和大小）之间的相关性。我们希望这份全面的报告可以为社区提供一些关于医疗 SAM 未来发展的见解。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006163847704.png" srcset="/img/loading.gif" lazyload alt="图1 "></p>
+<p>COSMOS 1050K 数据集包含各种模式，涉及 （a） CT，（b） MRI，（c） T1 加权 （T1W） MRI，（d） T2 加权 （T2W） MRI，（e） ADC MRI，（f） 电影 MRI，（g） CMR，（h） 弥散加权 （DW） MRI，（i） 造影剂后 T1 加权 （T1-GD） MRI，（j） T2 液体衰减反转恢复 （T2- FLAIR） MRI，（k） 组织病理学，（l） 电子显微镜，（m） 超声 （US），（n） X 射线，（o） 眼底， （p） 结肠镜检查，（q） 皮肤镜检查和 （r） 显微镜检查。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006163925591.png" srcset="/img/loading.gif" lazyload alt="图2"></p>
+<p>COSMOS 1050K 数据集涵盖了大多数生物医学对象，例如脑肿瘤、眼底脉管系统、甲状腺结节、脊柱、肺、心脏、腹部器官和肿瘤、细胞、息肉和仪器。</p>
+<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>医学影像有多种模式，例如 CT、MRI、超声 （US） 和 X 射线。不同模态之间存在较大的域差距，各种模态在可视化特定对象（包括解剖结构和病变）方面有其优势。为了全面评估 SAM 在 MIS 中的泛化性能，作者收集了 53 个公共数据集并对其进行标准化以构建大型 COSMOS 1050K 数据集。对于 COSMOS 1050K 的分类系统（例如，模态分类），参考了每个公共数据集的官方介绍和最近发表的研究（表1）。图 1 和图 2 分别说明了数据集中涵盖的各种成像模式和大多数临床分割对象。作者从以下两个方面对 COSMOS 1050K 进行了详细介绍，包括图像采集和预处理规范。</p>
+<h4 id="1-数据集合"><a href="#1-数据集合" class="headerlink" title="1.数据集合"></a>1.数据集合</h4><p>医学图像涵盖广泛的对象类型，例如脑器官和肿瘤、肺和心脏、腹部、脊柱、细胞和息肉。表 1 列出了收集的 MIS 数据集的详细列表，图 3 （a） 显示了预处理后每个数据集的数量。为了与评估 SAM 的不同模式兼容，采用了以下排除标准：</p>
+<p>1） 排除极小的物体，例如图 4 （a） 所示的耳蜗和输尿管。这是因为在极小的对象上自动生成点或框提示很困难。</p>
+<p>2） 排除 3D 体积中随着切片顺序提取而其整体目标明显分离的物体，例如肠道（如图 4 （b） 所示）、下颌骨和甲状腺。我们的目标是避免混淆主对象并为每个对象生成唯一的框。</p>
+<p>3） 排除整体结构相对离散的物体，例如乳腺癌的组织病理学图像（见图 4 （c））、肺气管树切片（见图 4 （d））、肾动脉和静脉。</p>
+<p>这些对象中的大多数在 2D 切片中分散为多个项目，并嵌入到其他对象中，导致无法合理地对这些对象使用 SAM 的提示模式进行验证。根据上述标准，COSMOS 1050K 现在总共包含 84 个对象，它们的数量如图 3 （b） 所示。这些对象在一张图像中仅分类一次，没有区分位置或详细划分（例如，“左肺”和“右肺”被归类为“肺”，各种器械被视为“工具”）。更多细节可以在图 3 的图例中找到。模态和图像分辨率的直方图分布分别显示在图 3 （c） 和图 3 （d） 中。鉴于同一对象在不同模态中的显著变化，包括灰度分布和纹理特征的差异，我们进一步将它们分为 125 个对象-模态配对目标。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006164317466.png" srcset="/img/loading.gif" lazyload alt="图3"></p>
+<p>COSMOS 1050K 数据集的统计数据。</p>
+<p>（a） 预处理后的数据集数量。</p>
+<p>（b） 84 个对象数量的直方图分布，如图例中提供的缩写映射所示。</p>
+<p>（c） 模态数量。</p>
+<p>（d） 图像分辨率的直方图分布。在 （d） 中，每个条形代表一个区域间隔分布，例如 128 ∗ 128 代表图像区域间隔 （0， 128 ∗ 128）;256 ∗ 256 表示图像区域间隔（128 ∗ 128、256 ∗ 256）。</p>
+<h4 id="2-数据集预处理规范"><a href="#2-数据集预处理规范" class="headerlink" title="2.数据集预处理规范"></a>2.数据集预处理规范</h4><p>COSMOS 1050K 包含不同的标签、模态、格式和形状。此外，原始版本的 SAM 仅支持 2D 输入，而 2D 格式是 3D&#x2F;4D 格式的基础，甚至是基本组件。为了标准化不同数据集中的数据，对每个收集的公共数据集应用了以下预处理步骤。对于 3D 体积，整个过程可以总结如下：</p>
+<p>1） 由于其分辨率更高，沿主观察平面提取切片。在 CT 中，它通常是横向的平面，而在 MRI 中，它可能是横向平面，例如前列腺、脑肿瘤，或矢状面，例如脊柱和心脏。</p>
+<p>2） 保留标签像素值之和较大的切片,对于任何 3D 图像和标签体积，都大于 50。这可确保每个切片都有相应的正确标签。</p>
+<p>3） 通过最小-最大归一化对提取的图像强度进行归一化：</p>
+<p>$I_n &#x3D; 255 ∗ （I − I_{min}）&#x2F;（I_{max} − I_{min}）$，将范围限制为 （0， 255）。$I$ 表示原始提取的图像，$I_n$ 表示标准化的图像。$Imin$ 和 $Imax$ 是 $I$ 的最小和最大强度值。同时，我们根据对象的类别或位置重置蒙版的像素值（例如，左肾和右肾具有不同的像素值）。这是因为医学图像的体素或像素值可能差异很大。示例包括强度范围为 （0， 800） 的 MRI 和强度范围为 （-2000， 2000） 的 CT，而其他模式可能已经在 （0， 255） 范围内。</p>
+<p>4） 以 PNG 格式保存图像和标签。对于 4D 数据 （N、W、H、D），我们将数据转换为 N 组 3D 体积，然后遵循 3D 体积处理流程。其中， N 表示 4D 数据中成对的体积数。对于 2D 图像，预处理如下：</p>
+<ul>
+<li>保留标签像素值之和大于 50 的图像。</li>
+<li>根据对象类别或位置在 1 到 255 的范围内重置标签的像素值。对于 CellSeg 挑战-NeurIPS 2022，由于原始标签值的范围很广 （1-1600），我们将每个图像和标签重建为几个子图形，以确保标签范围一致。</li>
+<li>将图像和标签的格式从 BMP、JPG、TIF 等转换为 PNG，以实现一致的数据加载。COSMOS 1050K 总共由 1,050,311 个 2D 图像或切片组成，其中 1,003,809 个切片来自 8,653 个 3D 体积，46,502 个是独立的 2D 图像。此外，该数据集包含 6,033,198 个掩码。</li>
+</ul>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><h4 id="1-SAM-简介"><a href="#1-SAM-简介" class="headerlink" title="1.SAM 简介"></a>1.SAM 简介</h4><p>SAM 与传统的分割框架不同，引入了一种新的可提示分割任务，该任务由灵活的支持提示的模型架构和大量多样的训练数据源提供支持。提出了一个数据引擎来构建一个循环过程，该过程利用该模型来促进数据收集，并随后利用新的收集的数据以增强模型的性能。最后，SAM 在一个庞大的数据集上进行了训练，该数据集包含来自 1100 万张许可 2D 图像的超过 10 亿个掩码。如图 5 所示，SAM 主要包含三个组件：图像编码器、提示编码器和掩码解码器。图像编码器以 ViT 为支柱，由掩蔽自动编码器 （MAE） 技术进行预训练。它采用一张图像作为输入，并输出图像嵌入，以便与后续的提示编码组合。提示编码器由密集 （掩码） 和稀疏 （点、框和文本） 分支组成。密集分支通过卷积神经网络 （CNN） 对掩码提示进行编码。对于稀疏的，点和框可以用位置编码来表示，而文本则用 CLIP 嵌入。最后，掩码解码器解码所有嵌入并预测掩码。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006181834883.png" srcset="/img/loading.gif" lazyload alt="图5 SAM的pipeline"></p>
+<p>在测试期间，SAM 支持自动 Everything 模式和手动 Prompt 模式。对于前者，用户只需将图像输入到 SAM，然后所有预测的掩码都会自动生成。对于后者，用户手动向 SAM 提供一些额外的提示，包括掩码、框、点和文本，以便 SAM 提供有关分割对象的更多信息。这两种模式的详细信息将在以下小节中介绍。值得注意的是，SAM 只能在图像中找到多个目标，而不会输出它们的详细类别 （即 single-label： object 与否）。在官方 GitHub 存储库中，作者提供了三种具有不同主干大小的预训练模型，分别是 ViTB、ViT-L 和 ViT-H。它们的模型参数范围从小到大。K等人中，ViT-H 显示出比 ViT-B 有显着的性能改进。但是，由于复杂性增加，前者需要成倍的测试时间。</p>
+<p>在评估医学图像中的 SAM 时，一项研究使用了六个医学数据集，发现 ViT-B、ViT-L 和 ViT-H 中没有明显的赢家。在本文的研究中，我们选择了最小的 ViT-B（具有 12 个transformer层和 91M 参数）和最大的 ViT-H（具有 32 个transformer层和 636M 参数）作为编码器来运行所有测试模式。作者希望在大型 COSMOS 1050K 上对不同大小的模型进行综合评估，可以为研究人员提供更多的启发。</p>
+<h4 id="2-AUTOMATIC-EVERYTHING-自动）模式"><a href="#2-AUTOMATIC-EVERYTHING-自动）模式" class="headerlink" title="2.AUTOMATIC EVERYTHING (自动）模式"></a>2.AUTOMATIC EVERYTHING (自动）模式</h4><p> 在一切模式 （$S_1$） 中，SAM 为整个图像中的所有潜在对象生成分割蒙版，无需任何手动先验。该过程的初始步骤涉及生成覆盖整个图像的点提示网格（即网格采样）。根据均匀采样的网格点，提示编码器将生成点嵌入并将其与图像嵌入相结合。然后，掩码解码器将组合作为输入，并为整个图像输出几个可能的掩码。随后，应用过滤机制，使用置信度分数、基于阈值抖动的稳定性评估和非极大值抑制 （NMS） 技术去除重复和低质量的掩码。</p>
+<h4 id="3-手动提示模式"><a href="#3-手动提示模式" class="headerlink" title="3.手动提示模式"></a>3.手动提示模式</h4><p> 在提示模式下，SAM 提供了不同类型的提示，包括点、框和文本。点提示包括正点和负点，分别表示一个对象的前景和背景。框提示表示需要分段的对象的空间区域。此外，文本提示指示一个句子（即位置、颜色、大小等基本信息）来描述对象。值得注意的是，文本提示尚未在官方 GitHub 存储库上发布。如图 5 所示，本文的提示模式包含五个策略，包括 1 个正点 （$S_2$）、5 个正点 （$S_3$）、5 个正点和 5 个负点 （$S_4$）、1 个框 （$S_6$） 和 1 个框带 1 个正点 （$S_6$）。作者进一步建立了统一的点选择规则，以确保随机性、可重复性和准确性。对于正点选择，</p>
+<p>a） 首先计算了真实 （GT） 掩码的质心（图 5 中的红点）。</p>
+<p>b） 如果质心在 GT 掩码内，我们将质心作为第一个正点。</p>
+<p>c） 然后，我们直接将 GT 掩码展平为一维向量，并通过采用 uniform 获得其他正点采样方法（图 5 中的绿点）。</p>
+<p>d） 如果质心在 GT 掩码之外，则通过执行步骤 c 将获得所有需要的正点。</p>
+<p>对于负点选择，目标是避免选择离目标区域太远的点。具体来说，首先将 GT 的边界框放大了两倍。负点是通过在非 GT 区域进行均匀采样生成的（图 5 中的黄点）。最后，对于框的选择，直接采用了 GT 掩码的边界框，无需任何额外的操作。上述策略可以保证实验的可重复性。此外，倾向于通过选择质心和紧密箱来测试 SAM 的理论最佳性能。因为它们可能包括目标最具代表性的特征。需要注意的是，SAM 允许将多个提示一次输入到网络中。因此，为了公平地进行比较，测试了上述五种提示策略 （$S_2-S_6$） 下 SAM 的单轮交互性能。</p>
+<h4 id="4-推理效率"><a href="#4-推理效率" class="headerlink" title="4.推理效率"></a>4.推理效率</h4><p>使用不同的策略对图像进行了多次测试 （n） 以获得最终评估（见图 5）。在 SAM 的原始代码逻辑和设计中，需要对一张图像进行 n 次相同的编码操作，这导致多策略测试场景的运行效率不佳。当使用高分辨率输入时，情况会变得更糟。基于这一观察，提前计算了所有输入图像的嵌入特征，并将它们保存为中间文件。因此，可以重复使用图像嵌入以减轻推理管道的计算负担。因此，SAM 测试的整体效率可以提高近 n 倍。SAM 中的测试策略越多，可以节省的时间就越多。这可以简单地扩展到 SAM 的其他多策略测试场景。</p>
+<h4 id="用于分割评估的掩码匹配机制"><a href="#用于分割评估的掩码匹配机制" class="headerlink" title="用于分割评估的掩码匹配机制"></a>用于分割评估的掩码匹配机制</h4><p> SAM 为每个输入图像生成了多个二进制掩码，但并非所有掩码都包含相应的对象。因此，提出了一种掩码匹配机制，在每种模式下使用 SAM 评估分割性能。具体来说，对于给定图像中的对象（前景之一），我们计算了一组骰子分数 ${DICE_n}^N_{n&#x3D;1} $在 N 个二进制预测掩码$ {P_n}^N_{n&#x3D;1}$ 和 GT $G$ 之间。然后，选择集合中骰子分数最高的那个作为匹配的预测掩码 P，用于后续的分割评估。这个获取 P 的过程可以表示如下：<br>$$<br>P &#x3D; max{(P1 · G), (P2 · G), . . . ,(PN · G)},<br>$$<br>其中 N 是一张图像中某个对象的预测二进制掩码的总数。运算 （·） 和 max{} 表示计算一个预测掩码和 GT 之间的骰子分数，而 max 表示获取具有最高骰子分数的预测掩码。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><h4 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h4><p>为了全面评估 SAM 的细分性能，使用了三个常见指标，如下所示：</p>
+<ol>
+<li>DICE 系数 （DICE， %）：一种相似性度量，用于评估预测与 GT 之间的重叠。从 [0， 1] 开始，值越高表示模型的性能越好。</li>
+<li>杰卡德相似系数 （JAC， %）：也称为 IOU，用于衡量两个掩码之间的相似性。它与 DICE 类似，但计算方法不同。具体而言，对于预测掩码和 GT 掩码 A 和 B，JAC 会计算交集 （|A ∩ B|）over union （|A ∪ B|）。JAC 的范围介于 0 到 1 之间，值越高表示性能越好。</li>
+<li>豪斯多夫距离（HD，像素）：一种评估两组点之间相似程度的度量，可以反映预测中每个点与 GT 中点之间的距离。它比 DICE 对边界更敏感。</li>
+</ol>
+<h4 id="不同模型下的分割性能"><a href="#不同模型下的分割性能" class="headerlink" title="不同模型下的分割性能"></a>不同模型下的分割性能</h4><p>在本节中，倾向于比较两种模型（ViT-B 和 ViT-H）在不同策略下的分割性能。从图 6 中可以观察到，在全模式（$S_1$）下，ViT-H 在 DICE 上以 7.47% 的比 ViT-B 高出 10.61 像素，在高清模式下比 ViT-B 低 10.61 像素。对于单点提示 （$S_2$），ViT-H 的平均性能略高于 ViT-B。随着点提示数量的增加，ViT-H 的优势将变得更加明显。而对于静止策略（没有&#x2F;有 1 个点的盒子，$S_5-S_6$），它们的表现非常接近（DICE 的差异：0.37% 和 0.06%）。与点提示相比，框提示包含有关对象的更多区域信息。因此，它可以更好地引导不同模型的 SAM 实现更好的分割性能。特定对象的 DICE 和 HD 性能可在表 2 和表 3 中找到。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006184728915.png" srcset="/img/loading.gif" lazyload alt="图6 ViT-B 和 ViT-H 在不同策略下的平均性能比较。"></p>
+<h4 id="不同测试模式下的分割性能"><a href="#不同测试模式下的分割性能" class="headerlink" title="不同测试模式下的分割性能"></a>不同测试模式下的分割性能</h4><p>在本节中，倾向于比较使用不同模型（ViT-B 和 ViT-H）的不同策略之间的分割性能。如图 6 所示，我们显示了 ViT-B 和 ViT-H 在不同策略下的平均 DICE 和 HD 性能。对于 ViT-B 和 ViT-H，不同策略的性能趋势基本一致。所有内容 （$S_1$） 的性能最差。对于点提示（$S_2-S_4$），增加更多的点数会带来稳定的性能提升（ViTB： DICE 从 56.02% 降低到 63.81%，ViT-H： DICE 从 56.78% 提高到 71.61%）。带有框提示符的 SAM 效果最好，而在框内增加 1 个点不会带来明显的变化（ViT-B： DICE 0.49%↓， ViT-H： DICE 0.06%↓）。根据实验，得出结论，与点提示相比，框提示包含更多重要信息。因为这个框实际上告诉了目标的确切位置，以及给定有限区域的潜在强度特征。但是，点仅表示目标的零件特征，这可能会导致混淆。图 7、图 8、表 2 和表 3 显示了 6 种测试策略下部分目标的特定分割精度结果。图 9 显示了 5 种手动提示模式（$S_2-S_6$）的预测可视化。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006184919651.png" srcset="/img/loading.gif" lazyload alt="图7 ViT-B 下不同检测策略下选择性常见医疗对象的 DICE 性能比较"></p>
+<h4 id="SAM-的推理时间分析"><a href="#SAM-的推理时间分析" class="headerlink" title="SAM 的推理时间分析"></a>SAM 的推理时间分析</h4><p>推理时间是评估模型的一个重要因素。在表 4 中，用嵌入生成、提示编码和掩码解码。所有测试均在一台具有 24G 内存的 NVIDIA GTX 3090 GPU 上执行。测试时间可能受多种因素影响，包括图像大小（预处理时间的微小差异，即将不同大小的图像上采样到 1024×1024）和目标数量（按顺序处理每个目标的提示）。因此，通过将图像大小限制为 256×256 并将目标数量设置为 1 进行了公平的比较。可以观察到，ViT-H 的包埋时间几乎是 ViT-B 的四倍。Everything （$S_1$） 的提示编码和掩码解码非常耗时，因为它需要处理从整个图像中采样的数百个点，包括使用 NMS 的大量后处理等。而对于手动提示编码和掩码解码（$S_2-S_6$），不同模型和策略的参考时间相似，均小于 0.01s。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006192028760.png" srcset="/img/loading.gif" lazyload alt="图9"></p>
+<p>SAM 的典型好案例 。r1、r2：CT、r3、r7：T2W MRI，r4、r6：T1W MRI，r5：CMR，r8：US，r9：X 射线，r10、r11：结肠镜检查，r12：皮肤镜检查，r13：显微镜检查。绿色和蓝色星号分别表示正点提示和负点提示。绿色框表示框提示符。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006192114067.png" srcset="/img/loading.gif" lazyload alt="图10"></p>
+<p>18 种不同模态的 DICE 性能。绿色三角形和箱形图中每个框上方的值表示平均值。</p>
+<h4 id="分析“一切”模式中的点数"><a href="#分析“一切”模式中的点数" class="headerlink" title="分析“一切”模式中的点数"></a>分析“一切”模式中的点数</h4><p>如上所述，在 Everything 模式下，将生成点提示网格 （m×m）。默认情况下，m 设置为 32。点数将对最终分段性能产生影响。特别是对于具有多个不同大小目标的图像，参数设计不当会导致分割不完美，部分对象出现无提示。如表 5 所示，在一张图像上测试了四个包含多个对象的数据集。结果表明，在这四个数据集中，随着点数从 82 增加到 2562，DICE 也逐渐增加。图 11 还显示，更多的点将带来更多的潜在对象（以不同的颜色显示）。此外，过多的点会使 SAM 将对象拆分为多个部分，从而破坏对象的完整性。增加点数也会导致测试时间显着增加。因此，这是分段性能和测试效率之间的权衡。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006192551961.png" srcset="/img/loading.gif" lazyload alt="表5 Everything 模式下点数的消融研究"></p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006192712036.png" srcset="/img/loading.gif" lazyload alt="图11 腺癌、线粒体 和 神经结构 的不同病例在 S_1H 中具有不同的点数。"></p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006192142244.png" srcset="/img/loading.gif" lazyload alt="表2"></p>
+<p>根据 DICE 评分 （%） 在不同模式的选择性常见医疗对象上的表现。ViT-B 和 ViT-H 代表 SAM 的小型和大型编码器。$S_1-S_6$ 代表不同的测试策略，分别包括一切、1 点、5 点、10 点、方框和 1 点方框。</p>
+<h4 id="与分割结果相关的因素分析"><a href="#与分割结果相关的因素分析" class="headerlink" title="与分割结果相关的因素分析"></a>与分割结果相关的因素分析</h4><p>为了验证影响 SAM 分割性能的因素，记录了 191,779 个解剖结构的大小、纵横比、前景和背景之间的强度差异、模态和边界复杂性。通过分析这些因素，我们旨在更好地了解解剖结构特征与 SAM 的分离之间的相关性能，并进一步为医疗 SAM 的发展提供一些有用的见解。解剖结构的大小被计算为相应掩码的像素级面积。要确定蒙版的纵横比，需要计算其边界框的短边和长边之间的比率（范围从 0 到 1）。强度差异被定义为结构与扩大的边界框内周围区域之间平均强度值的变化，不包括结构本身。具体来说，为了适应目标的不同尺寸，以 0.1 的预设比例动态地向外扩展框，而不是使用固定的像素值（例如，扩展 10 个像素）。此外，每个解剖结构的模态都映射到数值。此外，引入了椭圆傅里叶描述符 （EFD） 来描述边界复杂性。EFD 将模板的轮廓编码为表示不同频率分量的傅里叶级数。随着傅里叶阶数 （FO） 的增加，从傅里叶级数解码的轮廓越来越接近原始轮廓（见图 12），解码过程可以描述为如下方程。<br>$$<br>x_N(t) &#x3D; L_x +\sum_{n&#x3D;1}^N( a_n sin (\frac{T}{2nπt}+ b_n cos (\frac{T}{2nπt}))  \<br>y_N(t) &#x3D;L_y +\sum_{n&#x3D;1}^N( c_n sin (\frac{T}{2nπt}+ d_n cos (\frac{T}{2nπt}))<br>$$<br>其中 （xN（t）， yN（t）） 是等值线上任意点的坐标，N 是傅里叶级数展开的数量，t ∈ [0， T] 表示不同的采样位置。（Lx， Ly） 表示等值线中心点的坐标，（an， bn） 表示 x 坐标的傅里叶编码得到的参数，（cn， dn） 表示 y 轴的编码结果方向。可以根据 FO 粗略估计对象边界的复杂度。具体来说，阶数定义为当解码后的傅里叶级数的轮廓与原始轮廓达到一定程度的重叠（使用 DICE 表示重叠）时所需的累积次数。但是，当使用此方法作为定量度量时，设置适当的 DICE 阈值尤为重要。低阈值无法准确区分各种对象边界之间的复杂度差异。如果阈值太高，EFD 可能无法根据需要拟合复杂的轮廓，并进入无限计算。因此，我们优化了 FO 的表示，以避免 EFD 程序陷入无休止的累积（参见方程 2 中的累积项）。对于不同的结构，将 FO 从 1 增加到 1，并计算每一步解码轮廓和原始轮廓之间的 DICE。然后我们设置两种结束过程的方法：1） DICE &gt; 97.0%;2） DICE 之间的差异或 F（a−1） 和阶数 F（a） 小于 0.1%。因此，在终止后记录 FO （F（a）） 和 DICE。最后，取 $F_{final} &#x3D; F_a + n × 100 × （1 − DICE）$， n &#x3D; 2 作为最终优化的 FO。</p>
+<p>在不同测试策略下，使用 Spearman 秩偏相关系数对上述目标对象的五个属性与 DICE 评分之间的偏相关进行了分析。统计结果显示在表 6 中，而图 13 说明了$ S_5$ 策略的散点图。在大多数测试策略中，我们观察到 DICE 分数与 FO 和强度差异表现出中等相关性 （0.4 ≤ ρ &lt; 0.7），与大小呈弱相关性 （0.2 ≤ ρ &lt; 0.4），与模态和纵横比没有相关性。因此，SAM 可以始终如一地分割具有不同模态和纵横比的医疗目标。SAM 在框提示下的性能可能会受到解剖结构大小的影响。</p>
+<p>此外，在处理以复杂边界或低对比度为特征的对象时，SAM 的性能在所有测试策略下都趋于不佳。为了证实这些发现，们将 S_5B 下计算的 DICE 平均分为十个水平（例如，1 级表示 DICE （%） 属于 （0,10），并在图 14 中可视化了不同 DICE 水平的 FO 箱线图。该图表明，随着 DICE 水平的增加，结构的 FO 分布逐渐转移到值较小的范围。此外，在图 15 中，展示了具有各种 FO 范围的解剖结构的可视化。这些可视化显示，解剖结构的 DICE 评分随着 FO 的增加而趋于降低。进一步意味着形状和边界复杂性可能会对 SAM 的分段性能产生影响.</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006193506239.png" srcset="/img/loading.gif" lazyload alt="图13 在 S_5 策略下使用 DICE 的不同对象属性的散点图。"></p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006193534261.png" srcset="/img/loading.gif" lazyload alt="图14 不同 DICE 范围的 FO 箱线图。"></p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006193552209.png" srcset="/img/loading.gif" lazyload alt="图15 DICE 和 FO 之间的关系。从左到右，FO 逐渐增加。黄色框表示框提示，红色掩码是预测，绿色掩码是 GT，黄色掩码是预测和 GT 的重叠，蓝色等值线是从傅里叶级数解码而来的。"></p>
+<h4 id="注释时间和质量分析"><a href="#注释时间和质量分析" class="headerlink" title="注释时间和质量分析"></a>注释时间和质量分析</h4><p>在本节中，将讨论 SAM 是否可以帮助医生改善注释时间和质量。从 COSMOS 1050K 中随机采样了 100 张具有平均 DICE 性能的图像，以构建一个评估子集，其中包含 9 种模态的 55 个对象和 620 个蒙版，包括不同模态中同一对象的实例。然后，邀请了三位具有 10 年经验的医生来评估 SAM 在框提示下的预测是否可以提高注释速度和质量。他们被分配的任务包括 </p>
+<p>1） 从头开始注释评估子集中的所有对象，</p>
+<p>2） 根据 SAM 的预测调整对象标签，</p>
+<p>3） 记录两项任务的时间。</p>
+<p>为了评估注释质量，我们利用人工校正工作 （HCE） 指数 ，该指数估计了纠正不准确预测以满足实际应用中特定准确性（即 GT 掩码）要求所需的人工努力。较低的 HCE 指数表示掩码 （有&#x2F;无 SAM 的人类注释） 更接近 GT，即注释质量更高。如表 7 所示，在 SAM 的帮助下，它可以获得更高的注释质量 （HCE： 0.27↓） 并将注释速度提高约 25%。具体来说，注释一张图像可以节省 ∼1.31 分钟，为一个对象节省 ∼0.2 分钟（因为在上述任务中，一张图像包含 ∼6.2 个对象）。需要标记的解剖结构数量越多，SAM 效率的优势就越明显</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006193707566.png" srcset="/img/loading.gif" lazyload alt="表7 无论是否有 SAM 帮助，人工的注释速度和质量。S：秒，m：分钟"></p>
+<h4 id="不同提示随机性对性能的影响"><a href="#不同提示随机性对性能的影响" class="headerlink" title="不同提示随机性对性能的影响"></a>不同提示随机性对性能的影响</h4><p>在之前的实验中，修复了实验可重复性的框和点选择策略。通过选择质心和紧箱来测试 SAM 的理论最佳性能，因为它们可能包括目标最具代表性的特征。然而单击每个对象的精确中心或绘制确切的框来评估 SAM 是不切实际的。因此，为中心和盒子添加了不同级别的随机性，以模拟现实生活中的人类操作。</p>
+<p>此外，相信这可以帮助我们更好地讨论 SAM 的稳健性。具体来说，以 0-10、10-20 和 20-30 像素随机放大&#x2F;移动框&#x2F;点。在表 8 中，随机实验（随机 1-3） 进行 3 次，并计算平均结果 （Mean）。DICE drop 表示与原始结果相比，DICE 值平均下降，没有偏移。对于 S_2（单点），随着移位级别的增加，DICE 性能下降了 2.67%、7.38% 和 14.62%。随着点提示数量（S 3 和 S 4）的增加，可以缓解 DICE 的下降，并提高模型的稳定性。SAM 受到方框偏移的严重影响（S 5，偏移 20-30 像素时性能下降 24.11%），而当向方框添加一个点时，这种影响更为明显（S 6，下降了 29.93%）。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006193847488.png" srcset="/img/loading.gif" lazyload alt="表8 不同换档水平和测试策略下 DICE 下降的比较"></p>
+<h4 id="SAM-和交互式方法之间的比较"><a href="#SAM-和交互式方法之间的比较" class="headerlink" title="SAM 和交互式方法之间的比较"></a>SAM 和交互式方法之间的比较</h4><p>在前面的部分中，将所有提示输入到 SAM 的提示编码器中一次，以便公平地比较其一轮性能。为了模拟现实生活中的交互式分割程序，执行了多轮 SAM。点选择策略与常见的交互方法类似。具体来说，SAM 首先点击目标的中心，然后其余点击基于假阴性 （FN） 和假阳性 （FP） 区域。然后，将 SAM 与两个不同的强交互分割方法，即 FocalClick 和 SimpleClick。它们都使用与 SAM 相同数量的图像进行预训练。选择了 10 个典型的器官&#x2F;肿瘤，涵盖各种形态、形状、大小和强度分布。实验结果如图 16 所示。根据 DICE 结果，我们得出的结论是：</p>
+<p>1） SAM 在与单个点的第一次交互中优于 FocalClick 和 SimpleClick;</p>
+<p>2） 随着迭代的进行，SAM 的性能增长缓慢，甚至下降，而交互方法的性能可以稳步提高;</p>
+<p>3） 使用 10 个点，SAM 的表现比交互式方法差。类似的结果可以在最近发表的 MedIA 论文中找到。</p>
+<p>认为当前 SAM 基于点的多轮迭代能力在医学图像上较弱。未来的工作应该在训练 SAM 时优化迭代训练策略，或对其进行微调以增强其迭代多轮的能力。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006194100272.png" srcset="/img/loading.gif" lazyload alt="图16 三种不同方法的平均性能随点提示的数量而变化。"></p>
+<h4 id="针对-SAM-的任务特定细化"><a href="#针对-SAM-的任务特定细化" class="headerlink" title="针对 SAM 的任务特定细化"></a>针对 SAM 的任务特定细化</h4><p>SAM 对大多数医学图像&#x2F;任务的能力感知较弱主要是由于缺乏训练数据。SAM 的训练数据集，即 SA-1B5，包含 1100 万张照片，包括自然位置、物体和场景，但没有任何医学图像。自然图像通常与医学图像不同，因为它们具有颜色编码、相对清晰的对象定义和边界、更容易区分前景（对象）和背景（非对象）以及相对平衡的大小。然而，大多数医学图像都是灰度的，物体边界不清晰复杂，前后相似，图像尺寸范围广（尤其是包含一些非常小的物体）。因此，使用 COSMOS 1050K 的一部分对 SAM 进行了微调，以改善 SAM 对医疗对象的感知。具体来说，考虑了 45 个常见和典型对象来微调 SAM。受马和 Wang 的启发，只考虑使用框提示对 SAM 进行微调。修复了图像编码器以最大限度地降低计算成本，并且还保持了提示编码器的冻结状态，因为它具有强大的编码框位置信息的能力。因此，在微调过程中，仅调整了掩码解码器中的参数。将总 epoch 设置为 20，学习率和批量大小为 1e-4 和 2。</p>
+<p>结果表明，在 ViT-B 和 ViT-H 模型进行微调后，分割性能普遍提高，如图 17 和图 18 所示。图 17 显示了不同相关因子向更高 DICE 值的转变，表明整体性能有所提高。具体来说，对于 ViT-B，45 个对象中有 32 个表现出性能增强，而 ViT-H 在 45 个对象中有 37 个表现出改进。这可以证明 ViT-H 强大的学习能力，因为它的参数几乎是 ViT-B 的 7 倍（636M 对 91M）。具有较小数字、RGB 颜色编码等的对象的性能会降低。这提醒可能需要为特定于任务的微调进行更仔细的设计。</p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006194356144.png" srcset="/img/loading.gif" lazyload alt="图17 不同属性下 DICE 的趋势分析 （ViT-B 和 ViT-H 带框提示符，S 5）。蓝色圆圈显示最明显的更改。"></p>
+<p><img src="/../images/0-Segment-Anything-Model-for-Medical-Images/image-20241006194425816.png" srcset="/img/loading.gif" lazyload alt="图18 微调后的 DICE 改进，包括 ViT-B 和 ViT-H 的 SAM。"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在这项研究中，全面评估了用于大型医学图像数据集分割的 SAM。基于上述实证分析，我们的结论如下：</p>
+<p>1） SAM 在某些特定目标上表现出显著的性能，但在其他情况下不稳定、不完美甚至完全失效。</p>
+<p>2） 使用大 ViT-H 的 SAM 显示出比使用小 ViT-B 更好的整体性能。</p>
+<p>3） SAM 使用手动提示（尤其是 box）时的性能优于 Everything 模式。</p>
+<p>4） SAM 可以帮助人工注释，提高标记质量和减少时间。</p>
+<p>5） SAM 对中心点的随机性和紧凑的框提示很敏感，可能会出现严重的性能下降。</p>
+<p>6） SAM 的表现优于具有 1 个或几个点的交互式方法，但随着点数的增加，SAM 的性能会超过。</p>
+<p>7） SAM 的性能与不同的因素相关，包括边界复杂性等。</p>
+<p>8） 在特定医疗任务上微调 SAM 可以将其 ViT-B 和 ViT-H 的平均 DICE 性能分别提高 4.39% 和 6.68%。</p>
+<p>最后认为，虽然SAM有潜力成为一个通用的MIS模型，但目前它在MIS任务中的表现并不稳定。希望这份报告能帮助读者和社区更好地了解 SAM 在医学影像中的分割性能，并最终促进新一代 MIS 基础模型的开发。</p>
+<h3 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h3><p>将重点讨论 SAM 未来的潜在方向，希望这些能在一定程度上启发读者。当没有 GT 时，如何从 SAM 获得语义？当前的 SAM 仅具有感知对象的能力，而无法分析特定类别的对象。最近，有几项研究探索了解决这个问题，其中一项为 SAM 配备了 CLIP 型号。具体来说，SAM 将首先提供区域建议，区域补丁将从原始图像中裁剪出来。然后，裁剪后的补丁将被输入到 CLIP 以进行对象分类。另一种解决方案是将 SAM 与 Open-Vocabulary Object Detection 结合使用（OVOD） 模型，例如，带 SAM 的接地 DINO （GroundedSAM7）。在这个pipeline中，OVOD 模型可以检测边界具有分类结果的对象框。然后，SAM 会将 box 区域作为 input 并输出 Segmentation 结果。最近，语义 SAM 被提出用于分割和识别自然图像中的任何事物。之前的所有探索都是基于自然图像的。因此开发具有语义感知的医疗 SAM 可能会很有趣。然而，这具有挑战性，因为开放场景中的医疗对象具有多种多样和复杂的形状、多种类型以及许多相似的亚类（不同级别的肿瘤等）。</p>
+<h4 id="SAM-与传统的分割方法？"><a href="#SAM-与传统的分割方法？" class="headerlink" title="SAM 与传统的分割方法？"></a>SAM 与传统的分割方法？</h4><p>使用有限的医疗数据微调 SAM 可以胜过特定于任务的传统分割方法。这在最近发表的几项研究中得到了验证。Med-SAM 已经证明，在大多数情况下，微调 2D SAM 可以实现优于专业 Unet 模型的性能。3D 模态不可知的 SAM （MA-SAM） 已经验证，即使没有任何提示，使用 3D 适配器微调 SAM 也可以胜过传统的 SOTA 3D nn-Unet。它还对医学图像分割社区有所了解，表明微调基本分割模型可能比从头开始训练传统分割模型表现得更好。然而，SAM 仍然存在一些问题，包括模型对不同提示噪声的鲁棒性和多轮交互能力。</p>
+<h4 id="2D-还是-3D-SAM？"><a href="#2D-还是-3D-SAM？" class="headerlink" title="2D 还是 3D SAM？"></a>2D 还是 3D SAM？</h4><p>对于医疗数据，成像模式（2D&#x2F;视频&#x2F;3D&#x2F;4D）的可变性可能会使一般模型的设计变得复杂。与视频&#x2F;3D&#x2F;4D 图像（CT&#x2F;MRI 等）相比，2D 在医疗数据中更为基础和常见。因此，构建一个可以一致处理所有类型数据的 2D 模型更实用，因为视频&#x2F;3D&#x2F;4D 数据可以传输到一系列 2D 切片。有限的 3D 数据量（SAM：11M 图像和 1B 掩码，而我们的：&lt;10K 卷和 &lt;45K 掩码）可能会限制 3D 基本分割模型的构建，尤其是在需要从头开始训练的情况下。为了打破数据的局限性，将探索如何合成更多高保真 3D 数据，并为医学图像分割构建强大的基础模型。</p>
+<h4 id="SAM-推动大规模医学注释？"><a href="#SAM-推动大规模医学注释？" class="headerlink" title="SAM 推动大规模医学注释？"></a>SAM 推动大规模医学注释？</h4><p>开发强大而有效的基于深度学习的医疗分割模型非常需要大规模和完全标记的数据集。对于当前基于专家手动注释的方案来说，这是非常具有挑战性的。正如Q中介绍的那样，一位经验丰富的专家大约需要 30.8 年才能注释 8,448 个 CT 体积、9 个解剖结构和 320 万个切片。他们借助多个预先训练的分割模型来生成伪标签和其他有用的策略，将注释时间缩短到三周。然而，获得性能良好的预训练模型，尤其是假阳性率低的模型，仍然非常困难。此外，基于传统深度学习的分割网络无法很好地支持人机交互，限制了其灵活性。具有可及时分割的 SAM 的出现为解决挑战带来了希望。研究还初步验证了 SAM 可以大大缩短注释时间并提高注释质量。需要标记的解剖结构数量越多，SAM 的效率优势就越明显。值得注意的是，SAM 范例的设计有可能实现通用分割。这意味着可以使用单个 SAM 网络来实现大规模多模态、多类医学数据集的标注，而不是使用多个特定于任务的模型，这个对于在标记软件中轻量级和高效部署模型非常重要，例如 MONAI Label和配对注释软件包L。</p>
+<p>[仓库地址]:<a target="_blank" rel="noopener" href="https://github.com/yuhoo0302/Segment-Anything-Model-for-Medical-Images/blob/main/Supplementary_Materials.pdf">https://github.com/yuhoo0302/Segment-Anything-Model-for-Medical-Images/blob/main/Supplementary_Materials.pdf</a>	“GITHUB仓库”</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/29/0-Segment-Anything-in-Medical-Images/" title="0-Segment Anything in Medical Images">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-Segment Anything in Medical Images</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/29/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/" title="0-3DSAM-adapter: Holistic adaptation of SAM from 2D to 3D for promptable tumor segmentation">
+                        <span class="hidden-mobile">0-3DSAM-adapter: Holistic adaptation of SAM from 2D to 3D for promptable tumor segmentation</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

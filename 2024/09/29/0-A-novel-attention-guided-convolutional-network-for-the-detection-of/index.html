@@ -1,0 +1,668 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="A novel attention-guided convolutional network for the detection of 用于宫颈癌筛查中异常宫颈细胞检测的新型注意力引导的卷积网络背景一些研究已经在探索了自动检测宫颈癌的可能性，论文中举出了如以下提出的三种方法，而这些方法也存在问题，就是那些机器学习方法利用了为特定任务设计的传统手工特征，而这些特征通常不够健壮。 卷积神经网络（CNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-A novel attention-guided convolutional network for the detection of">
+<meta property="og:url" content="http://example.com/2024/09/29/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="A novel attention-guided convolutional network for the detection of 用于宫颈癌筛查中异常宫颈细胞检测的新型注意力引导的卷积网络背景一些研究已经在探索了自动检测宫颈癌的可能性，论文中举出了如以下提出的三种方法，而这些方法也存在问题，就是那些机器学习方法利用了为特定任务设计的传统手工特征，而这些特征通常不够健壮。 卷积神经网络（CNN">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205246880.png">
+<meta property="og:image" content="http://example.com/images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205711778.png">
+<meta property="og:image" content="http://example.com/images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205742324.png">
+<meta property="og:image" content="http://example.com/images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205806176.png">
+<meta property="og:image" content="http://example.com/images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205822417.png">
+<meta property="og:image" content="http://example.com/images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205852032.png">
+<meta property="og:image" content="http://example.com/images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205856300.png">
+<meta property="og:image" content="http://example.com/images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205956526.png">
+<meta property="article:published_time" content="2024-09-29T12:02:09.000Z">
+<meta property="article:modified_time" content="2024-09-29T16:03:55.839Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205246880.png">
+  
+  
+  
+  <title>0-A novel attention-guided convolutional network for the detection of - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-A novel attention-guided convolutional network for the detection of"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-29 20:02" pubdate>
+          上传日期：2024年9月29日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-A novel attention-guided convolutional network for the detection of</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="A-novel-attention-guided-convolutional-network-for-the-detection-of"><a href="#A-novel-attention-guided-convolutional-network-for-the-detection-of" class="headerlink" title="A novel attention-guided convolutional network for the detection of"></a>A novel attention-guided convolutional network for the detection of</h2><p><img src="/../images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205246880.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
+<h2 id="用于宫颈癌筛查中异常宫颈细胞检测的新型注意力引导的卷积网络"><a href="#用于宫颈癌筛查中异常宫颈细胞检测的新型注意力引导的卷积网络" class="headerlink" title="用于宫颈癌筛查中异常宫颈细胞检测的新型注意力引导的卷积网络"></a>用于宫颈癌筛查中异常宫颈细胞检测的新型注意力引导的卷积网络</h2><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>一些研究已经在探索了自动检测宫颈癌的可能性，论文中举出了如以下提出的三种方法，而这些方法也存在问题，就是那些机器学习方法利用了为特定任务设计的传统手工特征，而这些特征通常不够健壮。</p>
+<p>卷积神经网络（CNN）等深度学习的内容也被用于医学图像，因为它可以学习输入的分层特征，然而卷积神经网络也有其局限性，CNN模型的结构一般用于分类，对于细胞、器官或病变区域的定位不太适用。</p>
+<p>Faster R-CNN解决了定位的问题，它是一种深度学习物体检测方法。由以下三部分构成：</p>
+<p>1、CNN主干模块，用于提取有用的特征；</p>
+<p>2、RPN区域建议网络模块，用于生成高质量的区域建议（ROIs）；</p>
+<p>3、Faster R-CNN模块用这些高质量的ROI特征作为输入进行分类和检测的任务。</p>
+<p>Faster R-CNN重点在显微镜图像中的细胞检测、超声图像中的胎儿头部检测、牙齿根尖周裂缝中的牙齿检测以及MR图像中的转移淋巴结检测。目前只有两项研究构建用于宫颈细胞检测的Faster R-CNN，一个是将检测并将观察到的细胞分类为不同等级的恶性程度，一个是对宫颈脱落细胞进行检测和分类，用于早期诊断。</p>
+<p>而用于宫颈细胞检测的Faster R-CNN也存在两个问题：</p>
+<p>1、不能处理细胞的不同尺寸变换；</p>
+<p>2、临床知识如宫颈细胞的大小和形状被模型忽略了。</p>
+<p>本研究提出了一种新型的注意力特征金字塔网络（AttFPN),作用是自动检测和分类Thinprep Pap图像中非正常宫颈细胞。创新：</p>
+<p>1、开发了注意力模块，与多尺度特征融合更有效地重新提取特征。</p>
+<p>2、在区域建议网络中根据真实的宫颈细胞大小分布来设计anchor boxes（锚框）的尺寸和长宽比</p>
+<h2 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h2><p>宫颈癌检测任务分为三个阶段：1、标注过异常细胞的异常斑块用来训练AttFPN模型，重点在于检测特定图像斑块中的异常细胞；2、使用分类网络，根据检测到的异常细胞以及异常概率预测每个图片的异常概率；3、总结一个病例中的所有图片的预测结果，预测该病例的最终病例等级分类。</p>
+<p><img src="/../images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205711778.png" srcset="/img/loading.gif" lazyload alt="模型介绍"></p>
+<p>AttFPN模型</p>
+<p>AttFPN结合了注意力模块和多尺度特征融合，网络结构是DenseNet-169；</p>
+<p>检测部分，模型对输入进行学习，训练完成后给定一个image可以检测到异常的宫颈细胞并且得到他们的异常概率；</p>
+<p>分类部分，检测到的异常细胞的最大概率为图像的异常概率。</p>
+<p><img src="/../images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205742324.png" srcset="/img/loading.gif" lazyload alt="AttFPN模型"></p>
+<p>AttFPN结合了注意力模块和多尺度特征融合，网络结构是DenseNet-169；</p>
+<p>检测部分，模型对输入进行学习，训练完成后给定一个image可以检测到异常的宫颈细胞并且得到他们的异常概率；</p>
+<p>分类部分，检测到的异常细胞的最大概率为图像的异常概率。</p>
+<p><img src="/../images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205806176.png" srcset="/img/loading.gif" lazyload></p>
+<p>Attention module</p>
+<p>低层特征通过channel attention沿着channel维度进行重构，将重构的特征送入spatial attention，再沿着spatial维度进行重构，最后，重新确定的低层次特征与高层次特征相融合。</p>
+<p><img src="/../images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205822417.png" srcset="/img/loading.gif" lazyload alt="Attention module"></p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p>三种方法在各个网络结构上的检测性能比较</p>
+<p>评价标准：AP(平均精度)</p>
+<p><img src="/../images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205852032.png" srcset="/img/loading.gif" lazyload alt="实验结果"></p>
+<p>注意力模块可以有效地提高异常细胞的检测，因为注意力模块可以有效地重新提取特征。</p>
+<p><img src="/../images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205856300.png" srcset="/img/loading.gif" lazyload alt="实验结果"></p>
+<p>模型结合了多尺度特征融合和注意力模块，注意力模块知道在哪里需要强调哪里需要抑制并重新提取特征；多尺度特征融合可以检测出各种尺寸的异常细胞。</p>
+<p><img src="/../images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205956526.png" srcset="/img/loading.gif" lazyload alt="实验结果"></p>
+<p>AttFPN所包围的区域是最大的，因此这个方法能够更准确的将异常病例和正常病例进行分类。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文介绍了一种名为AttFPN的新型深度学习方法，作为宫颈癌筛查中宫颈细胞异常的自动检测模型。该模型以临床知识和注意力机制为指导，包括一个多尺寸的特征融合结构和一个注意力模块。</p>
+<p> 该方法的表现优于相关的先进的深度学习方法，并与具有10年经验的病理学家的表现相当。我们的方法可以作为一个可靠的助手，帮助病理学家在宫颈癌筛查中更有效和准确地确定异常的宫颈细胞。此外，它还可以为没有经验的病理学家提供有用的建议，特别是在资源匮乏的地区是很重要的。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/10/08/0-SAM2POINT-SEGMENT-ANY-3D-AS-VIDEOS-IN-ZERO-SHOT-AND-PROMPTABLE-MANNERS/" title="0-SAM2POINT: SEGMENT ANY 3D AS VIDEOS IN ZERO-SHOT AND PROMPTABLE MANNERS">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-SAM2POINT: SEGMENT ANY 3D AS VIDEOS IN ZERO-SHOT AND PROMPTABLE MANNERS</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/29/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E6%95%B0%E6%8D%AE%E9%9B%86/" title="医学影像数据集">
+                        <span class="hidden-mobile">医学影像数据集</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

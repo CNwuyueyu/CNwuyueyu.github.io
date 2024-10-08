@@ -1,0 +1,711 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SAM-UNet: Enhancing Zero-Shot Segmentation of SAM for Universal Medical Images  arXiv:2408.09886v1 [cs.CV] 19 Aug 2024  SAM-UNet：增强通用医学图像的 SAM 零样本分割  背景初始SAM在医学图像上并不适配，本文作者受到 U-Net 的模型在医学图像分割中的卓越性能的启发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-SAM-UNet: Enhancing Zero-Shot Segmentation of SAM for Universal Medical Images">
+<meta property="og:url" content="http://example.com/2024/09/29/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="SAM-UNet: Enhancing Zero-Shot Segmentation of SAM for Universal Medical Images  arXiv:2408.09886v1 [cs.CV] 19 Aug 2024  SAM-UNet：增强通用医学图像的 SAM 零样本分割  背景初始SAM在医学图像上并不适配，本文作者受到 U-Net 的模型在医学图像分割中的卓越性能的启发">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20240926191429854.png">
+<meta property="og:image" content="http://example.com/images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004194345499.png">
+<meta property="og:image" content="http://example.com/images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004200950682.png">
+<meta property="og:image" content="http://example.com/images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004211406984.png">
+<meta property="og:image" content="http://example.com/images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004211600360.png">
+<meta property="og:image" content="http://example.com/images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004212025323.png">
+<meta property="og:image" content="http://example.com/images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004212056968.png">
+<meta property="article:published_time" content="2024-09-29T07:58:00.000Z">
+<meta property="article:modified_time" content="2024-10-08T03:11:16.581Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20240926191429854.png">
+  
+  
+  
+  <title>0-SAM-UNet: Enhancing Zero-Shot Segmentation of SAM for Universal Medical Images - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-SAM-UNet: Enhancing Zero-Shot Segmentation of SAM for Universal Medical Images"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-09-29 15:58" pubdate>
+          上传日期：2024年9月29日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-SAM-UNet: Enhancing Zero-Shot Segmentation of SAM for Universal Medical Images</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images"><a href="#SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images" class="headerlink" title="SAM-UNet: Enhancing Zero-Shot Segmentation of SAM for Universal Medical Images"></a>SAM-UNet: Enhancing Zero-Shot Segmentation of SAM for Universal Medical Images</h2><p><img src="/../images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20240926191429854.png" srcset="/img/loading.gif" lazyload alt="SAM-UNet"></p>
+<blockquote>
+<p>arXiv:2408.09886v1 [cs.CV] 19 Aug 2024 </p>
+<p>SAM-UNet：增强通用医学图像的 SAM 零样本分割</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>初始SAM在医学图像上并不适配，本文作者受到 U-Net 的模型在医学图像分割中的卓越性能的启发，提出了 SAM-UNet，这是一种将 U-Net 整合到原始 SAM 的新基础模型，以充分利用卷积强大的上下文建模能力。在图像编码器中并行了一个卷积分支，该分支是用 vision Transformer 分支冻结独立训练的。此外，在掩码解码器中采用了多尺度融合，以促进对不同尺度目标的准确分割。 SA-Med2D-16M 上训练 SAM-UNet，产生了一个通用的医学图像预训练模型。在零镜头分割实验中，模型不仅在所有模态中都明显优于以前的大型医用 SAM 模型，而且还大大减轻了在看不见的模态上看到的性能下降。SAM-UNet 是一种高效且可扩展的基础模型，可以针对医学界的其他下游任务进一步微调。</p>
+<p><img src="/../images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004194345499.png" srcset="/img/loading.gif" lazyload alt="SAM-UNet-50与现有的SAM模型在训练集中有大量样本的模态"></p>
+<ul>
+<li>具体来说，作者分别介绍了图像编码器和掩码解码器中的两种架构设计。首先，在图像编码器中加入一个并行卷积神经网络 （CNN） 分支，原始的 Vision Transformer （ViT） 分支完全冻结，以保留 SAM 的自然图像编码能力，利用多尺度融合策略来实现多尺度目标的准确分割，并进一步采用了输出令牌设计，使掩码解码器更专门用于医疗领域。</li>
+<li>介绍了架构创新，包括在图像编码器中集成并行 CNN 分支，在掩码解码器中集成多尺度融合设计，这构成了部分参数的新方法SAM 的微调，这两者都已被证明可以有效提高分段性能。</li>
+<li>提出了 SAM-UNet，这是一个在 SA-Med2D-16M 上训练的强大基础模型，增强了 SAM 在通用医学图像上的零镜头分割能力。SAM-UNet 在各种医学影像模态中均具有卓越的性能（SA-Med2D-16M 测试集的 DSC 评分为 0.883）。</li>
+<li>开发了两个版本的 SAM-UNet，即 SAM-UNet-34 和 SAM-UNet-50，其中 SAM-UNet-50 具有更大的参数规模，表现出特别强的性能。</li>
+<li>在 7 个外部数据集上进行了零镜头分割实验，证明 SAM-UNet 的性能明显优于现有的基于 SAM 的模型。SAM-UNet 在训练集中充分代表的模态（如 CT 和 MR）中表现出卓越的性能，并在不太常见的模态中保持稳健的性能而不会显着退化。</li>
+</ul>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><img src="/../images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004200950682.png" srcset="/img/loading.gif" lazyload alt="SAM-UNet"></p>
+<p>SAM-UNet。该模型由一个双分支图像编码器和一个多尺度融合掩码解码器组成。它是在包含图中所示的八种模态的大型数据集上使用边界框作为提示进行训练的，并在所有十种模态上进行了测试。该图还说明了图像编码器中每个阶段的详细信息。</p>
+<p>SAM：SAM 由三个组件组成：大规模图像编码器、提示编码器和轻量级掩码解码器。图像编码器利用 ViT  来处理高分辨率图像，并以原始图像的 1&#x2F;16 比例生成特征图。提示编码器接受稀疏和密集提示，包括点、边界框或掩码，将它们转换为 256 维向量。然后，掩码解码器采用轻量级交叉注意力机制来集成来自图像和提示编码器的嵌入，从而允许 SAM 根据不同的提示为同一图像生成不同的掩码。</p>
+<p>双分支图像编码器：将 CNN 分支合并到原始 ViT 分支中。在训练阶段只训练参数明显较少的 CNN 分支，而 ViT 分支被冻结。需要注意的是，所有版本的 SAM 中的图像编码器都由四个阶段组成，每个阶段由几个窗口注意力 Transformer 模块和一个全局注意力 Transformer 模块组成。为了优化内存使用并加速推理过程，SAM-UNet 使用 SAM 的 ViT-B 版本作为初始模型。为了匹配 ViT 的四级设计，集成的并行 CNN 也由四个级组成。</p>
+<p><img src="/../images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004211406984.png" srcset="/img/loading.gif" lazyload alt=" Two-Branch Image Encoder in SAM-UNet"></p>
+<p>提示编码器：SAM-UNet 中的提示编码器与 SAM 保持一致。对于每个边界框，提示编码器使用位置编码对“左上角”和“右下角”像素的中心位置进行编码，生成两个 256 维向量。</p>
+<p><img src="/../images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004211600360.png" srcset="/img/loading.gif" lazyload alt="改进SAM掩码解码器的架构"></p>
+<p>具有多尺度特征融合的掩码解码器：</p>
+<ol>
+<li>Med-Output 令牌。受 SAM-HQ 的启发，引入了 Med-Output Token（大小为 1×256），并丢弃了原始 SAM 中使用的 IoU 预测令牌和多个掩码令牌。SAM 采用 IoU 预测令牌和多个掩码令牌的原因是，基于点的提示可能会在自然图像中产生歧义。因此，生成多个掩码并根据 IoU 预测分数选择最合适的掩码是合理的。然而，在以边界框作为提示的医学图像分割场景中，这种歧义很少见，因此无需输出预测的 IoU 分数和多个掩码。消融研究也证明了这种变化的有效性。</li>
+<li>多尺度融合分支。在编码器特征图中添加了一个类似 U-Net 的多尺度融合分支，与 CNN 类似，ViT 在早期的 Transformer 块中保留了更多的边缘信息，这可以提高分割精度——这也是类似 U-Net 的网络在分割任务中如此有效的原因。更新后的 Med-Output Token 已获取全局图像上下文和提示令牌信息，通过三层 MLP 进行处理，掩码解码器根据提示 成功生成掩码。</li>
+</ol>
+<p>SAM-UNet 训练：训练数据集是 SA-Med2D-16M。</p>
+<p>损失函数是：<br>$$<br>L &#x3D; 20 × L_{Dice} + L_{Focal}<br>$$</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004212025323.png" srcset="/img/loading.gif" lazyload alt="实验结果"></p>
+<p>SAM-UNet-50、SAM-UNet-34、SAM-Med2D、MedSAM 和 SAM 在大规模测试集上各种模态的性能比较</p>
+<p><img src="/../images/0-SAM-UNet-Enhancing-Zero-Shot-Segmentation-of-SAM-for-Universal-Medical-Images/image-20241004212056968.png" srcset="/img/loading.gif" lazyload alt="实验结果"></p>
+<p>SAM-UNet-50、SAM-Med2D、MedSAM 和 SAM 在看不见的模态和数据集上的零镜头分割实验中的性能比较。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文介绍了一种新颖有效的 SAM 部分参数微调架构，并提出了一个基础模型 SAM-UNet，该模型在最大的可用医学图像分割数据集上进行了训练。架构创新包括一个双分支图像编码器和一个具有多尺度融合的掩码解码器。模型在测试集上实现了 SOTA 性能，并在 7 个外部数据集的零镜头分割中表现出更稳定和卓越的性能。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/29/%E5%8C%BB%E5%AD%A6%E5%BD%B1%E5%83%8F%E4%B8%8ESAM/" title="医学影像与SAM">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">医学影像与SAM</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/29/0-SAMUS-Adapting-Segment-Anything-Model-for-Clinically-Friendly-and-Generalizable-Ultrasound-Image-Segmentation/" title="0-SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation">
+                        <span class="hidden-mobile">0-SAMUS: Adapting Segment Anything Model for Clinically-Friendly and Generalizable Ultrasound Image Segmentation</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
