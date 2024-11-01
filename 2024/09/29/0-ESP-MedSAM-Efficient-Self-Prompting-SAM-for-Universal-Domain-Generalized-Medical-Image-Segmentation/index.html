@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20240925233026212.png">
 <meta property="article:published_time" content="2024-09-29T08:01:09.000Z">
-<meta property="article:modified_time" content="2024-10-08T08:49:14.832Z">
+<meta property="article:modified_time" content="2024-10-19T14:59:18.645Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20240925233026212.png">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          4.2k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          19 分钟
+          35 分钟
         
       </span>
     
@@ -315,6 +315,21 @@
 <h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20241004150740526.png" srcset="/img/loading.gif" lazyload alt="与通用医学图像分割（源域）中最先进的框架进行比较。"></p>
 <p><img src="/../images/0-ESP-MedSAM-Efficient-Self-Prompting-SAM-for-Universal-Domain-Generalized-Medical-Image-Segmentation/image-20241004150838023.png" srcset="/img/loading.gif" lazyload alt="与域广义医学图像分割（看不见的域）中最先进的框架进行比较。"></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通用医学图像分割的 ESP-MedSAM 框架引入了 MMDKD 策略，将基础模型中的知识提炼到模态控制器和模态控制器中，以创建一个用于判别特征生成的半参数共享图像编码器。然后，SPPG 被设计出来自动生成一组高质量的补丁提示，以协助分割解码。最后，QDMD 为每种模态定制了特定的分割工作流程。大量实验表明，ESP-MedSAM 的计算复杂度低于标准 SAM，在各种医学成像分割任务中优于 SOTA 任务特定架构和轻量级 SAM，表现出卓越的零样本泛化和通用能力。</p>
+<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><p>下载了两个有关眼底的数据集stare和drive（这里说一下stare数据集，给的tar文件里是gz文件然后图片是ppm格式，要先tar解压一次，在gunzip解压一次，在convert换格式成ppm，给数据集作者点👍）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#sudo bash this.sh</span><br><span class="hljs-keyword">for</span> ppm <span class="hljs-keyword">in</span> *.ppm; <span class="hljs-keyword">do</span><br>    convert <span class="hljs-string">&quot;<span class="hljs-variable">$ppm</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;ppm%.ppm&#125;</span>.png&quot;</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>作者给出的checkpoint并没有有关这两个数据集的，于是使用了ESP_retinal_best.pth这个PTH文件，但是仍然会报模型和权重不匹配的错误</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Missing key(s) <span class="hljs-keyword">in</span> state_dict: <span class="hljs-string">&quot;module.SemiTViT.patch_embed.seq.0.c.weight&quot;</span>, <span class="hljs-string">&quot;module.SemiTViT.patch_embed.seq.0.bn.weight&quot;</span>, <span class="hljs-string">&quot;module.SemiTViT.patch_embed.seq.0.bn.bias&quot;</span>, <span class="hljs-string">&quot;mo......</span><br><span class="hljs-string">Unexpected key(s) in state_dict: &quot;</span>SemiTViT.patch_embed.seq.0.c.weight<span class="hljs-string">&quot;, &quot;</span>SemiTViT.patch_embed.seq.0.bn.weight<span class="hljs-string">&quot;, &quot;</span>SemiTViT.patch_embed.seq.0.bn.bias<span class="hljs-string">&quot;, &quot;</span>SemiTViT.....<br></code></pre></td></tr></table></figure>
+
+<p>看着像是前面多了一个module.对吧，那么给他改一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"> model = ESPMedSAM()<br> <span class="hljs-keyword">if</span> torch.cuda.device_count() &gt;= <span class="hljs-number">1</span>:<br>     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Let&#x27;s use&quot;</span>, torch.cuda.device_count(), <span class="hljs-string">&quot;GPUs!&quot;</span>)<br>     model = nn.DataParallel(model)<br><br> state_dict = torch.load(args.model)<br> new_state_dict = &#123;&#125;<br> <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> state_dict.items():<br>     <span class="hljs-keyword">if</span> k.startswith(<span class="hljs-string">&#x27;module.&#x27;</span>):<br>         new_state_dict[k[<span class="hljs-number">7</span>:]] = v  <span class="hljs-comment"># 去掉 &#x27;module.&#x27; 前缀</span><br>     <span class="hljs-keyword">else</span>:<br>         new_state_dict[k] = v<br><br> model.load_state_dict(new_state_dict, strict=<span class="hljs-literal">True</span>)<br><span class="hljs-comment"># model.load_state_dict(torch.load(args.model), strict=True)</span><br><br> model = model.cuda()<br></code></pre></td></tr></table></figure>
+
+<p>再对数据集结构dataloder进行更改，最后运行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">LR SCALES: [0.08589934592000005, 0.10737418240000006, 0.13421772800000006, 0.1677721600000001, 0.20971520000000007, 0.2621440000000001, 0.3276800000000001, 0.4096000000000001, 0.5120000000000001, 0.6400000000000001, 0.8, 1.0]<br>Let<span class="hljs-string">&#x27;s use 1 GPUs!</span><br><span class="hljs-string">  0%|          | 0/2 [00:00&lt;?, ?it/s]Could not load library libcudnn_cnn_infer.so.8. Error: libcuda.so: cannot open shared object file: No such file or directory</span><br><span class="hljs-string">Please make sure libcudnn_cnn_infer.so.8 is in your library path!</span><br><span class="hljs-string">/tmp/tmp3j0m_l6_: line 3: 42326 Aborted                 (core dumped) python /home/wuyueyu/git/ESP-MedSAM/test.py</span><br><span class="hljs-string">ERROR conda.cli.main_run:execute(125): `conda run python ***/ESP-MedSAM/test.py` failed. (See above for error)</span><br></code></pre></td></tr></table></figure>
+
+<p>我确定我的 CUDA 和 cuDNN 是正确安装</p>
 
                 
               </div>

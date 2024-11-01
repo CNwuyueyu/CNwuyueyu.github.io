@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-Learnable-Ophthalmology-SAM/image-20240924194146172.png">
 <meta property="article:published_time" content="2024-09-29T08:00:51.000Z">
-<meta property="article:modified_time" content="2024-10-08T08:48:37.382Z">
+<meta property="article:modified_time" content="2024-10-18T14:05:54.621Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-Learnable-Ophthalmology-SAM/image-20240924194146172.png">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          3.4k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          27 分钟
+          29 分钟
         
       </span>
     
@@ -285,8 +285,7 @@
 </blockquote>
 <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>针对眼科图像分析中的分割问题，由于眼科图像的多模态特性，现有的分割算法大多依赖于大量标签的训练或者泛化能力较弱，导致其应用受限。</p>
 <p>为了解决这一问题，本研究提出了一种适用于眼科多模态图像中多目标分割的方法，即可学习的眼科“分割任何物”(SAM)。</p>
-<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p>问题1：多模态图像导致的分割目标差异问题</p>
-<p>解法1：采用可学习提示层</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><h4 id="1：多模态图像导致的分割目标差异问题"><a href="#1：多模态图像导致的分割目标差异问题" class="headerlink" title="1：多模态图像导致的分割目标差异问题"></a>1：多模态图像导致的分割目标差异问题</h4><p>采用可学习提示层</p>
 <ul>
 <li>由于眼科图像包括彩色眼底图、光学相干断层扫描(OCT)等多种模态，每种模态图像的分割目标（如血管、视网膜层）不同，现有单一模型难以适应。</li>
 <li>通过引入可学习的提示层，使模型能够在不同模态图像中自动学习和识别分割目标，如在OCT图像中学习到视网膜层的特征，在彩色眼底图中学习到血管的特征，提高了模型的适应性和泛化能力。</li>
@@ -296,8 +295,7 @@
 <p>传统的分割模型可能在彩色眼底图上表现良好，能够识别出血管，但在OCT图像上却难以分辨出视网膜的不同层次。</p>
 <p>通过引入可学习的提示层，模型在处理OCT图像时能自动调整其学习重点，识别出视网膜的各个层次，而在处理彩色眼底图时则专注于血管的识别。</p>
 <p>这种自适应能力显著提高了模型在多模态图像上的适用性和准确性。</p>
-<p>子问题2：现有基础视觉模型在医学图像上应用受限</p>
-<p>子解法2：一次性训练机制的引入</p>
+<h4 id="2：现有基础视觉模型在医学图像上应用受限"><a href="#2：现有基础视觉模型在医学图像上应用受限" class="headerlink" title="2：现有基础视觉模型在医学图像上应用受限"></a>2：现有基础视觉模型在医学图像上应用受限</h4><p>一次性训练机制的引入</p>
 <ul>
 <li>基于大型视觉模型如SAM或DINOv2进行医学图像分割时，直接应用这些模型往往不能有效分割医学图像中的血管或病变。</li>
 <li>通过只对可学习的提示层和任务头进行一次性训练，而不是全模型微调，可以有效地将这些基础模型适配到医学图像分割任务上。</li>
@@ -306,8 +304,7 @@
 <p>在使用基于Transformer的大型视觉模型（如SAM）进行医学图像的血管分割时，直接应用通常结果不理想，因为这些模型未针对复杂的医学图像特征进行优化。</p>
 <p>通过对SAM的提示层和任务头进行一次性训练，例如在一张具有明显血管结构的彩色眼底图上进行训练，模型能够学习到如何在医学图像中识别血管，而不需要在整个大规模数据集上重新训练。</p>
 <p>这种方法不仅节省了大量的训练时间和资源，而且使模型能够有效地适用于特定的医学图像分割任务。</p>
-<p>子问题3：提高分割精度和泛化能力</p>
-<p>子解法3：深度可分离卷积的应用</p>
+<h4 id="3：提高分割精度和泛化能力"><a href="#3：提高分割精度和泛化能力" class="headerlink" title="3：提高分割精度和泛化能力"></a>3：提高分割精度和泛化能力</h4><p>子解法3：深度可分离卷积的应用</p>
 <ul>
 <li>在构建可学习提示层时，采用了1x1卷积、层归一化、GELU非线性激活函数，以及深度可分离的3x3卷积来捕获特征的局部模式。</li>
 <li>这种结构设计帮助模型更好地理解医学图像中的细节和结构，如通过深度可分离卷积提取血管或视网膜层的局部特征，从而提高了分割的精度和模型对不同数据集的泛化能力。</li>
@@ -353,22 +350,20 @@
 <p>通常需要通过预处理步骤（如图像增强、去噪、对比度调整）来改善图像质量，或者通过改进算法使其对低质量图像更加鲁棒。<br><img src="/../images/0-Learnable-Ophthalmology-SAM/28b1b9586224b97a01777a0bd4d236b5.png" srcset="/img/loading.gif" lazyload alt="实验结果6"></p>
 <p>LOSAM算法在识别和分割图像中的小目标上存在局限性，尤其是当目标尺寸非常小或与背景对比不明显时。</p>
 <p>所以，在应用中需要进一步提升算法在处理微小目标上的能力。</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>问题1：多模态图像的分割不一致性</p>
-<p>解法1：可学习提示层（Learnable Prompt Layer）</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>多模态图像的分割不一致性—–可学习提示层（Learnable Prompt Layer）</p>
 <p>原因： 多模态图像（如彩色眼底和OCTA图像）具有不同的成像特征，标准模型可能在一个模态上表现良好，在另一个模态上表现不足。可学习提示层允许模型在每个模态上捕捉和学习特定的特征，从而提高分割的一致性和准确性。</p>
 <p>例子： 在彩色眼底图像中，可学习提示层帮助模型区分了主要血管和次要血管，尽管分割微小血管仍然具有挑战性。</p>
-<p>问题2：OCT图像中的视网膜层精确分割</p>
-<p>解法2：体数据增强（Volume Data Augmentation）</p>
+<p>OCT图像中的视网膜层精确分割——体数据增强（Volume Data Augmentation）</p>
 <p>原因： OCT图像通常以三维数据形式存在，需要模型能够理解和处理这种体数据。体数据增强通过提供更丰富的三维信息来训练模型，从而提高分割视网膜层的精度。</p>
 <p>例子： 对于ARoI数据集的OCT层分割任务，体数据增强使得LOSAM在Dice评分上显著提高。</p>
-<p>问题3：小目标物的分割困难</p>
-<p>解法3：目标大小感知分割（Size-Aware Segmentation）</p>
+<p>小目标物的分割困难——目标大小感知分割（Size-Aware Segmentation）</p>
 <p>原因： 小目标物，如微动脉瘤，可能在图像的预处理阶段被丢失或在分割过程中难以辨认。目标大小感知分割专注于改进模型对于不同大小目标物的识别能力，特别是提高小目标的检测率。</p>
 <p>例子： 在iDRiD数据集上，LOSAM通过目标大小感知分割在大的病变（出血和硬渗出）上取得了成功，但对于小的病变（微动脉瘤和软渗出）的分割仍然是一个挑战。</p>
-<p>问题4：算法泛化到新的、未见过的数据集</p>
-<p>解法4：零次学习泛化（Zero-Shot Learning Generalization）</p>
+<p>算法泛化到新的、未见过的数据集—–零次学习泛化（Zero-Shot Learning Generalization）</p>
 <p>原因： 算法需要在训练时未见过的新数据集上仍然表现良好，这要求算法具有良好的泛化能力。零次学习泛化是在算法没有直接从特定数据集学习的情况下，验证其在新数据集上的表现。</p>
 <p>例子： 经过在FIVES数据集上的训练，LOSAM在HRF和CHASEDB数据集上的血管分割表现出了优秀的泛化能力，证明了其不依赖于特定数据集的训练就能够实现有效的分割。</p>
+<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><p>code:<a target="_blank" rel="noopener" href="https://github.com/Qsingle/LearnablePromptSAM">https://github.com/Qsingle/LearnablePromptSAM</a></p>
+<p>训练部分需要注意数据集的mask是否是二值图像，调整divide_mask的值（255），代码使用的SAM的自定义模型 <code>PromptSAM</code>，并且删除了部分层（如 <code>prompt_encoder</code> 和 <code>mask_decoder</code>），并对其他层（如 <code>blocks</code>）做了修改。这可能导致保存的模型权重与加载时的模型结构不一致。基于 SAM 模型进行的微调，并且仅冻结了 <code>image_encoder</code>，则需要确保训练时间足够长（epoch 数量、学习率等参数调整），以让新的任务（例如语义分割）适应当前数据集，最后在IDRiD和CHASEDB1数据集上分割失败，IOU为0。失败原因未知。</p>
 
                 
               </div>
