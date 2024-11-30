@@ -1,0 +1,675 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="GlanceSeg：利用凝视图引导基础模型进行实时微动脉瘤病变分割，用于早期检测糖尿病视网膜病变    arXiv:2311.08075v1  [eess.IV]  14 Nov 2023  背景早期糖尿病视网膜病变（DR）因微动脉瘤病变不明显且微小，临床诊断困难，相关研究有限。现有计算机辅助诊断（CAD）系统虽诊断性能好，但推理过程缺乏透明度，且早期检测能力不足，对标注数据依赖大。眼科医生诊断过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-GlanceSeg: Real-time microangioma lesion segmentation with gaze map-guided foundation model for early detection of diabetic retinopathy">
+<meta property="og:url" content="http://example.com/2024/11/30/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="GlanceSeg：利用凝视图引导基础模型进行实时微动脉瘤病变分割，用于早期检测糖尿病视网膜病变    arXiv:2311.08075v1  [eess.IV]  14 Nov 2023  背景早期糖尿病视网膜病变（DR）因微动脉瘤病变不明显且微小，临床诊断困难，相关研究有限。现有计算机辅助诊断（CAD）系统虽诊断性能好，但推理过程缺乏透明度，且早期检测能力不足，对标注数据依赖大。眼科医生诊断过">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130135346591.png">
+<meta property="og:image" content="http://example.com/images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130135936279.png">
+<meta property="og:image" content="http://example.com/images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130135651262.png">
+<meta property="og:image" content="http://example.com/images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130150855839.png">
+<meta property="og:image" content="http://example.com/images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130151110679.png">
+<meta property="og:image" content="http://example.com/images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130151204657.png">
+<meta property="og:image" content="http://example.com/images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130151251754.png">
+<meta property="og:image" content="http://example.com/images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130151348796.png">
+<meta property="og:image" content="http://example.com/images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130161524678.png">
+<meta property="og:image" content="http://example.com/images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130161540370.png">
+<meta property="article:published_time" content="2024-11-30T05:52:15.000Z">
+<meta property="article:modified_time" content="2024-11-30T08:16:05.743Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130135346591.png">
+  
+  
+  
+  <title>0-GlanceSeg: Real-time microangioma lesion segmentation with gaze map-guided foundation model for early detection of diabetic retinopathy - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-GlanceSeg: Real-time microangioma lesion segmentation with gaze map-guided foundation model for early detection of diabetic retinopathy"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-30 13:52" pubdate>
+          上传日期：2024年11月30日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-GlanceSeg: Real-time microangioma lesion segmentation with gaze map-guided foundation model for early detection of diabetic retinopathy</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>GlanceSeg：利用凝视图引导基础模型进行实时微动脉瘤病变分割，用于早期检测糖尿病视网膜病变</p>
+<p><img src="/../images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130135346591.png" srcset="/img/loading.gif" lazyload alt="TiTLE"></p>
+<blockquote>
+<p> arXiv:2311.08075v1  [eess.IV]  14 Nov 2023</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>早期糖尿病视网膜病变（DR）因微动脉瘤病变不明显且微小，临床诊断困难，相关研究有限。现有计算机辅助诊断（CAD）系统虽诊断性能好，但推理过程缺乏透明度，且早期检测能力不足，对标注数据依赖大。眼科医生诊断过程中，注视区域与诊断结果相关，但微小病变易被遗漏。将注视图（gaze map）作为注意力机制，可增强病变区域检测。基础模型（如 SAM）的出现为医学图像分割带来新可能，但直接应用于医学领域存在分割结果不一致问题，需探索有效提示点以实现精准分割。</p>
+<ul>
+<li><p>提出基于 SAM 的 GlanceSeg 框架，实现眼科医生查看眼底图像时微动脉瘤病变的实时分割，辅助早期 DR 诊断。</p>
+</li>
+<li><p>验证 GlanceSeg 在无监督和微调情况下的有效性与优越性，提高临床医生诊断效率和分割性能。</p>
+<p>  <img src="/../images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130135936279.png" srcset="/img/loading.gif" lazyload alt="Example"></p>
+<p>  第一行包括原始眼底图像 （a） 和其相应注释图像 （b），均来自 Retinal-Lesions 数据集。同样，第二行派生自 IDRiD 数据集。在内部，绿色实心框是眼底图像上不显眼的小病灶的放大视图，表明早期眼底疾病检测任务的难度。</p>
+</li>
+</ul>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><img src="/../images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130135651262.png" srcset="/img/loading.gif" lazyload alt="Pipline"></p>
+<p>提出的基于 SAM 的实时凝视地图引导的早期 DR 检测框架（即 GlanceSeg）的管道。它将凝视图集成为自上而下的注意力，将显著性图集成为自下而上的注意力，从而在临床医生查看图像时实时分割小病灶。或者，可以通过对注释进行微调来增强 GlanceSeg 的性能。</p>
+<h4 id="临床诊断设置与眼动追踪采集"><a href="#临床诊断设置与眼动追踪采集" class="headerlink" title="临床诊断设置与眼动追踪采集"></a>临床诊断设置与眼动追踪采集</h4><p>使用 Tobii Pro Spectrum 桌面眼动追踪器，在临床诊断中记录医生查看图像时的注视点，医生首次使用需进行 9 点校准，图像查看时实时记录注视点。</p>
+<h4 id="多注意力机制构建"><a href="#多注意力机制构建" class="headerlink" title="多注意力机制构建"></a>多注意力机制构建</h4><p><strong>自上而下注意力计算</strong>：用高斯函数将注视点转换为注视区域，计算注意力分散分数（ADS）衡量医生注意力聚焦程度，基于此得到自上而下的注视图。</p>
+<p><strong>感兴趣区域（ROI）提取与自下而上注意力增强</strong>：通过二值化注视图确定 ROI 范围，计算中心并裁剪子图像，再用高斯滤波模板增强 ROI 图像。</p>
+<p><strong>自下而上注意力计算</strong>：采用频率调谐（FT）显著区域检测方法和快速最小障碍距离（MBD）显著图计算方法，融合得到组合显著图，模拟图像内容引起的自下而上注意力。</p>
+<h4 id="基于生成提示点的-SAM-分割"><a href="#基于生成提示点的-SAM-分割" class="headerlink" title="基于生成提示点的 SAM 分割"></a>基于生成提示点的 SAM 分割</h4><p>构建网格点坐标集，从二值化显著图中提取显著点坐标，取两者交集作为最终提示点，利用 SAM 的零样本分割能力检测眼底微小病变。</p>
+<h4 id="通过领域知识过滤优化病变分割"><a href="#通过领域知识过滤优化病变分割" class="headerlink" title="通过领域知识过滤优化病变分割"></a>通过领域知识过滤优化病变分割</h4><p>提出领域知识过滤（DKF）模块，基于形状（如圆形度）、颜色（如 LAB 颜色空间中红色成分）和纹理（如局部区域平滑度）特征，筛选出符合目标病变特征的微动脉瘤病变，减少假阳性。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>使用 IDRiD 和 Retinal - Lesions 两个公开数据集，分别随机划分训练集和测试集，用于训练和评估 GlanceSeg 框架。</p>
+<p><img src="/../images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130150855839.png" srcset="/img/loading.gif" lazyload alt="实验结果"></p>
+<p>（a） 和 （b） 是来自 Retinal-Lesions 的说明性示例， （c） 和 （d） 来自 IDRiDdataset。每个示例的第一行依次表示由眼动追踪引导提取的眼底感兴趣区域 （ROI）、ROI 的显著图和经过二值化的后处理图。第二行类似于第一行，区别在于 ROI 已经经历了初步的图像增强处理进行优化。黄箭突出了微血管男性化，这是诊断糖尿病视网膜病变的早期指标。</p>
+<h4 id="医生查看和诊断图像分析"><a href="#医生查看和诊断图像分析" class="headerlink" title="医生查看和诊断图像分析"></a>医生查看和诊断图像分析</h4><p>邀请不同经验的眼科医生对眼底图像进行 DR 分级，经验丰富的医生诊断准确性更高、耗时更短，早期 DR（DR0 和 DR1）诊断对初级医生更具挑战性，因此本研究专注于辅助 DR1 诊断。</p>
+<p><img src="/../images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130151110679.png" srcset="/img/loading.gif" lazyload alt="医生查看和诊断图像分析"></p>
+<h4 id="GlanceSeg-零样本性能可视化"><a href="#GlanceSeg-零样本性能可视化" class="headerlink" title="GlanceSeg 零样本性能可视化"></a>GlanceSeg 零样本性能可视化</h4><p>基于眼动追踪确定 ROI，计算显著图，通过不同采样大小（N）生成提示点进行 SAM 分割，结果表明 N &#x3D; 100 时分割效果较好，引入领域知识过滤可排除假阳性。</p>
+<h4 id="与现有方法对比"><a href="#与现有方法对比" class="headerlink" title="与现有方法对比"></a>与现有方法对比</h4><p>监督学习方法在有限训练集上 AUPR 约为 0.5，传统 UNet 性能最差，CLC - Net 最佳。SAM 在原始图像均匀采样提示点下分割效果差（AUPR &#x3D; 0.1762），而 GlanceSeg 零样本方法 AUPR 达 0.5523，微调后性能进一步提升（AUPR &#x3D; 0.5705，DICE &#x3D; 0.3944）。</p>
+<p><img src="/../images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130151204657.png" srcset="/img/loading.gif" lazyload alt="与现有方法对比"></p>
+<h4 id="GlanceSeg-注释效率评估"><a href="#GlanceSeg-注释效率评估" class="headerlink" title="GlanceSeg 注释效率评估"></a>GlanceSeg 注释效率评估</h4><p>GlanceSeg 能实时呈现疑似微动脉瘤病变，辅助医生进行像素级注释。实验表明，初级和高级医生在使用 GlanceSeg 时注释效率均显著提高。</p>
+<p><img src="/../images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130151251754.png" srcset="/img/loading.gif" lazyload alt="注释效率评估"></p>
+<p>（a） 比较两名具有可比经验的临床医生、有 GlanceSeg 协助的临床医生 B 与没有帮助的临床医生 A 的注释时间。（b） 比较临床医生在两个大小相等的紧密分布的数据组上的注释时间。第 2 组采用 GlanceSeg 辅助注释，而第 1 组没有从这种辅助中受益。</p>
+<h4 id="GlanceSeg-诊断性能评估"><a href="#GlanceSeg-诊断性能评估" class="headerlink" title="GlanceSeg 诊断性能评估"></a>GlanceSeg 诊断性能评估</h4><p>GlanceSeg 辅助诊断时，初级医生早期 DR 分级准确性提高、诊断时间缩短、注意力分散分数降低；高级医生早期诊断时间缩短，但准确性略有下降，可能因其对微小病变敏感，GlanceSeg 对非早期 DR 分类帮助不大。</p>
+<h4 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h4><p>验证基于显著图的提示点和领域知识过滤对性能的提升作用，两者结合可实现最佳性能。</p>
+<p><img src="/../images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130151348796.png" srcset="/img/loading.gif" lazyload alt="消融实验"></p>
+<p>IDRiD（a） 和 Retinal-Lesions（b） 数据集上三个消融实验组的精确率&#x2F;召回率曲线图的比较。在内部，SM 是显著性图的缩写，而 DKF 代表领域知识过滤器。</p>
+<h4 id="超参数敏感性分析"><a href="#超参数敏感性分析" class="headerlink" title="超参数敏感性分析"></a>超参数敏感性分析</h4><p>研究生成提示点时采样点数 N 的影响，N 增加会使提示点数量和模型推理时间增加，N &#x3D; 100 时 AUPR 达到最优（IDRiD 数据集为 0.5523，Retinal - Lesions 数据集为 0.6817）。</p>
+<p><img src="/../images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130161524678.png" srcset="/img/loading.gif" lazyload alt="超参数敏感性分析1"></p>
+<p>在不同样本点维度大小 （N） 下比较两个数据集的提示点和模型推理时间的小提琴图。</p>
+<p><img src="/../images/0-GlanceSeg-Real-time-microangioma-lesion-segmentation-with-gaze-map-guided-foundation-model-for-early-detection-of-diabetic-retinopathy/image-20241130161540370.png" srcset="/img/loading.gif" lazyload alt="超参数敏感性分析2"></p>
+<p>基于上述两个数据集在不同超参数下的 AUPR 比较分析：调查样本提示点维度大小 （N） 的影响。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>提出的 GlanceSeg 框架结合注视图、显著图和领域知识过滤，实现早期 DR 的实时、无监督诊断，提高诊断性能和注释效率。GlanceSeg 可通过微调进一步提升分割性能，为模型优化提供新方向，有望实现早期 DR 检测的持续学习和卓越性能。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/11/30/0-LeSAM-Adapt-Segment-Anything-Model-for-Medical-Lesion-Segmentation/" title="0-LeSAM: Adapt Segment Anything Model for Medical Lesion Segmentation">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-LeSAM: Adapt Segment Anything Model for Medical Lesion Segmentation</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/11/27/0-RevSAM2-Prompt-SAM2-for-Medical-Image-Segmentation-via-Reverse-Propagation-without-Fine-tuning/" title="0-RevSAM2: Prompt SAM2 for Medical Image Segmentation via Reverse-Propagation without Fine-tuning">
+                        <span class="hidden-mobile">0-RevSAM2: Prompt SAM2 for Medical Image Segmentation via Reverse-Propagation without Fine-tuning</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
