@@ -1,0 +1,655 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SAM2 - UNet：利用 Segment Anything 2 为自然和医学图像分割打造强大编码器总结  arXiv:2408.08870v1  [cs.CV]  16 Aug 2024  https:&#x2F;&#x2F;github.com&#x2F;WZH0120&#x2F;SAM2-UNet.  背景图像分割是计算机视觉重要任务，多种下游任务依赖于它，但设计统一架构处理不同分割任务仍是挑战。视觉基础模型（VFMs）如 SA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-SAM2-UNet: Segment Anything 2 Makes Strong Encoder for Natural and Medical Image Segmentation">
+<meta property="og:url" content="http://example.com/2024/12/02/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="SAM2 - UNet：利用 Segment Anything 2 为自然和医学图像分割打造强大编码器总结  arXiv:2408.08870v1  [cs.CV]  16 Aug 2024  https:&#x2F;&#x2F;github.com&#x2F;WZH0120&#x2F;SAM2-UNet.  背景图像分割是计算机视觉重要任务，多种下游任务依赖于它，但设计统一架构处理不同分割任务仍是挑战。视觉基础模型（VFMs）如 SA">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202131452942.png">
+<meta property="og:image" content="http://example.com/images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202131753426.png">
+<meta property="og:image" content="http://example.com/images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202132132413.png">
+<meta property="og:image" content="http://example.com/images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202132149073.png">
+<meta property="og:image" content="http://example.com/images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202132256428.png">
+<meta property="article:published_time" content="2024-12-02T05:14:21.000Z">
+<meta property="article:modified_time" content="2024-12-02T13:30:40.823Z">
+<meta property="article:author" content="Wuyueyu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202131452942.png">
+  
+  
+  
+  <title>0-SAM2-UNet: Segment Anything 2 Makes Strong Encoder for Natural and Medical Image Segmentation - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-SAM2-UNet: Segment Anything 2 Makes Strong Encoder for Natural and Medical Image Segmentation"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-12-02 13:14" pubdate>
+          上传日期：2024年12月2日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          35 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-SAM2-UNet: Segment Anything 2 Makes Strong Encoder for Natural and Medical Image Segmentation</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="SAM2-UNet：利用-Segment-Anything-2-为自然和医学图像分割打造强大编码器总结"><a href="#SAM2-UNet：利用-Segment-Anything-2-为自然和医学图像分割打造强大编码器总结" class="headerlink" title="SAM2 - UNet：利用 Segment Anything 2 为自然和医学图像分割打造强大编码器总结"></a>SAM2 - UNet：利用 Segment Anything 2 为自然和医学图像分割打造强大编码器总结</h2><p><img src="/../images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202131452942.png" srcset="/img/loading.gif" lazyload alt="SAM2-UNet"></p>
+<blockquote>
+<p>arXiv:2408.08870v1  [cs.CV]  16 Aug 2024</p>
+<p> <a target="_blank" rel="noopener" href="https://github.com/WZH0120/SAM2-UNet">https://github.com/WZH0120/SAM2-UNet</a>.</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>图像分割是计算机视觉重要任务，多种下游任务依赖于它，但设计统一架构处理不同分割任务仍是挑战。视觉基础模型（VFMs）如 SAM2 在图像分割有潜力，但存在生成与任务无关的分割结果等问题，需探索提升其适应性和性能的策略。已有研究尝试将 SAM 适配到下游任务，如使用适配器、集成额外输入或改变架构，但受限于 SAM1 中 ViT 编码器的结构，SAM2 的分层骨干为设计更有效的 U 形网络提供了新机会。</p>
+<p>所以作者提出 SAM2 - UNet，证明 Segment Anything Model 2（SAM2）可作为 U 形分割模型的强大编码器，通过简单有效的框架实现通用图像分割。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><h4 id="模型架构"><a href="#模型架构" class="headerlink" title="模型架构"></a>模型架构</h4><p><img src="/../images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202131753426.png" srcset="/img/loading.gif" lazyload alt="模型架构"></p>
+<p>SAM2-UNet 概述。Hiera 块有一些变体，为了便于理解，我们只演示了一个简化的结构。</p>
+<h5 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a><strong>编码器</strong></h5><p>采用 SAM2 预训练的 Hiera 骨干网络，其分层结构适合 U 形网络，能多尺度捕捉特征，输出不同层次特征。</p>
+<h5 id="感受野模块（RFBs）"><a href="#感受野模块（RFBs）" class="headerlink" title="感受野模块（RFBs）"></a><strong>感受野模块（RFBs）</strong></h5><p>用于减少编码器特征的通道数至 64 并增强特征。</p>
+<h5 id="适配器"><a href="#适配器" class="headerlink" title="适配器"></a><strong>适配器</strong></h5><p>因 Hiera 参数量大，冻结其参数并在每个多尺度块前插入适配器，实现参数高效微调，适配器由线性层、GeLU 激活函数等组成。</p>
+<h5 id="解码器"><a href="#解码器" class="headerlink" title="解码器"></a><strong>解码器</strong></h5><p>采用经典 U - Net 设计，包含三个解码器块，每个块有两个 “Conv - BN - ReLU” 组合，输出特征经 1×1 Conv 分割头生成分割结果并上采样，与真实掩码监督训练，使用加权 IoU 损失和二元交叉熵（BCE）损失作为训练目标并应用深度监督。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>在五个不同基准上的十八个数据集进行实验，包括伪装对象检测、显著对象检测、海洋动物分割、镜子检测和息肉分割任务，各任务采用相应数据集和评估指标。</p>
+<p>基于 PyTorch 在单张 NVIDIA RTX 4090 GPU 上实现，使用 AdamW 优化器，采用随机垂直和水平翻转的数据增强策略，输入图像调整为 352×352，不同任务设置不同训练轮数，息肉分割任务采用多尺度训练策略。</p>
+<p>在伪装对象检测、显著对象检测、海洋动物分割、镜子检测和息肉分割任务中，SAM2 - UNet 在多个数据集上的各项评估指标上表现优异，超过其他对比方法，部分任务实现了最先进性能，可视化结果也显示其在不同场景下的准确性优势。</p>
+<p><img src="/../images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202132132413.png" srcset="/img/loading.gif" lazyload alt="伪装对象检测的可视化结果"></p>
+<p><img src="/../images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202132149073.png" srcset="/img/loading.gif" lazyload alt="息肉分割的可视化结果。"></p>
+<h4 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h4><p>对 Hiera 骨干网络大小进行消融实验，结果表明较大骨干通常性能更好，但较小骨干的 SAM2 - UNet 也能取得不错结果，证明 SAM2 预训练的 Hiera 骨干网络提供的高质量表示有效。</p>
+<p><img src="/../images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202132256428.png" srcset="/img/loading.gif" lazyload alt="消融实验"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>提出的 SAM2 - UNet 框架简单有效，适用于自然和医学图像分割任务，其采用的 SAM2 预训练 Hiera 编码器与经典 U - Net 解码器结合的方式被证明有效，可作为未来 SAM2 变体开发的新基线。</p>
+<h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><p>使用了SAM2.0基础模型的编码器与解码器，去除了其提示模块，并构建了无零样本分割能力的网络。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SAM2UNet</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, checkpoint_path=<span class="hljs-literal">None</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>        <span class="hljs-built_in">super</span>(SAM2UNet, self).__init__()    <br>        model_cfg = <span class="hljs-string">&quot;sam2_hiera_l.yaml&quot;</span><br>        <span class="hljs-keyword">if</span> checkpoint_path:<br>            model = build_sam2(model_cfg, checkpoint_path)<br>        <span class="hljs-keyword">else</span>:<br>            model = build_sam2(model_cfg)<br>        <span class="hljs-keyword">del</span> model.sam_mask_decoder<br>        <span class="hljs-keyword">del</span> model.sam_prompt_encoder<br>        <span class="hljs-keyword">del</span> model.memory_encoder<br>        <span class="hljs-keyword">del</span> model.memory_attention<br>        <span class="hljs-keyword">del</span> model.mask_downsample<br>        <span class="hljs-keyword">del</span> model.obj_ptr_tpos_proj<br>        <span class="hljs-keyword">del</span> model.obj_ptr_proj<br>        <span class="hljs-keyword">del</span> model.image_encoder.neck<br>        self.encoder = model.image_encoder.trunk<br><br>        <span class="hljs-keyword">for</span> param <span class="hljs-keyword">in</span> self.encoder.parameters():<br>            param.requires_grad = <span class="hljs-literal">False</span><br>        blocks = []<br>        <span class="hljs-keyword">for</span> block <span class="hljs-keyword">in</span> self.encoder.blocks:<br>            blocks.append(<br>                Adapter(block)<br>            )<br>        self.encoder.blocks = nn.Sequential(<br>            *blocks<br>        )<br>        self.rfb1 = RFB_modified(<span class="hljs-number">144</span>, <span class="hljs-number">64</span>)<br>        self.rfb2 = RFB_modified(<span class="hljs-number">288</span>, <span class="hljs-number">64</span>)<br>        self.rfb3 = RFB_modified(<span class="hljs-number">576</span>, <span class="hljs-number">64</span>)<br>        self.rfb4 = RFB_modified(<span class="hljs-number">1152</span>, <span class="hljs-number">64</span>)<br>        self.up1 = (Up(<span class="hljs-number">128</span>, <span class="hljs-number">64</span>))<br>        self.up2 = (Up(<span class="hljs-number">128</span>, <span class="hljs-number">64</span>))<br>        self.up3 = (Up(<span class="hljs-number">128</span>, <span class="hljs-number">64</span>))<br>        self.up4 = (Up(<span class="hljs-number">128</span>, <span class="hljs-number">64</span>))<br>        self.side1 = nn.Conv2d(<span class="hljs-number">64</span>, <span class="hljs-number">1</span>, kernel_size=<span class="hljs-number">1</span>)<br>        self.side2 = nn.Conv2d(<span class="hljs-number">64</span>, <span class="hljs-number">1</span>, kernel_size=<span class="hljs-number">1</span>)<br>        self.head = nn.Conv2d(<span class="hljs-number">64</span>, <span class="hljs-number">1</span>, kernel_size=<span class="hljs-number">1</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x</span>):<br>        x1, x2, x3, x4 = self.encoder(x)<br>        x1, x2, x3, x4 = self.rfb1(x1), self.rfb2(x2), self.rfb3(x3), self.rfb4(x4)<br>        x = self.up1(x4, x3)<br>        out1 = F.interpolate(self.side1(x), scale_factor=<span class="hljs-number">16</span>, mode=<span class="hljs-string">&#x27;bilinear&#x27;</span>)<br>        x = self.up2(x, x2)<br>        out2 = F.interpolate(self.side2(x), scale_factor=<span class="hljs-number">8</span>, mode=<span class="hljs-string">&#x27;bilinear&#x27;</span>)<br>        x = self.up3(x, x1)<br>        out = F.interpolate(self.head(x), scale_factor=<span class="hljs-number">4</span>, mode=<span class="hljs-string">&#x27;bilinear&#x27;</span>)<br>        <span class="hljs-keyword">return</span> out, out1, out2<br></code></pre></td></tr></table></figure>
+
+<p>通过设置不同的上、下采样数值，在前项传播中进行多尺度的融合计算。通过插值法bilinear计算3个不同的输出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RFB_modified</span>(nn.Module):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, in_channel, out_channel</span>):<br>        <span class="hljs-built_in">super</span>(RFB_modified, self).__init__()<br>        self.relu = nn.ReLU(<span class="hljs-literal">True</span>)<br>        self.branch0 = nn.Sequential(<br>            BasicConv2d(in_channel, out_channel, <span class="hljs-number">1</span>),<br>        )<br>        self.branch1 = nn.Sequential(<br>            BasicConv2d(in_channel, out_channel, <span class="hljs-number">1</span>),<br>            BasicConv2d(out_channel, out_channel, kernel_size=(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>), padding=(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)),<br>            BasicConv2d(out_channel, out_channel, kernel_size=(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>), padding=(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>)),<br>            BasicConv2d(out_channel, out_channel, <span class="hljs-number">3</span>, padding=<span class="hljs-number">3</span>, dilation=<span class="hljs-number">3</span>)<br>        )<br>        self.branch2 = nn.Sequential(<br>            BasicConv2d(in_channel, out_channel, <span class="hljs-number">1</span>),<br>            BasicConv2d(out_channel, out_channel, kernel_size=(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>), padding=(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>)),<br>            BasicConv2d(out_channel, out_channel, kernel_size=(<span class="hljs-number">5</span>, <span class="hljs-number">1</span>), padding=(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>)),<br>            BasicConv2d(out_channel, out_channel, <span class="hljs-number">3</span>, padding=<span class="hljs-number">5</span>, dilation=<span class="hljs-number">5</span>)<br>        )<br>        self.branch3 = nn.Sequential(<br>            BasicConv2d(in_channel, out_channel, <span class="hljs-number">1</span>),<br>            BasicConv2d(out_channel, out_channel, kernel_size=(<span class="hljs-number">1</span>, <span class="hljs-number">7</span>), padding=(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>)),<br>            BasicConv2d(out_channel, out_channel, kernel_size=(<span class="hljs-number">7</span>, <span class="hljs-number">1</span>), padding=(<span class="hljs-number">3</span>, <span class="hljs-number">0</span>)),<br>            BasicConv2d(out_channel, out_channel, <span class="hljs-number">3</span>, padding=<span class="hljs-number">7</span>, dilation=<span class="hljs-number">7</span>)<br>        )<br>        self.conv_cat = BasicConv2d(<span class="hljs-number">4</span>*out_channel, out_channel, <span class="hljs-number">3</span>, padding=<span class="hljs-number">1</span>)<br>        self.conv_res = BasicConv2d(in_channel, out_channel, <span class="hljs-number">1</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x</span>):<br>        x0 = self.branch0(x)<br>        x1 = self.branch1(x)<br>        x2 = self.branch2(x)<br>        x3 = self.branch3(x)<br>        x_cat = self.conv_cat(torch.cat((x0, x1, x2, x3), <span class="hljs-number">1</span>))<br><br>        x = self.relu(x_cat + self.conv_res(x))<br>        <span class="hljs-keyword">return</span> x<br></code></pre></td></tr></table></figure>
+
+<p>感受野模块用来确保尺度对齐。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/12/02/0-Hiera-A-Hierarchical-Vision-Transformer-without-the-Bells-and-Whistles/" title="0-Hiera: A Hierarchical Vision Transformer without the Bells-and-Whistles">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-Hiera: A Hierarchical Vision Transformer without the Bells-and-Whistles</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/11/30/0-Efficient-and-Robust-Medical-Image-Segmentation-Using-Lightweight-ViT-Tiny-based-SAM-and-Model-Quantization/" title="0-Efficient and Robust Medical Image Segmentation Using Lightweight ViT-Tiny based SAM and Model Quantization&gt;">
+                        <span class="hidden-mobile">0-Efficient and Robust Medical Image Segmentation Using Lightweight ViT-Tiny based SAM and Model Quantization&gt;</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
