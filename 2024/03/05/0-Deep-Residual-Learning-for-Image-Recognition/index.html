@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305100734044.png">
 <meta property="article:published_time" content="2024-03-05T01:46:11.000Z">
-<meta property="article:modified_time" content="2024-10-08T08:47:11.732Z">
+<meta property="article:modified_time" content="2025-03-06T08:56:52.892Z">
 <meta property="article:author" content="Wuyueyu">
 <meta property="article:tag" content="目标检测">
 <meta name="twitter:card" content="summary_large_image">
@@ -295,7 +295,7 @@
 <p><img src="/../images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305161546348.png" srcset="/img/loading.gif" lazyload alt="深度残差网络"></p>
 <p>​	从深层网络出发，深层网路&#x3D;浅层网络+附加层，如果浅层网络已经做的非常好了，附加层只会进行一些微小的改动，得到的结果就是网络随着深度的增加，准确率会上升，而不是degredation描述的下降。</p>
 <p><img src="/../images/0-Deep-Residual-Learning-for-Image-Recognition/image-20240305162027063.png" srcset="/img/loading.gif" lazyload alt="残差网络Residual Network"></p>
-<p>​	从图中我们可以看到ResNet中的快捷连接有实线和虚线，实线表示输入输出维度相同，虚线表示维度不同。对于 ResNet，当输入维度小于输出维度时，有3 种类型的快捷连接方式：</p>
+<p>​	从图中可以看到ResNet中的快捷连接有实线和虚线，实线表示输入输出维度相同，虚线表示维度不同。对于 ResNet，当输入维度小于输出维度时，有3 种类型的快捷连接方式：</p>
 <ul>
 <li>(A) Shortcut 执行恒等映射，使用额外的零填充来增加维度。因此，没有额外的参数。</li>
 <li>(B) 投影快捷方式仅用于增加维度，其他快捷方式是恒等映射。需要额外的参数。</li>

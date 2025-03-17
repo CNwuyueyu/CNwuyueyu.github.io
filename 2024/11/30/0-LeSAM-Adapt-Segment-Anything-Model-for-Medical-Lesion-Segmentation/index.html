@@ -30,8 +30,9 @@
 <meta property="og:image" content="http://example.com/images/0-LeSAM-Adapt-Segment-Anything-Model-for-Medical-Lesion-Segmentation/image-20241130172022420.png">
 <meta property="og:image" content="http://example.com/images/0-LeSAM-Adapt-Segment-Anything-Model-for-Medical-Lesion-Segmentation/image-20241130172215666.png">
 <meta property="article:published_time" content="2024-11-30T08:19:11.000Z">
-<meta property="article:modified_time" content="2024-11-30T09:22:57.162Z">
+<meta property="article:modified_time" content="2025-03-17T06:00:00.988Z">
 <meta property="article:author" content="Wuyueyu">
+<meta property="article:tag" content="SAM">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-LeSAM-Adapt-Segment-Anything-Model-for-Medical-Lesion-Segmentation/image-20241130161942974.png">
   
@@ -322,6 +323,41 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SAM/" class="print-no-link">#SAM</a>
+      
+    </div>
   
 </div>
 
@@ -445,6 +481,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -638,6 +680,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

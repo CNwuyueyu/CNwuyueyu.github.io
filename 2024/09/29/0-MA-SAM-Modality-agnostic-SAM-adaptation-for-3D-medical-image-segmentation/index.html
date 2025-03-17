@@ -25,8 +25,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-MA-SAM-Modality-agnostic-SAM-adaptation-for-3D-medical-image-segmentation/image-20240913215501362.png">
 <meta property="article:published_time" content="2024-09-29T08:00:40.000Z">
-<meta property="article:modified_time" content="2024-10-08T08:49:28.162Z">
+<meta property="article:modified_time" content="2025-03-17T06:01:19.180Z">
 <meta property="article:author" content="Wuyueyu">
+<meta property="article:tag" content="SAM">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-MA-SAM-Modality-agnostic-SAM-adaptation-for-3D-medical-image-segmentation/image-20240913215501362.png">
   
@@ -296,7 +297,7 @@
 <p>如上图所示，每个 3D 适配器由一个归一化层、一个线性下投影层、一个 3D 卷积层和一个激活层和一个线性上投影层组成。体积或时间信息的核心提取主要位于 3D 卷积层内。下投影层的目的是将原始 d 维特征的维数降低为更紧凑的 c 维表示，从而控制新引入参数的数量。相反，向上投影层将恢复特征尺寸。对于每个transformer块，在注意力层之前和之后都加入了两个 3D 适配器，因为这种设计可以获得经验上优越的性能。</p>
 <p>3.适配掩码解码器</p>
 <p>原始 SAM 中的掩码解码器仅包含两个 transformer 层、两个转置卷积层和一个多层感知层，构成了轻量级的架构，SAM对输入的16 x 16的下采样和连续的转置卷积等使生成的最终预测图像分辨率比原始低4倍，然而医学图像的细节非常小，需要更高的分辨率。本文使用了两种方法，一种是“渐进式上采样”，通过集成两个额外的转置卷积操作，对 SAM 解码器进行了适度的调整。每层将特征图上采样 2 倍，四个转置卷积层逐渐将特征图恢复到其原始输入分辨率。第二种方法被称为“多尺度融合”，需要创建一个类似于“U 形”网络的设计。这涉及使用跳过连接将图像编码器的多尺度特征图与掩码解码器的相应阶段连接起来，这一概念类似于 U-Net框架。</p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>作者在 5 个医学图像分割任务上广泛评估了我们的方法，涵盖了 11 个数据集的三种医学成像模式，即 CT 中的腹部多器官或肿瘤分割、MRI 中的前列腺分割和手术视频中的手术场景分割<img src="/../images/0-MA-SAM-Modality-agnostic-SAM-adaptation-for-3D-medical-image-segmentation/image-20240920155438617-1728357318283-34.png" srcset="/img/loading.gif" lazyload alt=" MA-SAM 方法与 BTCV 数据集上其他最先进方法之间的自动腹部多器官分割的比较。"><img src="/../images/0-MA-SAM-Modality-agnostic-SAM-adaptation-for-3D-medical-image-segmentation/image-20240920155511685.png" srcset="/img/loading.gif" lazyload alt=" MA-SAM 方法与其他最先进的方法在六个前列腺 MRI 数据集上的自动前列腺分割的比较。"> </p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>作者在 5 个医学图像分割任务上广泛评估了方法，涵盖了 11 个数据集的三种医学成像模式，即 CT 中的腹部多器官或肿瘤分割、MRI 中的前列腺分割和手术视频中的手术场景分割<img src="/../images/0-MA-SAM-Modality-agnostic-SAM-adaptation-for-3D-medical-image-segmentation/image-20240920155438617-1728357318283-34.png" srcset="/img/loading.gif" lazyload alt=" MA-SAM 方法与 BTCV 数据集上其他最先进方法之间的自动腹部多器官分割的比较。"><img src="/../images/0-MA-SAM-Modality-agnostic-SAM-adaptation-for-3D-medical-image-segmentation/image-20240920155511685.png" srcset="/img/loading.gif" lazyload alt=" MA-SAM 方法与其他最先进的方法在六个前列腺 MRI 数据集上的自动前列腺分割的比较。"> </p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文作者提出了植根于参数高效的微调策略的方法，并在微调过程中成功整合了医学图像的体积或时间信息。在不使用任何提示的情况下，自动分割方法大大优于各种 SOTA 3D 医学图像分割方法,模型还展示了出色的泛化能力，以及在使用提示时在特别具有挑战性的肿瘤分割方面的显着优势。本文的方法可为通用分割框架具有重要的前景，可以应用于各种医学成像模式，以实现全自动和可提示的分割。</p>
 
                 
@@ -306,6 +307,41 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SAM/" class="print-no-link">#SAM</a>
+      
+    </div>
   
 </div>
 

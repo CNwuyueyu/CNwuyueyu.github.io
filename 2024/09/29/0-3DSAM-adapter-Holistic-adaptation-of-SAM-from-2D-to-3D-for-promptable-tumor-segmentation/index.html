@@ -25,8 +25,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240911160429772.png">
 <meta property="article:published_time" content="2024-09-29T07:56:53.000Z">
-<meta property="article:modified_time" content="2024-10-08T08:48:18.872Z">
+<meta property="article:modified_time" content="2025-03-17T06:02:09.771Z">
 <meta property="article:author" content="Wuyueyu">
+<meta property="article:tag" content="SAM">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240911160429772.png">
   
@@ -299,7 +300,7 @@
 <p><img src="/../images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240913214011374.png" srcset="/img/loading.gif" lazyload alt="肿瘤分割"></p>
 <p>与公认的和最新的最先进的域分割方法比较。</p>
 <p><img src="/../images/0-3DSAM-adapter-Holistic-adaptation-of-SAM-from-2D-to-3D-for-promptable-tumor-segmentation/image-20240913214109207.png" srcset="/img/loading.gif" lazyload alt="3D 透视图可视化预测的分割掩码"></p>
-<p>从 3D 透视图可视化预测的分割掩码。与基线相比，我们的方法可以生成具有更多切片间平滑度和连贯性的蒙版</p>
+<p>从 3D 透视图可视化预测的分割掩码。与基线相比，本文的方法可以生成具有更多切片间平滑度和连贯性的蒙版</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文提出了一种新的参数高效适应方法，将 SAM 从 2D 整体适应 3D 以进行可及时的肿瘤分割。对图像编码器的修改是专门为支持体积输入而设计的，同时重用预先训练的权重。该文提出视觉采样器与全局查询一起，在提示编码器层面取代原来的交叉注意力机制，可以过滤掉提示中的噪声，缓解随着维度上升而过度平滑的问题。掩码解码器中使用了多层聚合，以更好地利用编码器的中间功能。在几个公共肿瘤分割数据集上的实验表明，本文的方法优于最先进的医学图像分割模型和现有的参数高效微调方法。</p>
 <p>目前存在的问题：一个观察结果是，尽管许多基于 transformer 的方法在多类分割方面可以优于 nnU-Net，但对于纯肿瘤分割，总体趋势是基于 CNN 的方法具有更好的性能并且更容易训练。这可能是因为肿瘤的大小非常小，肿瘤检测更多地依赖于局部纹理信息。因此，全局信息，即transformer 的强度不再有用。因为 SAM 基于 ViT，在第一次降采样操作期间可能会丢失大量详细的纹理信息。未来的方向可能需要如何调整架构以恢复这些纹理细节，以便性能能够以全自动的方式实现 SOTA。</p>
 
@@ -310,6 +311,41 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SAM/" class="print-no-link">#SAM</a>
+      
+    </div>
   
 </div>
 

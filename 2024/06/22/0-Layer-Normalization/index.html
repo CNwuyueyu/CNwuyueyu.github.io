@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-Layer-Normalization/image-20240622151144967.png">
 <meta property="article:published_time" content="2024-06-22T07:10:47.000Z">
-<meta property="article:modified_time" content="2024-10-08T08:49:00.622Z">
+<meta property="article:modified_time" content="2025-03-17T06:01:34.076Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-Layer-Normalization/image-20240622151144967.png">
@@ -284,7 +284,7 @@
 </blockquote>
 <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><a target="_blank" rel="noopener" href="https://cnwuyueyu.github.io/2024/05/25/0-Batch-Normalization-Accelerating-Deep-Network-Training-by-Reducing-Internal-Covariate-Shift/">BN（2015）</a>、<a href="#">LN</a>做为常用的标准化方法，不同之处就是在于对于激活函数的改变方式。标准化的目的是为了把输入转化成均值为0,方差为1的数据。</p>
 <p>BN通过在深度神经网络中加入额外的归一化阶段来减少训练时间，除了训练时间的改善外，批量统计的随机性还可在训练过程中充当正则化器。但是BN在处理RNN任务序列化数据不适用，并且BN依赖Batch Size,所以引出了本文，层归一化的思想：与批量归一化不同，所提出的方法直接从隐藏层内神经元的总输入中估计归一化统计数据，因此归一化不会在训练案例之间引入任何新的依赖关系。</p>
-<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p>层规范化LN就是为了克服BN的缺点，通过固定每层内输入总和的均值和方差，可以减少“协变量偏移”的问题。在RNN中，例如输入文本处理任务，训练案例中的不同句子长度不同是很常见的，使用BN的话，我们需要为序列中每个时间步长计算和存储单独的统计数据，如果测试数据比训练数据长，那么就会出现问题，而LN的归一化项仅取决于当前时间步长对层的输入求和，并且只有一组共享的增益和偏差参数。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p>层规范化LN就是为了克服BN的缺点，通过固定每层内输入总和的均值和方差，可以减少“协变量偏移”的问题。在RNN中，例如输入文本处理任务，训练案例中的不同句子长度不同是很常见的，使用BN的话，需要为序列中每个时间步长计算和存储单独的统计数据，如果测试数据比训练数据长，那么就会出现问题，而LN的归一化项仅取决于当前时间步长对层的输入求和，并且只有一组共享的增益和偏差参数。</p>
 <h4 id="1-权重和数据变换的不变性"><a href="#1-权重和数据变换的不变性" class="headerlink" title="1.权重和数据变换的不变性"></a>1.权重和数据变换的不变性</h4><p>两个标量$\mu$和$\sigma$将总输入$a_i$归一化到神经元，之后为每一个神经元学习自适应偏差b和增益g。<br>$$<br>h_i&#x3D;f(\frac{g_i}{\sigma_i}(a_i-\mu_i)+b_i)<br>$$<br>在经过权重与数据的重新缩放和重新居中后：<br>$$<br>h_i^丿&#x3D;f(\frac{g_i}{\sigma^丿}w_i^Tx^丿-\mu^丿)+b_i)&#x3D;f(\frac{g_i}{\delta\sigma}\delta w_i^Tx-\delta\mu)+b_i)&#x3D;h_i<br>$$<br>重新缩放单个数据点不会改变模型在层下的预测归一化，类似于层归一化中权重矩阵的重新居中，可以表明批量标准化对于数据集的重新居中具有不变性。</p>
 <h4 id="2-学习过程中参数空间的几何形状"><a href="#2-学习过程中参数空间的几何形状" class="headerlink" title="2.学习过程中参数空间的几何形状"></a>2.学习过程中参数空间的几何形状</h4><p>本部分，作者介绍了，通过权重向量的增长来隐性降低学习率和学习输入权重的大小的选取方法，归一化模型仅取决于预测误差的大小。标准化模型中传入权重对输入的缩放更具鲁棒性及其参数比标准模型更精确。详细推导见附录。</p>
 <p><img src="/../images/0-Layer-Normalization/image-20240622193442114.png" srcset="/img/loading.gif" lazyload alt="BN与LN"></p>
@@ -298,6 +298,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>

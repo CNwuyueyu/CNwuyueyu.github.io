@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wuyueyu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="DS - TransUNet：用于医学图像分割的双 Swin Transformer U - Net  JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, JUNE 2021 arXiv:2106.06716v1  [cs.CV]  12 Jun 2021  背景医学图像分割是临床应用关键环节，如息肉、病变、细胞分割等，对辅助诊断和病理研究意义重大。深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0-DS-TransUNet: Dual Swin Transformer U-Net for Medical Image Segmentation">
+<meta property="og:url" content="http://example.com/2024/12/04/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="DS - TransUNet：用于医学图像分割的双 Swin Transformer U - Net  JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, JUNE 2021 arXiv:2106.06716v1  [cs.CV]  12 Jun 2021  背景医学图像分割是临床应用关键环节，如息肉、病变、细胞分割等，对辅助诊断和病理研究意义重大。深度学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204163609059.png">
+<meta property="og:image" content="http://example.com/images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204170951312.png">
+<meta property="og:image" content="http://example.com/images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171030688.png">
+<meta property="og:image" content="http://example.com/images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171209333.png">
+<meta property="og:image" content="http://example.com/images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171231386.png">
+<meta property="og:image" content="http://example.com/images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171355075.png">
+<meta property="og:image" content="http://example.com/images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171535900.png">
+<meta property="og:image" content="http://example.com/images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171615529.png">
+<meta property="article:published_time" content="2024-12-04T08:35:00.000Z">
+<meta property="article:modified_time" content="2025-03-17T06:00:09.195Z">
+<meta property="article:author" content="Wuyueyu">
+<meta property="article:tag" content="SAM">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204163609059.png">
+  
+  
+  
+  <title>0-DS-TransUNet: Dual Swin Transformer U-Net for Medical Image Segmentation - Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":"3028c6400adaaa4521a5b772ad242a5e","google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>CV</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="0-DS-TransUNet: Dual Swin Transformer U-Net for Medical Image Segmentation"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-12-04 16:35" pubdate>
+          上传日期：2024年12月4日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">0-DS-TransUNet: Dual Swin Transformer U-Net for Medical Image Segmentation</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="DS-TransUNet：用于医学图像分割的双-Swin-Transformer-U-Net"><a href="#DS-TransUNet：用于医学图像分割的双-Swin-Transformer-U-Net" class="headerlink" title="DS - TransUNet：用于医学图像分割的双 Swin Transformer U - Net"></a>DS - TransUNet：用于医学图像分割的双 Swin Transformer U - Net</h2><p><img src="/../images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204163609059.png" srcset="/img/loading.gif" lazyload alt="DS - TransUNet"></p>
+<blockquote>
+<p>JOURNAL OF LATEX CLASS FILES, VOL. 14, NO. 8, JUNE 2021</p>
+<p>arXiv:2106.06716v1  [cs.CV]  12 Jun 2021</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>医学图像分割是临床应用关键环节，如息肉、病变、细胞分割等，对辅助诊断和病理研究意义重大。深度学习虽推动其发展，但现有基于卷积神经网络（CNNs）的方法因卷积固有局限，难以构建长距离依赖和全局上下文连接，限制性能提升。</p>
+<p>Transformer 在自然语言处理中成果丰硕，其自注意力机制可有效构建长距离上下文信息，在计算机视觉任务渐受关注。Vision Transformer（ViT）及分层结构的 Swin Transformer 在图像识别、检测和分割任务有出色表现，但在医学图像分割领域关注度不足。部分研究将 Transformer 用于医学图像分割编码器，在解码器应用及多尺度特征利用方面仍有挖掘空间。</p>
+<p>因此作者提出双 Swin Transformer U - Net（DS - TransUNet）医学图像分割框架，将 Swin Transformer 优势融入 U - Net 架构的编码器和解码器，提升医学图像语义分割质量，有效利用多尺度特征表示，建立特征间全局依赖，克服 CNN 固有局限。</p>
+<p><img src="/../images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204170951312.png" srcset="/img/loading.gif" lazyload alt="Transformer 与 Swin Transformer "></p>
+<p>标准 Transformer 块的架构（1）;（b） Swin Transformer 块的架构（2）和（3） 。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><img src="/../images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171030688.png" srcset="/img/loading.gif" lazyload alt="DS-TransUNet"></p>
+<p>给定一个输入的医学图像，首先将其分成两个尺度的非重叠补丁，分别将它们馈送到编码器的两个分支中，然后通过 Transformer Inter-active Fusion （TIF） 模块融合不同尺度的输出特征表示。最后，在基于 Swin Transformer 模块的上采样过程后，融合特征恢复到与输入图像相同的分辨率，从而获得最终的掩码预测。</p>
+<h4 id="Swin-Transformer-块"><a href="#Swin-Transformer-块" class="headerlink" title="Swin Transformer 块"></a>Swin Transformer 块</h4><p>标准 Transformer 编码器含多头自注意力（MSA）和多层感知器（MLP）模块，计算复杂度高。Swin Transformer 采用窗口多头自注意力（W - MSA）和移位窗口多头自注意力（SW - MSA）解决此问题，W - MSA 在局部窗口计算自注意力，SW - MSA 通过循环移位引入跨窗口交互，计算相似性时考虑相对位置偏差，提升计算效率。</p>
+<h4 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a>编码器</h4><p>模型基于 U - Net 架构，编码器用 Swin Transformer 提取特征。输入医学图像切分为重叠块并投影为 “令牌”，输入 Swin Transformer 的四个阶段，各阶段含多个 Swin Transformer 块（含 W - MSA 和 SW - MSA）。随网络加深，令牌数减少，前三个阶段经 patch merging 层降低特征分辨率、增加维度，实现层次化特征表示。</p>
+<h4 id="解码器"><a href="#解码器" class="headerlink" title="解码器"></a>解码器</h4><p>解码器含三个阶段，与传统 U - Net 及变体不同，各阶段有上采样、跳跃连接和 Swin Transformer 块。编码器第 4 阶段输出为解码器初始输入，经上采样与跳跃连接特征图拼接后输入 Swin Transformer 块，充分利用编码器特征并构建长距离依赖和全局上下文交互，提升解码性能。最后下采样输入图像获取低级别特征辅助最终掩码预测。</p>
+<h4 id="多尺度特征表示"><a href="#多尺度特征表示" class="headerlink" title="多尺度特征表示"></a>多尺度特征表示</h4><p>考虑到自注意力机制对补丁内像素级结构特征的忽视及 ViT 在细粒度补丁上的优势，采用多尺度 Swin Transformer 提取特征。用不同尺度（如和）分支互补提取粗、细粒度特征，增强模型分割性能与鲁棒性。</p>
+<h4 id="Transformer-交互融合模块（TIF）"><a href="#Transformer-交互融合模块（TIF）" class="headerlink" title="Transformer 交互融合模块（TIF）"></a>Transformer 交互融合模块（TIF）</h4><p>为融合双分支编码器输出的多尺度特征，提出 TIF 模块。其基于标准 Transformer 块的多头自注意力机制，实现多尺度特征高效交互。将不同分支特征重塑、拼接为令牌序列计算自注意力，建立不同尺度特征全局依赖，使细粒度特征获取粗粒度信息，提升分割性能。</p>
+<p><img src="/../images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171209333.png" srcset="/img/loading.gif" lazyload alt="TIF"></p>
+<p>Transformer 交互式融合模块 （TIF） 的示意图，该模块在多尺度特征融合过程中作为 DS-TransUNet 的核心组件。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>在息肉分割、ISIC 2018 皮肤病变分析、GLAS 腺体分割和 2018 数据科学碗细胞核检测四个医学图像分割任务中使用多个公开数据集，如息肉分割的 Kvasir、CVC - ColonDB 等五个数据集，各数据集按不同方式划分训练集、验证集和测试集，并统一图像分辨率。</p>
+<p>所有实验采用多尺度训练策略而非数据增强，损失函数为加权 IoU 损失和二元交叉熵损失，并通过深度监督辅助模型训练，最终损失函数为不同阶段输出损失加权和。用 SGD 优化器训练模型，设置动量、权重衰减和学习率，训练 100 个 epoch 并采用早期停止和余弦退火策略。模型基于 PyTorch 框架，在 NVIDIA RTX 3090 GPU 上训练，有基础版本（DS - TransUNet - B）和大版本（DS - TransUNet - L），分别使用 Swin - Base 和 Swin - Large 为主要尺度分支编码器，均以 Swin - Tiny 为互补尺度分支，且使用预训练权重。</p>
+<p>在不同数据集划分下，DS - TransUNet 均取得 SOTA 性能。在 Kvasir 数据集上，DS - TransUNet - L 在 mDice、mIoU、召回率和精度指标上优于此前 SOTA 方法 HarDNet - MSEG；在 CVC - ClinicDB 数据集上，DS - TransUNet - L 在多数指标达 SOTA，召回率提升显著；在综合多个数据集的实验中，DS - TransUNet 在所有数据集表现优异，尤其在未见过的数据集上优势明显，平均 mDice 得分相比 TransFuse 提升约 1.9%，能精准分割模糊息肉及大面积息肉。</p>
+<p><img src="/../images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171231386.png" srcset="/img/loading.gif" lazyload alt="image-20241204171231386"></p>
+<p>DS-TransUNet 息肉分割任务与其他模型的定性结果。模型显示出更好的学习和泛化能力，这导致了更高质量的分割性能。</p>
+<p><img src="/../images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171355075.png" srcset="/img/loading.gif" lazyload alt=" Kvasir 数据集的定量结果"></p>
+<p>定性结果。</p>
+<p><img src="/../images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171535900.png" srcset="/img/loading.gif" lazyload alt=" SOTA 方法相比"></p>
+<p>五个息肉分割数据集的定量结果与以前的 SOTA 方法相比。对于每一列，最佳结果都以粗体突出显示</p>
+<h4 id="消融研究"><a href="#消融研究" class="headerlink" title="消融研究"></a>消融研究</h4><p><strong>Swin Transformer 的影响</strong>：以 Base 模型探究 Swin Transformer 作为编码器的特征提取能力，虽总体性能略逊于 TransFuse，但在部分数据集（如 Kvasir 和 ColonDB）的 mDice 指标有提升，证明其作为编码器的有效性。</p>
+<p><strong>解码器中 Swin Transformer 块的影响</strong>：基于 Swin Transformer 编码器设计的 Swin U - Net 和 Swin Decoder 模型表明，U - 形编码器 - 解码器架构可提升分割性能，Swin Decoder 在平均 mDice 得分上比 TransFuse 提升 1.5%，能有效构建解码器中的长距离依赖和全局上下文连接5。</p>
+<p><strong>多尺度特征表示和 TIF 的影响</strong>：Multi - Scale SD 通过卷积融合多尺度特征未提升性能，因卷积难以有效融合多尺度特征且影响模型收敛。加入 TIF 模块的 DS - TransUNet 性能最佳，相比 Swin Decoder 在多个数据集的 mDice 和 mIoU 指标有提升，TIF 模块实现多尺度特征高效交互融合，提升分割效果。</p>
+<p><img src="/../images/0-DS-TransUNet-Dual-Swin-Transformer-U-Net-for-Medical-Image-Segmentation/image-20241204171615529.png" srcset="/img/loading.gif" lazyload alt=" 消融研究"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>提出的 DS - TransUNet 框架基于分层 Swin Transformer，在编码器采用双分支提取多尺度特征，解码器创新加入 Swin Transformer 块，并通过 TIF 模块融合多尺度特征，有效构建长距离依赖。在四个医学图像分割任务中显著优于其他 SOTA 方法，尤其在息肉分割表现突出。未来将聚焦设计更轻量化 Transformer 模型及学习视觉 Transformer 补丁划分产生的像素级内在结构特征。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SAM/" class="print-no-link">#SAM</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/12/04/0-Generalized-SAM-Efficient-Fine-Tuning-of-SAM-for-Variable-Input-Image-Sizes/" title="0-Generalized SAM: Efficient Fine-Tuning of SAM for Variable Input Image Sizes">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0-Generalized SAM: Efficient Fine-Tuning of SAM for Variable Input Image Sizes</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/12/03/0-Dr-SAM-U-Shape-Structure-Segment-Anything-Model-for-Generalizable-Medical-Image-Segmentation/" title="0-Dr-SAM: U-Shape Structure Segment Anything Model for Generalizable Medical Image Segmentation">
+                        <span class="hidden-mobile">0-Dr-SAM: U-Shape Structure Segment Anything Model for Generalizable Medical Image Segmentation</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"CNwuyueyu/CNwuyueyu.github.io","repo-id":"R_kgDOKPjK3A","category":"Announcements","category-id":"DIC_kwDOKPjK3M4CZLEu","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 2024 WuYueYu | Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

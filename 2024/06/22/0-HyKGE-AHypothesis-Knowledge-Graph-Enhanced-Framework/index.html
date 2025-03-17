@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143024238.png">
 <meta property="article:published_time" content="2024-06-22T07:02:32.000Z">
-<meta property="article:modified_time" content="2024-10-08T08:46:42.872Z">
+<meta property="article:modified_time" content="2025-03-17T06:04:23.840Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143024238.png">
@@ -307,7 +307,7 @@
 <p>KGRAG（左）。基本 KGRAG 从用户查询中提取关键实体，并在其中搜索相应实体 KG，然后与查询一起输入到 LLM 中。询问饭后，我感觉有点胃反流。用什么药？ 仅根据查询条件搜索KG 提示 &#x3D;查询+实体 答案：胃食管反流 可能是由于落后 食物或胃酸的流动。您 可以考虑使用抑酸 缓解症状的药物 胃反流和减轻 反流性食管炎的发展⋯⋯</p>
 <p>HyKGE（右）。HyKGE 首先查询 LLM 以获得假设 输出并从假设输出和查询中提取实体。然后 HyKGE 检索 任意两个锚实体，并将推理链与查询一起输入到 LLM问题吃完饭后，感觉有点胃痛 胃食管反流。我应该服用什么药物治疗？ 假设输出⋯⋯胃食管反流可能是由于胃酸反流到食管引起的⋯⋯根据 证据，考虑使用H2 受体拮抗剂或质子泵抑制剂⋯⋯ 推理链： ①胆汁反流→腹部←胃痛 ②碳酸铝镁→胃灼热→胃酸过多→胃痛 锚实体 提示&#x3D;查询+推理链 回答：胃酸倒流可能是导致 胃食管反流⋯⋯你可以考虑奥美拉唑或 埃索美拉唑减少胃酸分泌，⋯⋯或者， 您可以使用酸中和药物（抗酸药），例如 碳酸镁铝。另一种选择是使用 ⋯ H2 受体拮抗剂，如雷尼替丁或法莫替丁⋯ 中。</p>
 <h3 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h3><p><img src="/../images/0-HyKGE-AHypothesis-Knowledge-Graph-Enhanced-Framework/image-20240612143544030.png" srcset="/img/loading.gif" lazyload alt="整体框架"></p>
-<p>HyKGE 的整体框架。HyKGE 首先将用户查询（Q）输入到 LLM 中，得到假设输出（H ·O）。然后通过 NER 模块，应用 W2NER 模型识别实体并分离关系。然后通过 GTE 编码器将这 些识别出的实体与知识图谱中的实体链接起来。之后，HyKGE 从知识图谱中提取出相关推理链。然后，由于Q 的稀疏性，在 HO 片段粒度感知重排序模块中， HyKGE 将Q和HO进行分 块，并通过 TopK 链重排序器与推理链对齐，以消除不相关的知识。最后，我们根据用户查询来组织检索到的知识，并通过 LLM Reader 获取答案。</p>
+<p>HyKGE 的整体框架。HyKGE 首先将用户查询（Q）输入到 LLM 中，得到假设输出（H ·O）。然后通过 NER 模块，应用 W2NER 模型识别实体并分离关系。然后通过 GTE 编码器将这 些识别出的实体与知识图谱中的实体链接起来。之后，HyKGE 从知识图谱中提取出相关推理链。然后，由于Q 的稀疏性，在 HO 片段粒度感知重排序模块中， HyKGE 将Q和HO进行分 块，并通过 TopK 链重排序器与推理链对齐，以消除不相关的知识。最后，根据用户查询来组织检索到的知识，并通过 LLM Reader 获取答案。</p>
 <p><strong>预检索阶段：</strong>包括假设输出模块和NER模块。HOM利用LLM通过探索可能的答案来获得假设输出。然后NER模块提取来自假设输出模块的医疗实体和用户查询。</p>
 <p>NER（医学命名实体识别）模块：为了解决模型可能出现的幻觉或医学实体之间的误解，作者提取实体而不是关系，并使用KG中完全无误的三元组进行真实性验证，而不是在HO中分析的关系，使用 CMEEE（中文医学命名实体识别数据集）数据训练了一个医学命名实体识别(NER) 模型。</p>
 <p><strong>知识图谱上的检索</strong>：利用提取的实体作为锚点搜索不同类型的推理链，这些推理链将这些锚点相互连接起来，提供相关且合乎逻辑的知识。</p>
@@ -319,7 +319,7 @@
 <li>推理链充当有效的修剪机制，比 子图更有效地过滤噪音并节省资源。</li>
 </ul>
 <p><strong>后检索阶段：</strong></p>
-<p>采用 HO 片段粒度感知重排序方法。首先，假设输出和用户查询被分割成离散片段，随后，我们根据片段对检索到的推理链进行重排序。</p>
+<p>采用 HO 片段粒度感知重排序方法。首先，假设输出和用户查询被分割成离散片段，随后，根据片段对检索到的推理链进行重排序。</p>
 <p>传统的重新排序仅基于Q上的学习可能会过滤掉通过HOM获得的有价值的知识，从而导致重复和单调的情况。作者创新性地将HO和Q 结合起来，而不是仅仅依赖用户查询，利用其中包含的更丰富的医学知识。</p>
 <p><strong>LLM阅读器：</strong></p>
 <p>接收用户查询和修剪后的检索到的推理链，并通过精心设计的提示进行组织。</p>
@@ -341,6 +341,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -465,6 +493,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -658,6 +692,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

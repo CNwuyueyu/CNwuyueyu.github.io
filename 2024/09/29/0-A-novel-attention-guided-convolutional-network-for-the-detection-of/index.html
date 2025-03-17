@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205246880.png">
 <meta property="article:published_time" content="2024-09-29T12:02:09.000Z">
-<meta property="article:modified_time" content="2024-10-08T08:48:47.012Z">
+<meta property="article:modified_time" content="2025-03-17T06:01:45.720Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205246880.png">
@@ -315,7 +315,7 @@
 <p><img src="/../images/0-A-novel-attention-guided-convolutional-network-for-the-detection-of/image-20240829205956526.png" srcset="/img/loading.gif" lazyload alt="实验结果"></p>
 <p>AttFPN所包围的区域是最大的，因此这个方法能够更准确的将异常病例和正常病例进行分类。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文介绍了一种名为AttFPN的新型深度学习方法，作为宫颈癌筛查中宫颈细胞异常的自动检测模型。该模型以临床知识和注意力机制为指导，包括一个多尺寸的特征融合结构和一个注意力模块。</p>
-<p> 该方法的表现优于相关的先进的深度学习方法，并与具有10年经验的病理学家的表现相当。我们的方法可以作为一个可靠的助手，帮助病理学家在宫颈癌筛查中更有效和准确地确定异常的宫颈细胞。此外，它还可以为没有经验的病理学家提供有用的建议，特别是在资源匮乏的地区是很重要的。</p>
+<p> 该方法的表现优于相关的先进的深度学习方法，并与具有10年经验的病理学家的表现相当。本方法可以作为一个可靠的助手，帮助病理学家在宫颈癌筛查中更有效和准确地确定异常的宫颈细胞。此外，它还可以为没有经验的病理学家提供有用的建议，特别是在资源匮乏的地区是很重要的。</p>
 
                 
               </div>
@@ -323,6 +323,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -447,6 +475,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -640,6 +674,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

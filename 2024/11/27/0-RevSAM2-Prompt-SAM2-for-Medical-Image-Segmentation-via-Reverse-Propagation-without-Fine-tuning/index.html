@@ -28,8 +28,9 @@
 <meta property="og:image" content="http://example.com/images/0-RevSAM2-Prompt-SAM2-for-Medical-Image-Segmentation-via-Reverse-Propagation-without-Fine-tuning/image-20241127230814047.png">
 <meta property="og:image" content="http://example.com/images/0-RevSAM2-Prompt-SAM2-for-Medical-Image-Segmentation-via-Reverse-Propagation-without-Fine-tuning/image-20241127230840286.png">
 <meta property="article:published_time" content="2024-11-27T12:01:15.000Z">
-<meta property="article:modified_time" content="2024-11-27T15:14:19.461Z">
+<meta property="article:modified_time" content="2025-03-17T06:00:48.921Z">
 <meta property="article:author" content="Wuyueyu">
+<meta property="article:tag" content="SAM">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-RevSAM2-Prompt-SAM2-for-Medical-Image-Segmentation-via-Reverse-Propagation-without-Fine-tuning/image-20241127200246637.png">
   
@@ -293,7 +294,7 @@
 </ul>
 <h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><h4 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h4><p>基于 SAM2 构建 RevSAM2 框架，给定 3D 查询医学图像和少量 2D 支持图像及对应分割标签，预测查询图像的体素级分割图。包括前向传播、反向传播和查询自传播三个阶段。</p>
 <p><img src="/../images/0-RevSAM2-Prompt-SAM2-for-Medical-Image-Segmentation-via-Reverse-Propagation-without-Fine-tuning/image-20241127230650466.png" srcset="/img/loading.gif" lazyload alt="RevSAM2"></p>
-<p>RevSAM2 的总体框架 （a） 和正向传播和反向传播的图示 （b）。为了评价 S 和 Y 正向传播到 qi 上得到的预测 pi 的质量，我们将 qi 和 pi 反向传播回 S 得到 Yi，并计算 Yi 和 Y 之间的平均骰子 πi 并将其作为评估 pi 准确性的指标。</p>
+<p>RevSAM2 的总体框架 （a） 和正向传播和反向传播的图示 （b）。为了评价 S 和 Y 正向传播到 qi 上得到的预测 pi 的质量，将 qi 和 pi 反向传播回 S 得到 Yi，并计算 Yi 和 Y 之间的平均骰子 πi 并将其作为评估 pi 准确性的指标。</p>
 <h4 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h4><p>用图像编码器和提示编码器分别编码支持图像和标签，经记忆编码器融合信息存入记忆银行。对于查询图像的切片，通过记忆注意力机制基于支持图像信息获得融合视觉特征，再由掩码解码器预测分割掩码，但由于 SAM2 的空间位置扰动，分割质量可能不佳。</p>
 <h4 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h4><p>以查询切片及其预测掩码为支持图像 - 标签对，反向计算支持图像的预测 Dice 分数，评估查询切片预测的准确性。具体通过类似前向传播的方式，从查询切片和预测掩码中获取特征，经记忆注意力模块处理后由掩码解码器生成支持图像的预测掩码，计算其与真实标签的平均 Dice 分数。根据分数选择高质量的查询切片作为条件切片用于后续传播。</p>
 <h4 id="查询自传播"><a href="#查询自传播" class="headerlink" title="查询自传播"></a>查询自传播</h4><p>将条件查询切片及其预测掩码的特征存入记忆银行，并维护一个 FIFO 队列存储最近的非条件查询切片及其预测掩码的特征。对于非条件查询切片，通过记忆注意力机制结合条件切片信息获得融合视觉特征，进而预测其掩码。最终将条件掩码和非条件掩码组合形成查询图像的最终预测掩码。</p>
@@ -314,6 +315,41 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SAM/" class="print-no-link">#SAM</a>
+      
+    </div>
   
 </div>
 
@@ -437,6 +473,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -630,6 +672,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

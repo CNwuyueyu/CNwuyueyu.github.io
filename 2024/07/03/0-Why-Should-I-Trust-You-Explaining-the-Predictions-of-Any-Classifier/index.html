@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703151226459.png">
 <meta property="article:published_time" content="2024-07-03T06:45:00.000Z">
-<meta property="article:modified_time" content="2024-10-08T08:47:53.652Z">
+<meta property="article:modified_time" content="2025-03-17T06:02:26.976Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703151226459.png">
@@ -295,7 +295,7 @@
 <p>LIME的主要流程，通过对数据对可能的症状进行高亮标记，通过这个模型就会对于结果有可信的预测。</p>
 <p><img src="/../images/%E5%A6%82%E4%BD%95%E8%A7%A3%E9%87%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%9F/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240703155111570.png" srcset="/img/loading.gif" lazyload alt="LIME工作流程"></p>
 <p>在模型中选取需要预测的点，对其周围的点按照weight进行标记，然后将weight大的点放入模型中重新标记，选择一个解释模型来表示原来的模型，也就是在用一个可解释的新模型代替不可解释的原模型。</p>
-<p>假设我们有一个训练好的图像分类模型，可以将医学图像分类为正常或异常。我们使用LIME来解释模型对某个具体图像的预测：</p>
+<p>假设有一个训练好的图像分类模型，可以将医学图像分类为正常或异常。使用LIME来解释模型对某个具体图像的预测：</p>
 <ol>
 <li><strong>输入扰动</strong>：对该医学图像进行小幅度扰动，如改变某些像素值或添加噪声，生成一组相似的图像。</li>
 <li><strong>模型预测</strong>：使用原始模型对这些扰动图像进行预测，记录每个扰动图像的预测结果。</li>
@@ -303,7 +303,7 @@
 <li><strong>解释结果</strong>：分析线性模型的系数，解释哪些像素或图像区域对原始模型的预测影响最大，从而理解模型是如何做出预测的。</li>
 </ol>
 <h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>论文在多个数据集上进行了实验，包括文本分类和图像分类。实验结果表明，LIME能够有效地解释复杂模型的预测结果，并且在保持高解释性的同时，对原始模型的预测结果有较高的近似度。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过这种方法，我们可以更好地理解深度学习模型在医学图像处理中的决策过程，提升模型的透明度和可信度。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过这种方法，可以更好地理解深度学习模型在医学图像处理中的决策过程，提升模型的透明度和可信度。</p>
 <p>事实上还有一种方法SHAP（SHapley Additive exPlanations）是一种基于合作博弈论的解释方法，用于解释机器学习模型的预测结果。SHAP 结合了Shapley值的理论基础和加性特征重要性的思想，是目前广泛应用的一种解释工具。相比于 LIME，SHAP 更加严格和全面，但计算复杂度也较高。在实际应用中，SHAP 被广泛用于解释各种机器学习和深度学习模型的预测结果，提升模型的可解释性和透明度。在本文中不再介绍。</p>
 
                 
@@ -312,6 +312,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>

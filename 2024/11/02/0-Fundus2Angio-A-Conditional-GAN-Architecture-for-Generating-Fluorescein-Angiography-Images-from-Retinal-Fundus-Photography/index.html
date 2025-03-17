@@ -30,8 +30,9 @@
 <meta property="og:image" content="http://example.com/images/0-Fundus2Angio-A-Conditional-GAN-Architecture-for-Generating-Fluorescein-Angiography-Images-from-Retinal-Fundus-Photography/image-20241102134726242.png">
 <meta property="og:image" content="http://example.com/images/0-Fundus2Angio-A-Conditional-GAN-Architecture-for-Generating-Fluorescein-Angiography-Images-from-Retinal-Fundus-Photography/image-20241102140123049.png">
 <meta property="article:published_time" content="2024-11-02T04:45:36.000Z">
-<meta property="article:modified_time" content="2024-11-02T06:03:51.669Z">
+<meta property="article:modified_time" content="2025-03-17T06:01:07.727Z">
 <meta property="article:author" content="Wuyueyu">
+<meta property="article:tag" content="FA">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-Fundus2Angio-A-Conditional-GAN-Architecture-for-Generating-Fluorescein-Angiography-Images-from-Retinal-Fundus-Photography/image-20241102124739262.png">
   
@@ -303,9 +304,9 @@
 <p>生成器 Gfine 获取大小为 512x512 的输入图像，并生成具有相同分辨率的输出图像。同样，生成器 Gcoarse 网络获取大小为一半 （256x256） 的图像，并输出与输入大小相同的图像。此外，Gcoarse 还输出大小为 256x256x64 的特征向量，该向量最终与 Gfine 的中间层之一相加。</p>
 <h4 id="3-多尺度-PatchGAN-作为判别器"><a href="#3-多尺度-PatchGAN-作为判别器" class="headerlink" title="3.多尺度 PatchGAN 作为判别器"></a>3.多尺度 PatchGAN 作为判别器</h4><p>GAN 判别器需要适应粗生成和精细生成的图像，以区分真假图像。作者利用了使用两个马尔可夫判别器的想法，该判别器最初是在一种称为 PatchGAN 的技术中引入的，以解决更深架构、更宽感受野内核带来的过度拟合并增加参数数量问题。</p>
 <p>尽管判别器具有相似的网络结构，但以较低分辨率学习特征的判别器具有更宽的感受野。它尝试提取和保留更多的全局特征，如黄斑、视盘、颜色和亮度等，以生成更好的粗糙图像。相比之下，以原始分辨率学习特征的判别器指示生成器产生精细特征，例如视网膜静脉和动脉、渗出物等。通过这样，将全局和局部尺度的特征信息结合起来，同时独立地训练生成器及其成对的多尺度判别器。</p>
-<h4 id="4-加权对象函数和对抗性损失"><a href="#4-加权对象函数和对抗性损失" class="headerlink" title="4.加权对象函数和对抗性损失"></a>4.加权对象函数和对抗性损失</h4><p>使用 LSGAN来计算损失并训练我们的条件 GAN。</p>
+<h4 id="4-加权对象函数和对抗性损失"><a href="#4-加权对象函数和对抗性损失" class="headerlink" title="4.加权对象函数和对抗性损失"></a>4.加权对象函数和对抗性损失</h4><p>使用 LSGAN来计算损失并训练条件 GAN。</p>
 <p>判别器首先在真实眼底 x 和真实血管造影图像 Y 上进行训练，然后在真实眼底 x 和假血管造影图像 G（x） 上进行训练。首先训练判别器 Dfine 和 Dcoarse，对随机批次的图像进行几次迭代。接下来，在保持判别器权重冻结的同时训练 Gcoarse。之后，以类似的方式在一批随机样本上训练 Gfine。使用均方误差 （MSE） 来计算生成器的单个损耗，</p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><h4 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h4><p>使用 Hajeb 等人提供的 funuds 和血管造影数据集。该数据集包括来自 59 名患者的 30 对糖尿病视网膜病变和 29 对正常血管造影和眼底图像。因为，并非所有对都完全对齐，所以根据对齐选择了 17 对进行实验。图像要么完全对齐，要么几乎对齐。眼底和血管造影的分辨率如下 576 720。眼底照片为 RGB 格式，而血管造影为灰度格式。由于数据短缺，从每张图像中随机提取 50 个 512 512 大小的裁剪来训练我们的模型。因此，训练样本的总数为 850 （17x50）。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><h4 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h4><p>使用 Hajeb 等人提供的 funuds 和血管造影数据集。该数据集包括来自 59 名患者的 30 对糖尿病视网膜病变和 29 对正常血管造影和眼底图像。因为，并非所有对都完全对齐，所以根据对齐选择了 17 对进行实验。图像要么完全对齐，要么几乎对齐。眼底和血管造影的分辨率如下 576 720。眼底照片为 RGB 格式，而血管造影为灰度格式。由于数据短缺，从每张图像中随机提取 50 个 512 512 大小的裁剪来训练模型。因此，训练样本的总数为 850 （17x50）。</p>
 <p><img src="/../images/0-Fundus2Angio-A-Conditional-GAN-Architecture-for-Generating-Fluorescein-Angiography-Images-from-Retinal-Fundus-Photography/image-20241102140123049.png" srcset="/img/loading.gif" lazyload alt="F4"></p>
 <p>从转换后的眼底图像生成的血管造影。第一行显示原始图像、眼底实况和从不同架构生成的血管造影。第二行显示所选区域的封闭版本。红色边界框表示该特定区域。每行对说明的 None、Blur、Sharp 和 Noise 变换。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文介绍了 Fundus2Angio，这是一种新颖的条件生成结构，能够从视网膜眼底图像生成血管造影。通过从转换和扭曲的眼底图像中合成高质量的血管造影，进一步证明了它的稳健性、适应性和可重复性。此外，生物标志物的变化如何不会影响合成血管造影的适应性和可重复性。这确保了所提出的结构有效地保留了已知的生物标志物（例如 血管模式和结构）。因此，所提出的网络可以有效地用于生成准确的 FA 图像对于同一患者，从眼底图像随时间的变化。这样可以更好地控制患者的疾病进展监测或帮助发现新开发的疾病或病症。这项工作的一个未来方向是改进这项工作，以结合视网膜血管分割和渗出物定位。</p>
@@ -317,6 +318,41 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/FA/" class="print-no-link">#FA</a>
+      
+    </div>
   
 </div>
 
@@ -440,6 +476,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -633,6 +675,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

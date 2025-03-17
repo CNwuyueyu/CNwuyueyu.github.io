@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/C-Vision-Transformer-ViT/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240928154923206.png">
 <meta property="article:published_time" content="2024-09-28T07:48:20.000Z">
-<meta property="article:modified_time" content="2024-10-08T08:48:09.292Z">
+<meta property="article:modified_time" content="2025-03-17T06:02:15.951Z">
 <meta property="article:author" content="Wuyueyu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/C-Vision-Transformer-ViT/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240928154923206.png">
@@ -285,7 +285,7 @@
 <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>虽然Transformer架构已经成为自然语言处理任务的事实上的标准，但它在计算机视觉上的应用仍然有限。在视觉方面，注意力要么与卷积网络结合使用，要么用于替换卷积网络的某些组件，同时保持其整体结构不变。本文证明这种对cnn的依赖是不必要的，直接应用于图像补丁序列的纯Transformer可以很好地完成图像分类任务。当对大量数据进行预训练并传输到多个中型或小型图像识别基准(ImageNet, CIFAR-100, VTAB等)时，Vision Transformer (ViT)与最先进的卷积网络相比获得了出色的结果，同时需要更少的计算资源进行训练。</p>
 <h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><img src="/../images/C-Vision-Transformer-ViT/img-$%7BHH%7D-$%7Bmm%7D-$%7Bss%7D.$%7Bextension%7D/image-20240928161421240.png" srcset="/img/loading.gif" lazyload alt="ViT"></p>
 <p>将图像分割成固定大小的补丁，线性嵌入每个补丁，添加位置嵌入，并将结果向量序列馈送到标准Transformer编码器。为了执行分类，使用标准方法向序列中添加一个额外的可学习的“分类令牌”。</p>
-<h4 id="多头自注意力机制："><a href="#多头自注意力机制：" class="headerlink" title="多头自注意力机制："></a>多头自注意力机制：</h4><p>标准qkv自注意是神经架构的流行构建块。对于输入序列$z∈R^{N×D}$中的每个元素，我们计算序列中所有值v的加权和。注意权$A_{ij}$基于序列中两个元素的成对相似度及其各自的查询$q_i$和键$k_j$表示。<br>$$<br>[q,k,v]&#x3D;zU_{qkv} \ \ \ \ \ \ \ \ \  U_{qkv}\in R^{D\times3D_h},\<br>A&#x3D;softmax(\frac{qk^T}{\sqrt{D_h}}) \ \ \ \ \ \<br>A\in R^{N\times N},\<br>SA(z)&#x3D;A_v<br>$$<br>多头自注意(MSA)是自注意的扩展，其中并行运行k个自注意操作，称为“头”，并投影它们的连接输出。为了在改变k时保持计算量和参数数量不变，通常将$D_h$ 设为D&#x2F;k。<br>$$<br>MSA(z) &#x3D; [SA_1(z); SA_2(z); · · · ; SA_k(z)]U_{msa}\ \ \ \ \ \ \ \<br>U_{msa} ∈ R^{k·D_h×D}<br>$$</p>
+<h4 id="多头自注意力机制："><a href="#多头自注意力机制：" class="headerlink" title="多头自注意力机制："></a>多头自注意力机制：</h4><p>标准qkv自注意是神经架构的流行构建块。对于输入序列$z∈R^{N×D}$中的每个元素，计算序列中所有值v的加权和。注意权$A_{ij}$基于序列中两个元素的成对相似度及其各自的查询$q_i$和键$k_j$表示。<br>$$<br>[q,k,v]&#x3D;zU_{qkv} \ \ \ \ \ \ \ \ \  U_{qkv}\in R^{D\times3D_h},\<br>A&#x3D;softmax(\frac{qk^T}{\sqrt{D_h}}) \ \ \ \ \ \<br>A\in R^{N\times N},\<br>SA(z)&#x3D;A_v<br>$$<br>多头自注意(MSA)是自注意的扩展，其中并行运行k个自注意操作，称为“头”，并投影它们的连接输出。为了在改变k时保持计算量和参数数量不变，通常将$D_h$ 设为D&#x2F;k。<br>$$<br>MSA(z) &#x3D; [SA_1(z); SA_2(z); · · · ; SA_k(z)]U_{msa}\ \ \ \ \ \ \ \<br>U_{msa} ∈ R^{k·D_h×D}<br>$$</p>
 <h3 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h3><p>Vision transformer 将纯 transformer 应用于图像，无需任何卷积层。它们将图像分割成块，并将 transformer 应用于块嵌入。通过对块的扁平像素值应用简单的线性变换来生成块嵌入。然后，将块嵌入以及分类 token 馈送到标准 transformer 编码器 。token 上的编码 用于使用 MLP 对图像进行分类。</p>
 <p>在将补丁输入到 Transformer 时，学习到的位置嵌入会添加到补丁嵌入中，因为补丁嵌入不包含有关该补丁来自何处的任何信息。位置嵌入是每个补丁位置的一组向量，使用梯度下降法和其他参数进行训练。</p>
 <p>ViT 在大型数据集上进行预训练时表现良好。本文建议使用 MLP 分类头对它们进行预训练，然后在微调时使用单个线性层。本文使用在 3 亿个图像数据集上进行预训练的 ViT 击败了 SOTA。他们还在推理过程中使用更高分辨率的图像，同时保持补丁大小不变。新补丁位置的位置嵌入是通过插值学习位置嵌入来计算的。</p>
@@ -302,7 +302,7 @@
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">PatchEmbeddings</span>(<span class="hljs-title class_ inherited__">Module</span>):<br>	<span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, d_model: <span class="hljs-built_in">int</span>, patch_size: <span class="hljs-built_in">int</span>, in_channels: <span class="hljs-built_in">int</span></span>):<br></code></pre></td></tr></table></figure>
 
-<p>我们创建一个卷积层，其核大小和步长等于块大小。这相当于将图像分割成块并对每个块进行线性变换。</p>
+<p>创建一个卷积层，其核大小和步长等于块大小。这相当于将图像分割成块并对每个块进行线性变换。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">super</span>().__init__()<br>self.conv = nn.Conv2d(in_channels, d_model, patch_size, stride=patch_size)<br></code></pre></td></tr></table></figure>
 
 <ul>
@@ -385,7 +385,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">VisionTransformer</span>(<span class="hljs-title class_ inherited__">Module</span>):<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li><code>transformer_layer</code>是单个Transformer层的副本。我们复制它以制作Transformer 。<code>n_layers</code></li>
+<li><code>transformer_layer</code>是单个Transformer层的副本。复制它以制作Transformer 。<code>n_layers</code></li>
 <li><code>n_layers</code>是Transformer层的数量。</li>
 <li><code>patch_emb</code> 是补丁嵌入层。</li>
 <li><code>pos_emb</code> 是位置嵌入层。</li>
@@ -444,6 +444,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>

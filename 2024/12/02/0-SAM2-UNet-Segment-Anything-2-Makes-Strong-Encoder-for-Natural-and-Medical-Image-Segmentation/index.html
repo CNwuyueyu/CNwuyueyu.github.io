@@ -29,8 +29,9 @@
 <meta property="og:image" content="http://example.com/images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202132149073.png">
 <meta property="og:image" content="http://example.com/images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202132256428.png">
 <meta property="article:published_time" content="2024-12-02T05:14:21.000Z">
-<meta property="article:modified_time" content="2024-12-02T13:30:40.823Z">
+<meta property="article:modified_time" content="2025-03-17T06:00:46.718Z">
 <meta property="article:author" content="Wuyueyu">
+<meta property="article:tag" content="SAM">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202131452942.png">
   
@@ -290,7 +291,7 @@
 <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>图像分割是计算机视觉重要任务，多种下游任务依赖于它，但设计统一架构处理不同分割任务仍是挑战。视觉基础模型（VFMs）如 SAM2 在图像分割有潜力，但存在生成与任务无关的分割结果等问题，需探索提升其适应性和性能的策略。已有研究尝试将 SAM 适配到下游任务，如使用适配器、集成额外输入或改变架构，但受限于 SAM1 中 ViT 编码器的结构，SAM2 的分层骨干为设计更有效的 U 形网络提供了新机会。</p>
 <p>所以作者提出 SAM2 - UNet，证明 Segment Anything Model 2（SAM2）可作为 U 形分割模型的强大编码器，通过简单有效的框架实现通用图像分割。</p>
 <h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><h4 id="模型架构"><a href="#模型架构" class="headerlink" title="模型架构"></a>模型架构</h4><p><img src="/../images/0-SAM2-UNet-Segment-Anything-2-Makes-Strong-Encoder-for-Natural-and-Medical-Image-Segmentation/image-20241202131753426.png" srcset="/img/loading.gif" lazyload alt="模型架构"></p>
-<p>SAM2-UNet 概述。Hiera 块有一些变体，为了便于理解，我们只演示了一个简化的结构。</p>
+<p>SAM2-UNet 概述。Hiera 块有一些变体，为了便于理解，只演示了一个简化的结构。</p>
 <h5 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a><strong>编码器</strong></h5><p>采用 SAM2 预训练的 Hiera 骨干网络，其分层结构适合 U 形网络，能多尺度捕捉特征，输出不同层次特征。</p>
 <h5 id="感受野模块（RFBs）"><a href="#感受野模块（RFBs）" class="headerlink" title="感受野模块（RFBs）"></a><strong>感受野模块（RFBs）</strong></h5><p>用于减少编码器特征的通道数至 64 并增强特征。</p>
 <h5 id="适配器"><a href="#适配器" class="headerlink" title="适配器"></a><strong>适配器</strong></h5><p>因 Hiera 参数量大，冻结其参数并在每个多尺度块前插入适配器，实现参数高效微调，适配器由线性层、GeLU 激活函数等组成。</p>
@@ -318,6 +319,41 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SAM/" class="print-no-link">#SAM</a>
+      
+    </div>
   
 </div>
 
@@ -441,6 +477,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -634,6 +676,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
