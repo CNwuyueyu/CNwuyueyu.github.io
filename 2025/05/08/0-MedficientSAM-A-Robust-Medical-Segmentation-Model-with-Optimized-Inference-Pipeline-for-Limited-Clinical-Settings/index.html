@@ -16,24 +16,26 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="TP-DRSeg：使用显式文本提示辅助 SAM 改进糖尿病视网膜病变病变分割    MICCAI 2024, LNCS 15008, pp. 743–753, 2024.        https:&#x2F;&#x2F;doi.org&#x2F;10.1007&#x2F;978-3-031-72111-3_70  背景SAM在识别糖尿病视网膜病变 （DR） 病变分割有一定挑战。本文提出了一种将 SAM 用于文本提示的 DR 病变分割的">
+    <meta name="description" content="MedficientsAM：具有优化推理管道的强大医学分割模型，用于有限的临床环境 背景SAM的出现使通用医学图像分割模型的开发跨越了不同的模式。但是，临床环境中这种深度学习模型的推理仍然受到对强大计算设备的依赖的限制。 医学图像的早期分割模型通常基于nnUNET结构。尽管有效，但这些模型仅限于特定数据集，每个模型都针对特定的分割任务量身定制。SAM的出现标志着分割任务的显着范式移动。这些努力的重">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM">
-<meta property="og:url" content="http://example.com/2025/03/06/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/index.html">
+<meta property="og:title" content="0-MedficientSAM: A Robust Medical Segmentation Model with Optimized Inference Pipeline for Limited Clinical Settings">
+<meta property="og:url" content="http://example.com/2025/05/08/0-MedficientSAM-A-Robust-Medical-Segmentation-Model-with-Optimized-Inference-Pipeline-for-Limited-Clinical-Settings/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="TP-DRSeg：使用显式文本提示辅助 SAM 改进糖尿病视网膜病变病变分割    MICCAI 2024, LNCS 15008, pp. 743–753, 2024.        https:&#x2F;&#x2F;doi.org&#x2F;10.1007&#x2F;978-3-031-72111-3_70  背景SAM在识别糖尿病视网膜病变 （DR） 病变分割有一定挑战。本文提出了一种将 SAM 用于文本提示的 DR 病变分割的">
+<meta property="og:description" content="MedficientsAM：具有优化推理管道的强大医学分割模型，用于有限的临床环境 背景SAM的出现使通用医学图像分割模型的开发跨越了不同的模式。但是，临床环境中这种深度学习模型的推理仍然受到对强大计算设备的依赖的限制。 医学图像的早期分割模型通常基于nnUNET结构。尽管有效，但这些模型仅限于特定数据集，每个模型都针对特定的分割任务量身定制。SAM的出现标志着分割任务的显着范式移动。这些努力的重">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315165815618.png">
-<meta property="article:published_time" content="2025-03-06T09:07:21.000Z">
-<meta property="article:modified_time" content="2025-03-17T06:06:33.285Z">
+<meta property="og:image" content="http://example.com/images/0-MedficientSAM-A-Robust-Medical-Segmentation-Model-with-Optimized-Inference-Pipeline-for-Limited-Clinical-Settings/image-20250510160619451.png">
+<meta property="og:image" content="http://example.com/images/0-MedficientSAM-A-Robust-Medical-Segmentation-Model-with-Optimized-Inference-Pipeline-for-Limited-Clinical-Settings/image-20250510162029041.png">
+<meta property="og:image" content="http://example.com/images/0-MedficientSAM-A-Robust-Medical-Segmentation-Model-with-Optimized-Inference-Pipeline-for-Limited-Clinical-Settings/image-20250510162444311.png">
+<meta property="og:image" content="http://example.com/images/0-MedficientSAM-A-Robust-Medical-Segmentation-Model-with-Optimized-Inference-Pipeline-for-Limited-Clinical-Settings/image-20250510162607641.png">
+<meta property="article:published_time" content="2025-05-08T15:41:30.000Z">
+<meta property="article:modified_time" content="2025-05-10T08:29:16.970Z">
 <meta property="article:author" content="Wuyueyu">
-<meta property="article:tag" content="SAM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315165815618.png">
+<meta name="twitter:image" content="http://example.com/images/0-MedficientSAM-A-Robust-Medical-Segmentation-Model-with-Optimized-Inference-Pipeline-for-Limited-Clinical-Settings/image-20250510160619451.png">
   
   
   
-  <title>0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM - Blog</title>
+  <title>0-MedficientSAM: A Robust Medical Segmentation Model with Optimized Inference Pipeline for Limited Clinical Settings - Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +205,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM"></span>
+            <span id="subtitle" data-typed-text="0-MedficientSAM: A Robust Medical Segmentation Model with Optimized Inference Pipeline for Limited Clinical Settings"></span>
           
         </div>
 
@@ -214,8 +216,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-06 17:07" pubdate>
-          上传日期：2025年3月6日
+        <time datetime="2025-05-08 23:41" pubdate>
+          上传日期：2025年5月8日
         </time>
       </span>
     
@@ -226,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.9k 字
         
       </span>
     
@@ -274,45 +276,33 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM</h1>
+            <h1 id="seo-header">0-MedficientSAM: A Robust Medical Segmentation Model with Optimized Inference Pipeline for Limited Clinical Settings</h1>
             
             
               <div class="markdown-body">
                 
-                <p>TP-DRSeg：使用显式文本提示辅助 SAM 改进糖尿病视网膜病变病变分割</p>
-<p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315165815618.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
-<blockquote>
-<p> MICCAI 2024, LNCS 15008, pp. 743–753, 2024.<br>        <a target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-031-72111-3_70">https://doi.org/10.1007/978-3-031-72111-3_70</a></p>
-</blockquote>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>SAM在识别糖尿病视网膜病变 （DR） 病变分割有一定挑战。本文提出了一种将 SAM 用于文本提示的 DR 病变分割的框架，称为 TP-DRSeg。核心思想是利用语言线索将医学先验知识注入纯视觉分割网络，从而结合不同基础模型的优势，增强分割的可信度。提出了一个显式的先验编码器，将隐含的医学概念转化为明确的先验知识，为挖掘与病变相关的低级特征提供可解释的线索。此外设计了一个先验对齐的注入器，将显式的先验注入到分割过程中，这可以促进跨多模态特征的知识共享，并允许框架以参数高效的方式进行训练。</p>
-<p>DR分割包括：有效监测微动脉瘤 （MAs）、出血 （HEs）、硬分泌物 （EX） 和软渗出物 （SEs） 等神经病变。</p>
-<p>SAM的缺点：</p>
-<p>原SAM严重依赖手动提示，例如点和框(图(a)i)。然而，由于 DR 病灶体积小且数量众多，手动提示变得劳动密集型，使得这种方法对于临床应用不切实际。一些方法引入了上下文提示，从全局角度调整 SAM(图(a)ii)，但它们难以处理局部病变，导致性能欠佳。参数高效的在线调整方法(图(a)iii)通过调整有限数量的参数来使SAM适应下游任务，但这些方法忽略了基于提示的策略来实现自动推理。SAM相关的方法难以区分细粒度的 DR 病变类别，通常只能生成与类别无关的掩码。</p>
-<p>视觉语言模型 （VLM） 能够将图像与相应的文本描述对齐，那么VLM是否可以使用文本线索协助视觉模型定位病灶，提高区分不同病灶的准确性并增强分割的可信度？</p>
-<p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315182346826.png" srcset="/img/loading.gif" lazyload alt="背景1"></p>
-<p>（a）现有方法与本文提出的方法的比较。</p>
-<p>（b） CLIP 生成的类激活图。左下角利用隐式类名（hard exudate） 中的文本嵌入。右下角采用来自病变（黄白色沉积物）的明确描述的文本嵌入。</p>
-<p>本文提出了一个显式先验编码器(图(a)iv)，它利用病变的显式描述而不是隐式类名来生成可解释的线索，用于分割和分布类间差异。DR 病变的形态学外观可以用 VLM 易于理解的特定描述来表示，例如将硬质渗出物描绘成黄白色沉积物。这些可解释的线索提高了分割过程中的可信度。此外，在 SAM 编码器中引入了一个先验对齐的注入器，以将基于文本的外部先验注入到分割过程中，使 VLM 和纯视觉模型之间的知识共享和对齐。最后，特定于类的提示生成器生成为文本提示输入量身定制的特定提示，这些提示随后被馈送到 SAM 解码器中以生成相应的响应分割掩码。</p>
-<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316233334762.png" srcset="/img/loading.gif" lazyload alt="实验方法1"></p>
-<p>由4个部分构成：</p>
-<ol>
-<li>基于 VLM 的显式先验编码器</li>
-<li>带有先验对齐注入器的 SAM 编码器</li>
-<li>特定于类的提示生成器</li>
-<li>SAM 解码器</li>
-</ol>
-<p>显式先验编码器提取可解释的线索并生成用于分割的先验知识。然后将这个显式的先验输入到先验对齐的注入器中，以将先验知识注入到特征编码过程中。特定于类的提示生成器根据提供的基于文本的类生成分割图。</p>
-<h4 id="显式先验编码器"><a href="#显式先验编码器" class="headerlink" title="显式先验编码器"></a>显式先验编码器</h4><p>与现有的纯视觉 DR 分割方法不同，采用语言模态来提供分割中的外部知识。通过 VLM 中强大图像-文本知识（例如 CLIP ）对其进行预处理，最终生成显式先验信息，提供了可解释的线索，从而提高了分割过程的可信度。</p>
-<h4 id="先验对齐注入器的-SAM-编码器"><a href="#先验对齐注入器的-SAM-编码器" class="headerlink" title="先验对齐注入器的 SAM 编码器"></a>先验对齐注入器的 SAM 编码器</h4><p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316233834559.png" srcset="/img/loading.gif" lazyload alt="实验方法2"></p>
-<p>（a） 先验对齐的注入器（Injector） （b） 类特定的提示生成的详细架构</p>
-<p>由于预先训练的 SAM 和 CLIP 模型中嵌入的知识不会相互 “看到”，并且在集成之前保持孤立状态，因此构建交互桥梁至关重要，以确保表示在统一的特征空间内对齐。还需要一种机制将外部知识注入到分割过程中。</p>
-<p>在每个编码器层中有一个先验对齐的 injector （图 a），旨在促进分割和视觉语言模型之间的知识共享。</p>
-<h4 id="特定于类的提示生成器"><a href="#特定于类的提示生成器" class="headerlink" title="特定于类的提示生成器"></a>特定于类的提示生成器</h4><p>该模块包含基于文本提示的显式先验，以指导病灶分割的提示生成。利用原始的 SAM 解码器来处理密集和稀疏嵌入以进行病变分割。密集嵌入提供全局指导，而稀疏嵌入保留有关病变的更多详细信息，进一步促进病变分离。最后SAM 解码器输出预测图。 </p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316234240910.png" srcset="/img/loading.gif" lazyload alt="实验结果1"></p>
-<p>IDRiD和DDR数据集上的模型性能。</p>
-<p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316234309928.png" srcset="/img/loading.gif" lazyload alt="实验结果2"></p>
-<p>定性比较和可视化特征图。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文中研究了语言线索如何有利于 DR 病变分割，并在文本提示方案中提出了一种新的框架TP-DRSeg。显式的先验编码器通过基于文本的提示提供可解释的线索。先验对齐的注入器有效地在分割过程中注入明确的先验知识，并以参数高效的方式实现框架训练。</p>
+                <h2 id="MedficientsAM：具有优化推理管道的强大医学分割模型，用于有限的临床环境"><a href="#MedficientsAM：具有优化推理管道的强大医学分割模型，用于有限的临床环境" class="headerlink" title="MedficientsAM：具有优化推理管道的强大医学分割模型，用于有限的临床环境"></a>MedficientsAM：具有优化推理管道的强大医学分割模型，用于有限的临床环境</h2><p><img src="/../images/0-MedficientSAM-A-Robust-Medical-Segmentation-Model-with-Optimized-Inference-Pipeline-for-Limited-Clinical-Settings/image-20250510160619451.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>SAM的出现使通用医学图像分割模型的开发跨越了不同的模式。但是，临床环境中这种深度学习模型的推理仍然受到对强大计算设备的依赖的限制。</p>
+<p>医学图像的早期分割模型通常基于nnUNET结构。尽管有效，但这些模型仅限于特定数据集，每个模型都针对特定的分割任务量身定制。SAM的出现标志着分割任务的显着范式移动。这些努力的重点是将SAM适应医疗数据，同时保持较高的计算需求。在大多数医疗机构中，不可用强大的计算设备，需要快速的结果，因此在实践中部署这些模型的挑战。</p>
+<p>因此本文提出MedficientSAM，通过将EfficientViT模型与医学图像分割任务深度融合，提出了一种高效、精准且可临床落地的通用医学分割解决方案。其核心贡献在于：首次将轻量级ReLU线性注意力引入医学领域，通过两阶段训练（知识蒸馏+端到端调优）从MedSAM迁移知识至EfficientViT编码器，在保留SAM强泛化能力的同时，将模型计算复杂度降低至原版的1&#x2F;6；创新性地采用C++重构推理管线并设计嵌入缓存机制，使CPU端2D&#x2F;3D医学影像分割速度分别提升5倍和4.6倍（相比Python版LiteMedSAM），内存占用减少50%；在公开验证集上以86.42% DSC和87.95% NSD刷新性能记录，并在”Segment Anything In Medical Images On Laptop”挑战赛中综合排名第一，为CT、MRI、超声等多模态医学影像在边缘设备的实时分析提供了首个兼顾效率与精度的通用分割框架，显著推进了AI辅助诊断的临床实用性。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p>MedficientSAM 基于 EfficientViT-SAM。用 EfficientViT 替换了 MedSAM 的图像编码器。像 EfficientViT-SAM 一样，MedficientSAM 有三种变体，分别是 L0、L1 和 L2，按模型大小递增顺序列出。该模型分两个阶段进行训练：蒸馏和微调。</p>
+<p><img src="/../images/0-MedficientSAM-A-Robust-Medical-Segmentation-Model-with-Optimized-Inference-Pipeline-for-Limited-Clinical-Settings/image-20250510162029041.png" srcset="/img/loading.gif" lazyload alt="M1"></p>
+<p>EfficientViT-SAM-L1的宏观体系结构（上）和MedficientSAM（下）</p>
+<h4 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h4><p>对齐所使用的全部原图和MASK大小，原图使用双线性插值进行调整，应用最小-最大缩放，并用零值填充调整后的图像以创建正方形尺寸。MASK使用最近邻插值，然后用零填充调整后的掩模以达到正方形尺寸</p>
+<h4 id="蒸馏"><a href="#蒸馏" class="headerlink" title="蒸馏"></a>蒸馏</h4><p>为了初始化图像编码器，通过蒸馏将 MedSAM 的图像编码器（ViT-B）的知识转移到 EfficientViT。目标是通过最小化 L2 损失函数，使 EfficientViT 和 MedSAM-ViT-B 的图像嵌入对齐。</p>
+<h4 id="微调"><a href="#微调" class="headerlink" title="微调"></a>微调</h4><p>将蒸馏的 EfficientViT 与 MedSAM 的预训练提示编码器和掩码解码器集成，创建了 MedficientSAM。随后，进行端到端的训练，以进一步提高性能。为了提示模型，通过确定覆盖二进制掩码的最小矩形生成框提示，并引入随机偏移以提高模型的鲁棒性。</p>
+<h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><p>使用Focal损失和Dice损失的加权求和，比例为20:1。</p>
+<h4 id="3D推理"><a href="#3D推理" class="headerlink" title="3D推理"></a>3D推理</h4><p>受到LiteMedSAM的启发，在进行3D体积推断时，从中间切片开始，向两端传播，使用之前预测的掩膜切片作为指导提示。采用了在之前的器官分割工作中使用的掩膜传播的理念。如果在之前的切片中找到二进制掩膜，会获取覆盖该二进制掩膜的边界框，并将其作为当前切片的框提示，而不是使用输入中的框提示。</p>
+<h4 id="后处理"><a href="#后处理" class="headerlink" title="后处理"></a>后处理</h4><p>MedficientSAM输出的二进制掩码的固定尺寸为256 × 256。首先调整这些输出掩码的大小以匹配图像编码器的输入大小，然后将填充零件裁剪出来，并最终将其调整为原始分辨率</p>
+<h4 id="推理优化"><a href="#推理优化" class="headerlink" title="推理优化"></a>推理优化</h4><p>尽管对于模型原型制作非常方便，但Python由于其解释性质而不适合部署。所以作者将管道移植到C++，并使用OpenVino作为模型运行时来减少推理时间。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>分割涵盖了11种医学图像方式（CT、MRI、PET、X 光、超声、乳腺摄影、OCT、内窥镜、眼底镜、皮肤镜和显微镜）。评估指标包括两种准确度测量：Dice 相似系数 (DSC) 和标准化表面 Dice (NSD)，还有运行时间作为效率测量。</p>
+<p>定量结果：</p>
+<p><img src="/../images/0-MedficientSAM-A-Robust-Medical-Segmentation-Model-with-Optimized-Inference-Pipeline-for-Limited-Clinical-Settings/image-20250510162444311.png" srcset="/img/loading.gif" lazyload alt="E1"></p>
+<p>公共验证集的定量评估结果。</p>
+<p>定性结果:</p>
+<p><img src="/../images/0-MedficientSAM-A-Robust-Medical-Segmentation-Model-with-Optimized-Inference-Pipeline-for-Limited-Clinical-Settings/image-20250510162607641.png" srcset="/img/loading.gif" lazyload alt="E2"></p>
+<p>来自各种公共数据集的定性结果。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这项工作介绍了MedficientSAM，利用EfficientViT来提高MedSAM的效率和准确性。方法采用两阶段的训练过程，与MedSAM相比，分割准确性得到了提高，同时显著降低了计算需求。此外，开发了一种新颖的C++推理管道，使MedficientSAM能够在临床环境中常见的资源受限设备上运行。</p>
 
                 
               </div>
@@ -321,41 +311,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/SAM/" class="print-no-link">#SAM</a>
-      
-    </div>
   
 </div>
 
@@ -367,18 +322,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/07/0-Diffusion-empowered-AutoPrompt-MedSAM/" title="0-Diffusion-empowered AutoPrompt MedSAM">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">0-Diffusion-empowered AutoPrompt MedSAM</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/06/0-Self-Prompting-Large-Vision-Models-for-Few-Shot-Medical-Image-Segmentation/" title="0-Self-Prompting Large Vision Models for Few-Shot Medical Image Segmentation">
-                        <span class="hidden-mobile">0-Self-Prompting Large Vision Models for Few-Shot Medical Image Segmentation</span>
+                      <a href="/2025/05/08/0-EfficientViT-SAM-AcceleratedSegmentAnythingModel-WithoutAccuracyLoss/" title="0-EfficientViT-SAM:AcceleratedSegmentAnythingModel WithoutAccuracyLoss">
+                        <span class="hidden-mobile">0-EfficientViT-SAM:AcceleratedSegmentAnythingModel WithoutAccuracyLoss</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -479,12 +428,6 @@
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -678,49 +621,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

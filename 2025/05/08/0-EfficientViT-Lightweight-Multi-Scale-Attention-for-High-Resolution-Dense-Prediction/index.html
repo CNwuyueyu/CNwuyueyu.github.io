@@ -16,24 +16,28 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="TP-DRSeg：使用显式文本提示辅助 SAM 改进糖尿病视网膜病变病变分割    MICCAI 2024, LNCS 15008, pp. 743–753, 2024.        https:&#x2F;&#x2F;doi.org&#x2F;10.1007&#x2F;978-3-031-72111-3_70  背景SAM在识别糖尿病视网膜病变 （DR） 病变分割有一定挑战。本文提出了一种将 SAM 用于文本提示的 DR 病变分割的">
+    <meta name="description" content="EfficientViT:轻量级多尺度注意力用于高分辨率密集预测 背景巨大的计算成本使得在硬件设备上部署最先进的高分辨率密集预测模型变得困难。本文提出了EfficientViT，通过创新的轻量级多尺度注意力机制，显著提升了高分辨率密集预测任务的效率与实用性：其核心贡献在于将传统Transformer的二次复杂度自注意力替换为ReLU线性注意力，结合硬件友好的小核卷积实现线性计算复杂度，同时通过多尺">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM">
-<meta property="og:url" content="http://example.com/2025/03/06/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/index.html">
+<meta property="og:title" content="0-EfficientViT: Lightweight Multi-Scale Attention for High-Resolution Dense Prediction">
+<meta property="og:url" content="http://example.com/2025/05/08/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="TP-DRSeg：使用显式文本提示辅助 SAM 改进糖尿病视网膜病变病变分割    MICCAI 2024, LNCS 15008, pp. 743–753, 2024.        https:&#x2F;&#x2F;doi.org&#x2F;10.1007&#x2F;978-3-031-72111-3_70  背景SAM在识别糖尿病视网膜病变 （DR） 病变分割有一定挑战。本文提出了一种将 SAM 用于文本提示的 DR 病变分割的">
+<meta property="og:description" content="EfficientViT:轻量级多尺度注意力用于高分辨率密集预测 背景巨大的计算成本使得在硬件设备上部署最先进的高分辨率密集预测模型变得困难。本文提出了EfficientViT，通过创新的轻量级多尺度注意力机制，显著提升了高分辨率密集预测任务的效率与实用性：其核心贡献在于将传统Transformer的二次复杂度自注意力替换为ReLU线性注意力，结合硬件友好的小核卷积实现线性计算复杂度，同时通过多尺">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315165815618.png">
-<meta property="article:published_time" content="2025-03-06T09:07:21.000Z">
-<meta property="article:modified_time" content="2025-03-17T06:06:33.285Z">
+<meta property="og:image" content="http://example.com/images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250509181413329.png">
+<meta property="og:image" content="http://example.com/images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250510122147576.png">
+<meta property="og:image" content="http://example.com/images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250510124037922.png">
+<meta property="og:image" content="http://example.com/images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250510123244776.png">
+<meta property="og:image" content="http://example.com/images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250510124214294.png">
+<meta property="og:image" content="http://example.com/images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250510124346028.png">
+<meta property="article:published_time" content="2025-05-08T15:41:05.000Z">
+<meta property="article:modified_time" content="2025-05-10T04:48:36.563Z">
 <meta property="article:author" content="Wuyueyu">
-<meta property="article:tag" content="SAM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315165815618.png">
+<meta name="twitter:image" content="http://example.com/images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250509181413329.png">
   
   
   
-  <title>0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM - Blog</title>
+  <title>0-EfficientViT: Lightweight Multi-Scale Attention for High-Resolution Dense Prediction - Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM"></span>
+            <span id="subtitle" data-typed-text="0-EfficientViT: Lightweight Multi-Scale Attention for High-Resolution Dense Prediction"></span>
           
         </div>
 
@@ -214,8 +218,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-06 17:07" pubdate>
-          上传日期：2025年3月6日
+        <time datetime="2025-05-08 23:41" pubdate>
+          上传日期：2025年5月8日
         </time>
       </span>
     
@@ -226,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.4k 字
         
       </span>
     
@@ -237,7 +241,7 @@
         
         
         
-          16 分钟
+          13 分钟
         
       </span>
     
@@ -274,45 +278,30 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM</h1>
+            <h1 id="seo-header">0-EfficientViT: Lightweight Multi-Scale Attention for High-Resolution Dense Prediction</h1>
             
             
               <div class="markdown-body">
                 
-                <p>TP-DRSeg：使用显式文本提示辅助 SAM 改进糖尿病视网膜病变病变分割</p>
-<p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315165815618.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
-<blockquote>
-<p> MICCAI 2024, LNCS 15008, pp. 743–753, 2024.<br>        <a target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-031-72111-3_70">https://doi.org/10.1007/978-3-031-72111-3_70</a></p>
-</blockquote>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>SAM在识别糖尿病视网膜病变 （DR） 病变分割有一定挑战。本文提出了一种将 SAM 用于文本提示的 DR 病变分割的框架，称为 TP-DRSeg。核心思想是利用语言线索将医学先验知识注入纯视觉分割网络，从而结合不同基础模型的优势，增强分割的可信度。提出了一个显式的先验编码器，将隐含的医学概念转化为明确的先验知识，为挖掘与病变相关的低级特征提供可解释的线索。此外设计了一个先验对齐的注入器，将显式的先验注入到分割过程中，这可以促进跨多模态特征的知识共享，并允许框架以参数高效的方式进行训练。</p>
-<p>DR分割包括：有效监测微动脉瘤 （MAs）、出血 （HEs）、硬分泌物 （EX） 和软渗出物 （SEs） 等神经病变。</p>
-<p>SAM的缺点：</p>
-<p>原SAM严重依赖手动提示，例如点和框(图(a)i)。然而，由于 DR 病灶体积小且数量众多，手动提示变得劳动密集型，使得这种方法对于临床应用不切实际。一些方法引入了上下文提示，从全局角度调整 SAM(图(a)ii)，但它们难以处理局部病变，导致性能欠佳。参数高效的在线调整方法(图(a)iii)通过调整有限数量的参数来使SAM适应下游任务，但这些方法忽略了基于提示的策略来实现自动推理。SAM相关的方法难以区分细粒度的 DR 病变类别，通常只能生成与类别无关的掩码。</p>
-<p>视觉语言模型 （VLM） 能够将图像与相应的文本描述对齐，那么VLM是否可以使用文本线索协助视觉模型定位病灶，提高区分不同病灶的准确性并增强分割的可信度？</p>
-<p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315182346826.png" srcset="/img/loading.gif" lazyload alt="背景1"></p>
-<p>（a）现有方法与本文提出的方法的比较。</p>
-<p>（b） CLIP 生成的类激活图。左下角利用隐式类名（hard exudate） 中的文本嵌入。右下角采用来自病变（黄白色沉积物）的明确描述的文本嵌入。</p>
-<p>本文提出了一个显式先验编码器(图(a)iv)，它利用病变的显式描述而不是隐式类名来生成可解释的线索，用于分割和分布类间差异。DR 病变的形态学外观可以用 VLM 易于理解的特定描述来表示，例如将硬质渗出物描绘成黄白色沉积物。这些可解释的线索提高了分割过程中的可信度。此外，在 SAM 编码器中引入了一个先验对齐的注入器，以将基于文本的外部先验注入到分割过程中，使 VLM 和纯视觉模型之间的知识共享和对齐。最后，特定于类的提示生成器生成为文本提示输入量身定制的特定提示，这些提示随后被馈送到 SAM 解码器中以生成相应的响应分割掩码。</p>
-<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316233334762.png" srcset="/img/loading.gif" lazyload alt="实验方法1"></p>
-<p>由4个部分构成：</p>
-<ol>
-<li>基于 VLM 的显式先验编码器</li>
-<li>带有先验对齐注入器的 SAM 编码器</li>
-<li>特定于类的提示生成器</li>
-<li>SAM 解码器</li>
-</ol>
-<p>显式先验编码器提取可解释的线索并生成用于分割的先验知识。然后将这个显式的先验输入到先验对齐的注入器中，以将先验知识注入到特征编码过程中。特定于类的提示生成器根据提供的基于文本的类生成分割图。</p>
-<h4 id="显式先验编码器"><a href="#显式先验编码器" class="headerlink" title="显式先验编码器"></a>显式先验编码器</h4><p>与现有的纯视觉 DR 分割方法不同，采用语言模态来提供分割中的外部知识。通过 VLM 中强大图像-文本知识（例如 CLIP ）对其进行预处理，最终生成显式先验信息，提供了可解释的线索，从而提高了分割过程的可信度。</p>
-<h4 id="先验对齐注入器的-SAM-编码器"><a href="#先验对齐注入器的-SAM-编码器" class="headerlink" title="先验对齐注入器的 SAM 编码器"></a>先验对齐注入器的 SAM 编码器</h4><p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316233834559.png" srcset="/img/loading.gif" lazyload alt="实验方法2"></p>
-<p>（a） 先验对齐的注入器（Injector） （b） 类特定的提示生成的详细架构</p>
-<p>由于预先训练的 SAM 和 CLIP 模型中嵌入的知识不会相互 “看到”，并且在集成之前保持孤立状态，因此构建交互桥梁至关重要，以确保表示在统一的特征空间内对齐。还需要一种机制将外部知识注入到分割过程中。</p>
-<p>在每个编码器层中有一个先验对齐的 injector （图 a），旨在促进分割和视觉语言模型之间的知识共享。</p>
-<h4 id="特定于类的提示生成器"><a href="#特定于类的提示生成器" class="headerlink" title="特定于类的提示生成器"></a>特定于类的提示生成器</h4><p>该模块包含基于文本提示的显式先验，以指导病灶分割的提示生成。利用原始的 SAM 解码器来处理密集和稀疏嵌入以进行病变分割。密集嵌入提供全局指导，而稀疏嵌入保留有关病变的更多详细信息，进一步促进病变分离。最后SAM 解码器输出预测图。 </p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316234240910.png" srcset="/img/loading.gif" lazyload alt="实验结果1"></p>
-<p>IDRiD和DDR数据集上的模型性能。</p>
-<p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316234309928.png" srcset="/img/loading.gif" lazyload alt="实验结果2"></p>
-<p>定性比较和可视化特征图。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文中研究了语言线索如何有利于 DR 病变分割，并在文本提示方案中提出了一种新的框架TP-DRSeg。显式的先验编码器通过基于文本的提示提供可解释的线索。先验对齐的注入器有效地在分割过程中注入明确的先验知识，并以参数高效的方式实现框架训练。</p>
+                <h2 id="EfficientViT-轻量级多尺度注意力用于高分辨率密集预测"><a href="#EfficientViT-轻量级多尺度注意力用于高分辨率密集预测" class="headerlink" title="EfficientViT:轻量级多尺度注意力用于高分辨率密集预测"></a>EfficientViT:轻量级多尺度注意力用于高分辨率密集预测</h2><p><img src="/../images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250509181413329.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>巨大的计算成本使得在硬件设备上部署最先进的高分辨率密集预测模型变得困难。本文提出了EfficientViT，通过创新的轻量级多尺度注意力机制，显著提升了高分辨率密集预测任务的效率与实用性：其核心贡献在于将传统Transformer的二次复杂度自注意力替换为ReLU线性注意力，结合硬件友好的小核卷积实现线性计算复杂度，同时通过多尺度令牌聚合捕获全局与局部特征，在语义分割、超分辨率等任务中（如Cityscapes数据集）相比SegFormer等模型实现3.8-8.8倍GPU加速。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><img src="/../images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250510122147576.png" srcset="/img/loading.gif" lazyload alt="M1"></p>
+<p>Left：EfficityVit的构建块（左）一个效率的构建块由轻巧的MSA模块和MBCONV组成。轻巧的MSA模块负责捕获上下文信息，而MBCONV则用于捕获本地信息。 Right：轻量多尺度注意力（右）通过线性投影层 获得Q&#x2F;K&#x2F;V令牌后，通过通过轻质小内核卷积聚集附近令牌来生成多尺度令牌。基于RELU的全局注意力应用 于多尺度令牌，输出是串联并馈送到最终线性投影层以进行特征融合。</p>
+<h4 id="轻量多尺度注意力"><a href="#轻量多尺度注意力" class="headerlink" title="轻量多尺度注意力"></a>轻量多尺度注意力</h4><p>多尺度令牌生成：仅基于RELU的注意力就具有有限的模型能力。首先通过深度卷积来增强它，以提高其本地信息提取能力；仅使用小内核卷积 来进行信息聚合，以避免损害硬件效率。</p>
+<p><img src="/../images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250510124037922.png" srcset="/img/loading.gif" lazyload alt="M3"></p>
+<p>生成多尺度令牌的过程。</p>
+<p>MSA模块：平衡了有效高分辨率致密预测的两个至关重要的算法，即性能和效率。这项改进的重点是优化了全局注意力涉及的硬件不友好的操作，比如Soft-Max，从而使其在硬件上更有效。</p>
+<h4 id="EfficientViT结构"><a href="#EfficientViT结构" class="headerlink" title="EfficientViT结构"></a>EfficientViT结构</h4><p>包括一个轻巧的MSA模块和MBCONV。轻巧的MSA模块用于上下文信息的推断，而MBCONV则用于本地信息提取 。</p>
+<p><img src="/../images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250510123244776.png" srcset="/img/loading.gif" lazyload alt="M2"></p>
+<p>采用标准的backbone-head&#x2F;encoder-decoder设计。在backbone中，将有效的模块插入第3和4stage。将特征从最近三个阶段（P2，P3和P4）馈入head部。采用了一个简单的头部设计，该设计由几个MBCONV块和输出层组成。</p>
+<h4 id="Backbone"><a href="#Backbone" class="headerlink" title="Backbone"></a>Backbone</h4><p>该设计由输入茎和四个阶段组成，四个阶段逐渐减小了特征地图大小并逐渐增加了通道数。将EfficientViT模块插入第3阶段和第4阶段。对于下采样，使用带有步幅2的MBCONV。</p>
+<h4 id="Head"><a href="#Head" class="headerlink" title="Head"></a>Head</h4><p>P2，P3和P4表示阶段2、3和4的输出，形成了特征图的金字塔。为了简化和效率，使用1x1卷积和标准的上采样操作（例如，双线性&#x2F;双线性&#x2F;双尺寸 UPPLING）来匹配它们的空间和通道大小，并通过添加来融合它们。由于Backbone已经具有很强的信息提取能力，因此采用了一个简单的Head部设计，该设计包括几个MBCONV块和输出层（即预测和UpSample）。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>在语义分割和超分辨率数据集上进行实验。</p>
+<p><img src="/../images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250510124214294.png" srcset="/img/loading.gif" lazyload alt="E1"></p>
+<p>MAC与性能。与SOTA语义分割和图像分类模型相比，EfficientViT在MAC和性能之间提供了更好的权衡.</p>
+<p><img src="/../images/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/image-20250510124346028.png" srcset="/img/loading.gif" lazyload alt="E2"></p>
+<p>EfficientViT的backbone图像分类性能。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这项工作中研究了用于高分辨率密集预测的高效架构设计。引入了一个轻量级多尺度注意力模块，该模块同时实现了全局感受野和轻量化、硬件高效的多尺度学习，从而在不同硬件设备上提供显著的速度提升，而不损失性能，相较于当前最先进的高分辨率密集预测模型。对于未来的工作，将探索将Efficient ViT应用于其他视觉任务，并进一步扩展Efficient ViT模型。</p>
 
                 
               </div>
@@ -321,41 +310,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/SAM/" class="print-no-link">#SAM</a>
-      
-    </div>
   
 </div>
 
@@ -367,9 +321,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/07/0-Diffusion-empowered-AutoPrompt-MedSAM/" title="0-Diffusion-empowered AutoPrompt MedSAM">
+                      <a href="/2025/05/08/0-EfficientViT-SAM-AcceleratedSegmentAnythingModel-WithoutAccuracyLoss/" title="0-EfficientViT-SAM:AcceleratedSegmentAnythingModel WithoutAccuracyLoss">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">0-Diffusion-empowered AutoPrompt MedSAM</span>
+                        <span class="hidden-mobile">0-EfficientViT-SAM:AcceleratedSegmentAnythingModel WithoutAccuracyLoss</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -377,8 +331,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/06/0-Self-Prompting-Large-Vision-Models-for-Few-Shot-Medical-Image-Segmentation/" title="0-Self-Prompting Large Vision Models for Few-Shot Medical Image Segmentation">
-                        <span class="hidden-mobile">0-Self-Prompting Large Vision Models for Few-Shot Medical Image Segmentation</span>
+                      <a href="/2025/03/07/0-Diffusion-empowered-AutoPrompt-MedSAM/" title="0-Diffusion-empowered AutoPrompt MedSAM">
+                        <span class="hidden-mobile">0-Diffusion-empowered AutoPrompt MedSAM</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -479,12 +433,6 @@
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -678,49 +626,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

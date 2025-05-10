@@ -16,24 +16,23 @@
   <meta name="author" content="Wuyueyu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="TP-DRSeg：使用显式文本提示辅助 SAM 改进糖尿病视网膜病变病变分割    MICCAI 2024, LNCS 15008, pp. 743–753, 2024.        https:&#x2F;&#x2F;doi.org&#x2F;10.1007&#x2F;978-3-031-72111-3_70  背景SAM在识别糖尿病视网膜病变 （DR） 病变分割有一定挑战。本文提出了一种将 SAM 用于文本提示的 DR 病变分割的">
+    <meta name="description" content="扩散赋能的 AutoPrompt MedSAM  arXiv：2502.06817v1 [eess.IV] 2025 年 2 月 5 日 Code is available at https:&#x2F;&#x2F;github.com&#x2F;HP-ML&#x2F;AutoPromptMedSAM.git.  背景MedSAM 目前还存在两大挑战限制：一是依赖劳动密集型的人工提示；二是生成的器官或病变掩码缺乏语义标记，限制非专家用户">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM">
-<meta property="og:url" content="http://example.com/2025/03/06/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/index.html">
+<meta property="og:title" content="0-Diffusion-empowered AutoPrompt MedSAM">
+<meta property="og:url" content="http://example.com/2025/03/07/0-Diffusion-empowered-AutoPrompt-MedSAM/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="TP-DRSeg：使用显式文本提示辅助 SAM 改进糖尿病视网膜病变病变分割    MICCAI 2024, LNCS 15008, pp. 743–753, 2024.        https:&#x2F;&#x2F;doi.org&#x2F;10.1007&#x2F;978-3-031-72111-3_70  背景SAM在识别糖尿病视网膜病变 （DR） 病变分割有一定挑战。本文提出了一种将 SAM 用于文本提示的 DR 病变分割的">
+<meta property="og:description" content="扩散赋能的 AutoPrompt MedSAM  arXiv：2502.06817v1 [eess.IV] 2025 年 2 月 5 日 Code is available at https:&#x2F;&#x2F;github.com&#x2F;HP-ML&#x2F;AutoPromptMedSAM.git.  背景MedSAM 目前还存在两大挑战限制：一是依赖劳动密集型的人工提示；二是生成的器官或病变掩码缺乏语义标记，限制非专家用户">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315165815618.png">
-<meta property="article:published_time" content="2025-03-06T09:07:21.000Z">
-<meta property="article:modified_time" content="2025-03-17T06:06:33.285Z">
+<meta property="og:image" content="http://example.com/images/0-Diffusion-empowered-AutoPrompt-MedSAM/image-20250317150353507.png">
+<meta property="article:published_time" content="2025-03-07T07:03:27.000Z">
+<meta property="article:modified_time" content="2025-03-17T09:17:35.305Z">
 <meta property="article:author" content="Wuyueyu">
-<meta property="article:tag" content="SAM">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315165815618.png">
+<meta name="twitter:image" content="http://example.com/images/0-Diffusion-empowered-AutoPrompt-MedSAM/image-20250317150353507.png">
   
   
   
-  <title>0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM - Blog</title>
+  <title>0-Diffusion-empowered AutoPrompt MedSAM - Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM"></span>
+            <span id="subtitle" data-typed-text="0-Diffusion-empowered AutoPrompt MedSAM"></span>
           
         </div>
 
@@ -214,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-06 17:07" pubdate>
-          上传日期：2025年3月6日
+        <time datetime="2025-03-07 15:03" pubdate>
+          上传日期：2025年3月7日
         </time>
       </span>
     
@@ -226,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          507 字
         
       </span>
     
@@ -237,7 +236,7 @@
         
         
         
-          16 分钟
+          5 分钟
         
       </span>
     
@@ -274,46 +273,20 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM</h1>
+            <h1 id="seo-header">0-Diffusion-empowered AutoPrompt MedSAM</h1>
             
             
               <div class="markdown-body">
                 
-                <p>TP-DRSeg：使用显式文本提示辅助 SAM 改进糖尿病视网膜病变病变分割</p>
-<p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315165815618.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
+                <h2 id="扩散赋能的-AutoPrompt-MedSAM"><a href="#扩散赋能的-AutoPrompt-MedSAM" class="headerlink" title="扩散赋能的 AutoPrompt MedSAM"></a>扩散赋能的 AutoPrompt MedSAM</h2><p><img src="/../images/0-Diffusion-empowered-AutoPrompt-MedSAM/image-20250317150353507.png" srcset="/img/loading.gif" lazyload alt="TITLE"></p>
 <blockquote>
-<p> MICCAI 2024, LNCS 15008, pp. 743–753, 2024.<br>        <a target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-031-72111-3_70">https://doi.org/10.1007/978-3-031-72111-3_70</a></p>
+<p>arXiv：2502.06817v1 [eess.IV] 2025 年 2 月 5 日</p>
+<p>Code is available at <a target="_blank" rel="noopener" href="https://github.com/HP-ML/AutoPromptMedSAM.git">https://github.com/HP-ML/AutoPromptMedSAM.git</a>.</p>
 </blockquote>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>SAM在识别糖尿病视网膜病变 （DR） 病变分割有一定挑战。本文提出了一种将 SAM 用于文本提示的 DR 病变分割的框架，称为 TP-DRSeg。核心思想是利用语言线索将医学先验知识注入纯视觉分割网络，从而结合不同基础模型的优势，增强分割的可信度。提出了一个显式的先验编码器，将隐含的医学概念转化为明确的先验知识，为挖掘与病变相关的低级特征提供可解释的线索。此外设计了一个先验对齐的注入器，将显式的先验注入到分割过程中，这可以促进跨多模态特征的知识共享，并允许框架以参数高效的方式进行训练。</p>
-<p>DR分割包括：有效监测微动脉瘤 （MAs）、出血 （HEs）、硬分泌物 （EX） 和软渗出物 （SEs） 等神经病变。</p>
-<p>SAM的缺点：</p>
-<p>原SAM严重依赖手动提示，例如点和框(图(a)i)。然而，由于 DR 病灶体积小且数量众多，手动提示变得劳动密集型，使得这种方法对于临床应用不切实际。一些方法引入了上下文提示，从全局角度调整 SAM(图(a)ii)，但它们难以处理局部病变，导致性能欠佳。参数高效的在线调整方法(图(a)iii)通过调整有限数量的参数来使SAM适应下游任务，但这些方法忽略了基于提示的策略来实现自动推理。SAM相关的方法难以区分细粒度的 DR 病变类别，通常只能生成与类别无关的掩码。</p>
-<p>视觉语言模型 （VLM） 能够将图像与相应的文本描述对齐，那么VLM是否可以使用文本线索协助视觉模型定位病灶，提高区分不同病灶的准确性并增强分割的可信度？</p>
-<p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250315182346826.png" srcset="/img/loading.gif" lazyload alt="背景1"></p>
-<p>（a）现有方法与本文提出的方法的比较。</p>
-<p>（b） CLIP 生成的类激活图。左下角利用隐式类名（hard exudate） 中的文本嵌入。右下角采用来自病变（黄白色沉积物）的明确描述的文本嵌入。</p>
-<p>本文提出了一个显式先验编码器(图(a)iv)，它利用病变的显式描述而不是隐式类名来生成可解释的线索，用于分割和分布类间差异。DR 病变的形态学外观可以用 VLM 易于理解的特定描述来表示，例如将硬质渗出物描绘成黄白色沉积物。这些可解释的线索提高了分割过程中的可信度。此外，在 SAM 编码器中引入了一个先验对齐的注入器，以将基于文本的外部先验注入到分割过程中，使 VLM 和纯视觉模型之间的知识共享和对齐。最后，特定于类的提示生成器生成为文本提示输入量身定制的特定提示，这些提示随后被馈送到 SAM 解码器中以生成相应的响应分割掩码。</p>
-<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316233334762.png" srcset="/img/loading.gif" lazyload alt="实验方法1"></p>
-<p>由4个部分构成：</p>
-<ol>
-<li>基于 VLM 的显式先验编码器</li>
-<li>带有先验对齐注入器的 SAM 编码器</li>
-<li>特定于类的提示生成器</li>
-<li>SAM 解码器</li>
-</ol>
-<p>显式先验编码器提取可解释的线索并生成用于分割的先验知识。然后将这个显式的先验输入到先验对齐的注入器中，以将先验知识注入到特征编码过程中。特定于类的提示生成器根据提供的基于文本的类生成分割图。</p>
-<h4 id="显式先验编码器"><a href="#显式先验编码器" class="headerlink" title="显式先验编码器"></a>显式先验编码器</h4><p>与现有的纯视觉 DR 分割方法不同，采用语言模态来提供分割中的外部知识。通过 VLM 中强大图像-文本知识（例如 CLIP ）对其进行预处理，最终生成显式先验信息，提供了可解释的线索，从而提高了分割过程的可信度。</p>
-<h4 id="先验对齐注入器的-SAM-编码器"><a href="#先验对齐注入器的-SAM-编码器" class="headerlink" title="先验对齐注入器的 SAM 编码器"></a>先验对齐注入器的 SAM 编码器</h4><p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316233834559.png" srcset="/img/loading.gif" lazyload alt="实验方法2"></p>
-<p>（a） 先验对齐的注入器（Injector） （b） 类特定的提示生成的详细架构</p>
-<p>由于预先训练的 SAM 和 CLIP 模型中嵌入的知识不会相互 “看到”，并且在集成之前保持孤立状态，因此构建交互桥梁至关重要，以确保表示在统一的特征空间内对齐。还需要一种机制将外部知识注入到分割过程中。</p>
-<p>在每个编码器层中有一个先验对齐的 injector （图 a），旨在促进分割和视觉语言模型之间的知识共享。</p>
-<h4 id="特定于类的提示生成器"><a href="#特定于类的提示生成器" class="headerlink" title="特定于类的提示生成器"></a>特定于类的提示生成器</h4><p>该模块包含基于文本提示的显式先验，以指导病灶分割的提示生成。利用原始的 SAM 解码器来处理密集和稀疏嵌入以进行病变分割。密集嵌入提供全局指导，而稀疏嵌入保留有关病变的更多详细信息，进一步促进病变分离。最后SAM 解码器输出预测图。 </p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316234240910.png" srcset="/img/loading.gif" lazyload alt="实验结果1"></p>
-<p>IDRiD和DDR数据集上的模型性能。</p>
-<p><img src="/../images/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/image-20250316234309928.png" srcset="/img/loading.gif" lazyload alt="实验结果2"></p>
-<p>定性比较和可视化特征图。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文中研究了语言线索如何有利于 DR 病变分割，并在文本提示方案中提出了一种新的框架TP-DRSeg。显式的先验编码器通过基于文本的提示提供可解释的线索。先验对齐的注入器有效地在分割过程中注入明确的先验知识，并以参数高效的方式实现框架训练。</p>
-
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>MedSAM 目前还存在两大挑战限制：一是依赖劳动密集型的人工提示；二是生成的器官或病变掩码缺乏语义标记，限制非专家用户的实用性。</p>
+<p>为解决这些问题，本文作者提出 AutoMedSAM，一个基于 SAM 的端到端框架，提升可用性和分割性能。AutoMedSAM 保留 MedSAM 的图像编码器和掩码解码器，同时引入基于扩散的类提示编码器，其双解码器结构结合稀疏和密集提示协同生成提示嵌入，从而增强模型对临床图像的自主理解与处理能力。借助该编码器，AutoMedSAM 通过类提示将语义信息融入预测，使 MedSAM 的半自动管道转变为全自动化工作流程。</p>
+<p>AutoMedSAM 采用不确定性感知联合优化策略，在继承 MedSAM 预训练知识的同时，集成多个损失函数以提升泛化能力。实验结果表明，AutoMedSAM 在不同数据集上表现卓越，并拓展了其在临床环境和非专家用户中的适用性。</p>
+<h3 id="实验方法"><a href="#实验方法" class="headerlink" title="实验方法"></a>实验方法</h3><h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3>
                 
               </div>
             
@@ -321,41 +294,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="category-chain-item">论文笔记</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/SAM/" class="print-no-link">#SAM</a>
-      
-    </div>
   
 </div>
 
@@ -367,9 +305,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/07/0-Diffusion-empowered-AutoPrompt-MedSAM/" title="0-Diffusion-empowered AutoPrompt MedSAM">
+                      <a href="/2025/05/08/0-EfficientViT-Lightweight-Multi-Scale-Attention-for-High-Resolution-Dense-Prediction/" title="0-EfficientViT: Lightweight Multi-Scale Attention for High-Resolution Dense Prediction">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">0-Diffusion-empowered AutoPrompt MedSAM</span>
+                        <span class="hidden-mobile">0-EfficientViT: Lightweight Multi-Scale Attention for High-Resolution Dense Prediction</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -377,8 +315,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/06/0-Self-Prompting-Large-Vision-Models-for-Few-Shot-Medical-Image-Segmentation/" title="0-Self-Prompting Large Vision Models for Few-Shot Medical Image Segmentation">
-                        <span class="hidden-mobile">0-Self-Prompting Large Vision Models for Few-Shot Medical Image Segmentation</span>
+                      <a href="/2025/03/06/0-TP-DRSeg-Improving-Diabetic-Retinopathy-Lesion-Segmentation-with-Explicit-Text-Prompts-Assisted-SAM/" title="0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM">
+                        <span class="hidden-mobile">0-TP-DRSeg: Improving Diabetic Retinopathy Lesion Segmentation with Explicit Text-Prompts Assisted SAM</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -479,12 +417,6 @@
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -678,49 +610,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
